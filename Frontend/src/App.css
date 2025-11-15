@@ -687,13 +687,14 @@ select.form-select {
   border-radius: 25px;
   height: auto;
   padding: 30px;
+  
   display: inline-block;
   width: 100%;
   margin-bottom: 20px;
   /* max-width: 260px;
   min-height: 280px; */
   border: 1px solid #ccc;
-  min-height: auto;
+  min-height: 270px;
   flex-direction: column;
 }
 
@@ -1039,6 +1040,13 @@ h1.main-title-center::after,
 .scrolling-wrap:hover .comm {
   animation-play-state: paused;
 }
+
+
+
+.banner-mobile-menu {
+  display: none;
+}
+
 @media (max-width: 1399px) {
   .scrolling-wrap .comm {
     gap: 20px;
@@ -1056,6 +1064,25 @@ h1.main-title-center::after,
   .scrolling-wrap .comm {
     gap: 12px;
   }
+  .appointment-details, .appointment-details {
+    display: none;
+  }
+  .banner-mobile-menu {
+    position: fixed;
+    background: #827ec8;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+  }
+
+  .testimonials-btns {
+    display: none;
+  }
+
 }
 
 .marquee-section {
@@ -1352,7 +1379,8 @@ h1.main-title-center::after,
   background: #fff;
   border-radius: 15px;
   padding: 25px;
-  max-width: 600px;
+  min-width: 340px;
+  max-width: 500px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -2401,9 +2429,12 @@ footer {
 
 .nav-item.dropdown:hover .specialties-list {
   display: inline-flex;
-  width: 35rem;
+  /* width: 35rem; */
+  min-width: 640px;
+  max-width: 640px;
   position: absolute;
-  top: 1.6rem;
+  /* top: 1.6rem; */
+  top: 2rem;
   left: 0;
 }
 
@@ -2435,6 +2466,18 @@ footer {
 .side_menu_responsive_desktop {
   display: none !important;
 }
+
+.side_menu_responsive_desktop ul li{
+  padding: 6px 0;
+}
+
+
+
+
+
+
+
+
 
 @media (min-width: 1025px) {
   .side_menu_responsive_mobile {

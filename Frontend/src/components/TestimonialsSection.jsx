@@ -170,13 +170,13 @@ const TestimonialsSection = () => {
         <div className="relative">
           {/* Navigation Arrows */}
           <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow z-10"
+            className="testimonials-btns absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow z-10"
             onClick={() => handleDotClick("left")}
           >
             <span className="text-2xl">←</span>
           </button>
           <button
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow z-10"
+            className="testimonials-btns absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow z-10"
             onClick={() => handleDotClick("right")}
           >
             <span className="text-2xl">→</span>
@@ -187,7 +187,7 @@ const TestimonialsSection = () => {
             {testimonialsData?.map((testimonial) => (
               <div
                 key={testimonial._id}
-                className="testimonial-card col-md-4 border-1"
+                className="testimonial-card col-md-4 col-sm-12 border-1"
               >
                 <div className="text-6xl text-gray-200 mb-4">"</div>
                 <p>

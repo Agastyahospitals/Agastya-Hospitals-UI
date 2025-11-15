@@ -55,8 +55,7 @@ const Specialties = () => {
                           style={{
                             width: 50,
                             height: 50,
-                            objectFit: "cover",
-                            background: "#f5f5f5",
+                            objectFit: "cover",                            
                           }}
                         />
                       ) : (
