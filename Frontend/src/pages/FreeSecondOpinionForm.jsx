@@ -59,7 +59,7 @@ const FreeSecondOpinionForm = () => {
   };
 
   return (
-    <div className="container p-5">
+    <div className="container p-5 opinion-form">
       <div className="row">
         <div className="col-lg-5">
           {/* <p className="mb-6">

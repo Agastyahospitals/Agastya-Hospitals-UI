@@ -25,7 +25,7 @@ const About = () => {
     <div className="row">
       <div className="col-lg-8 m-auto">
           <div className="aboutus-text">
-        <div className="bg-white p-8">
+        <div className="bg-white p-2">
           <p>
             Agastya Hospitals, is a 150 bedded hospital located on converge of 5
             most important routes of twin cities, situated at Omakar Nagar,

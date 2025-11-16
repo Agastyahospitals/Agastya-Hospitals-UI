@@ -16,116 +16,53 @@ const AwardsAndRecongnition = () => {
           <div className="col-lg-12 text-center mb-12">
             <h2 className="main-title-center">Awards & Recognitions</h2>
           </div>
-        </div>
-
-        {/* <div className='accreds-recognitions'>
-            <div className='row'>
-              <div className='col-lg-3'>
-                <div className='accreds-card'>
-                    <img src="https://placehold.co/300x300/EEE/31343C" alt="" title="" />
-                    <div className='accreds-card-info'>
-                        <h3>Name Place holder</h3>
-                        <p>Designation</p>
-                    </div>
-                </div>
-              </div>
-
-              <div className='col-lg-3'>
-                <div className='accreds-card'>
-                    <img src="https://placehold.co/300x300/EEE/31343C" alt="" title="" />
-                    <div className='accreds-card-info'>
-                        <h3>Name Place holder</h3>
-                        <p>Designation</p>
-                    </div>
-                </div>
-              </div>
-
-              <div className='col-lg-3'>
-                <div className='accreds-card'>
-                    <img src="https://placehold.co/300x300/EEE/31343C" alt="" title="" />
-                    <div className='accreds-card-info'>
-                        <h3>Name Place holder</h3>
-                        <p>Designation</p>
-                    </div>
-                </div>
-              </div>
-
-              <div className='col-lg-3'>
-                <div className='accreds-card'>
-                    <img src="https://placehold.co/300x300/EEE/31343C" alt="" title="" />
-                    <div className='accreds-card-info'>
-                        <h3>Name Place holder</h3>
-                        <p>Designation</p>
-                    </div>
-                </div>
-              </div>
-            </div>
- 
-        </div> */}
+        </div> 
+        
         <div className="container awards-gallery">
           <div className="row">
             <LightGallery plugins={[lgZoom, lgThumbnail]} speed={500}>
-              <div className="row">
-                              
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-1.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-1.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-1.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763311013/agastya/awards-thumb-1.png"
                   alt="…"
                 />
               </a>
-              </div>
-            
-
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-2.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-2.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-2.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763310993/agastya/awards-thumb-2.png"
                   alt="…"
                 />
               </a>
-              </div>
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-3.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-3.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-3.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763310994/agastya/awards-thumb-3.png"
                   alt="…"
                 />
               </a>
-              </div>
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-4.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-4.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-4.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763311007/agastya/awards-thumb-4.png"
                   alt="…"
                 />
               </a>
-              </div>
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-5.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-5.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-5.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763311009/agastya/awards-thumb-5.png"
                   alt="…"
                 />
               </a>
-              </div>
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-6.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-6.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-6.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763310994/agastya/awards-thumb-6.png"
                   alt="…"
                 />
               </a>
-              </div>
-              <div class="col-lg-4">
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-7.jpg">
+              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-7.png">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-7.jpg"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763310993/agastya/awards-thumb-7.png"
                   alt="…"
                 />
               </a>
-              </div>
-                </div>
 
               {/* more items */}
             </LightGallery>

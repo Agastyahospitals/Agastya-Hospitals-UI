@@ -13,20 +13,20 @@ export const MENUITEMS = [
 
       {
         title: "Doctors",
-        icon: "widget",
+        icon: "user",
         path: `/doctors`,
         type: "link",
       },
 
       {
         title: "Patients",
-        icon: "widget",
+        icon: "user",
         path: `/patients`,
         type: "link",
       },
       {
         title: "Medical Records",
-        icon: "widget",
+        icon: "gallery",
         path: `/medical-records`,
         type: "link",
       },
@@ -39,13 +39,13 @@ export const MENUITEMS = [
 
       {
         title: "Appointments",
-        icon: "widget",
+        icon: "calendar",
         path: `/appointments`,
         type: "link",
       },
       {
         path: `/departments`,
-        icon: "project",
+        icon: "knowledgebase",
         title: "Departments",
         type: "link",
       },
@@ -69,31 +69,31 @@ export const MENUITEMS = [
       }, ///health-packages
       {
         title: "Health Packages",
-        icon: "home",
+        icon: "gallery",
         type: "link",
         path: `/health-packages`,
       },
       {
         title: "Technologies",
-        icon: "home",
+        icon: "project",
         type: "link",
         path: `/technologies`,
       },
       {
         path: `/blog`,
-        icon: "file",
+        icon: "blog",
         title: "Blog",
         type: "link",
       },
       {
         path: `/testimonials`,
-        icon: "home",
+        icon: "chat",
         title: "Testimonials",
         type: "link",
       },
       {
         path: `/roles-permissions`,
-        icon: "project",
+        icon: "user",
         title: "Roles & Permissions",
         type: "link",
       },
