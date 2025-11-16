@@ -126,7 +126,7 @@ const TestimonialForm = ({
       if (isEditMode) {
         // Replace testimonialID with the actual ID you want to update
         response = await axios.put(
-          `https://agastya-hospitals-0bfo.onrender.com/api/testimonials?testimonialID=${testimonialID}`,
+          `https://agastya-hospitals-backend.onrender.com/api/testimonials?testimonialID=${testimonialID}`,
           formData,
           {
             headers: {
@@ -136,7 +136,7 @@ const TestimonialForm = ({
         );
       } else {
         response = await axios.post(
-          "https://agastya-hospitals-0bfo.onrender.com/api/testimonials",
+          "https://agastya-hospitals-backend.onrender.com/api/testimonials",
           formData,
           {
             headers: {
