@@ -14,15 +14,17 @@ import {
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPatients } from "../../slices/patientSlice";
-import { uploadMedicalRecords } from "../../api/Services";
+import { uploadMedicalRecords, updatePatient } from "../../api/Services";
 import { toast } from "react-toastify";
 
 const UploadForm = ({ onClose, patientID }) => {
   const [patientName, setPatientName] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [patientData, setPatientData] = useState({});
+  const [originalMedicalRecords, setOriginalMedicalRecords] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
+  const [recordsChanged, setRecordsChanged] = useState(false);
   const dispatch = useDispatch();
   const {
     data: patients,
@@ -41,6 +43,8 @@ const UploadForm = ({ onClose, patientID }) => {
       let patient = patients.filter((p) => p.patientID === patientID)[0];
       setPatientData(patient || {});
       setPatientName(patientID);
+      setOriginalMedicalRecords((patient && patient.medicalRecords) || []);
+      setRecordsChanged(false);
     }
   }, [patientID]);
 
@@ -52,6 +56,8 @@ const UploadForm = ({ onClose, patientID }) => {
     setPatientData(selectedPatient);
     setPatientName(e.target.value);
     setUploadError(""); // Clear any previous errors
+    setOriginalMedicalRecords((selectedPatient && selectedPatient.medicalRecords) || []);
+    setRecordsChanged(false);
   };
 
   const handleFileChange = (e) => {
@@ -77,7 +83,9 @@ const UploadForm = ({ onClose, patientID }) => {
       ...prev,
       medicalRecords: prev.medicalRecords.filter((_, i) => i !== index),
     }));
-    // TODO: Call backend API to delete the file from server/storage
+    // Mark that records were changed so Save button enables
+    setRecordsChanged(true);
+    // TODO: Call backend API to delete the file from server/storage if needed
   };
 
   const handleSubmit = async (e) => {
@@ -88,8 +96,8 @@ const UploadForm = ({ onClose, patientID }) => {
       return;
     }
 
-    if (selectedFiles.length === 0) {
-      setUploadError("Please select at least one file to upload");
+    if (selectedFiles.length === 0 && !recordsChanged) {
+      setUploadError("Please select at least one file to upload or remove an existing record");
       return;
     }
 
@@ -97,33 +105,72 @@ const UploadForm = ({ onClose, patientID }) => {
     setUploadError("");
 
     try {
-      const response = await uploadMedicalRecords(
-        patientData.patientID,
-        selectedFiles
-      );
+      // If only records were changed (deleted) and no new files, update patient
+      if (selectedFiles.length === 0 && recordsChanged) {
+        const updateResp = await updatePatient(patientData.patientID, {
+          medicalRecords: patientData.medicalRecords || [],
+        });
+        toast.success(`Medical records updated for ${patientData.fullName}`);
 
-      if (response.updatedCount > 0) {
+        // Refresh patients list in parent/state
+        dispatch(fetchPatients());
+
+        // Reset and close
+        setSelectedFiles([]);
+        setPatientName("");
+        setPatientData({});
+        setOriginalMedicalRecords([]);
+        setRecordsChanged(false);
+        const fileInput = document.querySelector('input[type="file"]');
+        if (fileInput) fileInput.value = "";
+        setTimeout(() => onClose(), 1200);
+      } else if (selectedFiles.length > 0 && recordsChanged) {
+        // If both deletion and addition: first update the deleted list, then upload new files
+        await updatePatient(patientData.patientID, {
+          medicalRecords: patientData.medicalRecords || [],
+        });
+        const response = await uploadMedicalRecords(
+          patientData.patientID,
+          selectedFiles
+        );
         toast.success(
           `Successfully uploaded ${selectedFiles.length} medical record(s) for ${patientData.fullName}`
         );
 
-        // Reset form
+        // Refresh patients list in parent/state
+        dispatch(fetchPatients());
+
+        // Reset
         setSelectedFiles([]);
         setPatientName("");
         setPatientData({});
-
-        // Reset file input
+        setOriginalMedicalRecords([]);
+        setRecordsChanged(false);
         const fileInput = document.querySelector('input[type="file"]');
-        if (fileInput) {
-          fileInput.value = "";
-        }
-
-        // Close the form after successful upload
-        setTimeout(() => {
-          onClose();
-        }, 1500);
+        if (fileInput) fileInput.value = "";
+        setTimeout(() => onClose(), 1500);
       } else {
-        throw new Error("No records were updated");
+        // Only new files to upload
+        const response = await uploadMedicalRecords(
+          patientData.patientID,
+          selectedFiles
+        );
+        if (response.updatedCount > 0) {
+          toast.success(
+            `Successfully uploaded ${selectedFiles.length} medical record(s) for ${patientData.fullName}`
+          );
+          // Refresh patients list in parent/state
+          dispatch(fetchPatients());
+
+          setSelectedFiles([]);
+          setPatientName("");
+          setPatientData({});
+          const fileInput = document.querySelector('input[type="file"]');
+          if (fileInput) fileInput.value = "";
+          setTimeout(() => onClose(), 1500);
+        } else {
+          throw new Error("No records were updated");
+        }
       }
     } catch (error) {
       console.error("Upload error:", error);
@@ -298,9 +345,7 @@ const UploadForm = ({ onClose, patientID }) => {
                 color="primary"
                 type="submit"
                 disabled={
-                  isUploading ||
-                  !patientData.patientID ||
-                  selectedFiles.length === 0
+                  isUploading || !patientData.patientID || (selectedFiles.length === 0 && !recordsChanged)
                 }
               >
                 {isUploading ? (
