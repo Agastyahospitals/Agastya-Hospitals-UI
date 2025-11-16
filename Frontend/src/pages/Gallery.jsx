@@ -6,7 +6,6 @@ const Gallery = () => {
 }
 export default Gallery;*/
 
-
 import React, { useState } from "react";
 import LightGallery from "lightgallery/react";
 
@@ -18,39 +17,154 @@ import "lightgallery/css/lg-thumbnail.css";
 // Plugins
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
+import arthroscopy from "../assets/images/gallery/arthroscopy.JPG";
 
 const Gallery = () => {
   // Tabs and their image sets
   const tabs = {
-     Infrastructure: [
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-1.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-1.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468045/agastya/agastya-gallery-2.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468045/agastya/agastya-gallery-2.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468092/agastya/agastya-gallery-3.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468092/agastya/agastya-gallery-3.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-4.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-4.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468073/agastya/agastya-gallery-5.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468073/agastya/agastya-gallery-5.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-6.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-6.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-7.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-7.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-8.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-8.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-9.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-9.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-10.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-10.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-11.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-11.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-12.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-12.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-13.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-13.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-14.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-14.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-15.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-15.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-16.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-16.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-17.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-17.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-18.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-18.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-19.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-19.jpg", caption: "Infrastructure" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-20.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-20.jpg", caption: "Infrastructure" },      
+    Infrastructure: [
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-1.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-1.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468045/agastya/agastya-gallery-2.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468045/agastya/agastya-gallery-2.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468092/agastya/agastya-gallery-3.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468092/agastya/agastya-gallery-3.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-4.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-4.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468073/agastya/agastya-gallery-5.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468073/agastya/agastya-gallery-5.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-6.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-6.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-7.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-7.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-8.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-8.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-9.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-9.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-10.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-10.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-11.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-11.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-12.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-12.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-13.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-13.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-14.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-14.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-15.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-15.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-16.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-16.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-17.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-17.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-18.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-18.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-19.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-19.jpg",
+        caption: "Infrastructure",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-20.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-20.jpg",
+        caption: "Infrastructure",
+      },
     ],
- 
-     Equipment: [
-      
-      { src: "../../assets/images/gallery/arthroscopy.JPG", thumb: "../../assets/images/gallery/arthroscopy.JPG", caption: "Cathlab" },      
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg", caption: "Robotics" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg", caption: "CT Scan" },
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg", caption: "Arthroscopy" },
+
+    Equipment: [
+      { src: arthroscopy, thumb: arthroscopy, caption: "Cathlab" },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
+        caption: "Robotics",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
+        caption: "CT Scan",
+      },
+      {
+        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
+        thumb:
+          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
+        caption: "Arthroscopy",
+      },
     ],
     // Architecture: [
     //   { src: "https://picsum.photos/id/1003/1200/800", thumb: "https://picsum.photos/id/1003/600/400", caption: "Building" },
@@ -63,10 +177,8 @@ const Gallery = () => {
 
   return (
     <div className="container mt-5 mb-5">
-       
-
       {/* --- Tabs --- */}
-      <div  style={{ textAlign: "center", marginBottom: "20px" }}>
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
         {Object.keys(tabs).map((tab) => (
           <button
             key={tab}
@@ -75,7 +187,7 @@ const Gallery = () => {
               padding: "10px 20px",
               margin: "5px",
               border: "1px",
-              borderStyle:"solid",
+              borderStyle: "solid",
               borderRadius: "50px",
               cursor: "pointer",
               background: activeTab === tab ? "#1a365a" : "#fff",
@@ -96,11 +208,7 @@ const Gallery = () => {
         elementClassNames="gallery-grid"
       >
         {tabs[activeTab].map((img, i) => (
-          <a
-            key={i}
-            href={img.src}
-            data-sub-html={`<h4>${img.caption}</h4>`}
-          >
+          <a key={i} href={img.src} data-sub-html={`<h4>${img.caption}</h4>`}>
             <img
               src={img.thumb}
               alt={img.caption}
