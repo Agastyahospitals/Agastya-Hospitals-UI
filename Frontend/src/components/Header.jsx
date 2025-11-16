@@ -53,12 +53,13 @@ const Header = () => {
     { path: "/terms-and-conditions", label: "Terms & Conditions" },
     { path: "/free-second-opinion", label: "Free Second Opinion" },
     { path: "/medical-reports", label: "Medical Reports" },
-    { path: "/doctor/profile", label: "Doctor Profile" },
+    { path: `/doctor/`, label: "Doctor Profile" },
     { path: "/leadership-team", label: "Leadership Team" },
     { path: "/achievements", label: "Achievements" },
     { path: "/awards-recognition", label: "Awards & Recognition" },
     { path: "/gallery", label: "Gallery" },
     { path: "/blog-details", label: "Blog Details" },
+    { path: "/specialty/", label: "Specialty Details" },
   ];
 
   const aboutDropdown = [
@@ -83,7 +84,11 @@ const Header = () => {
 
   // Derive page title from pathname
   const currentPage =
-    allNavItems.find((item) => item.path === pathname)?.label || "";
+    allNavItems.find((item) => item.path === pathname)?.label ||
+    (pathname.startsWith("/doctor/") ? "Doctor Profile" : "") ||
+    (pathname.startsWith("/specialty/") ? "Specialty Details" : "");
+
+  console.log("CURRENT PAGE::: ", currentPage);
 
   useEffect(() => {
     // Reset breadcrumb to Home if on root, or set based on pathname
@@ -97,12 +102,30 @@ const Header = () => {
         ...aboutDropdown,
         ...sortedData,
       ];
-      const current = allNavItems.find(
-        (item) => item.path === location.pathname
-      );
-      if (current) {
-        dispatch(setBreadcrumb(["Home", current.label]));
+      let label = "";
+
+      // exact match first
+      const match = allNavItems.find((item) => item.path === pathname);
+      if (match) {
+        label = match.label;
       }
+
+      // dynamic doctor profile route
+      else if (pathname.startsWith("/doctor/")) {
+        label = "Doctor Profile";
+      } else if (pathname.startsWith("/specialty/")) {
+        label = "Specialty Details";
+      }
+
+      if (label) {
+        dispatch(setBreadcrumb(["Home", label]));
+      }
+      // const current = allNavItems.find(
+      //   (item) => item.path === location.pathname
+      // );
+      // if (current) {
+      //   dispatch(setBreadcrumb(["Home", current.label]));
+      // }
     }
   }, [pathname]);
 
@@ -244,16 +267,9 @@ const Header = () => {
                                 key={item.path}
                               >
                                 <Link
-                                  to={`/${item.path}`}
-                                  //state={{ specialityID: item.id }}
+                                  to={`/specialty/${item.path}`}
                                   className="dropdown-item"
                                   onClick={() => {
-                                    // navigate(`/${item.id}`),
-                                    //   {
-                                    //     state: {
-                                    //       specialityID: item.id,
-                                    //     },
-                                    //   };
                                     dispatch(
                                       setBreadcrumb(["Home", item.label])
                                     );
@@ -279,7 +295,7 @@ const Header = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 className="banner-title mt-5">{currentPage}</h2>
+                <h2 className="banner-title mt-5 mb-4">{currentPage}</h2>
               </div>
               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                 <div className="breadcrumb">

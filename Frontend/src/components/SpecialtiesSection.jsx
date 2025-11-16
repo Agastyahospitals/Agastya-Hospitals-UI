@@ -109,7 +109,7 @@ const SpecialtiesSection = () => {
                         setBreadcrumb(["Home", specialty.specialityName])
                       );
                       navigate(
-                        `/${specialty.specialityName
+                        `/specialty/${specialty.specialityName
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`,
                         {

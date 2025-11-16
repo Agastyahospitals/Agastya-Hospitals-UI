@@ -13,7 +13,7 @@ const DoctorProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { id: fullName } = useParams();
+  const { doctor: fullName } = useParams();
   // const doctorID = location.state?.doctorID;
   const formattedName = fullName
     .replace(/-/g, " ")

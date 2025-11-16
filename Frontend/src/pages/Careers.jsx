@@ -42,7 +42,7 @@ const Careers = () => {
   ];
 
   return (
-    <div className="container py-5 m-0" style={{overflow: "hidden"}}>
+    <div className="container py-5" style={{overflow: "hidden"}}>
       {/* <h1 className="text-4xl font-bold text-gray-900 text-center mb-12">
           Careers at Agastya Hospitals
         </h1> */}

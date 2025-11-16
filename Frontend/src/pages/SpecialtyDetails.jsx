@@ -16,14 +16,14 @@ const SpecialtyDetails = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id: specialityName } = useParams();
+  const { specialty: specialityName } = useParams();
 
   const formatSpecialtyTitle = (name) => {
     return name
-      .replace(/-/g, " ")
-      .toLowerCase()
-      .split(" ")
-      .map((word) =>
+      ?.replace(/-/g, " ")
+      ?.toLowerCase()
+      ?.split(" ")
+      ?.map((word) =>
         word === "and" ? "and" : word.charAt(0).toUpperCase() + word.slice(1)
       )
       .join(" ");
@@ -89,11 +89,13 @@ const SpecialtyDetails = () => {
   };
   useEffect(() => {
     fetchSpecialties();
+    dispatch(setBreadcrumb(["Home", formatSpecialtyTitle(specialityName)]));
   }, [specialityName]);
 
-  const gotoProfile = (doctorID) => {
+  const gotoProfile = (fullName) => {
     dispatch(setBreadcrumb(["Home", "Doctor Profile"]));
-    navigate("/doctor/profile", { state: { doctorID } });
+    const formattedName = fullName.toLowerCase().replace(/[.\s]+/g, "-");
+    navigate(`/doctor/${formattedName}`);
   };
 
   return (
@@ -194,7 +196,7 @@ const SpecialtyDetails = () => {
                         <button
                           href="#"
                           className="ctabtn viewprofile"
-                          onClick={() => gotoProfile(doctor.doctorID)}
+                          onClick={() => gotoProfile(doctor.fullName)}
                         >
                           View Profile
                         </button>

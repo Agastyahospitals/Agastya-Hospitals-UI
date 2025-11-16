@@ -685,7 +685,7 @@ select.form-select {
   border-radius: 25px;
   height: auto;
   padding: 30px;
-  
+
   display: inline-block;
   width: 100%;
   margin-bottom: 20px;
@@ -843,7 +843,7 @@ select.form-select {
   display: inline-block;
   background: #fff;
   width: 100%;
-  border:1px solid #ccc;
+  border: 1px solid #ccc;
   /* max-width: 320px; */
   padding: 1rem 1.5rem;
 }
@@ -1040,8 +1040,6 @@ h1.main-title-center::after,
   gap: 8px;
 }
 
-
-
 .scrolling-wrap .comm .cmn-textslide img {
   margin-right: 10px;
 }
@@ -1054,26 +1052,28 @@ h1.main-title-center::after,
   animation-play-state: paused;
 }
 
-.awards-gallery a {display: inline-block; padding: 10px;}
+.awards-gallery a {
+  display: inline-block;
+  padding: 10px;
+}
 
-.awards-gallery img{ 
-  width:300px;
+.awards-gallery img {
+  width: 300px;
 }
 
 .doctor-profile-info li label {
   font-size: 13px !important;
 }
-.doctor-profile-info li p{
+.doctor-profile-info li p {
   font-size: 14px !important;
 }
 
-.packagecard-internal {}
+.packagecard-internal {
+}
 
 .banner-mobile-menu {
   display: none;
 }
-
-
 
 @media (max-width: 1399px) {
   .scrolling-wrap .comm {
@@ -1092,7 +1092,8 @@ h1.main-title-center::after,
   .scrolling-wrap .comm {
     gap: 12px;
   }
-  .appointment-details, .herobanner-quicklinks {
+  .appointment-details,
+  .herobanner-quicklinks {
     display: none;
   }
   .banner-mobile-menu {
@@ -1116,22 +1117,17 @@ h1.main-title-center::after,
     font-size: 12px;
   }
 
-
-
-
   /* Updated by Dilip */
 
-  
-.doctor-left-section {
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-}
+  .doctor-left-section {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
 
-.doctor-profile-page {
-  padding:0px !important;
-}
+  .doctor-profile-page {
+    padding: 0px !important;
+  }
 
-  
   .testimonials-btns {
     display: none;
   }
@@ -1155,7 +1151,7 @@ h1.main-title-center::after,
   .hero-title {
     font-size: 2.8rem;
   }
-  .outstanding-care .accreds p{
+  .outstanding-care .accreds p {
     font-size: 16px;
   }
   .specialtieshome-container {
@@ -1172,60 +1168,43 @@ h1.main-title-center::after,
   .specialties-bg {
     padding: 20px 0;
   }
-  .package-card{
+  .package-card {
     min-width: 320px;
   }
-.specialty-card-home {
+  .specialty-card-home {
     min-width: 300px;
   }
   .footer-copy {
     margin-bottom: 70px;
   }
   .outstanding-btn-container {
-           display: flex !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        margin-bottom: 20px;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 20px;
   }
-  .outstanding-care .left-section .video, .outstanding-care .left-section .locateus {
+  .outstanding-care .left-section .video,
+  .outstanding-care .left-section .locateus {
     font-size: 14px !important;
-    margin: 5px 10px!important;
+    margin: 5px 10px !important;
     padding: 5px 10px !important;
   }
 
+  .accreds img {
+    width: auto;
+    max-width: 60%;
+    margin-top: 15px;
+  }
 
-.accreds img { 
-  width: auto;
-  max-width: 60%;
-  margin-top: 15px;;
-}
+  .py-16 {
+    padding: 2.5rem 0 !important;
+  }
 
+  /* Updated by Dilip */
 
-.py-16 {
-  padding: 2.5rem 0 !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Updated by Dilip */
-
-
-
-
-
-
-
-
+  .booking-form-row {
+    display: block !important;
+  }
 }
 
 .marquee-section {
@@ -2611,17 +2590,9 @@ footer {
   display: none !important;
 }
 
-.side_menu_responsive_desktop ul li{
+.side_menu_responsive_desktop ul li {
   padding: 6px 0;
 }
-
-
-
-
-
-
-
-
 
 @media (min-width: 1025px) {
   .side_menu_responsive_mobile {
