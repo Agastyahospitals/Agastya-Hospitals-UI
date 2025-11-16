@@ -68,7 +68,99 @@ const PatientDetails = ({ patientDetails }) => {
       <Card className="px-3 py-4">
         <h6 className="b-b-light pb-3">Medical Records</h6>
         <Row className="widget-grid">
-          <Col md="12 px-0"></Col>
+          <Col md="12 px-0">
+            {!patientDetails.medicalRecords || patientDetails.medicalRecords.length === 0 ? (
+              <p className="text-muted text-center py-3">No medical records found.</p>
+            ) : (
+              <div className="medical-records-container">
+                <div className="row">
+                  {patientDetails.medicalRecords.map((recordUrl, index) => {
+                    const fileName = recordUrl.split("/").pop();
+                    const isImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
+                    const isPdf = /\.pdf$/i.test(fileName);
+
+                    return (
+                      <div key={index} className="col-md-4 mb-3">
+                        <div className="card h-100 shadow-sm">
+                          {isImage ? (
+                            <>
+                              <img
+                                src={recordUrl}
+                                alt={fileName}
+                                className="card-img-top"
+                                style={{ height: "200px", objectFit: "cover" }}
+                              />
+                              <div className="card-body">
+                                <p className="card-text small text-truncate" title={fileName}>
+                                  {fileName}
+                                </p>
+                                <a
+                                  href={recordUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn btn-sm btn-primary"
+                                >
+                                  View Full
+                                </a>
+                              </div>
+                            </>
+                          ) : isPdf ? (
+                            <>
+                              <div
+                                className="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                style={{ height: "200px" }}
+                              >
+                                <span className="text-danger" style={{ fontSize: "48px" }}>
+                                  📄
+                                </span>
+                              </div>
+                              <div className="card-body">
+                                <p className="card-text small text-truncate" title={fileName}>
+                                  {fileName}
+                                </p>
+                                <a
+                                  href={recordUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn btn-sm btn-primary"
+                                >
+                                  Open PDF
+                                </a>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div
+                                className="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                style={{ height: "200px" }}
+                              >
+                                <span className="text-secondary" style={{ fontSize: "48px" }}>
+                                  📎
+                                </span>
+                              </div>
+                              <div className="card-body">
+                                <p className="card-text small text-truncate" title={fileName}>
+                                  {fileName}
+                                </p>
+                                <a
+                                  href={recordUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn btn-sm btn-primary"
+                                >
+                                  Download
+                                </a>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </Col>
         </Row>
       </Card>
       <Card className="px-3 pt-4 pb-0 bg-none">
@@ -79,7 +171,7 @@ const PatientDetails = ({ patientDetails }) => {
               headers={["Record ID", "Date", "Reason", "Description", "Doctor"]}
               tableBody={
                 <tbody>
-                  {patientDetails.medicalRecords?.length === 0 ? (
+                  {!patientDetails.visits || patientDetails.visits?.length === 0 ? (
                     <tr>
                       <td colSpan="5" className="text-center">
                         No medical records found.
