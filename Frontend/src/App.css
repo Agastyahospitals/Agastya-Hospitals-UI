@@ -1065,7 +1065,7 @@ h1.main-title-center::after,
   .scrolling-wrap .comm {
     gap: 12px;
   }
-  .appointment-details, .appointment-details {
+  .appointment-details, .herobanner-quicklinks {
     display: none;
   }
   .banner-mobile-menu {
