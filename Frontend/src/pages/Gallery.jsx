@@ -47,7 +47,7 @@ const Gallery = () => {
  
      Equipment: [
       
-      { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/cathlab.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/cathlab.jpg", caption: "Cathlab" },      
+      { src: "../../assets/images/gallery/arthroscopy.JPG", thumb: "../../assets/images/gallery/arthroscopy.JPG", caption: "Cathlab" },      
       { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg", caption: "Robotics" },
       { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg", caption: "CT Scan" },
       { src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg", thumb: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg", caption: "Arthroscopy" },

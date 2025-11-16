@@ -43,13 +43,13 @@ const Leadership = () => {
             <div className="col-lg-3">
               <div className="leadership-card">
                 <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1761463445/agastya/dr-sudhakar-reddy.png"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763285933/agastya/dr-g-sudhaker-reddy.png"
                   alt=""
                   title=""
                 />
                 <div className="leadership-info">
-                  <h3>Dr H. Sudhakar Reddy PT</h3>
-                  <p>MPT, MIAP, MTFI, CDRS, CBCT</p>
+                  <h3>Dr Gurram Sudhakar Reddy</h3>
+                  <p>MBBS, MS.Ortho</p>
                 </div>
               </div>
             </div>

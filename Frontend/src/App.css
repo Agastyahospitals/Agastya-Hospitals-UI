@@ -835,6 +835,18 @@ select.form-select {
   border-radius: 1rem;
   overflow: hidden;
 }
+.package-card-internal {
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  min-height: 100%;
+  display: inline-block;
+  background: #fff;
+  width: 100%;
+  border:1px solid #ccc;
+  /* max-width: 320px; */
+  padding: 1rem 1.5rem;
+}
 .package-card {
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
@@ -1042,11 +1054,26 @@ h1.main-title-center::after,
   animation-play-state: paused;
 }
 
+.awards-gallery a {display: inline-block; padding: 10px;}
 
+.awards-gallery img{ 
+  width:300px;
+}
+
+.doctor-profile-info li label {
+  font-size: 13px !important;
+}
+.doctor-profile-info li p{
+  font-size: 14px !important;
+}
+
+.packagecard-internal {}
 
 .banner-mobile-menu {
   display: none;
 }
+
+
 
 @media (max-width: 1399px) {
   .scrolling-wrap .comm {
@@ -1065,7 +1092,7 @@ h1.main-title-center::after,
   .scrolling-wrap .comm {
     gap: 12px;
   }
-  .appointment-details, .appointment-details {
+  .appointment-details, .herobanner-quicklinks {
     display: none;
   }
   .banner-mobile-menu {
@@ -1089,9 +1116,115 @@ h1.main-title-center::after,
     font-size: 12px;
   }
 
+
+
+
+  /* Updated by Dilip */
+
+  
+.doctor-left-section {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.doctor-profile-page {
+  padding:0px !important;
+}
+
+  
   .testimonials-btns {
     display: none;
   }
+
+  .mobile-topbooking-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .top-infonavigation .patientlogin {
+    font-size: 13px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .top-infonavigation .bookappointment {
+    font-size: 13px;
+  }
+  .hero-content {
+    padding: 2rem 1rem 1rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  .outstanding-care .accreds p{
+    font-size: 16px;
+  }
+  .specialtieshome-container {
+    justify-content: space-around;
+  }
+  .main-title {
+    font-size: 30px;
+  }
+  .viewall-spec-btn {
+    font-size: 16px;
+    text-align: right;
+  }
+
+  .specialties-bg {
+    padding: 20px 0;
+  }
+  .package-card{
+    min-width: 320px;
+  }
+.specialty-card-home {
+    min-width: 300px;
+  }
+  .footer-copy {
+    margin-bottom: 70px;
+  }
+  .outstanding-btn-container {
+           display: flex !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        margin-bottom: 20px;
+  }
+  .outstanding-care .left-section .video, .outstanding-care .left-section .locateus {
+    font-size: 14px !important;
+    margin: 5px 10px!important;
+    padding: 5px 10px !important;
+  }
+
+
+.accreds img { 
+  width: auto;
+  max-width: 60%;
+  margin-top: 15px;;
+}
+
+
+.py-16 {
+  padding: 2.5rem 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Updated by Dilip */
+
+
+
+
+
+
+
 
 }
 

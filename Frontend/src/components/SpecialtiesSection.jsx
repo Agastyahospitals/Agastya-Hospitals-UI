@@ -42,7 +42,7 @@ const SpecialtiesSection = () => {
   return (
     <section className="container specialties-bg mx-auto">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 specialtieshome-container">
           <div className="flex items-center">
             {/* <span className="text-2xl mr-2">→</span> */}
             <h2 className="main-title">Our Specialties</h2>
@@ -53,7 +53,7 @@ const SpecialtiesSection = () => {
               dispatch(setBreadcrumb(["Home", "Specialties"]));
               navigate("/specialties");
             }}
-            className="text-primary f-w-600 f-18 cursor-pointer"
+            className="text-primary f-w-600 f-18 cursor-pointer viewall-spec-btn"
           >
             View All Specialties
           </a>

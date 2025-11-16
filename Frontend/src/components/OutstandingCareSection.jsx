@@ -97,7 +97,7 @@ const OutstandingCareSection = () => {
           <div className="col-lg-6">
             <div className="left-section">
               <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662699/agastya/about-agastya.png" alt="Outstanding Care"></img>
-              <div className="d-flex mt-5 mx-auto justify-center">
+              <div className="d-flex mt-5 mx-auto justify-center outstanding-btn-container">
                 <a href="#" className="video"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/video-icon.svg"></img> Watch Video</a>
                 <a href="#" className="locateus"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/map-icon.svg"></img> Locate Us</a>
               </div>

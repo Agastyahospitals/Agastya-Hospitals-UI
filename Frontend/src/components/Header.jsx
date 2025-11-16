@@ -117,7 +117,7 @@ const Header = () => {
               040 65 108 108, &nbsp;+91 9459 108 108
             </span>
           </div>
-          <div className="d-flex items-center space-x-4">
+          <div className="d-flex items-center space-x-4 mobile-topbooking-nav">
             <Link
               // to="/patient"
               className="patientlogin"

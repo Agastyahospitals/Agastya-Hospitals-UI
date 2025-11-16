@@ -41,7 +41,7 @@ const DoctorProfile = () => {
   }, []);
 
   return (
-    <div className="container p-5">
+    <div className="container p-5 doctor-profile-page">
       {loading ? (
         <div className="text-center">
           <div
@@ -54,7 +54,7 @@ const DoctorProfile = () => {
           <p className="text-center">Loading...</p>
         </div>
       ) : (
-        <div className="row mx-5">
+        <div className="row mx-5 doctor-left-section">
           <div className="col-md-4 col-lg-4 col-sm-12 col-xs-12">
             <div className="rounded-0 bg-light p-4">
               <img
@@ -73,7 +73,7 @@ const DoctorProfile = () => {
                     : "N/A"}
                 </ul>
               </div>
-              <div className="mt-3">
+              <div className="mt-3 doctor-profile-info">
                 <ul>
                   {[
                     { label: "Designation", value: doctorProfile.designation },
@@ -103,7 +103,7 @@ const DoctorProfile = () => {
                           list.label === "OPD Timings" ? (
                             <p className="f-12 f-w-700">{subList}, </p>
                           ) : (
-                            <span className="f-12 f-w-700">{subList}, </span>
+                            <p className="f-12 f-w-700">{subList}, </p>
                           )
                         )
                       ) : (
@@ -113,7 +113,7 @@ const DoctorProfile = () => {
                   ))}
                 </ul>
               </div>
-              <div className="mt-4 text-center">
+              <div className="mt-4 text-start">
                 <button
                   className="btn rounded-pill px-3 py-2 book-btn f-12"
                   onClick={() => {

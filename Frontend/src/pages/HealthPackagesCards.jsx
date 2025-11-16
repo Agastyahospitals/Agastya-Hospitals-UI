@@ -85,8 +85,8 @@ const HealthPackagesCards = () => {
     <>
       <div class="row g-4 m-0">
         {packages.packages?.map((pkg) => (
-          <div className="col-md-3">
-            <div className="package-card shadow-md border-1">
+          <div className="col-lg-6 col-md-3 packagecard-internal">
+            <div className="package-card-internal shadow-md border-1">
               <span className="discount-badge">
                 {getDiscountPercentage(pkg)}% Off
               </span>
