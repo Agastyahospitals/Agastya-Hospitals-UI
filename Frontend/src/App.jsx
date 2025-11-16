@@ -27,6 +27,7 @@ import AwardsAndRecongnition from "./pages/AwardsAndRecongnition";
 import Gallery from "./pages/Gallery";
 import InternationalPatient from "./pages/InternationalPatient";
 import { routes } from "./AppRoutes";
+import MobileNav from "./components/MobileNav";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <MobileNav />
       <ToastContainer autoClose={3000} theme="colored" />
     </div>
   );
