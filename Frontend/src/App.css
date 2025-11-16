@@ -1029,6 +1029,9 @@ h1.main-title-center::after,
   align-items: center;
   gap: 8px;
 }
+
+
+
 .scrolling-wrap .comm .cmn-textslide img {
   margin-right: 10px;
 }
