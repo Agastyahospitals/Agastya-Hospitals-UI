@@ -20,7 +20,10 @@ const HealthPackagesSection = () => {
   } = useSelector((state) => state);
   const scrollRef = useRef();
 
-  useEffect(() => {
+    const hasFetched = useRef(false);
+    useEffect(() => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
     dispatch(fetchHealthPackages());
   }, [dispatch]);
 

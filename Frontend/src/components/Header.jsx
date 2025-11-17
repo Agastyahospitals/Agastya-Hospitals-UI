@@ -3,7 +3,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
 import { fetchSpecialties } from "../slices/specialtySlice";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import SideMenu from "./common/SideMenu";
 
 const Header = () => {

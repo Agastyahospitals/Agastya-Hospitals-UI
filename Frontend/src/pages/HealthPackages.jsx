@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
 import { useState } from "react";
@@ -20,7 +20,10 @@ const HealthPackages = () => {
     error,
   } = useSelector((state) => state);
 
-  useEffect(() => {
+    const hasFetched = useRef(false);
+    useEffect(() => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
     dispatch(fetchHealthPackages());
   }, [dispatch]);
 

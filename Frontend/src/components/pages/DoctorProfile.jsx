@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { DOCTORS_API } from "../../api/services";
@@ -35,7 +35,10 @@ const DoctorProfile = () => {
     }
   };
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchDoctorById();
     dispatch(setBreadcrumb(["Home", formattedName]));
   }, []);

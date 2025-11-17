@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import { fetchSpecialties } from "../slices/specialtySlice";
@@ -87,7 +87,10 @@ const SpecialtyDetails = () => {
       setLoading(false);
     }
   };
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchSpecialties();
     dispatch(setBreadcrumb(["Home", formatSpecialtyTitle(specialityName)]));
   }, [specialityName]);

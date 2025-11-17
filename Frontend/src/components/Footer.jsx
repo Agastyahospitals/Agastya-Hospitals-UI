@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSpecialties } from "../slices/specialtySlice";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
@@ -24,7 +24,10 @@ const Footer = () => {
     navigate(path);
     window.scrollTo({ top: 0, behavior: "smooth" }); // scroll smoothly to top
   };
-  useEffect(() => {
+    const hasFetched = useRef(false);
+    useEffect(() => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
     dispatch(fetchSpecialties());
   }, [dispatch]);
 

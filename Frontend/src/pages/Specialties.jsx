@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSpecialties } from "../slices/specialtySlice";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,10 @@ const Specialties = () => {
     (state) => state.specialties
   );
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(fetchSpecialties());
   }, [dispatch]);
 

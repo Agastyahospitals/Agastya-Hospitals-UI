@@ -16,7 +16,10 @@ const SpecialtiesSection = () => {
     (state) => state.specialties
   );
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(fetchSpecialties());
   }, [dispatch]);
 

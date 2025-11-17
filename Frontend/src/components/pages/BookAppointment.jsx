@@ -53,11 +53,11 @@ const BookAppointment = () => {
   const dateInputRef = useRef(null);
   const { data: doctors } = useSelector((state) => state.doctors);
 
-  useEffect(() => {
+   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
 
-  useEffect(() => {
+   useEffect(() => {
     return () => {
       setFormState(initialState);
       setFormErrors(initialStateErrors);

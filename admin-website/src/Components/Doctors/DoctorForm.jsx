@@ -158,11 +158,10 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
   const validateField = (name, value) => {
     switch (name) {
       case "fullName":
-      case "fullName":
         if (value.trim() === "") {
           return "Full Name is required";
         }
-        if (/[^a-zA-Z\s]/.test(value)) {
+        if (/[^A-Za-z\s]/.test(value)) {
           return "No special characters are allowed";
         }
         return "";
@@ -303,9 +302,11 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
     if (isValid) {
       try {
         // Prepare data for API (remove profilePicture if it's a File object)
-        const formattedName = formState.fullName.startsWith("Dr. ")
-          ? formState.fullName
-          : `Dr. ${formState.fullName}`;
+        const formattedName = (
+          /^dr\.?\s*/i.test(formState.fullName)
+            ? formState.fullName
+            : `Dr. ${formState.fullName}`
+        ).replace(/\b\w/g, (c) => c.toUpperCase());
         const submitData = { ...formState };
 
         submitData.fullName = formattedName;

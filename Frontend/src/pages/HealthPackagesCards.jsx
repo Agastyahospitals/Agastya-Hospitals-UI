@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ModalComponent from "../components/common/ModalComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
@@ -19,7 +19,10 @@ const HealthPackagesCards = () => {
     error,
   } = useSelector((state) => state);
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(fetchHealthPackages());
   }, [dispatch]);
 

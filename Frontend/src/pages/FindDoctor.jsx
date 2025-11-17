@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DOCTORS_API, SPECIALITIES_API } from "../api/services";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,10 @@ const FindDoctor = () => {
       setIsLoading(false);
     }
   };
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchDoctors();
     fetchSpecialties();
   }, []);

@@ -19,7 +19,10 @@ const TestimonialsSection = () => {
     }
   };
 
-  useEffect(() => {
+   const hasFetched = useRef(false);
+   useEffect(() => {
+     if (hasFetched.current) return;
+     hasFetched.current = true;
     fetchTestimonials();
   }, []);
 

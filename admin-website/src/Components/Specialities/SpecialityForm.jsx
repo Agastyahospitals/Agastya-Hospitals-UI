@@ -129,6 +129,15 @@ const SpecialityForm = ({
       return isEmpty(value) ? requiredFields[name] : "";
     }
 
+    if (name === "specialityName") {
+      // Allow only letters + spaces
+      const isValid = /[^A-Za-z\s]/.test(value);
+
+      if (!isValid) {
+        return "Speciality name must contain only alphabets and spaces";
+      }
+    }
+
     return "";
   };
 
@@ -199,7 +208,9 @@ const SpecialityForm = ({
       try {
         // Prepare data for API - match the API structure from your example
         const submitData = {
-          specialityName: formState.specialityName,
+          specialityName: formState.specialityName.replace(/\b\w/g, (c) =>
+            c.toUpperCase()
+          ),
           urlSlug: formState.urlSlug,
           shortDescription: formState.shortDescription,
           pageDescription: formState.pageDescription,
@@ -242,7 +253,6 @@ const SpecialityForm = ({
           toast.success("Speciality created successfully!");
         }
 
-        console.log("API Response:", response);
         onClose(); // Close the form after successful submission
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -359,16 +369,27 @@ const SpecialityForm = ({
                       </Label>
                       <div>
                         {doctors.map((doctor, index) => (
-                          <Label className="d-block" for={`doctorCheck${index}`} key={index}>
+                          <Label
+                            className="d-block"
+                            for={`doctorCheck${index}`}
+                            key={index}
+                          >
                             <Input
                               className="checkbox_animated"
                               id={`doctorCheck${index}`}
                               type="checkbox"
-                              checked={Array.isArray(formState.doctor) && formState.doctor.includes(parseInt(doctor.doctorID))}
+                              checked={
+                                Array.isArray(formState.doctor) &&
+                                formState.doctor.includes(
+                                  parseInt(doctor.doctorID)
+                                )
+                              }
                               onChange={() => {
                                 const id = parseInt(doctor.doctorID);
                                 setFormState((prev) => {
-                                  const arr = Array.isArray(prev.doctor) ? prev.doctor.slice() : [];
+                                  const arr = Array.isArray(prev.doctor)
+                                    ? prev.doctor.slice()
+                                    : [];
                                   const idx = arr.indexOf(id);
                                   if (idx === -1) arr.push(id);
                                   else arr.splice(idx, 1);

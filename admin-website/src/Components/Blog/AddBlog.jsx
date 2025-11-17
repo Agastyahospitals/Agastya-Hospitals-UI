@@ -68,7 +68,13 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
       case "title":
         return value.trim() === "" ? "Blog Title is required" : "";
       case "url":
-        return value.trim() === "" ? "Blog URL is required" : "";
+        if (value.trim() === "") {
+          return "Blog URL is required";
+        }
+        if (/[^A-Za-z-]/.test(value)) {
+          return "No special characters are allowed";
+        }
+        return "";
       case "category":
         return value.trim() === "" ? "Category is required" : "";
       case "blogContent":
