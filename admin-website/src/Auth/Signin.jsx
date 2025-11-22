@@ -13,20 +13,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import man from "../assets/images/dashboard/profile.png";
 
-import CustomizerContext from "../_helper/Customizer";
 import OtherWay from "./OtherWay";
 import { ToastContainer, toast } from "react-toastify";
 import { loginAsync, clearError } from "../slices/authSlice";
-import Swal from "sweetalert2";
 import { getRoleId } from '../utils';
 
 const Signin = ({ selected }) => {
-  const [email, setEmail] = useState("spiderman@avengers.com");
-  const [password, setPassword] = useState("MaryJane@3");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [togglePassword, setTogglePassword] = useState(false);
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { layoutURL } = useContext(CustomizerContext);
 
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.auth
