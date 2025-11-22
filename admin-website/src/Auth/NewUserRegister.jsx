@@ -10,7 +10,7 @@ import {
   InputGroupText,
 } from "reactstrap";
 import { Btn, H4, P, H6, Image } from "../AbstractElements";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { countryCodes } from "../api/countryCode";
 import { toast } from "react-toastify";
 import { registerUser } from "../api/Services";
@@ -24,6 +24,7 @@ const RegisterFrom = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +51,7 @@ const RegisterFrom = () => {
         isActive: true,
         roleID: 4,
         countryCode: countryCode,
-        modules: ["5"],
+        modules: ["5","14"],
       };
 
       const data = await registerUser(payload);
@@ -62,9 +63,9 @@ const RegisterFrom = () => {
         localStorage.setItem("userDetails", JSON.stringify(data.user));
       }
 
-      // redirect to login after short delay
+      // redirect to login after short delay (client-side navigation)
       setTimeout(() => {
-        window.location.href = "/login";
+        navigate("/login");
       }, 1200);
     } catch (error) {
       console.error(error);
