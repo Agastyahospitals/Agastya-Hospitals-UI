@@ -4,6 +4,9 @@ import cubaimg from "../../assets/images/logo/logo-icon.png"
 // import cubaimg from "https://res.cloudinary.com/sdk28cdn/image/upload/v1758560336/agastya/logo-icon.png"
 // import cubaimg from '../../assets/images/logo/'
 import CustomizerContext from '../../_helper/Customizer';
+// use remote image URL directly instead of importing it (importing external images treats them as JS modules)
+// const cubaimg = "https://res.cloudinary.com/sdk28cdn/image/upload/v1758560336/agastya/logo-icon.png";
+
 
 const SidebarIcon = () => {
   const { layoutURL } = useContext(CustomizerContext);

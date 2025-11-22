@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   LOGIN_URL,
+  REGISTER_URL,
   // add new constant if needed in index.jsx later
   DOCTORS_API,
   USER_ROLES_API,
@@ -98,6 +99,20 @@ export const updatePassword = async ({ currentPassword, newPassword, confirmPass
 export const loginUser = async (credentials) => {
   try {
     const response = await axios.post(LOGIN_URL, credentials, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Register new user
+export const registerUser = async (userData) => {
+  try {
+    const response = await axios.post(REGISTER_URL, userData, {
       headers: {
         "Content-Type": "application/json",
       },
