@@ -154,7 +154,7 @@ const Header = () => {
                 dispatch(setBreadcrumb(["Home"]));
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 window.open(
-                  "https://agastya-hospitals-adminpage.onrender.com",
+                  "https://agastya-hospitals-adminpage-leja.onrender.com",
                   "_blank"
                 );
               }}
