@@ -58,7 +58,7 @@ const Header = () => {
     { path: "/achievements", label: "Achievements" },
     { path: "/awards-recognition", label: "Awards & Recognition" },
     { path: "/gallery", label: "Gallery" },
-    { path: "/blog-details", label: "Blog Details" },
+    { path: "/blog/", label: "Blog Details" },
     { path: "/specialty/", label: "Specialty Details" },
   ];
 
@@ -86,7 +86,8 @@ const Header = () => {
   const currentPage =
     allNavItems.find((item) => item.path === pathname)?.label ||
     (pathname.startsWith("/doctor/") ? "Doctor Profile" : "") ||
-    (pathname.startsWith("/specialty/") ? "Specialty Details" : "");
+    (pathname.startsWith("/specialty/") ? "Specialty Details" : "") ||
+    (pathname.startsWith("/blog/") ? "Blog Details" : "");
 
   console.log("CURRENT PAGE::: ", currentPage);
 
@@ -115,6 +116,8 @@ const Header = () => {
         label = "Doctor Profile";
       } else if (pathname.startsWith("/specialty/")) {
         label = "Specialty Details";
+      } else if (pathname.startsWith("/blog/")) {
+        label = "Blog Details";
       }
 
       if (label) {

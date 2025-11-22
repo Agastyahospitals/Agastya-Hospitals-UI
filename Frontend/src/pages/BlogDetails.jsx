@@ -1,33 +1,70 @@
 import axios from "axios";
 import { format } from "date-fns";
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBlogs } from "../slices/blogSlice";
+import { setBreadcrumb } from "../slices/breadcrumbSlice";
 
 const BlogDetails = () => {
-  // const [blogs, setBlogs] = useState([]);
-  const location = useLocation();
-  const blogData = location.state?.blogData;
+  const [blogData, setBlogData] = useState(null);
+  const { urlSlug: urlSlug } = useParams();
+  const navigate = useNavigate();
+  //const location = useLocation();
+  //const blogData = location.state?.blogData;
 
   const dispatch = useDispatch();
-  const {
-    data: blogs,
-    loading,
-    error,
-  } = useSelector((state) => {
+  const { data: blogs } = useSelector((state) => {
     console.log(state);
     return state.blogs.blogs;
   });
 
+  const fetchBlogsData = async () => {
+    try {
+      const res = await axios.get(
+        "https://agastya-hospitals-backend.onrender.com/api/blogs",
+        { params: { url: urlSlug } }
+      );
+      setBlogData(res.data.data[0]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+    
+    dispatch(setBreadcrumb(["Home", "Blog Details"]));
+    fetchBlogsData();
     dispatch(fetchBlogs());
   }, [dispatch]);
 
-  const sortedBlogs = [...blogs].sort(
+  const sortedBlogs = [...(blogs || [])].sort(
     (a, b) => new Date(b.dateOfPost) - new Date(a.dateOfPost)
   );
+
+  const gotoBlogDetails = (slug) => {
+    navigate(`/blog/${slug}`);
+  };
+
+  if (!blogData) {
+    return (
+      <div className="container py-5">
+        <div className="row m-0">
+          <div className="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div className="text-center">
+              <div className="spinner-grow text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-5">
@@ -45,7 +82,10 @@ const BlogDetails = () => {
             by Admin | {format(new Date(blogData.dateOfPost), "MMM dd, yyyy")}
           </p>
           <div className="mt-3">
-            <p className="f-14" dangerouslySetInnerHTML={{__html: blogData.blogContent}} />
+            <p
+              className="f-14"
+              dangerouslySetInnerHTML={{ __html: blogData.blogContent }}
+            />
           </div>
         </div>
         <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -53,7 +93,11 @@ const BlogDetails = () => {
             <h2 className="f-30 f-w-700 mb-3">Recent Posts</h2>
             <ul>
               {sortedBlogs.slice(0, 5).map((data) => (
-                <li key={data.blogID} className="mb-4 inline-flex">
+                <li
+                  key={data.blogID}
+                  className="mb-4 inline-flex"
+                  //onClick={() => gotoBlogDetails(data.url)}
+                >
                   <span>
                     <svg
                       width="10"
@@ -69,7 +113,11 @@ const BlogDetails = () => {
                     </svg>
                   </span>
                   &nbsp;
-                  <span className="f-14">{data.title}</span>
+                  <span className="f-14">
+                    <a href="" onClick={() => gotoBlogDetails(data.url)}>
+                      {data.title}
+                    </a>
+                  </span>
                 </li>
               ))}
             </ul>

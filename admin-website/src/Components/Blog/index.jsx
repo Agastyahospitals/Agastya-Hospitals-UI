@@ -134,19 +134,23 @@ const Blog = () => {
                             >
                               {blog.title}
                             </h5>
-                            <p
+                            <div
                               className="card-text f-12"
                               style={{
                                 display: "-webkit-box",
-                                WebkitLineClamp: 5,
+                                WebkitLineClamp: 2,
                                 WebkitBoxOrient: "vertical",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 maxHeight: "5em",
                               }}
                             >
-                              {blog.blogContent}
-                            </p>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: blog.blogContent,
+                                }}
+                              />
+                            </div>
                             <span className="text-info f-12">Read more...</span>
                             <div className="d-flex">
                               <Button

@@ -45,7 +45,7 @@ export const routes = [
   { path: "/achievements", component: Achievements },
   { path: "/awards-recognition", component: AwardsAndRecongnition },
   { path: "/international-patient", component: InternationalPatient },
-  { path: "/blog-details", component: BlogDetails },
+  { path: "/blog/:urlSlug", component: BlogDetails },
   { path: "/specialty/:specialty", component: SpecialtyDetails },
   { path: "/gallery", component: Gallery },
 ];

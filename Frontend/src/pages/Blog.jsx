@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../slices/blogSlice";
 import BlogCards from "../components/pages/BlogCards";
@@ -16,7 +16,10 @@ const Blog = () => {
     return state.blogs.blogs;
   });
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(fetchBlogs());
   }, [dispatch]);
 

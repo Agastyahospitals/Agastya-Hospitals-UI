@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { fetchBlogs } from "../../slices/blogSlice";
 import { is } from "date-fns/locale";
 import HTMLTextEditor from "../Common/Component/HTMLTextEditor";
+import { fetchSpecialities } from "../../api/Services";
 
 const initialState = {
   blogID: "",
@@ -40,7 +41,15 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
   const [formErrors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [categoryOptions, setCategoryOptions] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchSpecialities().then((data) => {
+      console.log("Specialities data:", data);
+      setCategoryOptions(data);
+    });
+  }, []);
 
   useEffect(() => {
     if (isEditMode && blogDataToEdit) {
@@ -327,7 +336,7 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
                       <Label className="form-label" for="category">
                         Category
                       </Label>
-                      <Input
+                      {/* <Input
                         type="text"
                         name="category"
                         id="category"
@@ -335,7 +344,24 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
                         onChange={handleChange}
                         placeholder="Enter category"
                         invalid={!!formErrors.category}
-                      />
+                      /> */}
+                      <Input
+                        type="select"
+                        name="category"
+                        value={formState.category}
+                        onChange={handleChange}
+                        invalid={!!formErrors.countryCode}
+                      >
+                        <option value="">Category</option>
+                        {categoryOptions.map((category) => (
+                          <option
+                            value={category.specialityName}
+                            key={category._id}
+                          >
+                            {category.specialityName}
+                          </option>
+                        ))}
+                      </Input>
                       <ValidationAlert error={formErrors.category} />
                     </Col>
                   </Row>

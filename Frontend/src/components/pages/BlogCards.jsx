@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../../slices/blogSlice";
 import { useNavigate } from "react-router-dom";
+import { setBreadcrumb } from "../../slices/breadcrumbSlice";
 
 const BlogCards = () => {
   const navigate = useNavigate();
@@ -17,12 +18,16 @@ const BlogCards = () => {
     return state.blogs.blogs;
   });
 
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(fetchBlogs());
   }, [dispatch]);
 
-  const gotoBlogDetails = (blogData) => {
-    navigate("/blog-details", { state: { blogData } });
+  const gotoBlogDetails = (slug) => {
+    dispatch(setBreadcrumb(["Home", "Blog Details"]));
+    navigate(`/blog/${slug}`);
   };
 
   return (
@@ -44,11 +49,11 @@ const BlogCards = () => {
                 <span>{format(new Date(blog.dateOfPost), "dd-MMM-yyyy")}</span>
               </div>
               <h3 className="mb-5 cursor-pointer">
-                <a onClick={() => gotoBlogDetails(blog)}>{blog.title}</a>
+                <a onClick={() => gotoBlogDetails(blog.url)}>{blog.title}</a>
               </h3>
               {/* <p className="excerpt"> {blog.excerpt}</p> */}
               <a
-                onClick={() => gotoBlogDetails(blog)}
+                onClick={() => gotoBlogDetails(blog.url)}
                 className="text-primary f-12 cursor-pointer"
               >
                 Read the article →
