@@ -1,6 +1,7 @@
 const api = `api`;
 const baseUrl = `https://agastya-hospitals-backend.onrender.com`;
 export const LOGIN_URL = `${baseUrl}/${api}/auth/login`;
+export const REGISTER_URL = `${baseUrl}/${api}/auth/register`;
 export const DOCTORS_API = `${baseUrl}/${api}/doctors`;
 export const SPECIALITIES_API = `${baseUrl}/${api}/specialities`;
 export const SPECIALITY_BY_ID_API = `${baseUrl}/${api}/specialities`;

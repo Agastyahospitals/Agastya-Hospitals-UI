@@ -12,15 +12,73 @@ import {
 import { Btn, H4, P, H6, Image } from "../AbstractElements";
 import { Link } from "react-router-dom";
 import { countryCodes } from "../api/countryCode";
+import { toast } from "react-toastify";
+import { registerUser } from "../api/Services";
 
 const RegisterFrom = () => {
   const [togglePassword, setTogglePassword] = useState(false);
+  const [countryCode, setCountryCode] = useState("+91");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!fullName || !phone || !email || !password || !confirmPassword) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      
+      const payload = {
+        userName:fullName,
+        email,
+        password,
+        rawPassword: password,
+        mobile: phone,
+        whatsAppNumber: phone,
+        isActive: true,
+        roleID: 4,
+        countryCode: countryCode,
+        modules: ["5"],
+      };
+
+      const data = await registerUser(payload);
+      toast.success(data.message || "User registered successfully");
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      if (data.user) {
+        localStorage.setItem("userDetails", JSON.stringify(data.user));
+      }
+
+      // redirect to login after short delay
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 1200);
+    } catch (error) {
+      console.error(error);
+      toast.error("Registration failed. Try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <Fragment>
       <div className="login-card">
         <div>
           <div className="login-main">
-            <Form className="theme-form login-form">
+              <Form className="theme-form login-form" onSubmit={handleSubmit}>
               <H4>Create your account</H4>
               <P>Enter your personal details to create account</P>
               <FormGroup>
@@ -30,8 +88,10 @@ const RegisterFrom = () => {
                     <Input
                       className="form-control"
                       type="text"
-                      required=""
+                      required
                       placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                     />
                   </Col>
                 </Row>
@@ -44,7 +104,8 @@ const RegisterFrom = () => {
                       <Input
                         type="select"
                         name="countryCode"
-                        value={"+91"}
+                        value={countryCode}
+                        onChange={(e) => setCountryCode(e.target.value)}
                         style={{ maxWidth: "70px" }}
                         // className="form-select"
                       >
@@ -58,8 +119,10 @@ const RegisterFrom = () => {
                       <Input
                         className="form-control"
                         type="text"
-                        required=""
+                        required
                         placeholder="Phone Number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </InputGroup>
                   </Col>
@@ -70,8 +133,10 @@ const RegisterFrom = () => {
                 <Input
                   className="form-control"
                   type="email"
-                  required=""
+                  required
                   placeholder="Test@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
               <FormGroup className="position-relative">
@@ -83,6 +148,8 @@ const RegisterFrom = () => {
                     name="login[password]"
                     required
                     placeholder="*********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
                     className="show-hide"
@@ -101,6 +168,8 @@ const RegisterFrom = () => {
                     name="login[password]"
                     required
                     placeholder="*********"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div
                     className="show-hide"
@@ -116,9 +185,11 @@ const RegisterFrom = () => {
                     className: "d-block w-100",
                     color: "primary",
                     type: "submit",
+                    disabled: isSubmitting,
+                    onClick: handleSubmit,
                   }}
                 >
-                  Create Account
+                  {isSubmitting ? "Creating..." : "Create Account"}
                 </Btn>
               </FormGroup>
 
