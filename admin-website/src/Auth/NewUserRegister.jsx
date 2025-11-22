@@ -50,7 +50,7 @@ const RegisterFrom = () => {
         isActive: true,
         roleID: 4,
         countryCode: countryCode,
-        modules: ["5"],
+        modules: ["5","14"],
       };
 
       const data = await registerUser(payload);
