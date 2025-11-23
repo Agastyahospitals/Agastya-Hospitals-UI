@@ -381,6 +381,7 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
                         invalid={!!formErrors.blogContent}
                       /> 
                       <ValidationAlert error={formErrors.blogContent} />*/}
+
                       <HTMLTextEditor
                         name="blogContent"
                         state={formState.blogContent}
