@@ -23,12 +23,13 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updatePassword } from "../../api/Services";
 import axios from "axios";
 import { toasterConfig } from "../../utils";
 import { USERS_API } from "../../api";
+import { loginAsync, updateUserDetails } from "../../slices/authSlice";
 
 const UserProfileCard = () => {
   const [togglePwd, setTogglePwd] = useState(false);
@@ -42,6 +43,7 @@ const UserProfileCard = () => {
     email: "",
   });
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -111,14 +113,15 @@ const UserProfileCard = () => {
       roleID: userDetails.roleID,
       modules: userDetails.modules,
     };
-    debugger;
 
     try {
       const response = await axios.put(
         `${USERS_API}?userID=${userDetails.userID}`,
         requestData
       );
+
       if (response.status === 200) {
+        dispatch(updateUserDetails(requestData));
         setEditUserDetails(false);
         toasterConfig("success", "User details updated successfully");
       }
@@ -177,6 +180,7 @@ const UserProfileCard = () => {
                           placeholder="mobile number"
                           value={userData.mobile}
                           onChange={handleChange}
+                          maxLength={10}
                         />
                       ) : (
                         userData.mobile
