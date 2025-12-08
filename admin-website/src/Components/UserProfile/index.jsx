@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Breadcrumbs,
   P,
@@ -26,20 +26,38 @@ import {
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updatePassword } from "../../api/Services";
+import axios from "axios";
+import { toasterConfig } from "../../utils";
+import { USERS_API } from "../../api";
 
 const UserProfileCard = () => {
   const [togglePwd, setTogglePwd] = useState(false);
   const [currentpwd, setCurrentpwd] = useState("");
   const [newpwd, setNewpwd] = useState("");
   const [confirmpwd, setConfirmpwd] = useState("");
+  const [editUserDetails, setEditUserDetails] = useState(false);
+  const [userData, setUserData] = useState({
+    userName: "",
+    mobile: "",
+    email: "",
+  });
+  const [errors, setErrors] = useState({});
   const { userDetails } = useSelector((state) => state.auth);
-  console.log(userDetails);
+
+  useEffect(() => {
+    setUserData({
+      userName: userDetails.userName,
+      mobile: userDetails.mobile,
+      email: userDetails.email,
+    });
+  }, []);
 
   const resetForm = () => {
     setCurrentpwd("");
     setNewpwd("");
     setConfirmpwd("");
   };
+
   const onUpdatePassword = async (e) => {
     e.preventDefault();
     try {
@@ -53,9 +71,66 @@ const UserProfileCard = () => {
       resetForm();
       setTogglePwd(false);
     } catch (error) {
-      const msg = error.response?.data?.message || error.response?.data?.error || "Failed to update password";
+      const msg =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        "Failed to update password";
       toast.error(msg);
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUserData((prevData) => ({ ...prevData, [name]: value }));
+    if (name === "email") {
+      if (!emailValidation(value)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          email: "Invalid email format",
+        }));
+      } else {
+        setErrors((prevErrors) => {
+          const { email, ...rest } = prevErrors;
+          return rest;
+        });
+      }
+    }
+  };
+
+  const emailValidation = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const requestData = {
+      userName: userData.userName,
+      mobile: userData.mobile,
+      email: userData.email,
+      roleID: userDetails.roleID,
+      modules: userDetails.modules,
+    };
+    debugger;
+
+    try {
+      const response = await axios.put(
+        `${USERS_API}?userID=${userDetails.userID}`,
+        requestData
+      );
+      if (response.status === 200) {
+        setEditUserDetails(false);
+        toasterConfig("success", "User details updated successfully");
+      }
+    } catch (error) {
+      toasterConfig(
+        "error",
+        "Failed to update user details, please try again later!"
+      );
+      setEditUserDetails(true);
+    }
+
+    console.log("Updated User Details:", requestData);
   };
 
   return (
@@ -74,7 +149,19 @@ const UserProfileCard = () => {
                     }}
                   >
                     <H6>Name</H6>
-                    <span>{userDetails.userName}</span>
+                    <span>
+                      {editUserDetails ? (
+                        <input
+                          className="form-control"
+                          placeholder="user name"
+                          name="userName"
+                          value={userData.userName}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        userData.userName
+                      )}
+                    </span>
                   </LI>
                   <LI
                     attrLI={{
@@ -82,7 +169,19 @@ const UserProfileCard = () => {
                     }}
                   >
                     <H6>Contact No.</H6>
-                    <span>{userDetails.mobile}</span>
+                    <span>
+                      {editUserDetails ? (
+                        <input
+                          className="form-control"
+                          name="mobile"
+                          placeholder="mobile number"
+                          value={userData.mobile}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        userData.mobile
+                      )}
+                    </span>
                   </LI>
                   <LI
                     attrLI={{
@@ -90,9 +189,46 @@ const UserProfileCard = () => {
                     }}
                   >
                     <H6>Email Address</H6>
-                    <span>{userDetails.email}</span>
+                    <span>
+                      {editUserDetails ? (
+                        <input
+                          className="form-control"
+                          name="email"
+                          placeholder="email address"
+                          value={userData.email}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        userData.email
+                      )}
+                    </span>
                   </LI>
-                  <LI attrLI={{ className: "d-flex justify-content-center" }}>
+                  <LI attrLI={{ className: "d-flex justify-content-between" }}>
+                    <Button
+                      color={editUserDetails ? "primary" : "secondary"}
+                      onClick={
+                        editUserDetails
+                          ? handleSubmit
+                          : () => setEditUserDetails(true)
+                      }
+                      disabled={
+                        editUserDetails &&
+                        (userData.userName === "" ||
+                          userData.mobile === "" ||
+                          userData.email === "")
+                      }
+                    >
+                      {editUserDetails ? "Update" : "Edit"}
+                    </Button>
+                    {editUserDetails && (
+                      <Button
+                        color="secondary"
+                        onClick={() => setEditUserDetails(false)}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                    &nbsp;&nbsp;&nbsp;
                     <Button
                       color="light"
                       onClick={() => setTogglePwd(!togglePwd)}
