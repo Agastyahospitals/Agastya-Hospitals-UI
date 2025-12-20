@@ -305,7 +305,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
         const formattedName = (
           /^dr\.?\s*/i.test(formState.fullName)
             ? formState.fullName
-            : `Dr. ${formState.fullName}`
+            : `Dr ${formState.fullName}`
         ).replace(/\b\w/g, (c) => c.toUpperCase());
         const submitData = { ...formState };
 
@@ -452,7 +452,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                       <InputGroup
                         className={formErrors.fullName ? " is-invalid" : ""}
                       >
-                        <InputGroupText>{"Dr. "}</InputGroupText>
+                        <InputGroupText>{"Dr "}</InputGroupText>
                         <Input
                           type="text"
                           name="fullName"

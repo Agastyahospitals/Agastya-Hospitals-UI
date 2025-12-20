@@ -173,7 +173,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-copy">
-        Copyright © 2025 Agastya Hospitals. All rights reserved.
+        Copyright © 2025 Agastya Hospitals. All Rights Reserved.
       </div>
     </footer>
   );

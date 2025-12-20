@@ -8,7 +8,6 @@ import Technologies from "../Components/Technologies";
 import HealthPackages from "../Components/HealthPackages";
 import Blog from "../Components/Blog";
 import RolesPermissions from "../Components/RolesPermissions";
-import Settings from "../Components/Settings";
 import Specialities from "../Components/Specialities";
 import Patients from "../Components/Patients";
 import MedicalRecords from "../Components/MedicalRocords";
@@ -30,6 +29,5 @@ export const routes = [
   { path: `/blog`, Component: <Blog /> },
   { path: `/testimonials`, Component: <Testimonials /> },
   { path: `/roles-permissions`, Component: <RolesPermissions /> },
-  { path: `/settings`, Component: <Settings /> },
   { path: `/my-profile`, Component: <UserProfileCard /> },
 ];

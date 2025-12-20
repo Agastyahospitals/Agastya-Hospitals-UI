@@ -2,7 +2,7 @@ export const MENUITEMS = [
   {
     menutitle: "",
     menucontent:
-      "Dashboard,Doctors,Patients,MedicalRecords,Specialities,Appointments,Departments,Slot Management,AddSlots,ManageSlots,HealthPackages,Technologies,Blog,RolesPermissions,Settings",
+      "Dashboard,Doctors,Patients,MedicalRecords,Specialities,Appointments,Departments,Slot Management,AddSlots,ManageSlots,HealthPackages,Technologies,Blog,RolesPermissions",
     Items: [
       {
         title: "Dashboard",
@@ -95,12 +95,6 @@ export const MENUITEMS = [
         path: `/roles-permissions`,
         icon: "user",
         title: "Roles & Permissions",
-        type: "link",
-      },
-      {
-        title: "Settings",
-        icon: "widget",
-        path: `/settings`,
         type: "link",
       },
     ],
