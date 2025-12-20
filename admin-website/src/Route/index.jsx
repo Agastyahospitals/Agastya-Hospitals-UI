@@ -1,6 +1,6 @@
 import React from "react";
 import { Suspense, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loader from "../Layout/Loader";
 import { authRoutes } from "./AuthRoutes";
@@ -40,7 +40,7 @@ const Routers = () => {
   const initialRedirect = allowedRoles.includes(roleid) ? '/dashboard' : '/appointments';
 
   return (
-    <BrowserRouter basename={"/"}>
+    <HashRouter>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={"/"} element={<PrivateRoute />}>
@@ -60,7 +60,7 @@ const Routers = () => {
           ))}
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
