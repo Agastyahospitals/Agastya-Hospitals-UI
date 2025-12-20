@@ -6,7 +6,41 @@ import { fetchSpecialties } from "../slices/specialtySlice";
 import { useEffect, useRef } from "react";
 import SideMenu from "./common/SideMenu";
 
+ import React, { useState } from "react";
+
+
+
 const Header = () => {
+
+   // Add these two states
+    const [isSticky, setIsSticky] = useState(false);
+    const [hideTop, setHideTop] = useState(false);
+
+    // Add scroll effect
+    useEffect(() => {
+        const handleScroll = () => {
+
+            // Desktop only
+            if (window.innerWidth <= 991) {
+                setIsSticky(false);
+                setHideTop(false);
+                return;
+            }
+
+            if (window.scrollY > 80) {
+                setHideTop(true);
+                setIsSticky(true);
+            } else {
+                setHideTop(false);
+                setIsSticky(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { specialties, loading: isLoading } = useSelector(
@@ -135,7 +169,8 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
-      <div className="py-2">
+      <div className={`top-main-navigation ${hideTop ? "hide" : ""}`}>
+      <div className="py-2 top-main-navigation">
         <div className="container d-flex justify-between items-center top-infonavigation">
           <div className="d-flex items-center space-x-4">
             <span className="appointment-details">
@@ -180,9 +215,12 @@ const Header = () => {
         </div>
       </div>
 
+      </div>
+
       {/* Main Navigation */}
+      <div className={`main-navigation ${isSticky ? "sticky" : ""}`}>
       <nav
-        className={`container-fluid mx-auto px-2 pt-4 pb-0 main-navigation ${
+        className={`container-fluid mx-auto px-2 pb-2 main-navigation ${
           // currentPage && currentPage !== "Home"
           trail.some((nav) => nav !== "Home") ? "banner" : ""
         }`}
@@ -197,7 +235,7 @@ const Header = () => {
                 dispatch(setBreadcrumb(["Home"]));
               }}
             >
-              <img
+              <img className="site-logo"
                 src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756301086/agastya/agastyahospitals-logo.svg"
                 alt="Agastya Hospitals"
               />
@@ -324,6 +362,7 @@ const Header = () => {
           </div>
         )}
       </nav>
+      </div>
     </header>
   );
 };

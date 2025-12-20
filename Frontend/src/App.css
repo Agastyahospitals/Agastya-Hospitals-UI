@@ -409,6 +409,74 @@ select.form-select {
 
 /* Styles by Dilip */
 
+.top-main-navigation, .main-navigation {
+
+  transition: all 0.3s ease;
+
+}
+
+.top-main-navigation.hide {  
+
+  height: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+
+}
+
+.main-navigation.sticky {
+
+    position: fixed;
+
+    top: 0;
+
+    width: 100%;
+
+    background-color: #fff;
+
+    transition: all 0.3s ease;
+
+    z-index: 999;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+}
+
+
+
+.main-navigation.sticky .site-logo {
+
+ width: 70%;
+
+ transition: all 0.3s ease;
+
+}
+
+
+
+/* Desktop only */
+
+@media (max-width: 991px) {
+
+    .top-main-navigation,
+
+    .main-navigation {
+
+        position: relative !important;
+
+        height: auto !important;
+
+        transition: all 0.3s ease;
+
+    }
+
+}
+
+
+
 .main-navigation a {
   font-size: 16px;
   font-weight: 600;
@@ -2057,8 +2125,14 @@ h1.main-title-center::after,
 }
 
 .blog-card img {
-  width: 25rem;
-  height: 12rem;
+  /* width: 25rem;
+  height: 12rem; */
+
+  width: 100%;
+  height: auto;
+  min-height: 220px;
+  object-fit: cover;
+
 }
 
 .blog-meta {

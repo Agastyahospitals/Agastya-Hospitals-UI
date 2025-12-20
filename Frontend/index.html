@@ -12,5 +12,39 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    const topHeader = document.querySelector(".top-main-navigation");
+    const mainHeader = document.querySelector(".main-navigation");
+
+    let lastScroll = 0;
+
+    function handleScroll() {
+        if (window.innerWidth <= 991) {
+            // Remove sticky behavior on mobile
+            topHeader.classList.remove("hide");
+            mainHeader.classList.remove("sticky");
+            return;
+        }
+
+        let currentScroll = window.scrollY;
+
+        if (currentScroll > 80) {
+            // Scrolling down - hide top header and stick part 2
+            topHeader.classList.add("hide");
+            mainHeader.classList.add("sticky");
+        } 
+        else {
+            // Back to top - show everything normally
+            topHeader.classList.remove("hide");
+            mainHeader.classList.remove("sticky");
+        }
+
+        lastScroll = currentScroll;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+});
+    </script>
   </body>
 </html> 
