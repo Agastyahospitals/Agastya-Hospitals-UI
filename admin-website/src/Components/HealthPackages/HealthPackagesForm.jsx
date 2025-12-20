@@ -156,8 +156,8 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
         return "";
       case "discountType":
         return value === "" ? "Discount type is required" : "";
-      case "image":
-        return value === "" ? "Please upload image" : "";
+      // case "image":
+      //   return value === "" ? "Please upload image" : "";
       case "testsQuantity":
         if (!value.trim()) return "No. of lab tests is required";
         if (!/^[1-9]\d*$/.test(value))
@@ -176,10 +176,7 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
           ? "Please select at least one module"
           : "";
       case "ageGroup":
-        if (!value.trim()) return "Age group is required";
-        if (!/^\d{1,3}\s?-\s?\d{1,3}$/.test(value))
-          return "Age group must be in the format 'X - Y'";
-        return "";
+        return value === "" ? "Age group is required" : "";
       case "descriptionOfPackage":
         return value === "" ? "Description of health packages is required" : "";
       case "guidelines":
@@ -235,7 +232,7 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
     } else if (typeof value === 'string') {
       setFormState((prev) => ({ ...prev, [field]: value }));
     }
-    
+
     if (isSubmitted) {
       const errMsg = validateQuillField(field, value);
       setFormErrors((prev) => ({ ...prev, [field]: errMsg }));
@@ -265,7 +262,7 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
       }
     });
     setFormErrors(newErrors);
-    
+
     const isValid = Object.values(newErrors).every((msg) => msg === "");
     const isHTMLValid = Object.values(formState).every((value) => {
       if (typeof value === "string") {
