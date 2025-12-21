@@ -303,9 +303,9 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
       try {
         // Prepare data for API (remove profilePicture if it's a File object)
         const formattedName = (
-          /^dr\.?\s*/i.test(formState.fullName)
-            ? formState.fullName
-            : `Dr ${formState.fullName}`
+          // /^dr\.?\s*/i.test(formState.fullName)
+          //   ? formState.fullName:
+          `Dr ${formState.fullName}`
         ).replace(/\b\w/g, (c) => c.toUpperCase());
         const submitData = { ...formState };
 
@@ -458,7 +458,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                           name="fullName"
                           id="fullName"
                           value={formState.fullName
-                            .replace(/^(Dr\.)\s*/, "")
+                            .replace(/^(Dr)\s*/, "")
                             .replace(/[^a-zA-Z\s]/g, "")}
                           onChange={handleChange}
                           placeholder="Enter full name"
@@ -480,7 +480,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                           value={formState.countryCode}
                           onChange={handleChange}
                           style={{ maxWidth: "100px" }}
-                          // invalid={!!formErrors.countryCode}
+                        // invalid={!!formErrors.countryCode}
                         >
                           <option value="">Code</option>
                           {countryCodes.map((code) => (
@@ -530,7 +530,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         value={formState.medicalRegNumber}
                         onChange={handleChange}
                         placeholder="Enter medical reg. number"
-                        // invalid={!!formErrors.medicalRegNumber}
+                      // invalid={!!formErrors.medicalRegNumber}
                       />
                       {/* <ValidationAlert error={formErrors.medicalRegNumber} /> */}
                     </Col>
@@ -572,7 +572,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         value={formState.designation}
                         onChange={handleChange}
                         placeholder="Enter designation"
-                        // invalid={!!formErrors.designation}
+                      // invalid={!!formErrors.designation}
                       />
                       {/* <ValidationAlert error={formErrors.designation} /> */}
                     </Col>
@@ -584,7 +584,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         value={formState.about}
                         onChange={handleChange}
                         placeholder="Enter about doctor"
-                        // invalid={!!formErrors.about}
+                      // invalid={!!formErrors.about}
                       />
                       {/* <ValidationAlert error={formErrors.about} /> */}
                     </Col>
@@ -628,7 +628,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         value={formState.yearsOfExperience}
                         onChange={handleChange}
                         placeholder="Enter years of experience"
-                        // invalid={!!formErrors.yearsOfExperience}
+                      // invalid={!!formErrors.yearsOfExperience}
                       />
                       {/* <ValidationAlert error={formErrors.yearsOfExperience} /> */}
                     </Col>
@@ -641,7 +641,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         name="gender"
                         value={formState.gender}
                         onChange={handleChange}
-                        // invalid={!!formErrors.gender}
+                      // invalid={!!formErrors.gender}
                       >
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -677,7 +677,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                                   e.target.value
                                 )
                               }
-                              // invalid={!!formErrors.languagesKnown[index]}
+                            // invalid={!!formErrors.languagesKnown[index]}
                             />
                             &nbsp;&nbsp;
                             <span
@@ -688,24 +688,24 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                               onClick={
                                 index === 0
                                   ? () => {
-                                      addArrayField("languagesKnown");
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        languagesKnown: [
-                                          ...(prev.languagesKnown || []),
-                                          "",
-                                        ],
-                                      }));
-                                    }
+                                    addArrayField("languagesKnown");
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      languagesKnown: [
+                                        ...(prev.languagesKnown || []),
+                                        "",
+                                      ],
+                                    }));
+                                  }
                                   : () => {
-                                      removeArrayField("languagesKnown", index);
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        languagesKnown: (
-                                          prev.languagesKnown || []
-                                        ).filter((_, i) => i !== index),
-                                      }));
-                                    }
+                                    removeArrayField("languagesKnown", index);
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      languagesKnown: (
+                                        prev.languagesKnown || []
+                                      ).filter((_, i) => i !== index),
+                                    }));
+                                  }
                               }
                             >
                               {index === 0 ? <PlusSquare /> : <MinusSquare />}
@@ -729,13 +729,13 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         }
                         placeholder="Enter areas of expertise"
                         onBlur={() => handleQuillBlur("expertise")}
-                        // errors={
-                        //   formErrors.expertise && (
-                        //     <div className="text-danger">
-                        //       {formErrors.expertise}
-                        //     </div>
-                        //   )
-                        // }
+                      // errors={
+                      //   formErrors.expertise && (
+                      //     <div className="text-danger">
+                      //       {formErrors.expertise}
+                      //     </div>
+                      //   )
+                      // }
                       />
                     </Col>
                     <Col md="6 mb-3">
@@ -774,27 +774,27 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                               onClick={
                                 index === 0
                                   ? () => {
-                                      addArrayField("servicesOffered");
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        servicesOffered: [
-                                          ...(prev.servicesOffered || []),
-                                          "",
-                                        ],
-                                      }));
-                                    }
+                                    addArrayField("servicesOffered");
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      servicesOffered: [
+                                        ...(prev.servicesOffered || []),
+                                        "",
+                                      ],
+                                    }));
+                                  }
                                   : () => {
-                                      removeArrayField(
-                                        "servicesOffered",
-                                        index
-                                      );
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        servicesOffered: (
-                                          prev.servicesOffered || []
-                                        ).filter((_, i) => i !== index),
-                                      }));
-                                    }
+                                    removeArrayField(
+                                      "servicesOffered",
+                                      index
+                                    );
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      servicesOffered: (
+                                        prev.servicesOffered || []
+                                      ).filter((_, i) => i !== index),
+                                    }));
+                                  }
                               }
                             >
                               {index === 0 ? <PlusSquare /> : <MinusSquare />}
@@ -816,7 +816,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         value={formState.consultingLocation}
                         onChange={handleChange}
                         placeholder="Enter location"
-                        // invalid={!!formErrors.consultingLocation}
+                      // invalid={!!formErrors.consultingLocation}
                       />
                       {/* <ValidationAlert error={formErrors.consultingLocation} /> */}
                     </Col>
@@ -859,24 +859,24 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                               onClick={
                                 index === 0
                                   ? () => {
-                                      addArrayField("education");
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        education: [
-                                          ...(prev.education || []),
-                                          "",
-                                        ],
-                                      }));
-                                    }
+                                    addArrayField("education");
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      education: [
+                                        ...(prev.education || []),
+                                        "",
+                                      ],
+                                    }));
+                                  }
                                   : () => {
-                                      removeArrayField("education", index);
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        education: (
-                                          prev.education || []
-                                        ).filter((_, i) => i !== index),
-                                      }));
-                                    }
+                                    removeArrayField("education", index);
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      education: (
+                                        prev.education || []
+                                      ).filter((_, i) => i !== index),
+                                    }));
+                                  }
                               }
                             >
                               {index === 0 ? <PlusSquare /> : <MinusSquare />}
@@ -926,24 +926,24 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                               onClick={
                                 index === 0
                                   ? () => {
-                                      addArrayField("qualification");
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        qualification: [
-                                          ...(prev.qualification || []),
-                                          "",
-                                        ],
-                                      }));
-                                    }
+                                    addArrayField("qualification");
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      qualification: [
+                                        ...(prev.qualification || []),
+                                        "",
+                                      ],
+                                    }));
+                                  }
                                   : () => {
-                                      removeArrayField("qualification", index);
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        qualification: (
-                                          prev.qualification || []
-                                        ).filter((_, i) => i !== index),
-                                      }));
-                                    }
+                                    removeArrayField("qualification", index);
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      qualification: (
+                                        prev.qualification || []
+                                      ).filter((_, i) => i !== index),
+                                    }));
+                                  }
                               }
                             >
                               {index === 0 ? <PlusSquare /> : <MinusSquare />}
@@ -969,13 +969,13 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         }
                         placeholder="Enter experience description"
                         onBlur={() => handleQuillBlur("experienceDescription")}
-                        // errors={
-                        //   formErrors.experienceDescription && (
-                        //     <div className="text-danger">
-                        //       {formErrors.experienceDescription}
-                        //     </div>
-                        //   )
-                        // }
+                      // errors={
+                      //   formErrors.experienceDescription && (
+                      //     <div className="text-danger">
+                      //       {formErrors.experienceDescription}
+                      //     </div>
+                      //   )
+                      // }
                       />
                     </Col>
                     <Col md="12 mb-3">
@@ -990,13 +990,13 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         }
                         placeholder="Enter awards and achievements"
                         onBlur={() => handleQuillBlur("awardsAndAchievements")}
-                        // errors={
-                        //   formErrors.awardsAndAchievements && (
-                        //     <div className="text-danger">
-                        //       {formErrors.awardsAndAchievements}
-                        //     </div>
-                        //   )
-                        // }
+                      // errors={
+                      //   formErrors.awardsAndAchievements && (
+                      //     <div className="text-danger">
+                      //       {formErrors.awardsAndAchievements}
+                      //     </div>
+                      //   )
+                      // }
                       />
                     </Col>
                     <Col md="12 mb-3">
@@ -1016,13 +1016,13 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         onBlur={() =>
                           handleQuillBlur("researchAndPublications")
                         }
-                        // errors={
-                        //   formErrors.researchAndPublications && (
-                        //     <div className="text-danger">
-                        //       {formErrors.researchAndPublications}
-                        //     </div>
-                        //   )
-                        // }
+                      // errors={
+                      //   formErrors.researchAndPublications && (
+                      //     <div className="text-danger">
+                      //       {formErrors.researchAndPublications}
+                      //     </div>
+                      //   )
+                      // }
                       />
                     </Col>
                     <Col md="8 mb-3">
@@ -1063,24 +1063,24 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                               onClick={
                                 index === 0
                                   ? () => {
-                                      addArrayField("opTimings");
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        opTimings: [
-                                          ...(prev.opTimings || []),
-                                          "",
-                                        ],
-                                      }));
-                                    }
+                                    addArrayField("opTimings");
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      opTimings: [
+                                        ...(prev.opTimings || []),
+                                        "",
+                                      ],
+                                    }));
+                                  }
                                   : () => {
-                                      removeArrayField("opTimings", index);
-                                      setFormErrors((prev) => ({
-                                        ...prev,
-                                        opTimings: (
-                                          prev.opTimings || []
-                                        ).filter((_, i) => i !== index),
-                                      }));
-                                    }
+                                    removeArrayField("opTimings", index);
+                                    setFormErrors((prev) => ({
+                                      ...prev,
+                                      opTimings: (
+                                        prev.opTimings || []
+                                      ).filter((_, i) => i !== index),
+                                    }));
+                                  }
                               }
                             >
                               {index === 0 ? <PlusSquare /> : <MinusSquare />}
@@ -1102,7 +1102,7 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                         id="profilePicture"
                         onChange={handleChange}
                         placeholder="Enter profile photo"
-                        // invalid={!!formErrors.profilePicture}
+                      // invalid={!!formErrors.profilePicture}
                       />
                       {/* <ValidationAlert error={formErrors.profilePicture} /> */}
                     </Col>
@@ -1118,8 +1118,8 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                                 src={
                                   formState.profilePicture instanceof File
                                     ? URL.createObjectURL(
-                                        formState.profilePicture
-                                      )
+                                      formState.profilePicture
+                                    )
                                     : formState.profilePicture // already a URL string
                                 }
                                 alt="Profile Preview"
@@ -1142,8 +1142,8 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
                     {isLoading
                       ? "Saving..."
                       : isEditMode
-                      ? "Update Doctor"
-                      : "Save Doctor"}
+                        ? "Update Doctor"
+                        : "Save Doctor"}
                   </Btn>
                 </Form>
               </CardBody>

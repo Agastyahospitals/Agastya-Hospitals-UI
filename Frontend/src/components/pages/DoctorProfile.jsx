@@ -18,7 +18,7 @@ const DoctorProfile = () => {
   const formattedName = fullName
     .replace(/-/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase())
-    .replace(/^Dr\b/, "Dr.");
+    .replace(/^Dr\b/, "Dr");
 
   const fetchDoctorById = async () => {
     setLoading(true);
@@ -71,8 +71,8 @@ const DoctorProfile = () => {
                 <ul className="mt-2">
                   {doctorProfile.qualification
                     ? doctorProfile.qualification?.map((edu) => (
-                        <li className="f-12 text-muted mb-n1">{edu}</li>
-                      ))
+                      <li className="f-12 text-muted mb-n1">{edu}</li>
+                    ))
                     : "N/A"}
                 </ul>
               </div>
@@ -148,8 +148,8 @@ const DoctorProfile = () => {
               <ul>
                 {doctorProfile.educationQualification
                   ? doctorProfile.educationQualification?.map((edu) => (
-                      <li className="f-14 mb-1">{edu}</li>
-                    ))
+                    <li className="f-14 mb-1">{edu}</li>
+                  ))
                   : "N/A"}
               </ul>
             </div>
@@ -167,8 +167,8 @@ const DoctorProfile = () => {
               <ul>
                 {doctorProfile.servicesOffered
                   ? doctorProfile.servicesOffered?.map((service) => (
-                      <li className="f-14 mb-1">{service}</li>
-                    ))
+                    <li className="f-14 mb-1">{service}</li>
+                  ))
                   : "N/A"}
               </ul>
             </div>

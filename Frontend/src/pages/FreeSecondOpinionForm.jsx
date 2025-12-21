@@ -72,7 +72,7 @@ const FreeSecondOpinionForm = () => {
               soon.
             </div>
           ) : (
-            <EnquiryForm />
+            <EnquiryForm formType="Second Opinion Form" />
           )}
         </div>
 

@@ -20,6 +20,16 @@ const BlogDetails = () => {
     return state.blogs.blogs;
   });
 
+  const matchedBlog = () => {
+    let title;
+    blogs?.map((blog) => {
+      if (blog.url === urlSlug) {
+        title = blog.title;
+      }
+    });
+    return title;
+  };
+
   const fetchBlogsData = async () => {
     try {
       const res = await axios.get(
@@ -36,8 +46,8 @@ const BlogDetails = () => {
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
-    
-    dispatch(setBreadcrumb(["Home", "Blog Details"]));
+    console.log("matchedBlog()", matchedBlog());
+    dispatch(setBreadcrumb(["Home", matchedBlog()]));
     fetchBlogsData();
     dispatch(fetchBlogs());
   }, [dispatch]);
@@ -81,9 +91,9 @@ const BlogDetails = () => {
           <p className="f-16 text-muted mt-4 " style={{ color: "#999999" }}>
             by Admin | {format(new Date(blogData.dateOfPost), "MMM dd, yyyy")}
           </p>
-          <div className="mt-3">
+          <div className="mt-3 ql-snow">
             <p
-              className="f-14"
+              className="f-14 ql-editor"
               dangerouslySetInnerHTML={{ __html: blogData.blogContent }}
             />
           </div>
@@ -96,7 +106,7 @@ const BlogDetails = () => {
                 <li
                   key={data.blogID}
                   className="mb-4 inline-flex"
-                  //onClick={() => gotoBlogDetails(data.url)}
+                //onClick={() => gotoBlogDetails(data.url)}
                 >
                   <span>
                     <svg

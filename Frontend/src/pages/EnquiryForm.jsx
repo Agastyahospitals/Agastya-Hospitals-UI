@@ -1,4 +1,7 @@
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import React, { useState } from "react";
+import { toasterConfig } from "../utils";
+import { useRef } from "react";
 
 const initialState = {
   fullName: "",
@@ -7,12 +10,16 @@ const initialState = {
   message: "",
   agreePolicy: false,
   isWhatsApp: false,
+  "h-captcha-response": ""
 };
 
-const EnquiryForm = () => {
+const EnquiryForm = ({ formType = "Enquiry Form", enquiryFormTitle = "" }) => {
   const [formState, setFormState] = useState(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [result, setResult] = useState(false);
+  const captchaRef = useRef(null);
+
 
   const validate = () => {
     const newErrors = {};
@@ -36,13 +43,39 @@ const EnquiryForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const onHCaptchaChange = (token) => {
+    setFormState((prev) => ({
+      ...prev,
+      "h-captcha-response": token
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       setSubmitted(true);
-      // Here you would send the form data to your backend
+      setResult(false);
+      const formData = new FormData(e.target);
+      formData.append("access_key", "09952932-0e2d-40a1-8514-31fdc2bd87ff");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        toasterConfig("success", "Enquiry submitted successfully, we will get back to you soon!");
+        setFormState(initialState);
+        captchaRef.current.resetCaptcha();
+      } else {
+        setSubmitted(false);
+        toasterConfig("error", "Failed to submit enquiry, please try again!");
+        setFormState(initialState);
+      }
     }
   };
 
@@ -59,7 +92,8 @@ const EnquiryForm = () => {
   return (
     <form onSubmit={handleSubmit} className="booking-form-container bg-light border-none">
       <div className="booking-form-group">
-        <h2 className="booking-form-title">Enquire Now</h2>
+        <h2 className="booking-form-title">{enquiryFormTitle || "Enquire Now"}</h2>
+        <input type="hidden" name="enquiryForm" value={formType} id="enquiryForm" className="booking-form-input" />
         <label className="booking-form-label" htmlFor="fullName">
           Full Name
         </label>
@@ -135,6 +169,13 @@ const EnquiryForm = () => {
           <span className="text-red-600 text-xs">{errors.message}</span>
         )}
       </div>
+
+      <HCaptcha
+        sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+        reCaptchaCompat={false}
+        onVerify={onHCaptchaChange}
+        ref={captchaRef}
+      />
       <div className="booking-form-group mb-3">
         <input
           id="agreePolicy"
@@ -151,15 +192,19 @@ const EnquiryForm = () => {
           I agree to the Terms & Conditions and Privacy Policy.
         </label>
       </div>
-      <button
-        type="submit"
-        className={`rounded-5 btn ${
-          isFormInvalid() ? "btn-secondary" : "btn-primary"
-        }`}
-        disabled={isFormInvalid()}
-      >
-        Submit Request
-      </button>
+      {result && !submitted ? <button type="submit"
+        className={`rounded-5 btn ${isFormInvalid() ? "btn-secondary" : "btn-primary"
+          }`}
+        disabled={true}>{submitted && <span className="spinner-border spinner-border-sm me-2" />}{submitted ? "Submitting..." : "Submitted"}</button>
+        : <button
+          type="submit"
+          className={`rounded-5 btn ${isFormInvalid() ? "btn-secondary" : "btn-primary"
+            }`}
+          disabled={isFormInvalid()}
+        >
+          Submit Request
+        </button>}
+
     </form>
   );
 };

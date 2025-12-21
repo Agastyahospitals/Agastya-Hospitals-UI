@@ -270,11 +270,11 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
       case "countryCode":
         if (!value) return "Country code is required";
         return "";
-      case "email":
-        if (!value) return "Email is required";
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-          return "Invalid email format";
-        return "";
+      // case "email":
+      //   if (!value) return "Email is required";
+      //   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+      //     return "Invalid email format";
+      //   return "";
       case "dob":
         if (!patientExists && !value)
           return "Date of birth is required for new patients";
@@ -442,7 +442,7 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
           appointmentData.address = formState.address;
           appointmentData.countryCode = formState.countryCode;
         }
-        else{
+        else {
           appointmentData.fullName = formState.fullName;
         }
 
@@ -621,7 +621,7 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
                               placeholder="Enter email address"
                             />
                           </InputGroup>
-                          <ValidationAlert error={formErrors.email} />
+                          {/* <ValidationAlert error={formErrors.email} /> */}
                         </Col>
                       </>
                     )}
@@ -743,8 +743,8 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
                           {isLoadingSlots
                             ? "Loading slots..."
                             : availableSlots.length === 0
-                            ? "No slots available"
-                            : "Select start time"}
+                              ? "No slots available"
+                              : "Select start time"}
                         </option>
                         {availableSlots.map((slot) => (
                           <option key={slot} value={slot}>
@@ -781,7 +781,7 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
                         value={
                           formState.startTime
                             ? generateEndTimeOptions(formState.startTime)[0] ||
-                              ""
+                            ""
                             : ""
                         }
                         readOnly
@@ -830,8 +830,8 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
                         {isCheckingSlot
                           ? "Checking Slot..."
                           : isSubmitting
-                          ? "Booking..."
-                          : "Book"}
+                            ? "Booking..."
+                            : "Book"}
                       </Button>
                     </Col>
                   </Row>

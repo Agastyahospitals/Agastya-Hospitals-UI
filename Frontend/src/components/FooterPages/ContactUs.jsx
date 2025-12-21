@@ -1,14 +1,111 @@
-import React from "react";
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-} from "react-icons/fa";
+import React, { useState } from "react";
+import { toasterConfig } from "../../utils";
+import { useRef } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+
+const initialState = {
+  fullName: "",
+  mobile: "",
+  email: "",
+  message: "",
+  "h-captcha-response": ""
+};
 
 const ContactUs = () => {
+
+  const captchaRef = useRef();
+  const [formState, setFormState] = useState(initialState);
+  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState(false);
+
+  const validate = () => {
+    if (!formState.fullName) {
+      return "Full name is required";
+    }
+    if (!formState.mobile) {
+      return "Mobile number is required";
+    }
+    if (!formState.email) {
+      return "Email is required";
+    }
+    if (!formState.message) {
+      return "Message is required";
+    }
+    if (!formState["h-captcha-response"]) {
+      return "Captcha is required";
+    }
+    return "";
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const resetForm = () => {
+    setFormState(initialState);
+    setSubmitted(false);
+    setResult(false);
+    captchaRef.current.resetCaptcha();
+  };
+
+  const onHCaptchaChange = (token) => {
+    setFormState((prev) => ({
+      ...prev,
+      "h-captcha-response": token
+    }));
+  };
+
+  const handleHCaptchaError = () => {
+    setFormState((prev) => ({
+      ...prev,
+      "h-captcha-response": ""
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length === 0) {
+      setSubmitted(true);
+      setResult(false);
+      const formData = new FormData(e.target);
+      formData.append("access_key", "09952932-0e2d-40a1-8514-31fdc2bd87ff");
+      // formData.append("contactForm", "Contact Form");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        toasterConfig("success", "Enquiry submitted successfully, we will get back to you soon!");
+        captchaRef.current.resetCaptcha();
+        resetForm();
+      } else {
+        setSubmitted(false);
+        toasterConfig("error", "Failed to submit enquiry, please try again!");
+        resetForm();
+      }
+    }
+  };
+
+  const isFormInvalid = () => {
+    const requiredFields = ["fullName", "mobile", "email", "message", "h-captcha-response"];
+    return requiredFields.some(
+      (field) =>
+        formState[field] === null ||
+        formState[field] === undefined ||
+        formState[field] === "" ||
+        (typeof formState[field] === "boolean" && formState[field] === false)
+    );
+  };
+
   return (
     <div>
       <div className="container p-5">
@@ -48,23 +145,26 @@ const ContactUs = () => {
               <h2 className="contact-form-title">
                 Fill the Form, Will get back to you soon
               </h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="contact-form-row">
+                  <input type="hidden" name="contactForm" value="Contact Form" id="contactForm" className="contact-form-input" />
                   <div className="contact-form-group">
-                    <label for="fullname" className="contact-form-label">
+                    <label htmlFor="fullName" className="contact-form-label">
                       Full Name
                     </label>
                     <input
                       type="text"
-                      id="fullname"
-                      name="fullname"
+                      id="fullName"
+                      name="fullName"
                       className="contact-form-input"
+                      value={formState.fullName}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
                 <div className="contact-form-row">
                   <div className="contact-form-group">
-                    <label for="mobile" className="contact-form-label">
+                    <label htmlFor="mobile" className="contact-form-label">
                       Mobile Number
                     </label>
                     <input
@@ -72,10 +172,14 @@ const ContactUs = () => {
                       id="mobile"
                       name="mobile"
                       className="contact-form-input"
+                      value={formState.mobile}
+                      onChange={handleChange}
+                      maxLength={10}
+                      pattern="[0-9]{10}"
                     />
                   </div>
                   <div className="contact-form-group">
-                    <label for="email" className="contact-form-label">
+                    <label htmlFor="email" className="contact-form-label">
                       Email Address
                     </label>
                     <input
@@ -83,132 +187,45 @@ const ContactUs = () => {
                       id="email"
                       name="email"
                       className="contact-form-input"
+                      value={formState.email}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
 
                 <div className="contact-form-row">
                   <div className="contact-form-group">
-                    <label for="date" className="contact-form-label">
+                    <label htmlFor="message" className="contact-form-label">
                       Message
                     </label>
                     <textarea
-                      type="date"
-                      id="date"
-                      name="date"
+                      id="message"
+                      name="message"
                       className="contact-form-textarea"
+                      value={formState.message}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
-                <div className="contact-form-checkbox-group">
-                  <input
-                    type="checkbox"
-                    id="terms-bform"
-                    name="terms"
-                    className="contact-form-checkbox"
+
+                <div className="d-flex justify-content-center mb-3">
+                  <HCaptcha
+                    sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                    reCaptchaCompat={false}
+                    onVerify={onHCaptchaChange}
+                    ref={captchaRef}
                   />
-                  <label
-                    for="terms-bform"
-                    className="contact-form-checkbox-label"
-                  >
-                    I agree to the Terms & Conditions and Privacy Policy.
-                  </label>
                 </div>
 
-                <button type="submit" className="contact-form-btn-submit">
-                  Send Message
+                <button type="submit" className={!isFormInvalid() ? "contact-form-btn-submit" : "contact-form-btn-submit disabled opacity-50"} disabled={isFormInvalid()}>
+                  {submitted && <span className="spinner-border spinner-border-sm me-2" />}
+                  {submitted ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="container py-12 px-4 mx-auto max-w-3xl bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-extrabold mb-6 text-hospital-blue text-center">Contact Us</h2>
-      <p className="text-gray-700 mb-8 text-center">
-        We are here to help you with any questions or concerns. Please feel free
-        to reach out to us using the information below.
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-     
-        <div className="flex flex-col items-center text-center">
-          <div className="bg-blue-100 p-4 rounded-full mb-4">
-            <FaMapMarkerAlt className="text-hospital-blue text-2xl" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">Hospital Address</h3>
-          <p className="text-gray-600">
-            Agastya Hospitals<br />
-            123 Health Avenue,<br />
-            Hyderabad, Telangana 500001<br />
-            India
-          </p>
-        </div>
-      
-        <div className="flex flex-col items-center text-center">
-          <div className="bg-blue-100 p-4 rounded-full mb-4">
-            <FaPhoneAlt className="text-hospital-blue text-2xl" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">Phone</h3>
-          <p className="text-gray-600">
-            24x7 Helpline:{" "}
-            <a href="tel:04065108108" className="text-blue-600 font-medium hover:underline">
-              040 65 108 108
-            </a>
-            <br />
-            Mobile:{" "}
-            <a href="tel:+919459108108" className="text-blue-600 font-medium hover:underline">
-              +91 9459 108 108
-            </a>
-          </p>
-          <div className="bg-blue-100 p-4 rounded-full mb-4 mt-6">
-            <FaEnvelope className="text-hospital-blue text-2xl" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">Email</h3>
-          <p>
-            <a
-              href="mailto:info@agastyahospitals.com"
-              className="text-blue-600 font-medium hover:underline"
-            >
-              info@agastyahospitals.com
-            </a>
-          </p>
-        </div>
-      </div>
-      
-      <div className="mt-10 flex flex-col items-center">
-        <h3 className="text-xl font-semibold mb-3">Follow Us</h3>
-        <div className="flex space-x-6">
-          <a
-            href="https://facebook.com/agastyahospitals"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 text-2xl"
-            aria-label="Facebook"
-          >
-            <FaFacebook />
-          </a>
-          <a
-            href="https://twitter.com/agastyahosp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-600 text-2xl"
-            aria-label="Twitter"
-          >
-            <FaTwitter />
-          </a>
-          <a
-            href="https://instagram.com/agastyahospitals"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pink-500 hover:text-pink-700 text-2xl"
-            aria-label="Instagram"
-          >
-            <FaInstagram />
-          </a>
-        </div>
-      </div>
-    </div>*/}
     </div>
   );
 };

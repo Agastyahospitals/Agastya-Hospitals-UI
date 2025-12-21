@@ -6,39 +6,39 @@ import { fetchSpecialties } from "../slices/specialtySlice";
 import { useEffect, useRef } from "react";
 import SideMenu from "./common/SideMenu";
 
- import React, { useState } from "react";
+import React, { useState } from "react";
 
 
 
 const Header = () => {
 
-   // Add these two states
-    const [isSticky, setIsSticky] = useState(false);
-    const [hideTop, setHideTop] = useState(false);
+  // Add these two states
+  const [isSticky, setIsSticky] = useState(false);
+  const [hideTop, setHideTop] = useState(false);
 
-    // Add scroll effect
-    useEffect(() => {
-        const handleScroll = () => {
+  // Add scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
 
-            // Desktop only
-            if (window.innerWidth <= 991) {
-                setIsSticky(false);
-                setHideTop(false);
-                return;
-            }
+      // Desktop only
+      if (window.innerWidth <= 991) {
+        setIsSticky(false);
+        setHideTop(false);
+        return;
+      }
 
-            if (window.scrollY > 80) {
-                setHideTop(true);
-                setIsSticky(true);
-            } else {
-                setHideTop(false);
-                setIsSticky(false);
-            }
-        };
+      if (window.scrollY > 80) {
+        setHideTop(true);
+        setIsSticky(true);
+      } else {
+        setHideTop(false);
+        setIsSticky(false);
+      }
+    };
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
 
   const dispatch = useDispatch();
@@ -53,18 +53,19 @@ const Header = () => {
 
   const sortedData = Array.isArray(specialties?.data)
     ? [...specialties?.data].map((item) => {
-        return {
-          path: item.specialityName.toLowerCase().replace(/\s+/g, "-"),
-          label: item.specialityName,
-          id: item.specialityID,
-          isNavigationDisplay: item.isNavigationDisplay,
-        };
-      })
+      return {
+        path: item.specialityName.toLowerCase().replace(/\s+/g, "-"),
+        label: item.specialityName,
+        id: item.specialityID,
+        isNavigationDisplay: item.isNavigationDisplay,
+      };
+    })
     : [];
   const { pathname } = useLocation();
   console.log("PATHNAME::: ", pathname);
 
   const trail = useSelector((state) => state.breadcrumb.trail) || [];
+  const title = useSelector((state) => state.breadcrumb.title) || "";
 
   // Navigation items
   const navItems = [
@@ -170,198 +171,196 @@ const Header = () => {
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
       <div className={`top-main-navigation ${hideTop ? "hide" : ""}`}>
-      <div className="py-2 top-main-navigation">
-        <div className="container d-flex justify-between items-center top-infonavigation">
-          <div className="d-flex items-center space-x-4">
-            <span className="appointment-details">
-              <span>24x7 Appointment Helpline - </span>
-              040 65 108 108, &nbsp;+91 9459 108 108
-            </span>
-          </div>
-          <div className="d-flex items-center space-x-4 mobile-topbooking-nav">
-            <Link
-              // to="/patient"
-              className="patientlogin"
-              // onClick={() => {
-              //   dispatch(setBreadcrumb(["Home", "Patient Login"]));
-              //   window.scrollTo({ top: 0, behavior: "smooth" });
-              // }}
-              to="#"
-              onClick={(e) => {
-                e.preventDefault();
-                dispatch(setBreadcrumb(["Home"]));
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                window.open(
-                  "https://agastya-hospitals-adminpage-leja.onrender.com",
-                  "_blank"
-                );
-              }}
-            >
-              <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758392814/agastya/patient-login.svg" />
-              Patient Login
-            </Link>
-            <button
-              className="bookappointment d-flex items-center space-x-1"
-              onClick={() => {
-                dispatch(setBreadcrumb(["Home", "Book Appointment"]));
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                navigate("/book-appointment");
-              }}
-            >
-              <i className="lni lni-calendar-days icon"></i>
-              <span>Book Appointment</span>
-            </button>
+        <div className="py-2 top-main-navigation">
+          <div className="container d-flex justify-between items-center top-infonavigation">
+            <div className="d-flex items-center space-x-4">
+              <span className="appointment-details">
+                <span>24x7 Appointment Helpline - </span>
+                040 65 108 108, &nbsp;+91 9459 108 108
+              </span>
+            </div>
+            <div className="d-flex items-center space-x-4 mobile-topbooking-nav">
+              <Link
+                // to="/patient"
+                className="patientlogin"
+                // onClick={() => {
+                //   dispatch(setBreadcrumb(["Home", "Patient Login"]));
+                //   window.scrollTo({ top: 0, behavior: "smooth" });
+                // }}
+                to="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(setBreadcrumb(["Home"]));
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  window.open(
+                    "https://agastya-hospitals-adminpage-leja.onrender.com",
+                    "_blank"
+                  );
+                }}
+              >
+                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758392814/agastya/patient-login.svg" />
+                Patient Login
+              </Link>
+              <button
+                className="bookappointment d-flex items-center space-x-1"
+                onClick={() => {
+                  dispatch(setBreadcrumb(["Home", "Book Appointment"]));
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  navigate("/book-appointment");
+                }}
+              >
+                <i className="lni lni-calendar-days icon"></i>
+                <span>Book Appointment</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
       </div>
 
       {/* Main Navigation */}
       <div className={`main-navigation ${isSticky ? "sticky" : ""}`}>
-      <nav
-        className={`container-fluid mx-auto px-2 pb-2 main-navigation ${
-          // currentPage && currentPage !== "Home"
-          trail.some((nav) => nav !== "Home") ? "banner" : ""
-        }`}
-      >
-        <div className="container d-flex justify-between items-center position-relative z-3">
-          {/* Logo */}
-          <div className="d-flex items-center">
-            <Link
-              to="/"
-              className="text-2xl font-bold text-hospital-blue"
-              onClick={() => {
-                dispatch(setBreadcrumb(["Home"]));
-              }}
-            >
-              <img className="site-logo"
-                src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756301086/agastya/agastyahospitals-logo.svg"
-                alt="Agastya Hospitals"
-              />
-            </Link>
-          </div>
-          <SideMenu
-            navItems={navItems}
-            dropdownItems={dropdownItems}
-            pathname={pathname}
-          />
+        <nav
+          className={`container-fluid mx-auto px-2 pb-2 main-navigation ${
+            // currentPage && currentPage !== "Home"
+            trail.some((nav) => nav !== "Home") ? "banner" : ""
+            }`}
+        >
+          <div className="container d-flex justify-between items-center position-relative z-3">
+            {/* Logo */}
+            <div className="d-flex items-center">
+              <Link
+                to="/"
+                className="text-2xl font-bold text-hospital-blue"
+                onClick={() => {
+                  dispatch(setBreadcrumb(["Home"]));
+                }}
+              >
+                <img className="site-logo"
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756301086/agastya/agastyahospitals-logo.svg"
+                  alt="Agastya Hospitals"
+                />
+              </Link>
+            </div>
+            <SideMenu
+              navItems={navItems}
+              dropdownItems={dropdownItems}
+              pathname={pathname}
+            />
 
-          {/* Navigation Links */}
-          <div className="side_menu_responsive_desktop">
-            <ul className="d-flex items-center space-x-8">
-              {navItems.map(({ path, label }) => (
-                <li
-                  key={path}
-                  className={`nav-item position-relative ${
-                    label === "About Us" || label === "Specialties"
-                      ? "dropdown"
-                      : ""
-                  }`}
-                >
-                  <Link
-                    to={path}
-                    className={`hover:text-blue-600 inline-flex align-items-center ${
-                      pathname === path ? "font-semibold text-blue-700" : ""
-                    }`}
-                    onClick={() => {
-                      dispatch(setBreadcrumb(["Home", label]));
-                    }}
+            {/* Navigation Links */}
+            <div className="side_menu_responsive_desktop">
+              <ul className="d-flex items-center space-x-8">
+                {navItems.map(({ path, label }) => (
+                  <li
+                    key={path}
+                    className={`nav-item position-relative ${label === "About Us" || label === "Specialties"
+                        ? "dropdown"
+                        : ""
+                      }`}
                   >
-                    <span>{label}</span>
-                    {(label === "About Us" || label === "Specialties") && (
-                      <>
-                        &nbsp;&nbsp;
-                        <span>
-                          <FaChevronDown className="text-muted" />
-                        </span>
-                      </>
+                    <Link
+                      to={path}
+                      className={`hover:text-blue-600 inline-flex align-items-center ${pathname === path ? "font-semibold text-blue-700" : ""
+                        }`}
+                      onClick={() => {
+                        dispatch(setBreadcrumb(["Home", label]));
+                      }}
+                    >
+                      <span>{label}</span>
+                      {(label === "About Us" || label === "Specialties") && (
+                        <>
+                          &nbsp;&nbsp;
+                          <span>
+                            <FaChevronDown className="text-muted" />
+                          </span>
+                        </>
+                      )}
+                    </Link>
+                    {label === "About Us" && (
+                      <ul className="dropdown-menu shadow">
+                        {dropdownItems[label].map((item) => (
+                          <li key={item.path}>
+                            <Link
+                              to={item.path}
+                              className="dropdown-item"
+                              onClick={() => {
+                                dispatch(
+                                  setBreadcrumb(["Home", "About Us", item.label])
+                                );
+                              }}
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     )}
-                  </Link>
-                  {label === "About Us" && (
-                    <ul className="dropdown-menu shadow">
-                      {dropdownItems[label].map((item) => (
-                        <li key={item.path}>
-                          <Link
-                            to={item.path}
-                            className="dropdown-item"
-                            onClick={() => {
-                              dispatch(
-                                setBreadcrumb(["Home", "About Us", item.label])
-                              );
-                            }}
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {label === "Specialties" && (
-                    <div className="row m-0 specialties-list dropdown-menu shadow">
-                      {dropdownItems[label].map((item) => {
-                        return (
-                          <>
-                            {item.isNavigationDisplay && (
-                              <div
-                                className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                key={item.path}
-                              >
-                                <Link
-                                  to={`/specialty/${item.path}`}
-                                  className="dropdown-item"
-                                  onClick={() => {
-                                    dispatch(
-                                      setBreadcrumb(["Home", item.label])
-                                    );
-                                  }}
+                    {label === "Specialties" && (
+                      <div className="row m-0 specialties-list dropdown-menu shadow">
+                        {dropdownItems[label].map((item) => {
+                          return (
+                            <>
+                              {item.isNavigationDisplay && (
+                                <div
+                                  className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+                                  key={item.path}
                                 >
-                                  {item.label}
-                                </Link>
-                              </div>
-                            )}
-                          </>
-                        );
-                      })}
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
+                                  <Link
+                                    to={`/specialty/${item.path}`}
+                                    className="dropdown-item"
+                                    onClick={() => {
+                                      dispatch(
+                                        setBreadcrumb(["Home", item.label])
+                                      );
+                                    }}
+                                  >
+                                    {item.label}
+                                  </Link>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
 
-        {/* Banner & Breadcrumb */}
-        {currentPage !== "Home" && (
-          <div className="container hideinnertitleonscroll">
-            <div className="row">
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 className="banner-title mt-5 mb-4">{currentPage}</h2>
-              </div>
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <div className="breadcrumb">
-                  {Array.isArray(trail) &&
-                    trail.map((crumb, index) => (
-                      <span key={index} className="flex items-center gap-2">
-                        {index < trail.length - 1 ? (
-                          <Link
-                            to="/"
-                            onClick={() => dispatch(setBreadcrumb(["Home"]))}
-                          >
-                            {crumb}
-                          </Link>
-                        ) : (
-                          <span className="f-w-600">{crumb}</span>
-                        )}
-                        {index < trail.length - 1 && <span>/</span>}
-                      </span>
-                    ))}
+          {/* Banner & Breadcrumb */}
+          {currentPage !== "Home" && (
+            <div className="container hideinnertitleonscroll">
+              <div className="row">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                  <h2 className="banner-title mt-5 mb-4">{title || currentPage}</h2>
+                </div>
+                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                  <div className="breadcrumb">
+                    {Array.isArray(trail) &&
+                      trail.map((crumb, index) => (
+                        <span key={index} className="flex items-center gap-2">
+                          {index < trail.length - 1 ? (
+                            <Link
+                              to="/"
+                              onClick={() => dispatch(setBreadcrumb(["Home"]))}
+                            >
+                              {crumb}
+                            </Link>
+                          ) : (
+                            <span className="f-w-600">{crumb}</span>
+                          )}
+                          {index < trail.length - 1 && <span>/</span>}
+                        </span>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </nav>
+          )}
+        </nav>
       </div>
     </header>
   );

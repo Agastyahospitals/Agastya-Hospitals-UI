@@ -18,8 +18,8 @@ const SpecialtyDetails = () => {
   const navigate = useNavigate();
   const { specialty: specialityName } = useParams();
 
-  const formatSpecialtyTitle = (name) => {
-    return name
+  const formatSpecialtyTitle = () => {
+    return specialityName
       ?.replace(/-/g, " ")
       ?.toLowerCase()
       ?.split(" ")
@@ -53,9 +53,7 @@ const SpecialtyDetails = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${SPECIALITIES_API}?specialityName=${formatSpecialtyTitle(
-          specialityName
-        )}`
+        `${SPECIALITIES_API}?specialityName=${formatSpecialtyTitle()}`
       );
       if (response.data[0].doctor.length > 0) {
         // Fetch all doctor data in parallel
@@ -89,10 +87,10 @@ const SpecialtyDetails = () => {
   };
   const hasFetched = useRef(false);
   useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
+    // if (hasFetched.current) return;
+    // hasFetched.current = true;
     fetchSpecialties();
-    dispatch(setBreadcrumb(["Home", formatSpecialtyTitle(specialityName)]));
+    dispatch(setBreadcrumb(["Home", formatSpecialtyTitle()]));
   }, [specialityName]);
 
   const gotoProfile = (fullName) => {
@@ -117,7 +115,7 @@ const SpecialtyDetails = () => {
       ) : (
         <div className="row m-0">
           <div className="col-md-4">
-            <EnquiryForm />
+            <EnquiryForm formType={formatSpecialtyTitle() + " Enquiry Form"} />
           </div>
           <div className="col-md-8 p-4">
             <img
@@ -126,9 +124,11 @@ const SpecialtyDetails = () => {
               style={{ height: "200px", width: "100%" }}
             />
             <h2 className="f-30 f-w-700 mt-4 mb-3">Overview</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: specialties?.pageDescription }}
-            />
+            <div className="ql-snow">
+              <div className="ql-editor"
+                dangerouslySetInnerHTML={{ __html: specialties?.pageDescription }}
+              />
+            </div>
             <div className="mt-5">
               <h2 className="f-30 f-w-700 mb-3">Our Specialist Doctors</h2>
             </div>
@@ -176,7 +176,7 @@ const SpecialtyDetails = () => {
                                 <span className="label">Consultation:</span>{" "}
                                 <span className="information text-ellipsis-one">
                                   {doctor.opTimings &&
-                                  doctor.opTimings.length > 0
+                                    doctor.opTimings.length > 0
                                     ? doctor.opTimings.join(", ")
                                     : "Not Available"}
                                 </span>

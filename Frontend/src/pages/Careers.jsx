@@ -40,9 +40,28 @@ const Careers = () => {
         "Support our administrative team in managing hospital operations.",
     },
   ];
+  const sendResumeEmail = () => {
+    const email = "dm.agastyahospitals@gmail.com";
+    const subject = encodeURIComponent("Contact from Website");
+    const body = encodeURIComponent(
+      "Hi,\n\nI would like apply for a job position. Please find my resume attached.\n\nThanks"
+    );
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
+  const applyForJob = (title) => {
+    const email = "dm.agastyahospitals@gmail.com";
+    const subject = encodeURIComponent("Application for " + title + " position" + " - Contact from Website");
+    const body = encodeURIComponent(
+      "Hi,\n\nI would like apply for " + title + " position. Please find my resume attached.\n\nThanks"
+    );
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
 
   return (
-    <div className="container py-5" style={{overflow: "hidden"}}>
+    <div className="container py-5" style={{ overflow: "hidden" }}>
       {/* <h1 className="text-4xl font-bold text-gray-900 text-center mb-12">
           Careers at Agastya Hospitals
         </h1> */}
@@ -75,7 +94,7 @@ const Careers = () => {
                     <h3 className="position-title">{position.title}</h3>
                     <p className="position-desc">{position.description}</p>
                   </div>
-                  <button className="applynow rounded-5">Apply Now</button>
+                  <button className="applynow rounded-5" onClick={() => applyForJob(position.title)}>Apply Now</button>
                 </div>
 
                 <div className="careers-category">
@@ -105,7 +124,7 @@ const Careers = () => {
               Don't see a position that matches your skills? Send us your
               resume!
             </p>
-            <button className="primary-btn mb-5 mt-2 rounded-5">Submit Resume</button>
+            <button className="primary-btn mb-5 mt-2 rounded-5" onClick={sendResumeEmail}>Submit Resume</button>
           </div>
         </div>
       </div>

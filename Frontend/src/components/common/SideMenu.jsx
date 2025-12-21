@@ -66,11 +66,10 @@ const SideMenu = ({ navItems, dropdownItems, pathname }) => {
               {navItems.map(({ path, label }) => (
                 <li
                   key={path}
-                  className={`border-0 shadow-sm py-2 px-3 mb-2 nav-item position-relative ${
-                    label === "About Us" || label === "Specialties"
-                      ? "dropdown"
-                      : ""
-                  } ${pathname === path ? "side_menu_item_active" : ""}`}
+                  className={`border-0 shadow-sm py-2 px-3 mb-2 nav-item position-relative ${label === "About Us" || label === "Specialties"
+                    ? "dropdown"
+                    : ""
+                    } ${pathname === path ? "side_menu_item_active" : ""}`}
                 >
                   {label === "About Us" || label === "Specialties" ? (
                     <>
@@ -94,9 +93,8 @@ const SideMenu = ({ navItems, dropdownItems, pathname }) => {
                         </span>
                         <FaChevronDown
                           onClick={() => handleAccordion(label)}
-                          className={`text-muted ms-2 transition-transform ${
-                            openAccordion === label ? "rotate-180" : ""
-                          }`}
+                          className={`text-muted ms-2 transition-transform ${openAccordion === label ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       {openAccordion === label && (
@@ -106,7 +104,7 @@ const SideMenu = ({ navItems, dropdownItems, pathname }) => {
                               <Link
                                 to={
                                   label === "Specialties"
-                                    ? `/${item.id}`
+                                    ? `/specialty/${item.path}`
                                     : item.path
                                 }
                                 className="dropdown-item"

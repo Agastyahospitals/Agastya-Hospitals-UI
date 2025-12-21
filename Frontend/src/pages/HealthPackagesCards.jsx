@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ModalComponent from "../components/common/ModalComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const HealthPackagesCards = () => {
   const [isBookOpen, setIsBookOpen] = useState(false);
@@ -80,10 +81,49 @@ const HealthPackagesCards = () => {
     setIsBookOpen(false);
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setShowNote(true);
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowNote(true);
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length === 0) {
+      setSubmitted(true);
+      setResult(false);
+      const formData = new FormData(e.target);
+      formData.append("access_key", "09952932-0e2d-40a1-8514-31fdc2bd87ff");
+      // formData.append("contactForm", "Contact Form");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setShowNote(true);
+        setSubmitted(true);
+        toasterConfig("success", "Enquiry submitted successfully, we will get back to you soon!");
+        captchaRef.current.resetCaptcha();
+        resetForm();
+      } else {
+        setSubmitted(false);
+        toasterConfig("error", "Failed to submit enquiry, please try again!");
+        resetForm();
+      }
+    }
   };
+
+  const onHCaptchaChange = (token) => {
+    setFormState((prev) => ({
+      ...prev,
+      "h-captcha-response": token
+    }));
+  };
+  const captchaRef = useRef(null);
+
+
   return (
     <>
       <div class="row g-4 m-0">
@@ -146,6 +186,13 @@ const HealthPackagesCards = () => {
               <form onSubmit={handleSubmit}>
                 <div className="row m-0">
                   <div className="booking-form-group my-0">
+                    <input
+                      type="hidden"
+                      name="healthPackage"
+                      value={packageData.packageName + " - Rs." + packageData.price + "/- " + packageData.ageGroup}
+                      id="healthPackage"
+                      className="booking-form-input"
+                    />
                     <label for="fullName" className="booking-form-label">
                       Full Name
                     </label>
@@ -192,13 +239,22 @@ const HealthPackagesCards = () => {
                     />
                   </div>
                 </div>
+                <div className="row my-3">
+                  <div className="col-md-12 pl-3">
+                    <HCaptcha
+                      sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                      reCaptchaCompat={false}
+                      onVerify={onHCaptchaChange}
+                      ref={captchaRef}
+                    />
+                  </div>
+                </div>
                 <div className="row m-0">
                   <div className="col-md-12 text-center">
                     <button
                       type="submit"
-                      className={`btn ${
-                        isFormInvalid() ? "btn-secondary" : "btn-primary"
-                      }`}
+                      className={`btn ${isFormInvalid() ? "btn-secondary" : "btn-primary"
+                        }`}
                       disabled={isFormInvalid()}
                     >
                       Submit
