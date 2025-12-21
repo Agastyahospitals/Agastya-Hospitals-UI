@@ -407,6 +407,10 @@ select.form-select {
   background: #7a6ad8;
 }
 
+.hideinnertitleonscroll {
+  display: block;
+}
+
 /* Styles by Dilip */
 
 .top-main-navigation, .main-navigation {
@@ -427,7 +431,7 @@ select.form-select {
 
 }
 
-.main-navigation.sticky {
+/* .main-navigation.sticky {
 
     position: fixed;
 
@@ -443,7 +447,7 @@ select.form-select {
 
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 
-}
+} */
 
 
 
@@ -453,6 +457,10 @@ select.form-select {
 
  transition: all 0.3s ease;
 
+}
+
+.main-navigation.sticky .hideinnertitleonscroll {
+  display: none;
 }
 
 
@@ -1764,22 +1772,29 @@ h1.main-title-center::after,
   padding-left: 50px;
 }
 
+.leadership-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 4fr; /* Explicitly use fr units */
+    gap: 15px; /* Adds a gutter, adjust as needed */
+  }
+
 .leadership-team {
 }
 
-.leadership-card {
+.leadership-grid-row .leadership-card {
   margin-bottom: 60px;
 }
-.leadership-card img {
+.leadership-grid-row .leadership-card img {
   border-radius: 20px;
-  max-width: 90%;
+  /* max-width: 90%; */
+  max-width: 200px;
   margin-bottom: 25px;
   border: 1px solid #c9c9c9;
 }
-.leadership-info {
-  margin: 10px;
+.leadership-grid-row .leadership-info {
+  margin: 10px 10px 40px 10px;
 }
-.leadership-info h3 {
+.leadership-grid-row .leadership-info h3 {
   font-size: 20px;
   font-weight: bold;
   margin: 15px 0 5px 0;
@@ -1787,12 +1802,167 @@ h1.main-title-center::after,
   text-align: left;
 }
 
-.leadership-info p {
+.leadership-grid-row .leadership-info .title {
   font-size: 16px;
-  color: #666;
+  color: #000;
+  font-weight: 600;
   margin-bottom: 5px;
   text-align: left;
 }
+
+.leadership-grid-row .leadership-info .description {
+  font-size: 16px;
+  color: #000;
+  font-weight:normal;
+  line-height: normal;
+  margin-bottom: 5px;
+  text-align: left;
+}
+.leadership-grid-row .leadership-info .description p {
+  margin-bottom: 10px;
+}
+.leadership-grid-row .leadership-info ul {
+  margin:10px 0 10px 20px;
+}
+.leadership-grid-row .leadership-info li {
+  list-style: disc;
+}
+
+.leadership-grid-row .leadership-info .italic {
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 15px;
+  display: block;
+  text-align: left;
+}
+
+.international-patient-page {
+
+}
+
+
+.whychoose-agastya {
+  margin: 60px 0;
+   padding: 6px;
+  position: relative;
+  background: #ffd9d9;
+background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255, 0) 100%);
+   
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
+}
+
+.whychoose-agastya .content {
+  background: #fff;
+  border-top-right-radius: 45px;
+  border-top-left-radius: 45px;
+  padding: 2rem;
+  
+}
+
+.whychoose-agastya .gridcontent {
+    padding: 3rem;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+.whychoose-agastya .gridcontent img {
+  max-width: 60px;
+  margin: 0 auto;
+}
+.whychoose-agastya .gridcontent p {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.intl-appointmentform .bgcolor{
+  background-color: #EAF5FF;
+  border-radius: 450px;
+  
+}
+
+.intl-appointmentform .booking-form-container {
+  background-color: #022B50 !important;
+}
+.intl-appointmentform .booking-form-container h2,
+.intl-appointmentform .booking-form-container label {
+  color: #ffffff;
+}
+
+.intl-appointmentform .booking-form-container .submitbtn {
+background: #CD1E29;
+color: #fff;
+border:0;
+
+}
+.intl-patient-stories {
+
+}
+
+.story-card {
+      max-width: 360px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border: 1px solid #E9E9E9;
+      padding: 0;
+    }
+
+    .story-card img {
+      object-fit: cover;
+      height: 220px;
+      width: 100%;
+      margin-bottom: 10px;
+    } 
+    .story-card .card-body {
+      padding: 15px;
+    }
+    .story-card .card-title {
+      margin-bottom: 10px;
+    }
+
+   .story-card .btn-video {
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin:10px 0 10px 0;
+    }
+
+   .story-card .btn-video .play-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #6f42c1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+    }
+
+
+.intl-faqs-section {}
+
+.intl-faqs-section .accordion-button{
+  padding: 1.5rem;
+}
+
+.intl-faqs-section .accordion-header {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
+
 
 .accreds-recognitions {
 }
@@ -2130,8 +2300,10 @@ h1.main-title-center::after,
 
   width: 100%;
   height: auto;
-  min-height: 220px;
-  object-fit: cover;
+  /* min-height: 220px; */
+  min-height: 200px;
+  max-height: 200px;
+  /* object-fit: cover; */
 
 }
 

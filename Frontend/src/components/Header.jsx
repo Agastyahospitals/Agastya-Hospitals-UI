@@ -333,7 +333,7 @@ const Header = () => {
 
         {/* Banner & Breadcrumb */}
         {currentPage !== "Home" && (
-          <div className="container">
+          <div className="container hideinnertitleonscroll">
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2 className="banner-title mt-5 mb-4">{currentPage}</h2>

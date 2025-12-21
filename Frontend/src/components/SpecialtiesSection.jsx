@@ -83,12 +83,11 @@ const SpecialtiesSection = () => {
                   <img
                     src={specialty.icon || specialty.banner[0]}
                     style={{
-                      width: 50,
-                      height: 50,
+                      width: 65,
+                      height: 65,
                       objectFit: "cover",
-                      background: "#f5f5f5",
                     }}
-                    className="rounded-5"
+                    className=""
                   />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">

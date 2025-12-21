@@ -8,118 +8,131 @@ const PrivacyPolicy = () => {
           <p>&nbsp;</p>
           <p>Last Update : June 2025</p>
           <p>
-            Please read these Terms and Conditions carefully beofre using this
-            website and our services. By accessing or using the site, you agree
-            to be bound by these terms.
+            Agastya Hospitals respects and values the privacy of every individual who visits our website or 
+avails our healthcare services. This Privacy Policy outlines how Agastya Hospitals collects, 
+uses, stores, protects, and discloses personal and medical information obtained through our 
+website and healthcare services.<br/><br/>
+
+By accessing or using this website, you consent to the terms of this Privacy Policy.
           </p>
 
           <div className="point">
-            <h3>1. Use of the website</h3>
+            <h3>1. Information Collected</h3>
             <p>
-              This website provides information and services related to medical
-              second opinions and related inquiries. You agree to use the
-              website only for lawful purposes and in accordance with these
-              Terms.
+              Agastya Hospitals may collect the following information: 
             </p>
-          </div>
-          <div className="point">
-            <h3>2. Medical Disclaimer</h3>
-            <p>
-              The information provided on this website is for general
-              informational purposes only and is not intended as a substitute
-              for professional medical advice, diagnosis, or treatment. Always
-              seek the advice of your physician or other qualified health
-              provider regarding a medical condition.
-            </p>
-          </div>
-
-          <div className="point">
-            <h3>3. User Responsibilities</h3>
-            <p>You agree that:</p>
+            <p><b>Personal Information </b></p>
             <ul>
-              <li>
-                The information you provide through any forms or communications
-                is accurate and complete.
-              </li>
-              <li>
-                You will not misuse, hack, or attempt to disrupt the website.
-              </li>
-              <li>
-                You are solely responsible for maintaining the confidentiality
-                of any login credentials (if applicable).
-              </li>
+              <li>Name, age, gender </li>
+<li>Contact details such as phone number, email address, and address </li>
+<li>Identification details when required for medical or administrative purposes </li>
             </ul>
+
+              
+            <p><b>Medical Information </b></p>
+            <ul>
+              <li>Medical history and health-related information </li>
+              <li>Diagnostic reports, prescriptions, and treatment records </li>
+              <li>Appointment and consultation details </li>
+              </ul>
+
+              <p><b>Website & Technical Information </b></p>
+
+              <ul>
+                <li>IP address and browser information </li>
+              <li>Device type and operating system </li>
+              <li>Website usage data collected via cookies and analytics tools </li>
+              </ul>
           </div>
 
-          <div className="point">
-            <h3>4. Intellectual Property</h3>
-            <p>
-              All content on this website, including text, graphics, logos, and
-              images, is the property of [Your Company Name] or its licensors
-              and is protected by applicable copyright and intellectual property
-              laws. You may not reproduce, distribute, or create derivative
-              works without our prior written permission.
-            </p>
+
+
+        <div className="point">
+            <h3>2. Use of Information</h3>
+            <p>The information collected is used for:</p>
+            <ul>
+<li>Providing medical care, diagnosis, and treatment </li>
+<li>Scheduling appointments and managing patient services </li>
+<li>Communicating medical updates, reminders, and service-related information </li>
+<li>Improving hospital services, website functionality, and user experience </li>
+<li>Legal, regulatory, and compliance requirements</li>
+</ul>
+
+<p>Agastya Hospitals does <b>not sell or commercially exploit personal data.</b> </p>
           </div>
 
-          <div className="point">
-            <h3>4. Limitation of Liability</h3>
-            <p>
-              To the fullest extent permitted by law, [Your Company Name] and
-              its affiliates shall not be liable for any direct, indirect,
-              incidental, consequential, or punitive damages arising from your
-              use of or inability to use the website or services.
-            </p>
-          </div>
-          <div className="point">
-            <h3>5. Links to Third-Party Sites</h3>
-            <p>
-              This website may contain links to third-party websites. We are not
-              responsible for the content or practices of these external sites.
-            </p>
+
+
+           <div className="point">
+            <h3>3. Disclosure of Information </h3>
+<p>Personal and medical information may be disclosed only: </p>
+
+<ul>
+	<li>To authorized doctors, medical staff, and healthcare providers involved in patient care </li>
+<li>To diagnostic centers, pharmacies, insurance companies, or TPAs where required </li>
+<li>When mandated by law, court orders, or regulatory authorities </li>
+</ul>
+<p>All disclosures are made strictly on a need-to-know basis. </p>
           </div>
 
-          <div className="point">
-            <h3>6. Privacy</h3>
-            <p>
-              Your use of this website is also governed by our Privacy Policy.
-              Please review it carefully.
-            </p>
+  <div className="point">
+            <h3>4.Data Protection & Security </h3>
+<p>Agastya Hospitals adopts reasonable administrative, technical, and physical safeguards to 
+protect personal and medical information against unauthorized access, alteration, loss, or 
+misuse.</p>
+</div>
+
+
+
+
+
+           <div className="point">
+            <h3>5. Cookies Policy  </h3>
+              <p>Our website uses cookies to: </p>
+
+              <ul>
+                <li>Enhance website performance</li>
+              <li>Analyze visitor behavior </li>
+              <li>Improve navigation and content relevance</li>
+              </ul>
+              <p>Users may disable cookies via browser settings; however, some website features may be 
+              affected.</p>
           </div>
 
-          <div className="point">
-            <h3>7. Modifications</h3>
-            <p>
-              We reserve the right to modify or replace these Terms at any time.
-              Changes will be effective when posted on this page with the
-              updated date. Your continued use of the website after such changes
-              constitutes your acceptance.
-            </p>
+
+       <div className="point">
+            <h3>6. Third-Party Websites </h3>
+              <p>Our website may contain links to external websites. Agastya Hospitals is not responsible for the 
+privacy policies, content, or practices of third-party websites.  </p>
+ 
           </div>
 
-          <div className="point">
-            <h3>8. Governing Law</h3>
-            <p>
-              These Terms are governed by and construed in accordance with the
-              laws of [Your Country/State], without regard to its conflict of
-              law provisions.
-            </p>
+     <div className="point">
+            <h3>7. Children's Privacy  </h3>
+              <p>Personal information of minors is collected only with the consent of parents or legal guardians. 
+</p>
+ 
           </div>
 
-          <div className="point">
-            <h3>9. Contact Us</h3>
-            <p>
-              If you have any questions about these Terms, please contact us:{" "}
-              <br />
-              [Your Company Name]
-              <br />
-              [Address]
-              <br />
-              [Phone Number]
-              <br />
-              [Email Address]
-            </p>
+
+          
+     <div className="point">
+            <h3>8. Policy Updates  </h3>
+              <p>Agastya Hospitals reserves the right to modify or update this Privacy Policy at any time. 
+Changes will be effective immediately upon publication on the website.</p>
+ 
           </div>
+
+
+  <div className="point">
+            <h3>9. Contact Information  </h3>
+              <p>For privacy-related queries or concerns, contact us<br/> Email us : info@agastyahospitals.com <br/>or <br/>
+Call us: +91 9459 108 108</p>
+ 
+          </div>
+
+
+ 
         </div>
       </div>
     </div>

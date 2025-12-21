@@ -6,28 +6,48 @@ const FAQSection = () => {
   const faqs = [
     {
       id: 0,
-      question: "Why is Agastya Hospitals known as the best hospital in Hyderabad?",
-      answer: "Agastya Hospitals is recognized as the best hospital in Hyderabad due to our state-of-the-art facilities, highly qualified medical professionals, advanced technology, and commitment to patient-centered care. We have consistently delivered excellent healthcare outcomes and maintain the highest standards of medical excellence."
+      question: "Where is Agastya Hospitals located in Hyderabad? ",
+      answer: "Agastya Hospitals is located in LB Nagar, East Hyderabad, with easy access via metro and major roadways."
     },
     {
       id: 1,
-      question: "When should you go to the hospital?",
-      answer: "You should visit the hospital immediately if you experience severe chest pain, difficulty breathing, sudden severe headache, loss of consciousness, severe bleeding, or any other life-threatening symptoms. For non-emergency conditions, consult your doctor for guidance."
+      question: "Is Agastya Hospitals a multispecialty hospital?",
+      answer: "Yes, we are a full-fledged multispecialty hospital offering comprehensive medical and surgical care."
     },
     {
       id: 2,
-      question: "What specialties does Agastya Hospitals offer?",
-      answer: "We offer comprehensive medical specialties including Cardiology, Neurology, Orthopedics, General Surgery, ENT, Pulmonology, Nephrology, Urology, and many more. Our team of specialists provides expert care across all major medical disciplines."
+      question: "Does Agastya Hospitals provide 24/7 emergency services? ",
+      answer: "Yes, our emergency and trauma care services operate round-the-clock."
     },
     {
       id: 3,
-      question: "How can I book an appointment?",
-      answer: "You can book an appointment by calling our 24x7 helpline at +91 9492 88 1134, visiting our website, or using our patient portal. We also offer online appointment booking for your convenience."
+      question: "Are advanced surgeries performed at Agastya Hospitals?",
+      answer: "Yes, we specialize in advanced and minimally invasive surgical procedures."
     },
     {
       id: 4,
-      question: "What insurance plans do you accept?",
-      answer: "We accept most major insurance plans and have tie-ups with leading insurance providers. Please contact our billing department to verify your specific insurance coverage and benefits."
+      question: "Are treatments affordable at Agastya Hospitals?",
+      answer: "We offer high-quality care at transparent and affordable pricing. "
+    },
+    {
+      id: 5,
+      question: "Can I book appointments online? ",
+      answer: "Yes, appointments can be booked through phone or digital platforms. "
+    },
+    {
+      id: 6,
+      question: "Does Agastya Hospitals accept insurance? ",
+      answer: "Yes, we work with major insurance providers and TPAs. "
+    },
+    {
+      id: 7,
+      question: "Do you offer post-treatment follow-ups? ",
+      answer: "Yes, structured follow-up care is part of our treatment protocol. "
+    },
+    {
+      id: 8,
+      question: "Why choose Agastya Hospitals over other hospitals in Hyderabad? ",
+      answer: "Our strength lies in ethical care, experienced doctors, affordability, and personalized attention."
     }
   ]
 
