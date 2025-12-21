@@ -1,6 +1,6 @@
 import React from "react";
 import { Suspense, useEffect, useState } from "react";
-import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loader from "../Layout/Loader";
 import { authRoutes } from "./AuthRoutes";
@@ -17,7 +17,7 @@ const Routers = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const defaultLayoutObj = classes.find((item) => Object.values(item).pop(1) === "compact-wrapper");
   const layout = localStorage.getItem("layout") || Object.keys(defaultLayoutObj).pop();
-  
+
   // Get authentication state from Redux
   const { isAuthenticated } = useSelector((state) => state.auth);
 
@@ -40,7 +40,7 @@ const Routers = () => {
   const initialRedirect = allowedRoles.includes(roleid) ? '/dashboard' : '/appointments';
 
   return (
-    <HashRouter>
+    <BrowserRouter basename={"/"}>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={"/"} element={<PrivateRoute />}>
@@ -60,7 +60,7 @@ const Routers = () => {
           ))}
         </Routes>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
