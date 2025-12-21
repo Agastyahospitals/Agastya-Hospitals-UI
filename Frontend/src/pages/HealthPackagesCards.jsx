@@ -3,6 +3,7 @@ import ModalComponent from "../components/common/ModalComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { toasterConfig } from "../utils";
 
 const HealthPackagesCards = () => {
   const [isBookOpen, setIsBookOpen] = useState(false);
@@ -85,12 +86,27 @@ const HealthPackagesCards = () => {
   //   e.preventDefault();
   //   setShowNote(true);
   // };
+
+  const validate = () => {
+    const errors = {};
+    if (!formState.fullName) {
+      errors.fullName = "Full name is required";
+    }
+    if (!formState.email) {
+      errors.email = "Email is required";
+    }
+    if (!formState.mobileNumber) {
+      errors.mobileNumber = "Mobile number is required";
+    }
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      setSubmitted(true);
-      setResult(false);
+      // setSubmitted(true);
+      // setResult(false);
       const formData = new FormData(e.target);
       formData.append("access_key", "09952932-0e2d-40a1-8514-31fdc2bd87ff");
       // formData.append("contactForm", "Contact Form");
@@ -103,12 +119,12 @@ const HealthPackagesCards = () => {
       const data = await response.json();
       if (data.success) {
         setShowNote(true);
-        setSubmitted(true);
+        // setSubmitted(true);
         toasterConfig("success", "Enquiry submitted successfully, we will get back to you soon!");
         captchaRef.current.resetCaptcha();
         resetForm();
       } else {
-        setSubmitted(false);
+        // setSubmitted(false);
         toasterConfig("error", "Failed to submit enquiry, please try again!");
         resetForm();
       }
@@ -220,6 +236,7 @@ const HealthPackagesCards = () => {
                       value={formState.mobileNumber}
                       onChange={handleChange}
                       placeholder="Enter your mobile number"
+                      maxLength={10}
                     />
                   </div>
                 </div>
