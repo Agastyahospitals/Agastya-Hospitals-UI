@@ -117,11 +117,11 @@ const SpecialtyDetails = () => {
           <div className="col-md-4">
             <EnquiryForm formType={formatSpecialtyTitle() + " Enquiry Form"} />
           </div>
-          <div className="col-md-8 p-4">
+          <div className="col-md-8 p-4 specialtypage-details">
             <img
               className="rounded-5 border-1 shadow-sm"
               src={specialties?.banner[0]}
-              style={{ height: "200px", width: "100%" }}
+              style={{ width: "100%" }}
             />
             <h2 className="f-30 f-w-700 mt-4 mb-3">Overview</h2>
             <div className="ql-snow">
