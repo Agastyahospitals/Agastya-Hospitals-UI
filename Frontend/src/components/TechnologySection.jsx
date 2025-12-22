@@ -86,22 +86,22 @@ const TechnologySection = () => {
                     <div className="comm">
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     <div className="comm">
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment &nbsp;&nbsp;</div>
                     </div>
                    <div className="comm">
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     <div className="comm">
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
                         <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     
                 </div>

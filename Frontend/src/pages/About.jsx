@@ -87,6 +87,38 @@ const About = () => {
 
       {/* stats-card d-flex justify-content-between align-items-center flex-wrap gap-0 */}
 
+
+
+       <div className="row mission-vission">
+         
+
+        <div className="col-lg-4 col-md-4 col-sm-12">
+          <div className="mission-card">
+              <h4>Our Vision</h4>
+              <p>To provide unparalleled Healthcare for the people & Communities from not only Hyderabad but also from beyond the boundaries of the state and overseas. To help the one & all to enjoy healthy life to its fullest.</p>
+          </div>
+        </div>
+
+         <div className="col-lg-4 col-md-4 col-sm-12">
+          <div className="mission-card">
+              <h4>Vision</h4>
+              <p>Excel in all that we do, and thus transform the Healthcare</p>
+          </div>
+        </div>
+
+         <div className="col-lg-4 col-md-4 col-sm-12">
+          <div className="mission-card">
+              <h4>Values</h4>
+              <ul>
+                <li>Compassion: We are kind & caring. We put YOU first.</li>
+                <li>Integrity: We do only what is right</li>
+                <li>Accountability: We walk the talk</li>
+                <li>Team Work: We work together with Mutual Respect</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
       <div className="row stats-container">
         <div className="col-lg-3 stats-section">
           <h6>Happy Patients</h6>
