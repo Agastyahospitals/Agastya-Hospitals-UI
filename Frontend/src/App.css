@@ -729,6 +729,11 @@ select.form-select {
   min-height: 280px;
 }
 
+.specialty-card-home h3 {
+    color:#000 !important;
+  }
+
+
 .specialty-card-home-active {
   background-color: #1a365a;
 }
@@ -813,7 +818,7 @@ select.form-select {
 }
 
 .specialtypage-btn a {
-  font-size: 16px;
+  font-size: 14px !important;
   color: #022b50;
   margin-bottom: 10px;
 }
@@ -1142,6 +1147,7 @@ h1.main-title-center::after,
   align-items: center;
   animation: scroll 60s linear infinite;
   gap: 4rem;
+  margin-left: 30px;
   cursor: pointer;
 }
 
@@ -1187,6 +1193,29 @@ h1.main-title-center::after,
   font-size: 14px !important;
 }
 
+
+.mission-vission {
+margin-bottom: 50px;
+background-color: #eaf2fc;
+padding: 40px;
+border-radius: 50px;
+}
+
+.mission-vission .mission-card h4{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000;
+}
+.mission-vission .mission-card ul {
+  margin-left: 10px;
+}
+
+.mission-vission .mission-card li {
+  list-style: disc;
+
+}
+
 .social-icons-footer {
   display: flex;
 }
@@ -1221,7 +1250,7 @@ h1.main-title-center::after,
   }
 }
 @media (max-width: 575px) {
-
+  .mission-vission .mission-card {margin-bottom: 50px;}
   .specialtypage-details img { height: auto !important; border-radius: 10px !important;}
   .specialtypage-details .ql-editor { padding-left: 0 !important; padding-right: 0 !important}
   .leadership-grid-row .leadership-card,
@@ -1383,6 +1412,7 @@ h1.main-title-center::after,
     min-width: 300px;
   }
 
+  
   .footer-copy {
     margin-bottom: 70px;
   }

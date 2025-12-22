@@ -112,7 +112,7 @@ const OutstandingCareSection = () => {
 
               <ul className="list-items">
                 <li>Highly qualified team of doctors and specialists</li>
-                <li>State-of-the-art facilities and cutting-edge technology</li>
+                <li>State-of-the-art facilities and cutting-edge technology </li>
                 <li>Commitment to affordable and accessible for all</li>
               </ul>
             </div>

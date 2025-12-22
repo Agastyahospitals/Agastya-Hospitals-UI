@@ -194,7 +194,7 @@ const Patient = () => {
             </div>
           </div>
         </div>
-        <div className="row intl-patient-stories">
+        {/* <div className="row intl-patient-stories">
           <div className="content">
             <div className="row">
               <div class="col-lg-12 text-center mb-12"><h2 class="main-title-center">Patient Stories</h2></div>
@@ -258,9 +258,10 @@ const Patient = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="row intl-faqs-section pt-5 mt-5">
+        <div className="row intl-faqs-section"> 
+          {/* pt-5 mt-5"> */}
           <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
