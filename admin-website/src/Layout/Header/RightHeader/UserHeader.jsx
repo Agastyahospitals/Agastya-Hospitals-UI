@@ -86,7 +86,7 @@ const UserHeader = () => {
             {authenticated ? userDetails.userName : name}
           </span>
           <P attrPara={{ className: "mb-0 font-roboto" }}>
-            {Admin} <i className="middle fa fa-angle-down"></i>
+            {authenticated ? userDetails.roleName : ""} <i className="middle fa fa-angle-down"></i>
           </P>
         </div>
       </div>
