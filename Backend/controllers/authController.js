@@ -101,9 +101,28 @@ exports.register = async (req, res) => {
 // ============================== LOGIN ==============================
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, mobile, countryCode, password } = req.body;
 
-    const user = await User.findOne({ email: { $regex: `^${email}$`, $options: 'i' } });
+    // Validate that password is provided
+    if (!password) {
+      return res.status(400).json({ message: 'Password is required' });
+    }
+
+    // Validate that either email OR (mobile + countryCode) is provided
+    if (!email && (!mobile || !countryCode)) {
+      return res.status(400).json({ message: 'Either email or (mobile + countryCode) is required' });
+    }
+
+    // Find user by email or mobile
+    let user;
+    if (email) {
+      // Login with email
+      user = await User.findOne({ email: { $regex: `^${email}$`, $options: 'i' } });
+    } else {
+      // Login with mobile and countryCode
+      user = await User.findOne({ mobile, countryCode });
+    }
+
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -115,6 +134,8 @@ exports.login = async (req, res) => {
       {
         userID: user.userID,
         email: user.email,
+        mobile: user.mobile,
+        countryCode: user.countryCode,
         roleID: user.roleID,
         modules: user.modules,
         isActive: user.isActive,
