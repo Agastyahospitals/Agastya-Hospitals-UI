@@ -58,7 +58,7 @@ const FindDoctor = () => {
 
     const matchesName = searchText
       ? doctor.fullName.toLowerCase().includes(searchText.toLowerCase()) ||
-        doctor.speciality.includes(searchText)
+      doctor.speciality.includes(searchText)
       : true;
 
     return matchesSpecialty && matchesName;
@@ -179,7 +179,7 @@ const FindDoctor = () => {
                             <li>
                               <span className="label">Speaks:</span>{" "}
                               <span className="information">
-                                Telugu, English, Hindi
+                                {doctor.languagesKnown.join(", ")}
                               </span>
                             </li>
                             <li>
@@ -190,14 +190,25 @@ const FindDoctor = () => {
                                   : "Not Available"}
                               </span>
                             </li>
-                            <li>
+                            <li className="ql-snow">
                               <span className="label">Expertise:</span>{" "}
-                              <span className="information text-ellipsis-one">
-                                <p
-                                  dangerouslySetInnerHTML={{
-                                    __html: doctor.experienceDescription,
-                                  }}
-                                ></p>
+                              <span className="information" style={{
+                                display: "inline-block",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxWidth: "250px", // Adjust width as needed or let it inherit
+                                verticalAlign: "middle"
+                              }}>
+                                {doctor.expertise ? (
+                                  <span className="ql-editor"
+                                    dangerouslySetInnerHTML={{
+                                      __html: doctor.expertise,
+                                    }}
+                                  ></span>
+                                ) : (
+                                  "Not Available"
+                                )}
                               </span>
                             </li>
                           </ul>
@@ -234,8 +245,9 @@ const FindDoctor = () => {
             )}
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

@@ -130,12 +130,12 @@ const DoctorProfile = () => {
             </div>
           </div>
           <div className="col-md-8 col-lg-8 col-sm-12 col-xs-12 pt-2">
-            <div className="pl-2 border-bottom pb-3">
+            <div className="pl-2 border-bottom pb-3 ql-snow">
               <h3 className="f-w-700 f-18 mb-2">Overview</h3>
               <p
                 className="text-justify f-14"
                 dangerouslySetInnerHTML={{
-                  __html: doctorProfile.experienceDescription,
+                  __html: doctorProfile.about,
                 }}
               ></p>
               <p
@@ -143,28 +143,28 @@ const DoctorProfile = () => {
                 dangerouslySetInnerHTML={{ __html: doctorProfile.expertise }}
               />
             </div>
-            <div className="pl-2 border-bottom py-3">
+            <div className="pl-2 border-bottom py-3 ql-snow">
               <h3 className="f-w-700 f-18 mb-2">Educational Qualifications</h3>
-              <ul>
-                {doctorProfile.educationQualification
-                  ? doctorProfile.educationQualification?.map((edu) => (
+              <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+                {doctorProfile.education
+                  ? doctorProfile.education?.map((edu) => (
                     <li className="f-14 mb-1">{edu}</li>
                   ))
                   : "N/A"}
               </ul>
             </div>
-            <div className="pl-2 border-bottom py-3">
+            <div className="pl-2 border-bottom py-3 ql-snow">
               <h3 className="f-w-700 f-18 mb-2">Work Experience</h3>
               <p
-                className="text-justify f-14"
+                className="ql-editor text-justify f-14"
                 dangerouslySetInnerHTML={{
                   __html: doctorProfile.experienceDescription,
                 }}
               />
             </div>
-            <div className="pl-2 border-bottom py-3">
+            <div className="pl-2 border-bottom py-3 ql-snow">
               <h3 className="f-w-700 f-18 mb-2">Services offered</h3>
-              <ul>
+              <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
                 {doctorProfile.servicesOffered
                   ? doctorProfile.servicesOffered?.map((service) => (
                     <li className="f-14 mb-1">{service}</li>
@@ -172,10 +172,10 @@ const DoctorProfile = () => {
                   : "N/A"}
               </ul>
             </div>
-            <div className="pl-2 border-bottom py-3">
+            <div className="pl-2 border-bottom py-3 ql-snow">
               <h3 className="f-w-700 f-18 mb-2">Awards and Achievements</h3>
               <p
-                className="text-justify f-14"
+                className="ql-editor text-justify f-14"
                 dangerouslySetInnerHTML={{
                   __html: doctorProfile.awardsAndAchievements,
                 }}
@@ -184,7 +184,7 @@ const DoctorProfile = () => {
             <div className="pl-2 py-3">
               <h3 className="f-w-700 f-18 mb-2">Research & Publications</h3>
               <p
-                className="text-justify f-14"
+                className="ql-editor text-justify f-14"
                 dangerouslySetInnerHTML={{
                   __html: doctorProfile.researchAndPublications,
                 }}

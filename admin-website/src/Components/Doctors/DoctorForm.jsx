@@ -24,7 +24,6 @@ import {
   fetchSpecialities,
 } from "../../api/Services";
 import { toasterConfig } from "../../utils";
-import { toast } from "react-toastify";
 
 const initialFormState = {
   fullName: "",
@@ -143,11 +142,11 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
         ...initialData,
         speciality: mappedSpeciality,
         // Handle array fields properly
-        education: initialData.education || [""],
-        qualification: initialData.qualification || [""],
-        opTimings: initialData.opTimings || [""],
-        languagesKnown: initialData.languagesKnown || [""],
-        servicesOffered: initialData.servicesOffered || [""],
+        education: initialData.education && initialData.education.length > 0 ? initialData.education : [""],
+        qualification: initialData.qualification && initialData.qualification.length > 0 ? initialData.qualification : [""],
+        opTimings: initialData.opTimings && initialData.opTimings.length > 0 ? initialData.opTimings : [""],
+        languagesKnown: initialData.languagesKnown && initialData.languagesKnown.length > 0 ? initialData.languagesKnown : [""],
+        servicesOffered: initialData.servicesOffered && initialData.servicesOffered.length > 0 ? initialData.servicesOffered : [""],
         about: initialData.about || "NA",
         // Map departmentID if it exists
         departmentID: initialData.departmentID || "",
@@ -303,9 +302,9 @@ const DoctorForm = ({ onClose, initialData = null, isEditMode = false }) => {
       try {
         // Prepare data for API (remove profilePicture if it's a File object)
         const formattedName = (
-          // /^dr\.?\s*/i.test(formState.fullName)
-          //   ? formState.fullName:
-          `Dr ${formState.fullName}`
+          /^dr?\s*/i.test(formState.fullName)
+            ? formState.fullName
+            : `Dr ${formState.fullName}`
         ).replace(/\b\w/g, (c) => c.toUpperCase());
         const submitData = { ...formState };
 

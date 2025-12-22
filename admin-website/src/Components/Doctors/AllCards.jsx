@@ -205,7 +205,7 @@ const AllCards = ({ onEditDoctor, refreshTrigger = 0 }) => {
                             fontSize: "12px !important",
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: doctor.expertise,
+                            __html: doctor.experienceDescription,
                           }}
                         />
                       </li>

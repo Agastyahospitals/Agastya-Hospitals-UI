@@ -169,7 +169,7 @@ const SpecialtyDetails = () => {
                               <li>
                                 <span className="label">Speaks:</span>{" "}
                                 <span className="information">
-                                  Telugu, English, Hindi
+                                  {doctor.languagesKnown.join(", ")}
                                 </span>
                               </li>
                               <li>
