@@ -9,6 +9,7 @@ export const MENUITEMS = [
         icon: "home",
         type: "link",
         path: `/dashboard`,
+        id: 1,
       },
 
       {
@@ -16,6 +17,7 @@ export const MENUITEMS = [
         icon: "user",
         path: `/doctors`,
         type: "link",
+        id: 2,
       },
 
       {
@@ -23,18 +25,21 @@ export const MENUITEMS = [
         icon: "user",
         path: `/patients`,
         type: "link",
+        id: 15,
       },
       {
         title: "Medical Records",
         icon: "gallery",
         path: `/medical-records`,
         type: "link",
+        id: 14,
       },
       {
         path: `/specialities`,
         icon: "file",
         title: "Specialities",
         type: "link",
+        id: 3,
       },
 
       {
@@ -42,18 +47,21 @@ export const MENUITEMS = [
         icon: "calendar",
         path: `/appointments`,
         type: "link",
+        id: 5,
       },
       {
         path: `/departments`,
         icon: "knowledgebase",
         title: "Departments",
         type: "link",
+        id: 4,
       },
       {
         title: "Slot Management",
         icon: "chat",
         type: "sub",
         active: false,
+        id: 6,
         children: [
           {
             path: `/slot-management/add-slots`,
@@ -72,30 +80,35 @@ export const MENUITEMS = [
         icon: "gallery",
         type: "link",
         path: `/health-packages`,
+        id: 13,
       },
       {
         title: "Technologies",
         icon: "project",
         type: "link",
         path: `/technologies`,
+        id: 7,
       },
       {
         path: `/blog`,
         icon: "blog",
         title: "Blog",
         type: "link",
+        id: 10,
       },
       {
         path: `/testimonials`,
         icon: "chat",
         title: "Testimonials",
         type: "link",
+        id: 9,
       },
       {
         path: `/roles-permissions`,
         icon: "user",
         title: "Roles & Permissions",
         type: "link",
+        id: 11,
       },
     ],
   },

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import SvgIcon from "../../Components/Common/Component/SvgIcon";
 import CustomizerContext from "../../_helper/Customizer";
 import { MENUITEMS } from "./Menu";
-import { getRoleId } from '../../utils';
+
 
 const SidebarMenuItems = ({
   setMainMenu,
@@ -59,20 +59,27 @@ const SidebarMenuItems = ({
     setMainMenu({ mainmenu: MENUITEMS });
   };
 
-  // Get roleID from localStorage.userdetails
-  const roleid = getRoleId();
-  const allowedRoles = [1, 2, 3];
+  // Get user details from localStorage
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+  const userModules = userDetails?.modules || [];
 
-  // Filter menu items based on roleid
+  // Filter menu items based on user modules
   const filterMenuItems = (items) => {
-    if (allowedRoles.includes(roleid)) {
-      return items;
+    // If no modules array is present (e.g. legacy user or admin fallback not handled), show safe defaults or nothing
+    if (!userModules || userModules.length === 0) {
+      // Potentially allow Dashboard (id: 1) by default or return empty
+      // For now, adhering strictly to "show only modules which are coming from this api"
+      return items.filter(item => item.id === 1); // Fallback to Dashboard if needed, or just return []
     }
-    // For other roles, show only Appointments and Medical Records
-    return items.filter(
-      (item) =>
-        item.title === 'Appointments' || item.title === 'Medical Records'
-    );
+
+    return items.filter((item) => {
+      // If item has no ID (like separators or un-managed items), decide policy. 
+      // Assuming all managed items have IDs now.
+      if (item.id) {
+        return userModules.includes(item.id);
+      }
+      return true; // Keep items without ID (like potential static headers if any, though Structure is strictly mapped now)
+    });
   };
 
   return (
@@ -89,9 +96,8 @@ const SidebarMenuItems = ({
               {menuItem.type === "sub" ? (
                 <a
                   href="javascript"
-                  className={`sidebar-link sidebar-title ${
-                    activeTab === menuItem.title ? "active" : ""
-                  } ${menuItem.active && "active"}`}
+                  className={`sidebar-link sidebar-title ${activeTab === menuItem.title ? "active" : ""
+                    } ${menuItem.active && "active"}`}
                   onClick={(event) => {
                     event.preventDefault();
                     setNavActive(menuItem);
@@ -129,11 +135,10 @@ const SidebarMenuItems = ({
               {menuItem.type === "link" ? (
                 <Link
                   to={menuItem.path}
-                  className={`sidebar-link sidebar-title link-nav  ${
-                    CurrentPath.includes(menuItem.title.toLowerCase())
-                      ? "active"
-                      : ""
-                  }`}
+                  className={`sidebar-link sidebar-title link-nav  ${CurrentPath.includes(menuItem.title.toLowerCase())
+                    ? "active"
+                    : ""
+                    }`}
                   onClick={() => toggletNavActive(menuItem)}
                 >
                   <SvgIcon
@@ -177,13 +182,12 @@ const SidebarMenuItems = ({
                         {childrenItem.type === "sub" ? (
                           <a
                             href="javascript"
-                            className={`${
-                              CurrentPath.includes(
-                                childrenItem?.title?.toLowerCase()
-                              )
-                                ? "active"
-                                : ""
-                            }`}
+                            className={`${CurrentPath.includes(
+                              childrenItem?.title?.toLowerCase()
+                            )
+                              ? "active"
+                              : ""
+                              }`}
                             onClick={(event) => {
                               event.preventDefault();
                               toggletNavActive(childrenItem);
@@ -208,13 +212,12 @@ const SidebarMenuItems = ({
                         {childrenItem.type === "link" ? (
                           <Link
                             to={childrenItem.path}
-                            className={`${
-                              CurrentPath.includes(
-                                childrenItem?.title?.toLowerCase()
-                              )
-                                ? "active"
-                                : ""
-                            }`}
+                            className={`${CurrentPath.includes(
+                              childrenItem?.title?.toLowerCase()
+                            )
+                              ? "active"
+                              : ""
+                              }`}
                             onClick={() => toggletNavActive(childrenItem)}
                           >
                             {t(childrenItem.title)}
@@ -240,13 +243,12 @@ const SidebarMenuItems = ({
                                   {childrenSubItem.type === "link" ? (
                                     <Link
                                       to={childrenSubItem.path}
-                                      className={`${
-                                        CurrentPath.includes(
-                                          childrenSubItem?.title?.toLowerCase()
-                                        )
-                                          ? "active"
-                                          : ""
-                                      }`}
+                                      className={`${CurrentPath.includes(
+                                        childrenSubItem?.title?.toLowerCase()
+                                      )
+                                        ? "active"
+                                        : ""
+                                        }`}
                                       onClick={() =>
                                         toggletNavActive(childrenSubItem)
                                       }
