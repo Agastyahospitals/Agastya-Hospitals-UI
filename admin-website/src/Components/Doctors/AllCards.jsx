@@ -191,10 +191,10 @@ const AllCards = ({ onEditDoctor, refreshTrigger = 0 }) => {
                             : "Not Available"}
                         </span>
                       </li>
-                      <li className="text-muted mb-1">
+                      <li className="text-muted mb-1 ql-snow">
                         <strong className="me-1">Expertise:</strong>{" "}
                         <span
-                          className="text-dark text-clamped-one"
+                          className="text-dark text-clamped-one ql-editor"
                           style={{
                             display: "inline-block",
                             maxWidth: "60%",
@@ -205,7 +205,7 @@ const AllCards = ({ onEditDoctor, refreshTrigger = 0 }) => {
                             fontSize: "12px !important",
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: doctor.experienceDescription,
+                            __html: doctor.expertise,
                           }}
                         />
                       </li>

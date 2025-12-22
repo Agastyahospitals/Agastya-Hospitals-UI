@@ -4,6 +4,8 @@ import "./index.scss";
 import App from "./App";
 import "./i18n";
 import reportWebVitals from "./reportWebVitals";
+import "react-quill/dist/quill.snow.css";
+
 
 const Root = () => {
   return (

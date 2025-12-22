@@ -1,6 +1,5 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 // import CKEditors from 'react-ckeditor-component';
 
 const HTMLTextEditor = ({ name, placeholder, state, handleChange, errors }) => {
