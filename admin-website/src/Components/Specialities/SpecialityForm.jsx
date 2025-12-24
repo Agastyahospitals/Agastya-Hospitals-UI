@@ -110,9 +110,16 @@ const SpecialityForm = ({
 
   const validateAllFields = (name, value) => {
     const isEmpty = (val) => {
+      // Consider null or undefined as empty
+      if (val === null || val === undefined) return true;
+      // File objects are considered present
       if (val instanceof File) return false;
+      // Empty arrays are empty
       if (Array.isArray(val)) return val.length === 0;
-      return typeof val === "string" ? val.trim() === "" : !val;
+      // Empty strings are empty
+      if (typeof val === "string") return val.trim() === "";
+      // Booleans and numbers (including false and 0) are valid (not empty)
+      return false;
     };
 
     const requiredFields = {
