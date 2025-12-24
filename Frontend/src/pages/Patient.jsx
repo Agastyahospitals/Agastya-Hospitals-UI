@@ -171,25 +171,25 @@ const Patient = () => {
         <div className="row whychoose-agastya">
           <div className="content">
             <div className="row">
-              <div class="col-lg-12 text-center mb-12"><h2 class="main-title-center">Why Choose Agastya</h2></div>
+              <div class="col-lg-12 text-center mb-12"><h2 class="main-title-center">Why Choose Agastya Hospitals for International Patients</h2></div>
               <div class="col-lg-12 text-center mb-"><p className="text-center">At Agastya Hospital, your path to complete healing begins with world-class medical professionals who center your comfort and well-being.</p></div>
             </div>
             <div className="row">
               <div className="col-lg-3 gridcontent">
-                <img src="https://ik.imagekit.io/sandy143/specialities/icon/vaccine_HsEPp-krV.png" />
-                <p>Healthcare within Reach</p>
+                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766532840/agastya/world.png" />
+                <p>Global Standards, Affordable Care</p>
               </div>
               <div className="col-lg-3 gridcontent">
-                <img src="https://ik.imagekit.io/sandy143/specialities/icon/vaccine_HsEPp-krV.png" />
-                <p>Healthcare within Reach</p>
+                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766532840/agastya/doctor.png" />
+                <p> Dedicated International Patient Support</p>
               </div>
               <div className="col-lg-3 gridcontent">
-                <img src="https://ik.imagekit.io/sandy143/specialities/icon/vaccine_HsEPp-krV.png" />
-                <p>Healthcare within Reach</p>
+                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766532839/agastya/health.png" />
+                <p>Experienced Specialists & Advanced Technology</p>
               </div>
               <div className="col-lg-3 gridcontent">
-                <img src="https://ik.imagekit.io/sandy143/specialities/icon/vaccine_HsEPp-krV.png" />
-                <p>Healthcare within Reach</p>
+                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766532839/agastya/airplane.png" />
+                <p>Seamless Travel & Treatment Experience</p>
               </div>
             </div>
           </div>

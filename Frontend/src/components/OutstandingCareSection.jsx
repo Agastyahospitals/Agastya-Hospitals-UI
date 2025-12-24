@@ -99,7 +99,7 @@ const OutstandingCareSection = () => {
               <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662699/agastya/about-agastya.png" alt="Outstanding Care"></img>
               <div className="d-flex mt-5 mx-auto justify-center outstanding-btn-container">
                 <a href="#" className="video"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/video-icon.svg"></img> Watch Video</a>
-                <a href="#" className="locateus"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/map-icon.svg"></img> Locate Us</a>
+                <a href="https://maps.app.goo.gl/SdLVBpmTThWkM9w89" target="_blank" className="locateus"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/map-icon.svg"></img> Locate Us</a>
               </div>
             </div>
           </div>

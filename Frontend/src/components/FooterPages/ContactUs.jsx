@@ -115,9 +115,7 @@ const ContactUs = () => {
               <div className="contact-location-box">
                 <h4 className="title">Location:</h4>
                 <p className="infotext">
-                  Nagarjuna Sagar Rd, Jahangir Nagar <br /> Colony, Omkar Nagar,
-                  Hyderabad, <br />
-                  Telangana 500074
+                 #102, 103, Omkar Nagar, Nagarjuna Sagar Road, LB Nagar, Hyderabad, Telangana - 500079, India.
                 </p>
               </div>
 
@@ -130,13 +128,9 @@ const ContactUs = () => {
               <div className="contact-location-box">
                 <h4 className="title">Write to us:</h4>
                 <p className="infotext">
-                  <a href="mailto:info@domainname.com">info@domainname.com</a>
+                  <a href="mailto:info@agastyahospitals.com">info@agastyahospitals.com</a>
                 </p>
-                <p className="infotext">
-                  <a href="mailto:info@domainname.com">
-                    contact@domainname.com
-                  </a>
-                </p>
+                
               </div>
             </aside>
           </div>

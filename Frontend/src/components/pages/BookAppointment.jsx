@@ -708,8 +708,7 @@ const BookAppointment = () => {
                 </h5>
                 <ul className="sep">
                   <li>
-                    Nagarjuna Sagar Rd, Jahangir Nagar Colony, Omkar Nagar,
-                    Hyderabad, Telangana 500074
+                    #102, 103, Omkar Nagar, Nagarjuna Sagar Road, LB Nagar, Hyderabad, Telangana - 500079, India.
                   </li>
                   <li style={{ listStyle: "none" }}>
                     <a href="https://maps.app.goo.gl/SdLVBpmTThWkM9w89" target="_blank" className="directions-btn">

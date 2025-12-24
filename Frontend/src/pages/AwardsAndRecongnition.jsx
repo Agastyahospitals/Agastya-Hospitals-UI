@@ -20,6 +20,7 @@ const AwardsAndRecongnition = () => {
         
         <div className="container awards-gallery">
           <div className="row">
+            <div className="col-lg-12 f-20 text-center mb-3 f-w-600">Agastya Hospitals is Awarded for Excellence in Advanced Medical Care At Times Icons of Healthcare 2025. </div>
             <LightGallery plugins={[lgZoom, lgThumbnail]} speed={500}>
               <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-1.png">
                 <img
@@ -67,6 +68,7 @@ const AwardsAndRecongnition = () => {
               {/* more items */}
             </LightGallery>
           </div>
+          
         </div>
       </div>
     </div>

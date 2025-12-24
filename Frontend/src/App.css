@@ -4,7 +4,9 @@
   box-sizing: border-box;
   text-align: left;
 }
-
+:root {
+  --brand-color: #022b50;
+}
 #root {
   width: 100%;
 }
@@ -394,7 +396,7 @@ select.form-select {
 }
 
 .book-btn {
-  background: #8f7cf6;
+  background: var(--brand-color);
   border: none;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -403,8 +405,9 @@ select.form-select {
 }
 
 .book-btn:hover {
-  color: #fff;
-  background: #7a6ad8;
+  color: var(--brand-color);
+  background: #fff;
+  border: 2px solid var(--brand-color);
 }
 
 .hideinnertitleonscroll {
@@ -913,12 +916,13 @@ select.form-select {
 .doctor-card .bookappointment {
   display: flex;
   background-color: #fff;
-  border: 1px solid #4d39d2;
-  color: #4d39d2;
+  border: 1px solid var(--brand-color);
+  color: var(--brand-color);
 }
 
 .doctor-card .bookappointment img {
   margin-right: 5px;
+  color: var(--brand-color);
 }
 
 .doctor-card .bookappointment:hover {
@@ -969,9 +973,19 @@ select.form-select {
   transform: translateY(-5px);
 }
 
+.brand-btn {
+      background-color: #022b50 !important;
+    color: #FFF !important;
+    border: 0 !important;
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: auto;
+}
+
 .discount-badge {
-  background: #eceafe;
-  color: #000;
+  /* background: #eceafe; */
+  background-color: #022b50;
+  color: #FFF;
   font-size: 0.8rem;
   padding: 0.3rem 0.7rem;
   border-radius: 50px;
@@ -1009,7 +1023,7 @@ select.form-select {
 .price {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #5a3ef5;
+  color: #cd1e29;
 }
 
 .old-price {
@@ -1584,7 +1598,7 @@ border-radius: 50px;
 
 .banner {
   position: relative;
-  padding: 50px 20px;
+  padding: 20px 20px;
   text-align: left;
   /*         background-image: linear-gradient(to right top, #ffe6e6, #fee4ea, #fce3ef, #f7e3f4, #f0e3f9, #eee4fb, #ebe4fd, #e8e5ff, #ebe6ff, #eee6ff, #f1e7ff, #f4e8ff); */
 
@@ -1597,7 +1611,7 @@ border-radius: 50px;
     radial-gradient(at 63.51455455476997% 37.04482919712624%,
       hsla(46.15384615384614, 100%, 94.90196078431372%, 1) 0%,
       hsla(46.15384615384614, 100%, 94.90196078431372%, 0) 100%);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* Watermark Icon */
@@ -1902,6 +1916,18 @@ border-radius: 50px;
   padding-left: 50px;
 }
 
+.list-item-disc {
+  margin: 20px 0 40px 40px;
+}
+
+.list-item-disc li {
+  margin-bottom: 20px;
+  font-weight: 600;
+  list-style: disc !important;
+  padding-left: 0px;
+  font-weight: normal;
+}
+
 .leadership-grid-row {
     display: flex;
     flex-direction: row;
@@ -2051,6 +2077,7 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
     text-align: center;
 
     align-items: center;
+    align-content: baseline;
 
     display: grid;
 
@@ -2073,7 +2100,26 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
   text-align: center;
 
   padding: 20px 0;
+  font-size: 18px;
+  font-weight: normal;
 
+}
+
+.h1-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 10px 0 15px 0;
+}
+.h2-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0 15px 0;
+}
+
+.h3-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 10px 0;
 }
 
 

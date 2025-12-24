@@ -6,7 +6,7 @@ const TermsAndConditions = () => {
       <div className="row">
         <div className="col-lg-12">
           <p>&nbsp;</p>
-          <p>Last Update : June 2025</p>
+          <p>Last Update : December 2025</p>
           <p>
             Please read these Terms and Conditions carefully beofre using this
             website and our services. By accessing or using the site, you agree
@@ -55,7 +55,7 @@ const TermsAndConditions = () => {
             <h3>4. Intellectual Property</h3>
             <p>
               All content on this website, including text, graphics, logos, and
-              images, is the property of [Your Company Name] or its licensors
+              images, is the property of Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) or its licensors
               and is protected by applicable copyright and intellectual property
               laws. You may not reproduce, distribute, or create derivative
               works without our prior written permission.
@@ -65,7 +65,7 @@ const TermsAndConditions = () => {
           <div className="point">
             <h3>4. Limitation of Liability</h3>
             <p>
-              To the fullest extent permitted by law, [Your Company Name] and
+              To the fullest extent permitted by law, Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) and
               its affiliates shall not be liable for any direct, indirect,
               incidental, consequential, or punitive damages arising from your
               use of or inability to use the website or services.
@@ -110,14 +110,14 @@ const TermsAndConditions = () => {
             <h3>9. Contact Us</h3>
             <p>
               If you have any questions about these Terms, please contact us:{" "}
-              <br />
-              [Your Company Name]
-              <br />
-              [Address]
-              <br />
-              [Phone Number]
-              <br />
-              [Email Address]
+              <br /><br />
+             <b> Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.)
+              <br /><br />
+              #102, 103, Omkar Nagar, Nagarjuna Sagar Road, LB Nagar, Hyderabad, Telangana - 500079, India.
+              <br /><br />
+              +91 9459 108 108
+              <br /><br />
+              info@agastyahospitals.com</b>
             </p>
           </div>
         </div>

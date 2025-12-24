@@ -6,10 +6,10 @@ const PrivacyPolicy = () => {
       <div className="row">
         <div className="col-lg-12">
           <p>&nbsp;</p>
-          <p>Last Update : June 2025</p>
+          <p>Last Update : December 2025</p>
           <p>
-            Agastya Hospitals respects and values the privacy of every individual who visits our website or 
-avails our healthcare services. This Privacy Policy outlines how Agastya Hospitals collects, 
+            Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) respects and values the privacy of every individual who visits our website or 
+avails our healthcare services. This Privacy Policy outlines how Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) collects, 
 uses, stores, protects, and discloses personal and medical information obtained through our 
 website and healthcare services.<br/><br/>
 
@@ -19,7 +19,7 @@ By accessing or using this website, you consent to the terms of this Privacy Pol
           <div className="point">
             <h3>1. Information Collected</h3>
             <p>
-              Agastya Hospitals may collect the following information: 
+              Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) may collect the following information: 
             </p>
             <p><b>Personal Information </b></p>
             <ul>
@@ -77,7 +77,7 @@ By accessing or using this website, you consent to the terms of this Privacy Pol
 
   <div className="point">
             <h3>4.Data Protection & Security </h3>
-<p>Agastya Hospitals adopts reasonable administrative, technical, and physical safeguards to 
+<p>Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) adopts reasonable administrative, technical, and physical safeguards to 
 protect personal and medical information against unauthorized access, alteration, loss, or 
 misuse.</p>
 </div>
@@ -102,7 +102,7 @@ misuse.</p>
 
        <div className="point">
             <h3>6. Third-Party Websites </h3>
-              <p>Our website may contain links to external websites. Agastya Hospitals is not responsible for the 
+              <p>Our website may contain links to external websites. Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) is not responsible for the 
 privacy policies, content, or practices of third-party websites.  </p>
  
           </div>
@@ -118,7 +118,7 @@ privacy policies, content, or practices of third-party websites.  </p>
           
      <div className="point">
             <h3>8. Policy Updates  </h3>
-              <p>Agastya Hospitals reserves the right to modify or update this Privacy Policy at any time. 
+              <p>Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.) reserves the right to modify or update this Privacy Policy at any time. 
 Changes will be effective immediately upon publication on the website.</p>
  
           </div>
