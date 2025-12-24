@@ -58,28 +58,28 @@ const About = () => {
         <div className="col-lg-3 coloumn">
           <div className="keyfeatures-card top-curve">
               <h4>Quality Care</h4>
-              <p>Our continuous search for best practices in healthcare has lead to our superior quality and performance. We have emerged as ‘leaders in the field’ with our rare and complex procedures</p>
+              <p>We deliver evidence-based, patient-first care with strict safety standards, ensuring consistent outcomes for both routine and complex medical conditions.</p>
           </div>
         </div>
 
         <div className="col-lg-3 coloumn">
           <div className="keyfeatures-card bottom-curve">
               <h4>Technology</h4>
-              <p>Our continuous search for best practices in healthcare has lead to our superior quality and performance. We have emerged as ‘leaders in the field’ with our rare and complex procedures</p>
+              <p>Advanced medical technology enables accurate diagnosis, minimally invasive treatment, and faster recovery while meeting global healthcare standards.</p>
           </div>
         </div>
 
         <div className="col-lg-3 coloumn">
           <div className="keyfeatures-card top-curve">
               <h4>Faclities</h4>
-              <p>Our continuous search for best practices in healthcare has lead to our superior quality and performance. We have emerged as ‘leaders in the field’ with our rare and complex procedures</p>
+              <p>Modern, patient-friendly facilities with advanced operation theatres, ICUs, diagnostics, and emergency care under one roof.</p>
           </div>
         </div>
 
         <div className="col-lg-3 coloumn">
           <div className="keyfeatures-card bottom-curve">
               <h4>Team</h4>
-              <p>Our continuous search for best practices in healthcare has lead to our superior quality and performance. We have emerged as ‘leaders in the field’ with our rare and complex procedures</p>
+              <p>Our experienced doctors, nurses, and healthcare professionals work together to provide ethical, compassionate, and personalized care.</p>
           </div>
         </div>
       </div>
@@ -101,19 +101,19 @@ const About = () => {
 
          <div className="col-lg-4 col-md-4 col-sm-12">
           <div className="mission-card">
-              <h4>Vision</h4>
+              <h4>Our Mission</h4>
               <p>Excel in all that we do, and thus transform the Healthcare</p>
           </div>
         </div>
 
          <div className="col-lg-4 col-md-4 col-sm-12">
           <div className="mission-card">
-              <h4>Values</h4>
+              <h4>Our Values</h4>
               <ul>
-                <li>Compassion: We are kind & caring. We put YOU first.</li>
-                <li>Integrity: We do only what is right</li>
-                <li>Accountability: We walk the talk</li>
-                <li>Team Work: We work together with Mutual Respect</li>
+                <li><b>Compassion: We are kind & caring. We put YOU first.</b></li>
+                <li><b>Integrity: We do only what is right.</b></li>
+                <li><b>Accountability: We walk the talk.</b></li>
+                <li><b>Team Work: We work together with Mutual Respect.</b></li>
               </ul>
           </div>
         </div>
@@ -156,7 +156,7 @@ const About = () => {
               team of specialists offers comprehensive evaluations to ensure you
               feel confident in your healthcare choices.
             </p>
-            <a href="#" className="second-opinion-btn mt-3">
+            <a href="/free-second-opinion" className="second-opinion-btn mt-3">
               <span>➔</span> Get Your Free Second Opinion
             </a>
           </div>

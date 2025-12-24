@@ -221,7 +221,7 @@ const Header = () => {
       {/* Main Navigation */}
       <div className={`main-navigation ${isSticky ? "sticky" : ""}`}>
         <nav
-          className={`container-fluid mx-auto px-2 pb-2 main-navigation ${
+          className={`container-fluid mx-auto px-2 pb-0 main-navigation ${
             // currentPage && currentPage !== "Home"
             trail.some((nav) => nav !== "Home") ? "banner" : ""
             }`}
@@ -335,7 +335,7 @@ const Header = () => {
             <div className="container hideinnertitleonscroll">
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                  <h2 className="banner-title mt-5 mb-4">{title || currentPage}</h2>
+                  <h1 className="banner-title mt-5 mb-4">{title || currentPage}</h1>
                 </div>
                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                   <div className="breadcrumb">

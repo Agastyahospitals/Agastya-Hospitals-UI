@@ -133,8 +133,8 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6 col-sm-12">
             <div className="widget">
               <h3>Contact Info</h3>
-              <p>agastyahospitals@gmail.com</p>
-              <p>+91 9876543210</p>
+              <p>info@agastyahospitals.com</p>
+              <p>+91 9459 108 108</p>
               <h5 className="mt-5">24×7 Appointment Helpline</h5>
               <div className="helpline">
                 <span className="dot"></span> +91 40 65 108 108
@@ -170,7 +170,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-copy">
-        Copyright © 2025 Agastya Hospitals. All Rights Reserved.
+        Copyright © 2025 Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.). All Rights Reserved.
       </div>
     </footer>
   );

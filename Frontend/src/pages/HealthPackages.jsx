@@ -87,11 +87,11 @@ const HealthPackages = () => {
       )}
       <HealthPackagesCards />
       <div className="text-center pt-4 mt-5">
-        <p className="mb-2">
+        <p className="mb-2 text-center">
           Need a custom package? Contact us for personalized health check-up
           plans.
         </p>
-        <button className="btn btn-outline-primary">Contact Us</button>
+        <a href="/contact-us" className="brand-btn btn btn-outline-primary">Contact Us</a>
       </div>
     </div>
   );

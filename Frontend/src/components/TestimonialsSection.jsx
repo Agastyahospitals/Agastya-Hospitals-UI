@@ -196,7 +196,7 @@ const TestimonialsSection = () => {
                 <p>
                   {testimonial.description ? testimonial.description : "NA"}
                 </p>
-                <span className="date">{testimonial.updatedAt}</span>
+                {/* <span className="date">{testimonial.updatedAt}</span> */}
                 <div className="testimonial-footer">
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">

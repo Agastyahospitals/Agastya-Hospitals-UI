@@ -5,7 +5,7 @@ return (
 	<div className="container py-5">
 		<div className="row">
 			<div className="col-lg-12 text-center mb-12">
-				<h2 className="main-title-center">Leadership</h2>
+				<h2 className="main-title-center">Leadership Team</h2>
 				<p>At Agastya Hospitals, leadership is driven by a shared commitment to clinical excellence,
 					ethical medical practice, and patient-centric care. Our leadership team brings together highly
 					experienced doctors and healthcare professionals who guide the hospital’s vision of delivering
@@ -42,8 +42,7 @@ return (
 										<li>Implementing standardized treatment protocols </li>
 										<li>Mentoring young clinicians and surgical teams</li>
 									</ul>
-									<p>His approach emphasizes precision, patient education, and long-term functional
-									outcomes.</p>
+									<p>He is widely respected for his ethical practice and compassionate patient engagement. </p>
 								</div>
 							</div>
 						</div>
@@ -106,7 +105,9 @@ return (
 										<li>Ensuring clinical safety and quality benchmarks </li>
 										<li>Supporting multidisciplinary collaboration </li>
 									</ul>
-									<p>He is widely respected for his ethical practice and compassionate patient engagement. </p>
+									<p>His approach emphasizes precision, patient education, and long-term functional
+									outcomes.</p>
+									
 								</div>
 							</div>
 						</div>
@@ -114,17 +115,17 @@ return (
 					<div className="leadership-grid-row">
 						<div>
 							<div className="leadership-card">
-								{/* <img
-								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763285933/agastya/dr-g-sudhaker-reddy.png"
+								 <img
+								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766534599/agastya/Dr-AnilKumar-CEO.png"
 								alt=""
 								title=""
 								/>
-								*/}
+								
 							</div>
 						</div>
 						<div>
 							<div className="leadership-info">
-								<h3>Anil Kumar</h3>
+								<h3>Dr Anil Kumar</h3>
 								<p className="title">Hospital Administration & Operations Leadership  </p>
 								
 								<div className="description">
