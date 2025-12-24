@@ -70,7 +70,11 @@ const testimonialFilesMiddleware = (req, res, next) => {
                 fileName: `${Date.now()}-${file.originalname}`,
                 folder: `/testimonials/${field}`, // 👈 Folder separated per field
                 useUniqueFileName: true,
+                // Ensure uploaded files are public (not private/signed)
+                isPrivateFile: false,
               });
+              // helpful debug when troubleshooting access issues
+              console.log(`ImageKit uploaded ${field}:`, uploaded.url);
               return { url: uploaded.url, fileId: uploaded.fileId };
             })
           );
