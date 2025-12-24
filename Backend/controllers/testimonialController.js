@@ -38,8 +38,8 @@ const validateTestimonial = (data, isUpdate = false) => {
   }
 
   // Optional: Enforce rule for video testimonials
-  if (normalized.type === "video" && !normalized.videoUpload && !normalized.youtubeLink) {
-    errors.push("Video testimonials must include a video upload or YouTube link");
+  if (normalized.type === "video" && !normalized.videoUpload ) {
+    errors.push("Video testimonials must include a video upload ");
   }
 
   return { normalized, errors };
