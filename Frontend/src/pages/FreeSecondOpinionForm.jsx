@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EnquiryForm from "./EnquiryForm";
+import { freeSecondOpinionFaqs } from "../components/common/FAQs";
 
 const initialState = {
   fullName: "",
@@ -14,6 +15,7 @@ const FreeSecondOpinionForm = () => {
   const [formState, setFormState] = useState(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [openFAQ, setOpenFAQ] = useState(null);
 
   const validate = () => {
     const newErrors = {};
@@ -58,6 +60,14 @@ const FreeSecondOpinionForm = () => {
     );
   };
 
+  const toggleFAQ = (id) => {
+    if (openFAQ === id) {
+      setOpenFAQ(null);
+    } else {
+      setOpenFAQ(id);
+    }
+  };
+
   return (
     <div className="container p-5 opinion-form">
       <div className="row">
@@ -92,41 +102,41 @@ const FreeSecondOpinionForm = () => {
           <p>Medical conditions can be complex, and treatment approaches may vary between doctors and hospitals. Seeking a second opinion ensures:</p>
           <ul className="list-item-disc">
             <li>Confirmation of diagnosis</li>
-              <li>Validation of recommended surgery or procedure</li>
+            <li>Validation of recommended surgery or procedure</li>
 
-              <li>Awareness of non-surgical or minimally invasive alternatives</li>
+            <li>Awareness of non-surgical or minimally invasive alternatives</li>
 
-              <li>Better understanding of risks, recovery, and outcomes</li>
+            <li>Better understanding of risks, recovery, and outcomes</li>
 
-              <li>Confidence before proceeding with treatment</li>
+            <li>Confidence before proceeding with treatment</li>
           </ul>
 
           <p>At Agastya Hospitals, we provide <b>ethical, unbiased, and evidence-based second opinions</b> to help patients and families choose what is truly best for their health.</p>
 
-          
 
-        <h2 className="h2-title mt-5">When Should You Consider a Second Opinion?</h2>
-        <h3 className="h3-title">Common Situations Where a Second Opinion is Recommended</h3>
+
+          <h2 className="h2-title mt-5">When Should You Consider a Second Opinion?</h2>
+          <h3 className="h3-title">Common Situations Where a Second Opinion is Recommended</h3>
           <p>You should consider a second medical opinion if:</p>
 
           <ul className="list-item-disc">
-  <li>You have been advised major or high-risk surgery</li>
-<li>Your condition is chronic, rare, or worsening</li>
-<li>Multiple treatment options exist and you are unsure which to choose</li>
-<li>You are not comfortable with the diagnosis or explanation given</li>
-<li>Treatment costs or duration seem unclear</li>
-<li>You want reassurance before starting long-term treatment</li>
+            <li>You have been advised major or high-risk surgery</li>
+            <li>Your condition is chronic, rare, or worsening</li>
+            <li>Multiple treatment options exist and you are unsure which to choose</li>
+            <li>You are not comfortable with the diagnosis or explanation given</li>
+            <li>Treatment costs or duration seem unclear</li>
+            <li>You want reassurance before starting long-term treatment</li>
           </ul>
 
-<p className="f-w-600">A second opinion is not a sign of mistrust — it is a responsible and proactive healthcare decision.</p>
+          <p className="f-w-600">A second opinion is not a sign of mistrust — it is a responsible and proactive healthcare decision.</p>
 
 
 
 
 
- <h2 className="h2-title mt-5">Second Opinion Services at Agastya Hospitals</h2>
- <p>Agastya Hospitals offers expert second opinions across major medical and surgical specialties, supported by advanced diagnostics and multidisciplinary consultation.</p>
-        <h3 className="h3-title">Specialties Covered for Second Opinions</h3>         
+          <h2 className="h2-title mt-5">Second Opinion Services at Agastya Hospitals</h2>
+          <p>Agastya Hospitals offers expert second opinions across major medical and surgical specialties, supported by advanced diagnostics and multidisciplinary consultation.</p>
+          <h3 className="h3-title">Specialties Covered for Second Opinions</h3>
 
           <ul className="list-item-disc">
             <li>Orthopaedics & Joint Replacement</li>
@@ -141,73 +151,73 @@ const FreeSecondOpinionForm = () => {
             <li>Internal Medicine</li>
           </ul>
 
-<p className="f-w-600">Each case is reviewed by experienced senior consultants who focus on accuracy, safety, and long-term patient outcomes.</p>
+          <p className="f-w-600">Each case is reviewed by experienced senior consultants who focus on accuracy, safety, and long-term patient outcomes.</p>
 
 
 
 
 
 
- <h2 className="h2-title mt-5">How Our Second Opinion Process Works</h2>
- 
-        <h3 className="h3-title">Step-by-Step Approach:</h3>         
-          <p class="mb-3"><b>1.Share Medical Records</b><br/>
-          Submit your reports, scans, prescriptions, and diagnostic results.</p> 
+          <h2 className="h2-title mt-5">How Our Second Opinion Process Works</h2>
+
+          <h3 className="h3-title">Step-by-Step Approach:</h3>
+          <p class="mb-3"><b>1.Share Medical Records</b><br />
+            Submit your reports, scans, prescriptions, and diagnostic results.</p>
           <p class="mb-3"><b>2.Expert Clinical Review</b>
- Our specialists thoroughly evaluate your medical history and findings.</p>
+            Our specialists thoroughly evaluate your medical history and findings.</p>
 
-<p class="mb-3"><b>3.Discussion & Clarification</b>
- We explain the diagnosis, treatment options, and alternatives in clear, simple language.</p>
+          <p class="mb-3"><b>3.Discussion & Clarification</b>
+            We explain the diagnosis, treatment options, and alternatives in clear, simple language.</p>
 
-<p class="mb-3"><b>4.Personalized Medical Advice</b>
- You receive a transparent and unbiased second opinion tailored to your condition.</p>
+          <p class="mb-3"><b>4.Personalized Medical Advice</b>
+            You receive a transparent and unbiased second opinion tailored to your condition.</p>
 
-<p class="mb-3"><b>Next-Step Guidance</b>
- We help you decide whether to proceed with treatment, seek further evaluation, or explore conservative care.</p>
-
- 
+          <p class="mb-3"><b>Next-Step Guidance</b>
+            We help you decide whether to proceed with treatment, seek further evaluation, or explore conservative care.</p>
 
 
-<h2 className="h2-title mt-5">Why Choose Agastya Hospitals for a Second Opinion in Hyderabad?</h2>
-<p>Agastya Hospitals is recognized for ethical clinical practices and patient-first care, especially for patients seeking clarity before major medical decisions.</p>
-
-	<h3 className="h3-title">Our Key Strengths</h3>
-<ul class="list-item-disc">
-<li>Senior doctors with extensive clinical experience</li>
-<li>Honest, unbiased medical opinions</li>
-<li>No pressure for immediate treatment or surgery</li>
-<li>Affordable consultation costs</li>
-<li>Quick turnaround time</li>
-<li>Easy access from LB Nagar and East Hyderabad</li>
-</ul>
-
-<p>Unlike large hospital chains, we prioritize individual attention, transparency, and trust.</p>
 
 
-<h2 className="h2-title mt-5">Online & In-Person Second Opinions Available</h2>
-<h3 class="h3-title">Online Second Opinion</h3>
-<p>Patients can share reports digitally and consult our specialists remotely — ideal for patients outside Hyderabad or seeking quick guidance.</p>
-<h3 class="h3-title">In-Hospital Second Opinion</h3>
-<p>Visit Agastya Hospitals in LB Nagar for face-to-face consultation, physical examination, and advanced diagnostic review if required.</p>
+          <h2 className="h2-title mt-5">Why Choose Agastya Hospitals for a Second Opinion in Hyderabad?</h2>
+          <p>Agastya Hospitals is recognized for ethical clinical practices and patient-first care, especially for patients seeking clarity before major medical decisions.</p>
+
+          <h3 className="h3-title">Our Key Strengths</h3>
+          <ul class="list-item-disc">
+            <li>Senior doctors with extensive clinical experience</li>
+            <li>Honest, unbiased medical opinions</li>
+            <li>No pressure for immediate treatment or surgery</li>
+            <li>Affordable consultation costs</li>
+            <li>Quick turnaround time</li>
+            <li>Easy access from LB Nagar and East Hyderabad</li>
+          </ul>
+
+          <p>Unlike large hospital chains, we prioritize individual attention, transparency, and trust.</p>
 
 
-<h2 className="h2-title mt-5">Who Can Benefit from a Second Opinion?</h2>
-
-<ul class="list-item-disc">
-	<li>Patients advised surgery</li>
-<li>Elderly patients with multiple health conditions</li>
-<li>Patients with recurring symptoms</li>
-<li>Individuals seeking cost-effective treatment alternatives</li>
-<li>International patients seeking treatment in India</li>
-</ul>
-<p>A second opinion often leads to better outcomes, reduced anxiety, and informed consent.</p>
+          <h2 className="h2-title mt-5">Online & In-Person Second Opinions Available</h2>
+          <h3 class="h3-title">Online Second Opinion</h3>
+          <p>Patients can share reports digitally and consult our specialists remotely — ideal for patients outside Hyderabad or seeking quick guidance.</p>
+          <h3 class="h3-title">In-Hospital Second Opinion</h3>
+          <p>Visit Agastya Hospitals in LB Nagar for face-to-face consultation, physical examination, and advanced diagnostic review if required.</p>
 
 
-<h2 className="h2-title mt-5">Commitment to Ethical & Patient-Centric Care</h2>
-<p>At Agastya Hospitals, our second opinion service is guided by medical ethics, transparency, and compassion. We respect the opinions of other doctors while ensuring patients receive clear, medically sound advice without commercial bias.</p>
+          <h2 className="h2-title mt-5">Who Can Benefit from a Second Opinion?</h2>
+
+          <ul class="list-item-disc">
+            <li>Patients advised surgery</li>
+            <li>Elderly patients with multiple health conditions</li>
+            <li>Patients with recurring symptoms</li>
+            <li>Individuals seeking cost-effective treatment alternatives</li>
+            <li>International patients seeking treatment in India</li>
+          </ul>
+          <p>A second opinion often leads to better outcomes, reduced anxiety, and informed consent.</p>
 
 
- 
+          <h2 className="h2-title mt-5">Commitment to Ethical & Patient-Centric Care</h2>
+          <p>At Agastya Hospitals, our second opinion service is guided by medical ethics, transparency, and compassion. We respect the opinions of other doctors while ensuring patients receive clear, medically sound advice without commercial bias.</p>
+
+
+
 
 
 
@@ -222,47 +232,47 @@ const FreeSecondOpinionForm = () => {
       </div>
 
 
-       {/* <div className="row intl-faqs-section mt-5"> 
-        
-          <section className="py-16">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="main-title-center mb-12">FAQs – Get a Second Opinion at Agastya Hospitals</h2>
-              </div>
-            </div>
-            <div className="container mx-auto px-4">
+      <div className="row intl-faqs-section mt-5">
 
-              <div className="max-w-4xl mx-auto">
-                {faqs.map((faq) => (
-                  <div
-                    key={faq.id}
-                    className="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden"
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="main-title-center mb-12">FAQs – Get a Second Opinion at Agastya Hospitals</h2>
+            </div>
+          </div>
+          <div className="container mx-auto px-4">
+
+            <div className="max-w-4xl mx-auto">
+              {freeSecondOpinionFaqs.map((faq) => (
+                <div
+                  key={faq.id}
+                  className="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden"
+                >
+                  <button
+                    className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
+                    onClick={() => toggleFAQ(faq.id)}
                   >
-                    <button
-                      className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
-                      onClick={() => toggleFAQ(faq.id)}
-                    >
-                      <span className="font-semibold text-gray-900">{faq.question}</span>
-                      <span className={`text-2xl transition-transform duration-200 ${openFAQ === faq.id ? 'rotate-45' : ''
-                        }`}>
-                        +
-                      </span>
-                    </button>
+                    <span className="font-semibold text-gray-900">{faq.question}</span>
+                    <span className={`text-2xl transition-transform duration-200 ${openFAQ === faq.id ? 'rotate-45' : ''
+                      }`}>
+                      +
+                    </span>
+                  </button>
 
-                    {openFAQ === faq.id && (
-                      <div className="px-6 pb-4">
-                        <p className="text-gray-600 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
+                  {openFAQ === faq.id && (
+                    <div className="px-6 pb-4">
+                      <p className="text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-          </section>
-        </div> */}
+
+          </div>
+        </section>
+      </div>
 
 
 
