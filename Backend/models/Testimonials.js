@@ -8,7 +8,7 @@ const testimonialSchema = new mongoose.Schema({
   type: { type: String, enum: ['text', 'video'], required: true },
   description: { type: String },
   videoUpload: { type: String, default: null   },
-  youtubeLink: { type: String, default: null   },
+  videoLink: { type: String, default: null   },
   createdBy: { type: String, default: 'admin' },
 }, {
   timestamps: true,

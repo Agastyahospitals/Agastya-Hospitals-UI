@@ -30,16 +30,11 @@ const validateTestimonial = (data, isUpdate = false) => {
   normalized.name = normalizeString(data.name);
   normalized.place = normalizeString(data.place);
   normalized.description = normalizeString(data.description);
-  normalized.youtubeLink = normalizeString(data.youtubeLink);
+  normalized.videoLink = normalizeString(data.videoLink);
   normalized.createdBy = normalizeString(data.createdBy) || "admin";
 
   if (normalized.type && !["text", "video"].includes(normalized.type)) {
     errors.push("type must be 'text' or 'video'");
-  }
-
-  // Optional: Enforce rule for video testimonials
-  if (normalized.type === "video" && !normalized.videoUpload ) {
-    errors.push("Video testimonials must include a video upload ");
   }
 
   return { normalized, errors };
@@ -223,4 +218,3 @@ exports.deleteTestimonials = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
-
