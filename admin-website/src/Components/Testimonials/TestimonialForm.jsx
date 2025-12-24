@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Breadcrumbs } from "../../AbstractElements";
 import {
   Card,
@@ -18,10 +18,14 @@ import Switch from "react-switch";
 const initialFormState = {
   name: "",
   place: "",
-  userPhoto: "",
+  // actual File objects (or null) for uploads
+  userPhoto: null,
+  userPhotoPreview: "",
   type: "",
   description: "",
-  videoUpload: "",
+  videoUpload: null,
+  videoUploadPreview: "",
+  youtubeLink: "",
 };
 
 const initialFormErrors = {
@@ -31,6 +35,7 @@ const initialFormErrors = {
   type: "",
   description: "",
   videoUpload: "",
+  youtubeLink: "",
 };
 const TestimonialForm = ({
   isEditMode,
@@ -42,16 +47,20 @@ const TestimonialForm = ({
   const [formState, setFormState] = useState(initialFormState);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
 
-  useState(() => {
+  useEffect(() => {
     if (isEditMode && testimonialToEdit) {
-      setFormState({
+      setFormState((prev) => ({
+        ...prev,
         name: testimonialToEdit.name || "",
         place: testimonialToEdit.place || "",
-        userPhoto: testimonialToEdit.userPhoto || "",
+        // keep actual File null, but keep preview as existing URL
+        userPhoto: null,
+        userPhotoPreview: testimonialToEdit.userPhoto || "",
         type: testimonialToEdit.type || "",
         description: testimonialToEdit.description || "",
-        videoUpload: testimonialToEdit.videoUpload || "",
-      });
+        videoUpload: null,
+        videoUploadPreview: testimonialToEdit.videoUpload || "",
+      }));
     }
   }, [isEditMode, testimonialToEdit]);
 
@@ -60,10 +69,16 @@ const TestimonialForm = ({
     let fieldValue = value;
 
     if (type === "file") {
-      if (name === "userPhoto" && files && files[0]) {
-        fieldValue = URL.createObjectURL(files[0]);
-      } else if (name === "videoUpload" && files && files[0]) {
-        fieldValue = URL.createObjectURL(files[0]);
+      if (files && files[0]) {
+        const file = files[0];
+        const preview = URL.createObjectURL(file);
+        // store actual File object in state and preview separately
+        setFormState({
+          ...formState,
+          [name]: file,
+          [`${name}Preview`]: preview,
+        });
+        return;
       }
     }
 
@@ -82,7 +97,8 @@ const TestimonialForm = ({
       return value.trim() === "" ? "This field is required" : "";
     }
     if (name === "userPhoto") {
-      return value === "" ? "User photo is required" : "";
+      const hasPhoto = formState.userPhoto instanceof File || formState.userPhotoPreview;
+      return !hasPhoto ? "User photo is required" : "";
     }
     if (name === "type") {
       return value === "" ? "Please select type" : "";
@@ -91,7 +107,8 @@ const TestimonialForm = ({
       return value.trim() === "" ? "Description is required" : "";
     }
     if (name === "videoUpload" && formState.type === "video") {
-      return value === "" ? "Video file is required" : "";
+      const hasVideo = formState.videoUpload instanceof File || formState.videoUploadPreview;
+      return !hasVideo ? "Video file is required" : "";
     }
     return "";
   };
@@ -114,17 +131,23 @@ const TestimonialForm = ({
     formData.append("description", formState.description);
     formData.append("type", formState.type);
 
-    formData.append("userPhoto", formState.userPhoto);
+    // Only append files if the user selected new File objects.
+    if (formState.userPhoto instanceof File) {
+      formData.append("userPhoto", formState.userPhoto);
+    }
 
-    formData.append("videoUpload", formState.videoUpload);
+    if (formState.videoUpload instanceof File) {
+      formData.append("videoUpload", formState.videoUpload);
+    }
 
     formData.append("createdBy", "user");
-    formData.append("youtubeLink", formState.youtubeLink || "");
+    // Always send empty youtubeLink as requested
+    formData.append("youtubeLink", "");
 
     try {
       let response;
       if (isEditMode) {
-        // Replace testimonialID with the actual ID you want to update
+        // Let axios/browser set the correct multipart boundary header
         response = await axios.put(
           `https://agastya-hospitals-backend.onrender.com/api/testimonials?testimonialID=${testimonialID}`,
           formData,
@@ -135,6 +158,7 @@ const TestimonialForm = ({
           }
         );
       } else {
+        // Let axios/browser set the correct multipart boundary header
         response = await axios.post(
           "https://agastya-hospitals-backend.onrender.com/api/testimonials",
           formData,
@@ -226,14 +250,14 @@ const TestimonialForm = ({
                       {/* <ValidationAlert error={formErrors.userPhoto} /> */}
                     </Col>
                     <Col md="6" className="mb-3">
-                      {formState.userPhoto ? (
+                      {formState.userPhotoPreview ? (
                         <>
                           <Label className="form-label" for="userphotoPreview">
                             Preview
                           </Label>
                           <div>
                             <img
-                              src={formState.userPhoto}
+                              src={formState.userPhotoPreview}
                               style={{ objectFit: "contain", height: "8rem" }}
                             />
                           </div>
@@ -320,14 +344,19 @@ const TestimonialForm = ({
                           accept="video/*"
                           onChange={handleChange}
                         />
-                        {formState.videoUpload && (
+                        {formState.videoUploadPreview && (
                           <video
                             width="320"
                             height="240"
                             controls
+                            preload="metadata"
+                            crossOrigin="anonymous"
                             style={{ marginTop: "1rem" }}
-                            src={formState.videoUpload}
-                          />
+                            onError={(e) => console.error("Preview video error:", e)}
+                          >
+                            <source src={formState.videoUploadPreview} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
                         )}
                         <ValidationAlert error={formErrors.videoUpload} />
                       </Col>
