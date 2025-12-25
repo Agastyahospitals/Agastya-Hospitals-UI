@@ -124,7 +124,7 @@ const DoctorsSection = () => {
           {doctorList.length > 0 ? (
             <>
               <button
-                className="absolute border-1  start-0 top-50 translate-middle-y bg-white p-5 rounded-circle shadow-sm z-10 d-flex align-items-center justify-content-center"
+                className="absolute border-1  start-0 top-50 translate-middle-y bg-white p-4 rounded-circle shadow-sm z-10 d-flex align-items-center justify-content-center"
                 style={{ width: "40px", height: "40px", left: "-50px" }}
                 onClick={handlePrev}
               >
@@ -185,7 +185,7 @@ const DoctorsSection = () => {
               </Carousel>
 
               <button
-                className="absolute border-1 end-0 top-50 translate-middle-y bg-white p-5 rounded-circle shadow-sm z-10 d-flex align-items-center justify-content-center"
+                className="absolute border-1 end-0 top-50 translate-middle-y bg-white p-4 rounded-circle shadow-sm z-10 d-flex align-items-center justify-content-center"
                 style={{ width: "40px", height: "40px", right: "-50px" }}
                 onClick={handleNext}
               >
