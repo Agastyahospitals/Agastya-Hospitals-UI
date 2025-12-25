@@ -108,9 +108,9 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
   };
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormState((prev) => ({ ...prev, [id]: value }));
-    setErrors((prev) => ({ ...prev, [id]: validateField(id, value) }));
+    const { id, name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   const createBlog = async (blogData) => {
