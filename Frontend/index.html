@@ -1,50 +1,55 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agastya Hospitals - Transforming Lives, Restoring Health</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-    const topHeader = document.querySelector(".top-main-navigation");
-    const mainHeader = document.querySelector(".main-navigation");
 
-    let lastScroll = 0;
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agastya Hospitals - Transforming Lives, Restoring Health</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
+    integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+</head>
 
-    function handleScroll() {
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const topHeader = document.querySelector(".top-main-navigation");
+      const mainHeader = document.querySelector(".main-navigation");
+
+      let lastScroll = 0;
+
+      function handleScroll() {
         if (window.innerWidth <= 991) {
-            // Remove sticky behavior on mobile
-            topHeader.classList.remove("hide");
-            mainHeader.classList.remove("sticky");
-            return;
+          // Remove sticky behavior on mobile
+          topHeader.classList.remove("hide");
+          mainHeader.classList.remove("sticky");
+          return;
         }
 
         let currentScroll = window.scrollY;
 
         if (currentScroll > 80) {
-            // Scrolling down - hide top header and stick part 2
-            topHeader.classList.add("hide");
-            mainHeader.classList.add("sticky");
-        } 
+          // Scrolling down - hide top header and stick part 2
+          topHeader.classList.add("hide");
+          mainHeader.classList.add("sticky");
+        }
         else {
-            // Back to top - show everything normally
-            topHeader.classList.remove("hide");
-            mainHeader.classList.remove("sticky");
+          // Back to top - show everything normally
+          topHeader.classList.remove("hide");
+          mainHeader.classList.remove("sticky");
         }
 
         lastScroll = currentScroll;
-    }
+      }
 
-    window.addEventListener("scroll", handleScroll);
-});
-    </script>
-  </body>
-</html> 
+      window.addEventListener("scroll", handleScroll);
+    });
+  </script>
+</body>
+
+</html>

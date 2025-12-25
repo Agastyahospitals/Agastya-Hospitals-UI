@@ -255,8 +255,8 @@ const Header = () => {
                   <li
                     key={path}
                     className={`nav-item position-relative ${label === "About Us" || label === "Specialties"
-                        ? "dropdown"
-                        : ""
+                      ? "dropdown"
+                      : ""
                       }`}
                   >
                     <Link
