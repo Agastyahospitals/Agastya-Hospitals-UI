@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Breadcrumbs, Btn } from "../../AbstractElements";
+import { useNavigate } from "react-router-dom";
 import { Card, Container, Form, Row } from "reactstrap";
 import UserRolesForm from "./UserRolesForm";
 import TableComponent from "../Common/Component/TableComponent";
@@ -15,6 +16,7 @@ const RolesPermissions = () => {
   const [editingUserRole, setEditingUserRole] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchUserRoles = async () => {
     try {
@@ -55,7 +57,19 @@ const RolesPermissions = () => {
     <Fragment>
       {!showUserRoleForm ? (
         <>
-          <Breadcrumbs mainTitle="User Roles and Permissions" />
+          <div className="d-flex align-items-center justify-content-between">
+            <Breadcrumbs mainTitle="User Roles and Permissions" />
+            <div>
+              <Btn
+                attrBtn={{
+                  color: "primary",
+                  onClick: () => navigate(`/register-new-user?addRole=true`),
+                }}
+              >
+                Add Role
+              </Btn>
+            </div>
+          </div>
 
           <Container fluid={true}>
             <UserRolesForm />
