@@ -88,19 +88,26 @@ const RolesPermissions = () => {
                           </td>
                         </tr>
                       ) : (
-                        userRoles?.map((role, index) => (
-                          <tr key={index}>
-                            <td>{role.userName || role.fullName || "N/A"}</td>
-                            <td>{role.roleName || role.loginType || "N/A"}</td>
-                            <td>
-                              <FaPencilAlt
-                                color="#7366ff"
-                                onClick={() => handleEdit(role)}
-                                className="cursor-pointer"
-                              />
-                            </td>
-                          </tr>
-                        ))
+                        // Exclude default user role (roleID 4 / roleName 'User') from the table
+                        userRoles
+                          ?.filter(
+                            (role) =>
+                              Number(role?.roleID) !== 4 &&
+                              String(role?.roleName).toLowerCase() !== "user"
+                          )
+                          .map((role, index) => (
+                            <tr key={index}>
+                              <td>{role.userName || role.fullName || "N/A"}</td>
+                              <td>{role.roleName || role.loginType || "N/A"}</td>
+                              <td>
+                                <FaPencilAlt
+                                  color="#7366ff"
+                                  onClick={() => handleEdit(role)}
+                                  className="cursor-pointer"
+                                />
+                              </td>
+                            </tr>
+                          ))
                       )}
                     </tbody>
                   }
