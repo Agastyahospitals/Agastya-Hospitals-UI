@@ -58,12 +58,12 @@ const AwardsAndRecongnition = () => {
                   alt="…"
                 />
               </a>
-              <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-7.png">
+              {/* <a href="https://res.cloudinary.com/sdk28cdn/image/upload/v1761464677/agastya/Agastya-Awards-7.png">
                 <img
                   src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763310993/agastya/awards-thumb-7.png"
                   alt="…"
                 />
-              </a>
+              </a> */}
 
               {/* more items */}
             </LightGallery>

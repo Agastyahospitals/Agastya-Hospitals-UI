@@ -82,6 +82,38 @@ return (
 					<div className="leadership-grid-row">
 						<div>
 							<div className="leadership-card">
+								 <img
+								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766534599/agastya/Dr-AnilKumar-CEO.png"
+								alt=""
+								title=""
+								/>
+								
+							</div>
+						</div>
+						<div>
+							<div className="leadership-info">
+								<h3>Dr Anil Madati</h3>
+								<p className="title">Hospital Administration & Operations Leadership  </p>
+								
+								<div className="description">
+									<p>Anil Kumar oversees hospital administration and operational strategy at Agastya Hospitals.
+										With strong experience in healthcare operations, he ensures that clinical teams are supported
+									by efficient systems, modern infrastructure, and patient-friendly processes.  </p>
+									<p>His responsibilities include:</p>
+									<ul>
+										<li>Hospital operations and governance</li>
+										<li>Patient experience optimization </li>
+										<li>Compliance, quality systems, and service delivery </li>
+									</ul>
+									<p>His leadership ensures that Agastya Hospitals operates with efficiency, transparency, and
+									patient comfort at its core.  </p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="leadership-grid-row">
+						<div>
+							<div className="leadership-card">
 								<img
 								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763285933/agastya/dr-g-sudhaker-reddy.png"
 								alt=""
@@ -112,38 +144,7 @@ return (
 							</div>
 						</div>
 					</div>
-					<div className="leadership-grid-row">
-						<div>
-							<div className="leadership-card">
-								 <img
-								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1766534599/agastya/Dr-AnilKumar-CEO.png"
-								alt=""
-								title=""
-								/>
-								
-							</div>
-						</div>
-						<div>
-							<div className="leadership-info">
-								<h3>Dr Anil Kumar</h3>
-								<p className="title">Hospital Administration & Operations Leadership  </p>
-								
-								<div className="description">
-									<p>Anil Kumar oversees hospital administration and operational strategy at Agastya Hospitals.
-										With strong experience in healthcare operations, he ensures that clinical teams are supported
-									by efficient systems, modern infrastructure, and patient-friendly processes.  </p>
-									<p>His responsibilities include:</p>
-									<ul>
-										<li>Hospital operations and governance</li>
-										<li>Patient experience optimization </li>
-										<li>Compliance, quality systems, and service delivery </li>
-									</ul>
-									<p>His leadership ensures that Agastya Hospitals operates with efficiency, transparency, and
-									patient comfort at its core.  </p>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 

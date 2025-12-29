@@ -5,15 +5,15 @@ const TechnologySection = () => {
   const technologies = [
     {
       id: 1,
-      name: "Siemens SOMATOM go.Now CT Scan",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394529/agastya/tech-siemens-somatom.webp",
+      name: "Smith & Nephew – CORI Robotic System",
+      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1767029394/cori_hh6fcg.png",
       description: "Advanced imaging system"
     },
     {
       id: 2,
-      name: "Olympus Endoscope",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394590/agastya/tech-olympus.webp",
-      description: "Precision surgical microscope"
+       name: "Arthrex Synergy Vision Imaging ",
+      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-arhrex.webp",
+      description: "Advanced diagnostic imaging"     
     },
     {
       id: 3,
@@ -23,15 +23,15 @@ const TechnologySection = () => {
     },
     {
       id: 4,
-      name: "J & J VELYS Robotic-Assidted Solutions",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-jandj.webp",
-      description: "Healthcare information system"
+      name: "Siemens SOMATOM go.Now CT Scan",
+      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394529/agastya/tech-siemens-somatom.webp",
+      description: "Advanced imaging system"     
     },
     {
       id: 5,
-      name: "Arthrex Synergy Vision Imaging ",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-arhrex.webp",
-      description: "Advanced diagnostic imaging"
+      name: "Olympus Endoscope",
+      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394590/agastya/tech-olympus.webp",
+      description: "Precision surgical microscope"
     },
     {
       id: 6,
@@ -40,6 +40,10 @@ const TechnologySection = () => {
       description: "Surgical navigation technology"
     }
   ]
+
+  //  name: "J & J VELYS Robotic-Assidted Solutions",
+  //  icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-jandj.webp",
+  //  description: "Healthcare information system"
 
   return (
     <section className="py-16 bg-white">

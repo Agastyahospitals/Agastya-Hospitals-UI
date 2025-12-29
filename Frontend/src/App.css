@@ -3271,6 +3271,11 @@ footer {
   padding: 6px 0;
 }
 
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px !important;
+  }
+}
 @media (min-width: 1025px) {
   .side_menu_responsive_mobile {
     display: none;
