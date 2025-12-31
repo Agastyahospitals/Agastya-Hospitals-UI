@@ -10,7 +10,8 @@ const healthPackageSchema = new mongoose.Schema({
   totalLabTests: { type: Number },
   coveredTests: [{ type: String }],
   ageGroup: { type: String },
-  idealFor: { type: String, enum: ['Male', 'Female', 'Children'] },
+  // Allow multiple selections for 'idealFor' (e.g., ['Male','Female'])
+  idealFor: [{ type: String, enum: ['Male', 'Female', 'Children'] }],
   description: { type: String },
   guidelines: { type: String },
   createdBy: { type: String, default: 'admin' },

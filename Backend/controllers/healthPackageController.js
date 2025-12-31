@@ -115,6 +115,28 @@ exports.addHealthPackage = async (req, res) => {
       if (payload.coveredTests !== undefined) {
         payload.coveredTests = normalizeCoveredTests(payload.coveredTests);
       }
+      // Normalize idealFor: accept array, JSON array string, or comma-separated string
+      if (payload.idealFor !== undefined) {
+        if (Array.isArray(payload.idealFor)) {
+          payload.idealFor = Array.from(new Set(payload.idealFor.map(s => String(s).trim()).filter(Boolean)));
+        } else if (typeof payload.idealFor === 'string') {
+          const str = payload.idealFor.trim();
+          if (str.startsWith('[') && str.endsWith(']')) {
+            try {
+              const parsed = JSON.parse(str);
+              if (Array.isArray(parsed)) {
+                payload.idealFor = Array.from(new Set(parsed.map(s => String(s).trim()).filter(Boolean)));
+              } else {
+                payload.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+              }
+            } catch (_) {
+              payload.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+            }
+          } else {
+            payload.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+          }
+        }
+      }
       if (!payload.packageID) payload.packageID = await getNextPackageID();
       if (!payload.discountPrice) calculateDiscountPrice(payload);
 
@@ -128,6 +150,27 @@ exports.addHealthPackage = async (req, res) => {
     for (const pack of payload) {
       if (pack.coveredTests !== undefined) {
         pack.coveredTests = normalizeCoveredTests(pack.coveredTests);
+      }
+      if (pack.idealFor !== undefined) {
+        if (Array.isArray(pack.idealFor)) {
+          pack.idealFor = Array.from(new Set(pack.idealFor.map(s => String(s).trim()).filter(Boolean)));
+        } else if (typeof pack.idealFor === 'string') {
+          const str = pack.idealFor.trim();
+          if (str.startsWith('[') && str.endsWith(']')) {
+            try {
+              const parsed = JSON.parse(str);
+              if (Array.isArray(parsed)) {
+                pack.idealFor = Array.from(new Set(parsed.map(s => String(s).trim()).filter(Boolean)));
+              } else {
+                pack.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+              }
+            } catch (_) {
+              pack.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+            }
+          } else {
+            pack.idealFor = Array.from(new Set(str.split(',').map(s => s.trim()).filter(Boolean)));
+          }
+        }
       }
       if (!pack.packageID) pack.packageID = await getNextPackageID();
       if (!pack.discountPrice) calculateDiscountPrice(pack);
@@ -176,6 +219,30 @@ exports.updateHealthPackage = async (req, res) => {
         }
       } else {
         updateData.coveredTests = normalizeArray(str.split(','));
+      }
+    }
+  }
+
+  // Normalize idealFor if provided: accept array, JSON array string, or comma-separated string
+  if (updateData.idealFor !== undefined) {
+    const normalizeArray = (arr) => Array.from(new Set(arr.map(s => String(s).trim()).filter(Boolean)));
+    if (Array.isArray(updateData.idealFor)) {
+      updateData.idealFor = normalizeArray(updateData.idealFor);
+    } else if (typeof updateData.idealFor === 'string') {
+      const str = updateData.idealFor.trim();
+      if (str.startsWith('[') && str.endsWith(']')) {
+        try {
+          const parsed = JSON.parse(str);
+          if (Array.isArray(parsed)) {
+            updateData.idealFor = normalizeArray(parsed);
+          } else {
+            updateData.idealFor = normalizeArray(str.split(','));
+          }
+        } catch (_) {
+          updateData.idealFor = normalizeArray(str.split(','));
+        }
+      } else {
+        updateData.idealFor = normalizeArray(str.split(','));
       }
     }
   }

@@ -137,8 +137,35 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
         image: editData.photo || "",
         testsQuantity: editData.totalLabTests?.toString() || "",
         listOfCoveredTests: editData.coveredTests ? editData.coveredTests.join(", ") : "",
-        idealFor: editData.idealFor ? [editData.idealFor] : [],
-        idealForIds: editData.idealFor === "Male" ? [1] : editData.idealFor === "Female" ? [2] : editData.idealFor === "Children" ? [3] : [],
+        idealFor: (() => {
+          if (!editData.idealFor) return [];
+          if (Array.isArray(editData.idealFor)) return editData.idealFor;
+          if (typeof editData.idealFor === 'string') {
+            try {
+              const trimmed = editData.idealFor.trim();
+              if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+                const parsed = JSON.parse(trimmed);
+                if (Array.isArray(parsed)) return parsed.map(s => String(s).trim()).filter(Boolean);
+              }
+              // comma separated
+              return trimmed.split(',').map(s => s.trim()).filter(Boolean);
+            } catch (_) {
+              return String(editData.idealFor).split(',').map(s => s.trim()).filter(Boolean);
+            }
+          }
+          return [];
+        })(),
+        idealForIds: (() => {
+          const ideals = Array.isArray(editData.idealFor)
+            ? editData.idealFor
+            : typeof editData.idealFor === 'string'
+            ? editData.idealFor.split(',').map(s => s.trim())
+            : [];
+          return ideals
+            .map(name => idealForList.find(i => i.name === name))
+            .filter(Boolean)
+            .map(i => i.id);
+        })(),
         ageGroup: editData.ageGroup || "",
         descriptionOfPackage: editData.description || "",
         guidelines: editData.guidelines || "",
@@ -200,10 +227,11 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, files } = e.target;
+    const fieldValue = type === "file" ? (files && files[0] ? files[0] : "") : value;
+    setFormState((prev) => ({ ...prev, [name]: fieldValue }));
     if (isSubmitted) {
-      const errorMsg = validateField(name, value);
+      const errorMsg = validateField(name, fieldValue);
       setFormErrors((prev) => ({ ...prev, [name]: errorMsg }));
     }
   };
@@ -264,7 +292,9 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
     setFormErrors(newErrors);
 
     const isValid = Object.values(newErrors).every((msg) => msg === "");
-    const isHTMLValid = Object.values(formState).every((value) => {
+    // Treat `image` as optional; skip it when checking for non-empty string fields
+    const isHTMLValid = Object.entries(formState).every(([key, value]) => {
+      if (key === "image") return true;
       if (typeof value === "string") {
         const stripped = value.replace(/<[^>]+>/g, "").trim();
         return stripped !== "";
@@ -283,7 +313,8 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
           totalLabTests: parseInt(formState.testsQuantity),
           coveredTests: formState.listOfCoveredTests.split(',').map(test => test.trim()),
           ageGroup: formState.ageGroup,
-          idealFor: formState.idealFor[0] || "",
+          // Send full array of selected 'idealFor' values (frontend now supports multiple selections)
+          idealFor: formState.idealFor,
           description: formState.descriptionOfPackage,
           guidelines: formState.guidelines,
           image: formState.image
