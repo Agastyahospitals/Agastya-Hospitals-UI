@@ -548,7 +548,8 @@ select.form-select {
 
 .herosection-bg {
   padding-top: 20px;
-  background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1756660474/agastya/hero-background.jpg") no-repeat center center;
+  /* background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1756660474/agastya/hero-background.jpg") no-repeat center center; */
+  background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1767182092/agastya/banner-agh.png") no-repeat center center;
 }
 
 .hero-container {
@@ -556,7 +557,7 @@ select.form-select {
 }
 
 .hero-content {
-  padding: 5rem 1rem;
+  padding: 14rem 1rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -564,12 +565,13 @@ select.form-select {
 
 .hero-title {
   font-size: 60px;
-  color: #000;
+  color: #fff;
   margin-bottom: 20px;
   line-height: normal;
   font-weight: 800;
   width: 100%;
   display: block;
+  text-shadow: 0px 0px 10px #000;
 }
 
 .hero-title .thin {
@@ -1108,7 +1110,7 @@ h1.main-title-center::after,
 .specialty-tabpill {
   border: 1px solid #022b50;
   padding: 12px 20px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 50px;
   color: #000;
   margin-bottom: 8px;
@@ -1118,6 +1120,11 @@ h1.main-title-center::after,
 .specialty-tabpill:hover {
   background-color: #022b50;
   color: white;
+}
+
+.doctor-profile-home img{
+      max-width: 240px;
+    margin: 0 auto;
 }
 
 .technology-card {
@@ -3297,4 +3304,5 @@ footer {
   transform: translate(50px, -50px);
   background: linear-gradient(-14deg, black, transparent);
   color: #fff;
+  display: none !important;
 }

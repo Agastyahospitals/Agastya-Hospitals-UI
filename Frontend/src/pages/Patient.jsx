@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import EnquiryForm from './EnquiryForm';
+import intlpatientimg from"../assets/images/international-patients-map.png";
 
 const Patient = () => {
   const [openFAQ, setOpenFAQ] = useState(0)
@@ -72,91 +73,13 @@ const Patient = () => {
         </div>
 
         <div className='row intl-appointmentform'>
-          <div className='col-lg-12 bgcolor'>
+          <div className='col-lg-12'>
             <div className='row'>
               <div className='col-lg-8'>
-
+              <img src={intlpatientimg} alt="International Patient" className='mt-12' />
               </div>
               <div className='col-lg-4'>
-                {/* <form className="booking-form-container bg-light border-none">
-                  <div className="booking-form-group">
-                    <h2 className="booking-form-title">International Patients Enquiry Form</h2>
-                    <label className="booking-form-label" htmlFor="fullName">
-                      Full Name
-                    </label>
-                    <input
-                      className="booking-form-input"
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      value=""
-                      placeholder="Enter full name"
-                    />
-                  </div>
-                  <div className="booking-form-group">
-                    <label className="booking-form-label" htmlFor="mobileNumber">
-                      Mobile Number
-                    </label>
-                    <input
-                      className="booking-form-input"
-                      type="text"
-                      id="mobileNumber"
-                      name="mobileNumber"
-                      value=""
-                      placeholder="Enter phone number"
-                    />
-                  </div>
-                  <div className="booking-form-group">
-                    <input
-                      id="isWhatsApp"
-                      type="checkbox" />
-                    <label className="f-12" htmlFor="isWhatsApp">
-                      This is my WhatsApp number
-                    </label>
-                  </div>
-                  <div className="booking-form-group">
-                    <label className="booking-form-label" htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      className="booking-form-input"
-                      type="email"
-                      id="email"
-                      name="email"
-                      value=""
-                      placeholder="Enter email address"
-                    />
-                  </div>
-                  <div className="booking-form-group">
-                    <label className="booking-form-label" htmlFor="message">
-                      Message
-                    </label>
-                    <textarea
-                      className="booking-form-textarea"
-                      id="message"
-                      name="message"
-                      rows="4"
-                      value=""
-                      placeholder="Enter your query"
-                    />
-
-                  </div>
-                  <div className="booking-form-group mb-3">
-                    <input
-                      id="agreePolicy"
-                      type="checkbox" />
-                    <label className="f-12" htmlFor="agreePolicy">
-                      I agree to the Terms & Conditions and Privacy Policy.
-                    </label>
-                  </div>
-                  <button
-                    type="submit"
-                    className="rounded-5 btn btn-secondary btn-primary submitbtn"
-
-                  >
-                    Submit Request
-                  </button>
-                </form> */}
+                 
                 <EnquiryForm
                   formType='International Patient Enquiry Form'
                   enquiryFormTitle='International Patient Enquiry Form'

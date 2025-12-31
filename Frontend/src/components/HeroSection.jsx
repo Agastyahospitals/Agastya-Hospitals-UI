@@ -68,7 +68,7 @@ const HeroSection = () => {
       </div>
     </section> */}
 
-      <section className="container-fluid">
+      <section className="container-fluid p-0">
         <div className="herosection-bg">
           <div className="container hero-container">
             <div className="row">
@@ -79,12 +79,12 @@ const HeroSection = () => {
                 </h1>
               </div>
               <div className="col-lg-6">
-                <img
+                {/* <img
                   src={
                     "https://res.cloudinary.com/sdk28cdn/image/upload/v1756659932/agastya/doctor-image.png"
                   }
                   alt="Transofrm Health Care"
-                />
+                /> */}
               </div>
             </div>
             <div className="herobanner-quicklinks">

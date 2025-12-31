@@ -123,7 +123,7 @@ const DoctorsSection = () => {
         </div>
 
         {/* Specialty Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 ">
+        <div className="flex flex-wrap justify-center gap-3 mb-12 ">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
@@ -163,7 +163,7 @@ const DoctorsSection = () => {
               >
                 {slides.map((slide, index) => (
                   <Carousel.Item key={index}>
-                    <div className="d-flex justify-content-center gap-4">
+                    <div className="d-flex justify-content-center gap-4 doctor-profile-home">
                       {slide.map((doctor) => (
                         <div
                           key={doctor.doctorID}
@@ -206,6 +206,7 @@ const DoctorsSection = () => {
                       ))}
                     </div>
                   </Carousel.Item>
+                   
                 ))}
               </Carousel>
 
