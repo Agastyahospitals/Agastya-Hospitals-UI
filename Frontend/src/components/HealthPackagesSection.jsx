@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
 import ModalComponent from "./common/ModalComponent";
+import { stripHtml } from "../components/common/HtmlParser";
 
 const HealthPackagesSection = () => {
   const [isBookOpen, setIsBookOpen] = useState(false);
@@ -148,7 +149,7 @@ const HealthPackagesSection = () => {
                           {getDiscountPercentage(pkg)}% Off
                         </span>
                         <h5 className="packagename">{pkg.packageName}</h5>
-                        <p className="tests-covered">Tests Covered: 24</p>
+                        <p className="tests-covered">Tests Covered:{pkg.totalLabTests}</p>
                         <ul
                           className="tests-list"
                           style={{
@@ -159,7 +160,7 @@ const HealthPackagesSection = () => {
                           }}
                         >
                           {pkg.coveredTests.map((test, idx) => (
-                            <li key={idx}>{test}</li>
+                            <li key={idx}>{stripHtml(test)}</li>
                           ))}
                         </ul>
                         <div className="price-container">

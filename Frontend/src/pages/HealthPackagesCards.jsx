@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHealthPackages } from "../slices/healthPackages";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { toasterConfig } from "../utils";
+import { stripHtml } from "../components/common/HtmlParser";
 
 const HealthPackagesCards = () => {
   const [isBookOpen, setIsBookOpen] = useState(false);
@@ -150,7 +151,7 @@ const HealthPackagesCards = () => {
                 {getDiscountPercentage(pkg)}% Off
               </span>
               <h5 className="packagename">{pkg.packageName}</h5>
-              <p className="tests-covered">Tests Covered: 24</p>
+              <p className="tests-covered">Tests Covered: {pkg.totalLabTests}</p>
               <ul
                 className="tests-list"
                 style={{
@@ -161,7 +162,7 @@ const HealthPackagesCards = () => {
                 }}
               >
                 {pkg.coveredTests.map((test, idx) => (
-                  <li key={idx}>{test}</li>
+                  <li key={idx}>{stripHtml(test)}</li>
                 ))}
               </ul>
               <div className="price-container">
