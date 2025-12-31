@@ -73,10 +73,10 @@ const HeroSection = () => {
           <div className="container hero-container">
             <div className="row">
               <div className="col-lg-6 hero-content">
-                <h1 className="hero-title">
+                {/* <h1 className="hero-title">
                   Transforming lives, <span className="thin">Restoring</span>{" "}
                   <span className="regular">your</span> health
-                </h1>
+                </h1> */}
               </div>
               <div className="col-lg-6">
                 {/* <img

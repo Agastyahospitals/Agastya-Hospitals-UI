@@ -1,42 +1,50 @@
 // import siemensIcon from "../assets/images/";
 
+// import hasicon from "https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png";
+import techcori from "../assets/images/tech-cori.png";
+import techarhrex from "../assets/images/tech-arhrex.webp";
+import techleica from "../assets/images/tech-leica.webp";
+import techolympus from "../assets/images/tech-olympus.webp";
+import techsiemens from "../assets/images/tech-siemens.webp";
+import techsiemenssomatom from "../assets/images/tech-siemens-somatom.webp";
+
 const TechnologySection = () => {
 
   const technologies = [
     {
       id: 1,
       name: "Smith & Nephew – CORI Robotic System",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1767029394/cori_hh6fcg.png",
+      icon: techcori,
       description: "Advanced imaging system"
     },
     {
       id: 2,
        name: "Arthrex Synergy Vision Imaging ",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-arhrex.webp",
+      icon: techarhrex,
       description: "Advanced diagnostic imaging"     
     },
     {
       id: 3,
       name: "Siemens ARTIS one Edition X Cathlab",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394660/agastya/tech-siemens.webp",
+        icon: techsiemens,      
       description: "Robotic surgical assistance"
     },
     {
       id: 4,
       name: "Siemens SOMATOM go.Now CT Scan",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394529/agastya/tech-siemens-somatom.webp",
+      icon: techsiemenssomatom,
       description: "Advanced imaging system"     
     },
     {
       id: 5,
       name: "Olympus Endoscope",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394590/agastya/tech-olympus.webp",
+      icon: techolympus,
       description: "Precision surgical microscope"
     },
     {
       id: 6,
       name: "Leica M520 Optics OptiChrome Microscope",
-      icon: "https://res.cloudinary.com/sdk28cdn/image/upload/v1758394661/agastya/tech-leica.webp",
+      icon: techleica,
       description: "Surgical navigation technology"
     }
   ]
@@ -88,24 +96,24 @@ const TechnologySection = () => {
             <div className="mycustom-marque theme-blue-bg">
                 <div className="scrolling-wrap">
                     <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment &nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment &nbsp;&nbsp;</div>
                     </div>
                    <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
-                    <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://ex-coders.com/html/digtek/assets/img/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                     <div className="comm">
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     
                 </div>

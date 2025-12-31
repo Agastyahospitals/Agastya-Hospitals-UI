@@ -41,7 +41,7 @@ const Careers = () => {
     },
   ];
   const sendResumeEmail = () => {
-    const email = "dm.agastyahospitals@gmail.com";
+    const email = "hr@agastyahospitals.com";
     const subject = encodeURIComponent("Contact from Website");
     const body = encodeURIComponent(
       "Hi,\n\nI would like apply for a job position. Please find my resume attached.\n\nThanks"
@@ -84,9 +84,9 @@ const Careers = () => {
 
       <div className="row mt-5 m-0">
         <div className="col-lg-12">
-          <h2 className="heading-22 mb-3">Current Openings</h2>
+          <h2 className="heading-22 mb-3 text-center">Please submit your resume, will get back to you soon.</h2>
 
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             {positions.map((position) => (
               <div key={position.id} className="bg-white careers-card">
                 <div className="">
@@ -117,14 +117,16 @@ const Careers = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
 
-          <div className="col-lg-12 text-center pt-3 m-5">
-            <p className="paragraph-16 text-center">
+          <div className="col-lg-12 text-center">
+            {/* <p className="paragraph-16 text-center">
               Don't see a position that matches your skills? Send us your
               resume!
-            </p>
+            </p> */}
+            {/* <button className="primary-btn mb-5 mt-2 rounded-5" onClick={sendResumeEmail}>Submit Resume</button> */}
             <button className="primary-btn mb-5 mt-2 rounded-5" onClick={sendResumeEmail}>Submit Resume</button>
+            
           </div>
         </div>
       </div>

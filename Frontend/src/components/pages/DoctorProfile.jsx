@@ -93,7 +93,7 @@ const DoctorProfile = () => {
                       value: doctorProfile.yearsOfExperience,
                     },
                     {
-                      label: "Languages Speack",
+                      label: "Languages Speak",
                       value: doctorProfile.languagesKnown,
                     },
                     { label: "OPD Timings", value: doctorProfile.opTimings },
@@ -104,9 +104,9 @@ const DoctorProfile = () => {
                       {Array.isArray(list.value) ? (
                         list.value.map((subList) =>
                           list.label === "OPD Timings" ? (
-                            <p className="f-12 f-w-700">{subList}, </p>
+                            <p className="f-12 f-w-700">{subList} </p>
                           ) : (
-                            <p className="f-12 f-w-700">{subList}, </p>
+                            <p className="f-12 f-w-700">{subList} </p>
                           )
                         )
                       ) : (

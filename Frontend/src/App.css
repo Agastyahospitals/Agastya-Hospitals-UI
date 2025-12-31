@@ -542,14 +542,17 @@ select.form-select {
   margin-right: 10px;
 }
 
-.homepage-bg {
+/* .homepage-bg {
   background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1756660474/agastya/hero-background.jpg") no-repeat center center;
-}
+} */
 
 .herosection-bg {
   padding-top: 20px;
   /* background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1756660474/agastya/hero-background.jpg") no-repeat center center; */
-  background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1767182092/agastya/banner-agh.png") no-repeat center center;
+  background: url("assets/images/healthcare-at-east-hyderabad.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .hero-container {
@@ -557,7 +560,7 @@ select.form-select {
 }
 
 .hero-content {
-  padding: 14rem 1rem;
+  padding: 16rem 1rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -588,7 +591,7 @@ select.form-select {
 
 .herobanner-quicklinks {
   position: absolute;
-  bottom: 100px;
+  bottom: 20px;
   background: linear-gradient(90deg, #abc9ef, #e8a2a6);
   padding: 20px 40px;
   border-radius: 100px;

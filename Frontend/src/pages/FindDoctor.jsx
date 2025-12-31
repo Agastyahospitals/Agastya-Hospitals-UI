@@ -190,7 +190,7 @@ const FindDoctor = () => {
                                   : "Not Available"}
                               </span>
                             </li>
-                            <li className="ql-snow">
+                            <li className="ql-snow d-none">
                               <span className="label">Expertise:</span>{" "}
                               <span className="information" style={{
                                 display: "inline-block",
