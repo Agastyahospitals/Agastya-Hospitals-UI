@@ -11,8 +11,31 @@ const DoctorsSection = () => {
   const [activeIndex, setActiveIndex] = useState();
   const [doctorList, setDoctorList] = useState([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+  const [slides, setSlides] = useState([]);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerSlide(window.innerWidth >= 992 ? 3 : 1);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (doctorList.length > 0) {
+      const newSlides = [];
+      for (let i = 0; i < doctorList.length; i += itemsPerSlide) {
+        newSlides.push(doctorList.slice(i, i + itemsPerSlide));
+      }
+      setSlides(newSlides);
+      setCarouselIndex(0);
+    }
+  }, [doctorList, itemsPerSlide]);
   const navigate = useNavigate();
   const { specialties, loading: isLoading } = useSelector(
     (state) => state.specialties
@@ -79,12 +102,12 @@ const DoctorsSection = () => {
   };
 
   const handlePrev = () => {
-    const newIndex = carouselIndex === 0 ? doctorList.length - 1 : carouselIndex - 1;
+    const newIndex = carouselIndex === 0 ? slides.length - 1 : carouselIndex - 1;
     setCarouselIndex(newIndex);
   };
 
   const handleNext = () => {
-    const newIndex = carouselIndex === doctorList.length - 1 ? 0 : carouselIndex + 1;
+    const newIndex = carouselIndex === slides.length - 1 ? 0 : carouselIndex + 1;
     setCarouselIndex(newIndex);
   };
 
@@ -138,47 +161,49 @@ const DoctorsSection = () => {
                 controls={false}
                 interval={null}
               >
-                {doctorList.map((doctor) => (
-                  <Carousel.Item key={doctor.doctorID}>
-                    <div className="d-flex justify-content-center">
-                      <div
-                        key={doctor.doctorID}
-                        className="flex-shrink-0 w-80 bg-white rounded-lg"
-                      >
-                        <div className="text-center">
-                          <div className="mb-4">
-                            <img
-                              className="rounded-5"
-                              src={doctor.profilePicture}
-                              alt={doctor.fullName}
-                            />
-                            <button
-                              className="shadow-sm border-1 rounded-5 d-flex align-items-center mt-3 ctabtn bookappointment home-appointment_btn"
-                              onClick={() => {
-                                dispatch(
-                                  setBreadcrumb(["Home", "Book Appointment"])
-                                );
-                                window.scrollTo({ top: 0, behavior: "smooth" });
-                                navigate("/book-appointment");
-                              }}
-                            >
-                              <span>
-                                <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758389743/agastya/circlearrow.svg" />
-                              </span>{" "}
-                              <span>Book Appointment</span>
-                            </button>
+                {slides.map((slide, index) => (
+                  <Carousel.Item key={index}>
+                    <div className="d-flex justify-content-center gap-4">
+                      {slide.map((doctor) => (
+                        <div
+                          key={doctor.doctorID}
+                          className="flex-shrink-0 w-80 bg-white rounded-lg"
+                        >
+                          <div className="text-center">
+                            <div className="mb-4">
+                              <img
+                                className="rounded-5"
+                                src={doctor.profilePicture}
+                                alt={doctor.fullName}
+                              />
+                              <button
+                                className="shadow-sm border-1 rounded-5 d-flex align-items-center mt-3 ctabtn bookappointment home-appointment_btn"
+                                onClick={() => {
+                                  dispatch(
+                                    setBreadcrumb(["Home", "Book Appointment"])
+                                  );
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                                  navigate("/book-appointment");
+                                }}
+                              >
+                                <span>
+                                  <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758389743/agastya/circlearrow.svg" />
+                                </span>{" "}
+                                <span>Book Appointment</span>
+                              </button>
+                            </div>
+                            <h3 className="f-20 mb-3 f-w-700 text-center">
+                              {doctor.fullName}
+                            </h3>
+                            <p className="text-center text-muted f-16">
+                              {doctor.designation}
+                            </p>
+                            <p className="text-center mb-2 text-muted f-16">
+                              {doctor.qualification.join(", ")}
+                            </p>
                           </div>
-                          <h3 className="f-20 mb-3 f-w-700 text-center">
-                            {doctor.fullName}
-                          </h3>
-                          <p className="text-center text-muted f-16">
-                            {doctor.designation}
-                          </p>
-                          <p className="text-center mb-2 text-muted f-16">
-                            {doctor.qualification.join(", ")}
-                          </p>
                         </div>
-                      </div>
+                      ))}
                     </div>
                   </Carousel.Item>
                 ))}
