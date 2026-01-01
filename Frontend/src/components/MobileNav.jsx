@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
 
+
 const MobileNav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const MobileNav = () => {
 
       <div
         class="mobile-nav-item"
-        onClick={() => window.open("https://wa.me/", "_blank")}
+        onClick={() => window.open("https://wa.me/9876543210", "_blank")}
       >
         <img src={whatsappIcon} width={"30px"} />
         <span>WhatsApp</span>

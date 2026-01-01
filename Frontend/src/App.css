@@ -4,9 +4,11 @@
   box-sizing: border-box;
   text-align: left;
 }
+
 :root {
   --brand-color: #022b50;
 }
+
 #root {
   width: 100%;
 }
@@ -457,13 +459,13 @@ select.form-select {
 
 .main-navigation.sticky .site-logo {
 
- width: 70%;
+  width: 70%;
 
- transition: all 0.3s ease;
+  transition: all 0.3s ease;
 
-} */
+}
 
-.main-navigation.sticky .hideinnertitleonscroll {
+*/ .main-navigation.sticky .hideinnertitleonscroll {
   display: none;
 }
 
@@ -555,7 +557,7 @@ select.form-select {
   background-size: cover;
 }
 
- 
+
 
 
 .hero-container {
@@ -741,8 +743,8 @@ select.form-select {
 }
 
 .specialty-card-home h3 {
-    color:#000 !important;
-  }
+  color: #000 !important;
+}
 
 
 .specialty-card-home-active {
@@ -982,12 +984,12 @@ select.form-select {
 }
 
 .brand-btn {
-      background-color: #022b50 !important;
-    color: #FFF !important;
-    border: 0 !important;
-    border-radius: 50px;
-    padding: 10px 20px;
-    width: auto;
+  background-color: #022b50 !important;
+  color: #FFF !important;
+  border: 0 !important;
+  border-radius: 50px;
+  padding: 10px 20px;
+  width: auto;
 }
 
 .discount-badge {
@@ -1128,9 +1130,9 @@ h1.main-title-center::after,
   color: white;
 }
 
-.doctor-profile-home img{
-      max-width: 240px;
-    margin: 0 auto;
+.doctor-profile-home img {
+  max-width: 240px;
+  margin: 0 auto;
 }
 
 .technology-card {
@@ -1222,18 +1224,19 @@ h1.main-title-center::after,
 
 
 .mission-vission {
-margin-bottom: 50px;
-background-color: #eaf2fc;
-padding: 40px;
-border-radius: 50px;
+  margin-bottom: 50px;
+  background-color: #eaf2fc;
+  padding: 40px;
+  border-radius: 50px;
 }
 
-.mission-vission .mission-card h4{
+.mission-vission .mission-card h4 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #000;
 }
+
 .mission-vission .mission-card ul {
   margin-left: 10px;
 }
@@ -1276,36 +1279,52 @@ border-radius: 50px;
     gap: 14px;
   }
 }
+
 @media (max-width: 575px) {
 
-      
+
   .herosection-bg {
-  background: url("assets/images/healthcare-at-east-hyderabad-mobile.png");
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  min-height: 500px;
-  margin-bottom: 20px;
-}
+    background: url("assets/images/healthcare-at-east-hyderabad-mobile.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    min-height: 500px;
+    margin-bottom: 20px;
+  }
 
 
-  .mission-vission .mission-card {margin-bottom: 50px;}
-  .specialtypage-details img { height: auto !important; border-radius: 10px !important;}
-  .specialtypage-details .ql-editor { padding-left: 0 !important; padding-right: 0 !important}
+  .mission-vission .mission-card {
+    margin-bottom: 50px;
+  }
+
+  .specialtypage-details img {
+    height: auto !important;
+    border-radius: 10px !important;
+  }
+
+  .specialtypage-details .ql-editor {
+    padding-left: 0 !important;
+    padding-right: 0 !important
+  }
+
   .leadership-grid-row .leadership-card,
   .leadership-grid-row .leadership-card img {
     margin-bottom: 0px !important;
   }
+
   .leadership-grid-row .leadership-card img {
     max-width: 300px !important;
   }
+
   .leadership-grid-row {
     display: flex !important;
     flex-direction: column !important
   }
+
   .scrolling-wrap .comm {
     gap: 12px;
   }
+
   .appointment-details,
   .herobanner-quicklinks {
     display: none;
@@ -1451,7 +1470,7 @@ border-radius: 50px;
     min-width: 300px;
   }
 
-  
+
   .footer-copy {
     margin-bottom: 70px;
   }
@@ -1954,17 +1973,20 @@ border-radius: 50px;
 }
 
 .leadership-grid-row {
-    display: flex;
-    flex-direction: row;
-    grid-template-columns: 1fr 4fr; /* Explicitly use fr units */
-    gap: 15px; /* Adds a gutter, adjust as needed */
-  }
-
-.leadership-team {
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: 1fr 4fr;
+  /* Explicitly use fr units */
+  gap: 15px;
+  /* Adds a gutter, adjust as needed */
 }
+
+.leadership-team {}
+
 .leadership-grid-row .leadership-card {
   margin-bottom: 60px;
 }
+
 .leadership-grid-row .leadership-card img {
   border-radius: 20px;
   /* max-width: 90%; */
@@ -1972,9 +1994,11 @@ border-radius: 50px;
   margin-bottom: 25px;
   border: 1px solid #c9c9c9;
 }
+
 .leadership-grid-row .leadership-info {
   margin: 10px 10px 40px 10px;
 }
+
 .leadership-grid-row .leadership-info h3 {
   font-size: 20px;
   font-weight: bold;
@@ -1997,7 +2021,7 @@ border-radius: 50px;
 
   color: #000;
 
-  font-weight:normal;
+  font-weight: normal;
 
   line-height: normal;
 
@@ -2015,7 +2039,7 @@ border-radius: 50px;
 
 .leadership-grid-row .leadership-info ul {
 
-  margin:10px 0 10px 20px;
+  margin: 10px 0 10px 20px;
 
 }
 
@@ -2045,11 +2069,7 @@ border-radius: 50px;
 
 
 
-.international-patient-page {
-
-
-
-}
+.international-patient-page {}
 
 
 
@@ -2059,15 +2079,15 @@ border-radius: 50px;
 
   margin: 60px 0;
 
-   padding: 6px;
+  padding: 6px;
 
   position: relative;
 
   background: #ffd9d9;
 
-background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255, 0) 100%);
 
-   
+
 
   border-top-right-radius: 50px;
 
@@ -2087,7 +2107,7 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
 
   padding: 2rem;
 
-  
+
 
 }
 
@@ -2095,20 +2115,20 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
 
 .whychoose-agastya .gridcontent {
 
-    padding: 3rem;
+  padding: 3rem;
 
-    font-size: 20px;
+  font-size: 20px;
 
-    text-align: center;
+  text-align: center;
 
-    align-items: center;
-    align-content: baseline;
+  align-items: center;
+  align-content: baseline;
 
-    display: grid;
+  display: grid;
 
-    justify-content: center;
+  justify-content: center;
 
-    margin: 0 auto;
+  margin: 0 auto;
 
 }
 
@@ -2135,6 +2155,7 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
   font-weight: bold;
   margin: 10px 0 15px 0;
 }
+
 .h2-title {
   font-size: 22px;
   font-weight: bold;
@@ -2149,13 +2170,13 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
 
 
 
-.intl-appointmentform .bgcolor{
+.intl-appointmentform .bgcolor {
 
   background-color: #EAF5FF;
 
   border-radius: 450px;
 
-  
+
 
 }
 
@@ -2179,109 +2200,105 @@ background: linear-gradient(180deg,rgba(255, 217, 217, 1) 0%, rgba(255, 255, 255
 
 .intl-appointmentform .booking-form-container .submitbtn {
 
-background: #CD1E29;
+  background: #CD1E29;
 
-color: #fff;
+  color: #fff;
 
-border:0;
-
-
-
-}
-
-.intl-patient-stories {
+  border: 0;
 
 
 
 }
+
+.intl-patient-stories {}
 
 
 
 .story-card {
 
-      max-width: 360px;
+  max-width: 360px;
 
-      border-radius: 18px;
+  border-radius: 18px;
 
-      overflow: hidden;
+  overflow: hidden;
 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
-      border: 1px solid #E9E9E9;
+  border: 1px solid #E9E9E9;
 
-      padding: 0;
+  padding: 0;
 
-    }
-
-
-
-    .story-card img {
-
-      object-fit: cover;
-
-      height: 220px;
-
-      width: 100%;
-
-      margin-bottom: 10px;
-
-    } 
-
-    .story-card .card-body {
-
-      padding: 15px;
-
-    }
-
-    .story-card .card-title {
-
-      margin-bottom: 10px;
-
-    }
+}
 
 
 
-   .story-card .btn-video {
+.story-card img {
 
-      border-radius: 30px;
+  object-fit: cover;
 
-      padding: 8px 18px;
+  height: 220px;
 
-      font-weight: 500;
+  width: 100%;
 
-      display: inline-flex;
+  margin-bottom: 10px;
 
-      align-items: center;
+}
 
-      gap: 8px;
+.story-card .card-body {
 
-      margin:10px 0 10px 0;
+  padding: 15px;
 
-    }
+}
+
+.story-card .card-title {
+
+  margin-bottom: 10px;
+
+}
 
 
 
-   .story-card .btn-video .play-icon {
+.story-card .btn-video {
 
-      width: 22px;
+  border-radius: 30px;
 
-      height: 22px;
+  padding: 8px 18px;
 
-      border-radius: 50%;
+  font-weight: 500;
 
-      background-color: #6f42c1;
+  display: inline-flex;
 
-      display: flex;
+  align-items: center;
 
-      align-items: center;
+  gap: 8px;
 
-      justify-content: center;
+  margin: 10px 0 10px 0;
 
-      color: #fff;
+}
 
-      font-size: 12px;
 
-    }
+
+.story-card .btn-video .play-icon {
+
+  width: 22px;
+
+  height: 22px;
+
+  border-radius: 50%;
+
+  background-color: #6f42c1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #fff;
+
+  font-size: 12px;
+
+}
 
 
 
@@ -2291,7 +2308,7 @@ border:0;
 
 
 
-.intl-faqs-section .accordion-button{
+.intl-faqs-section .accordion-button {
 
   padding: 1.5rem;
 
@@ -2321,9 +2338,7 @@ border:0;
 
 
 
-.accreds-recognitions {
-
-}
+.accreds-recognitions {}
 
 .accreds-card {
   margin-bottom: 60px;
@@ -3301,6 +3316,7 @@ footer {
     max-width: 1280px !important;
   }
 }
+
 @media (min-width: 1025px) {
   .side_menu_responsive_mobile {
     display: none;
@@ -3323,4 +3339,87 @@ footer {
   background: linear-gradient(-14deg, black, transparent);
   color: #fff;
   display: none !important;
+}
+
+/* Sticky wrapper */
+.right-sticky-wrapper {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Button */
+.sticky-btn {
+  width: 52px;
+  height: auto;
+  max-height: 160px !important;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+/* Vertical text */
+.sticky-btn span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.sticky-btn i {
+  font-size: 20px;
+}
+
+/* Colors */
+.appointment {
+  background: #7b75e8;
+}
+
+.opinion {
+  background: #6a68d9;
+}
+
+.whatsapp {
+  background: #25d366;
+}
+
+.sticky-btn:hover {
+  filter: brightness(1.1);
+  color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .right-sticky-wrapper {
+    top: auto;
+    bottom: 20px;
+    right: 10px;
+    transform: none;
+    flex-direction: row;
+    display: none;
+  }
+
+  .sticky-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .sticky-btn span {
+    display: none;
+  }
 }

@@ -58,17 +58,11 @@ const RolesPermissions = () => {
       {!showUserRoleForm ? (
         <>
           <div className="d-flex align-items-center justify-content-between">
-            <Breadcrumbs mainTitle="User Roles and Permissions" />
-            <div>
-              <Btn
-                attrBtn={{
-                  color: "primary",
-                  onClick: () => navigate(`/register-new-user?addRole=true`),
-                }}
-              >
-                Add Role
-              </Btn>
-            </div>
+            <Breadcrumbs
+              mainTitle="User Roles and Permissions"
+              buttonTitle={"Add Role"}
+              onClick={() => navigate(`/register-new-user?addRole=true`)}
+            />
           </div>
 
           <Container fluid={true}>

@@ -2,11 +2,13 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import React, { useState } from "react";
 import { toasterConfig } from "../utils";
 import { useRef } from "react";
+import { countryCodes } from "../api/countryCode";
 
 const initialState = {
   fullName: "",
   email: "",
   mobileNumber: "",
+  countryCode: "+91",
   message: "",
   agreePolicy: false,
   isWhatsApp: false,
@@ -111,16 +113,33 @@ const EnquiryForm = ({ formType = "Enquiry Form", enquiryFormTitle = "" }) => {
         <label className="booking-form-label" htmlFor="mobileNumber">
           Mobile Number
         </label>
-        <input
-          className="booking-form-input"
-          type="text"
-          id="mobileNumber"
-          name="mobileNumber"
-          value={formState.mobileNumber}
-          placeholder="Enter phone number"
-          onChange={handleChange}
-          maxLength={10}
-        />
+        <div className="d-flex">
+          <select
+            name="countryCode"
+            className="booking-form-input w-20 mr-2"
+            value={formState.countryCode}
+            onChange={handleChange}
+            style={{ minWidth: "90px", marginRight: "10px" }}
+          >
+            <option value="">Code</option>
+            {countryCodes.map((code) => (
+              <option value={code.dial_code} key={code.code}>
+                {code.dial_code}
+              </option>
+            ))}
+          </select>
+          <input
+            className="booking-form-input flex-1"
+            type="text"
+            id="mobileNumber"
+            name="mobileNumber"
+            value={formState.mobileNumber}
+            placeholder="Enter phone number"
+            onChange={handleChange}
+            maxLength={10}
+            style={{ flex: 1 }}
+          />
+        </div>
       </div>
       <div className="booking-form-group">
         <input
