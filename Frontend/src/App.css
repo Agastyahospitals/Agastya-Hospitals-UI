@@ -555,6 +555,9 @@ select.form-select {
   background-size: cover;
 }
 
+ 
+
+
 .hero-container {
   position: relative;
 }
@@ -1274,6 +1277,18 @@ border-radius: 50px;
   }
 }
 @media (max-width: 575px) {
+
+      
+  .herosection-bg {
+  background: url("assets/images/healthcare-at-east-hyderabad-mobile.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  min-height: 500px;
+  margin-bottom: 20px;
+}
+
+
   .mission-vission .mission-card {margin-bottom: 50px;}
   .specialtypage-details img { height: auto !important; border-radius: 10px !important;}
   .specialtypage-details .ql-editor { padding-left: 0 !important; padding-right: 0 !important}
