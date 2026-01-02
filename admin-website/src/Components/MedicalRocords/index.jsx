@@ -83,18 +83,39 @@ const MedicalRecords = () => {
     <Fragment>
       {!openUploadForm ? (
         <>
-          <Breadcrumbs
-            mainTitle={
-              viewPatientDetails ? "Patient Details" : "Medical Records"
+          {/* Hide 'Upload Records' button when logged-in user is roleID 4 or roleName 'User' */}
+          {(() => {
+            let userDetails = {};
+            try {
+              userDetails = JSON.parse(localStorage.getItem('userDetails')) || {};
+            } catch (e) {
+              userDetails = {};
             }
-            buttonTitle={viewPatientDetails ? "Back to list" : "Upload Records"}
-            onClick={
-              viewPatientDetails
-                ? () => setViewPatientDetails(false)
-                : () => setOpenUploadForm(true)
-            }
-            btnColor={viewPatientDetails ? "secondary" : "primary"}
-          />
+            const hideUploadButton =
+              Number(userDetails.roleID) === 4 ||
+              String(userDetails.roleName).toLowerCase() === 'user';
+
+            return (
+              <Breadcrumbs
+                mainTitle={viewPatientDetails ? "Patient Details" : "Medical Records"}
+                buttonTitle={
+                  viewPatientDetails
+                    ? "Back to list"
+                    : hideUploadButton
+                    ? undefined
+                    : "Upload Records"
+                }
+                onClick={
+                  viewPatientDetails
+                    ? () => setViewPatientDetails(false)
+                    : hideUploadButton
+                    ? undefined
+                    : () => setOpenUploadForm(true)
+                }
+                btnColor={viewPatientDetails ? "secondary" : "primary"}
+              />
+            );
+          })()}
 
           <Container fluid={true}>
             {loading ? (
@@ -119,14 +140,32 @@ const MedicalRecords = () => {
                               <td>{data.fullName}</td>
                               <td>{data.mobile}</td>
                               <td>{data.email}</td>
-                              <td>
-                                <FaPencilAlt
-                                  color="#7366ff"
-                                  onClick={() => handleViewDetails(data)}
-                                  className="me-2 text-primary cursor-pointer"
-                                  title="Edit Medical Records"
-                                />
-                              </td>
+                                  <td>
+                                    <FaPencilAlt
+                                      color="#7366ff"
+                                      onClick={() => {
+                                        // If logged-in user is roleID 4 / roleName 'User', show view only
+                                        let userDetails = {};
+                                        try {
+                                          userDetails = JSON.parse(localStorage.getItem('userDetails')) || {};
+                                        } catch (e) {
+                                          userDetails = {};
+                                        }
+                                        const isReadOnlyUser =
+                                          Number(userDetails.roleID) === 4 ||
+                                          String(userDetails.roleName).toLowerCase() === 'user';
+
+                                        if (isReadOnlyUser) {
+                                          setPatientData(data);
+                                          setViewPatientDetails(true);
+                                        } else {
+                                          handleViewDetails(data);
+                                        }
+                                      }}
+                                      className="me-2 text-primary cursor-pointer"
+                                      title={"Edit Medical Records"}
+                                    />
+                                  </td>
                             </tr>
                           ))}
                         </tbody>

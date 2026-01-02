@@ -48,6 +48,16 @@ const UploadForm = ({ onClose, patientID }) => {
     }
   }, [patientID]);
 
+  // Determine if current user is read-only 'User' (roleID 4)
+  const isReadOnlyUser = (() => {
+    try {
+      const ud = JSON.parse(localStorage.getItem('userDetails')) || {};
+      return Number(ud.roleID) === 4 || String(ud.roleName).toLowerCase() === 'user';
+    } catch (e) {
+      return false;
+    }
+  })();
+
   const handlePatientChange = (e) => {
     const value = e.target.value;
     const selectedPatient = patients.find(
@@ -261,7 +271,7 @@ const UploadForm = ({ onClose, patientID }) => {
                                 aria-label="Delete"
                                 onClick={() => handleDeleteMedicalRecord(idx)}
                                 style={{ marginLeft: 8 }}
-                                disabled={isUploading}
+                                disabled={isUploading || isReadOnlyUser}
                               />
                             </li>
                           ))}
@@ -275,7 +285,7 @@ const UploadForm = ({ onClose, patientID }) => {
                     accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                     multiple
                     onChange={handleFileChange}
-                    disabled={isUploading}
+                    disabled={isUploading || isReadOnlyUser}
                   />
                   {selectedFiles.length > 0 && (
                     <div className="mt-2">
@@ -291,7 +301,7 @@ const UploadForm = ({ onClose, patientID }) => {
                               aria-label="Remove"
                               onClick={() => handleRemoveFile(index)}
                               style={{ marginLeft: 8 }}
-                              disabled={isUploading}
+                              disabled={isUploading || isReadOnlyUser}
                             />
                           </li>
                         ))}
@@ -341,22 +351,24 @@ const UploadForm = ({ onClose, patientID }) => {
               </Card>
             </Col>
             <Col md="12" className="text-center mt-1">
-              <Button
-                color="primary"
-                type="submit"
-                disabled={
-                  isUploading || !patientData.patientID || (selectedFiles.length === 0 && !recordsChanged)
-                }
-              >
-                {isUploading ? (
-                  <>
-                    <Spinner size="sm" className="me-2" />
-                    Uploading...
-                  </>
-                ) : (
-                  "Save"
-                )}
-              </Button>
+              {!isReadOnlyUser && (
+                <Button
+                  color="primary"
+                  type="submit"
+                  disabled={
+                    isUploading || !patientData.patientID || (selectedFiles.length === 0 && !recordsChanged)
+                  }
+                >
+                  {isUploading ? (
+                    <>
+                      <Spinner size="sm" className="me-2" />
+                      Uploading...
+                    </>
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+              )}
             </Col>
           </Row>
         </Form>
