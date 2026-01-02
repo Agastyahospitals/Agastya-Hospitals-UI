@@ -120,7 +120,7 @@ const HeroSection = () => {
                 </span>
               </a>
               <a
-                href="https://agastya-hospitals-adminpage-leja.onrender.com"
+                href="https://dashboard.agastyahospitals.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {

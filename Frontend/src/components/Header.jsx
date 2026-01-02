@@ -193,7 +193,7 @@ const Header = () => {
                   dispatch(setBreadcrumb(["Home"]));
                   window.scrollTo({ top: 0, behavior: "smooth" });
                   window.open(
-                    "https://agastya-hospitals-adminpage-leja.onrender.com",
+                    "https://dashboard.agastyahospitals.com",
                     "_blank"
                   );
                 }}
