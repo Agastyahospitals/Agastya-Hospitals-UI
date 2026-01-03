@@ -9,7 +9,8 @@ export const fetchSpecialties = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(SPECIALITIES_API);
-      return response;
+      // return only the data payload so reducers and components get the expected array
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch specialties");
     }

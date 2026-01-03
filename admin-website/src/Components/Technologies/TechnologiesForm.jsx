@@ -34,8 +34,11 @@ const TechnologiesForm = ({ isEditMode, initialData, onClose }) => {
   });
 
   useEffect(() => {
-    dispatch(fetchSpecialties());
-  }, [dispatch]);
+    // Only fetch specialties if they are not already available in the store
+    if (!specialties || specialties.length === 0) {
+      dispatch(fetchSpecialties());
+    }
+  }, [dispatch, specialties]);
 
   useEffect(() => {
     if (isEditMode && initialData) {
