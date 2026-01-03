@@ -33,6 +33,14 @@ const AppointmentsTable = ({ appointments, flowType, title }) => {
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [updatingIds, setUpdatingIds] = useState([]);
+  const isReadOnlyUser = (() => {
+    try {
+      const ud = JSON.parse(localStorage.getItem("userDetails")) || {};
+      return Number(ud.roleID) === 4 || String(ud.roleName).toLowerCase() === "user";
+    } catch (e) {
+      return false;
+    }
+  })();
 
   const handleStatusChange = (status) => {
     setSelectedStatuses((prev) =>
@@ -111,67 +119,93 @@ const AppointmentsTable = ({ appointments, flowType, title }) => {
                 {appointment.startTime} - {appointment.endTime}
               </td>
               <td>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <select
-                    value={appointment.status}
-                    onChange={async (e) => {
-                      const newStatus = e.target.value;
-                      try {
-                        setUpdatingIds((prev) => [...prev, appointment.appointmentID]);
-                        await fetchDataPut(`${APPOINTMENTS_API}/${appointment.appointmentID}`, { status: newStatus });
-                        // Refresh the page to show latest status
-                        window.location.reload();
-                      } catch (err) {
-                        console.error("Failed to update appointment status:", err);
-                        alert("Failed to update status. Please try again.");
-                      } finally {
-                        setUpdatingIds((prev) => prev.filter((id) => id !== appointment.appointmentID));
-                      }
-                    }}
-                    className="form-select"
-                    style={{
-                      minWidth: 120,
-                      backgroundColor: statusColor(appointment.status),
-                      color: "#fff",
-                      border: "none",
-                      padding: "6px 10px",
-                      borderRadius: 20,
-                      appearance: "none",
-                      WebkitAppearance: "none",
-                      MozAppearance: "none",
-                    }}
-                  >
-                    {STATUS_OPTIONS.map((opt) => {
-                      // Disable setting to 'booked' for appointments that are already expired
-                      const isBookedOption = opt.value === 'booked';
-                      let disableBooked = false;
-                      if (isBookedOption) {
+                {isReadOnlyUser ? (
+                  <div>
+                    <span
+                      style={{
+                        backgroundColor: statusColor(appointment.status),
+                        color: "#fff",
+                        padding: "6px 10px",
+                        borderRadius: 20,
+                        display: "inline-block",
+                        minWidth: 80,
+                        textAlign: "center",
+                      }}
+                    >
+                      {appointment.status}
+                    </span>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <select
+                      value={appointment.status}
+                      onChange={async (e) => {
+                        const newStatus = e.target.value;
                         try {
-                          const aptDate = new Date(appointment.date);
-                          const now = new Date();
-                          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                          const currentTime = now.toTimeString().slice(0,5);
-                          // If appointment date is before today => expired
-                          if (aptDate < today) disableBooked = true;
-                          // If appointment date is today and endTime already passed => expired
-                          if (!disableBooked && aptDate.getFullYear() === today.getFullYear() && aptDate.getMonth() === today.getMonth() && aptDate.getDate() === today.getDate()) {
-                            if (appointment.endTime && appointment.endTime < currentTime) disableBooked = true;
-                          }
-                        } catch (e) {
-                          disableBooked = false;
+                          setUpdatingIds((prev) => [...prev, appointment.appointmentID]);
+                          await fetchDataPut(`${APPOINTMENTS_API}/${appointment.appointmentID}`, { status: newStatus });
+                          // Refresh the page to show latest status
+                          window.location.reload();
+                        } catch (err) {
+                          console.error("Failed to update appointment status:", err);
+                          alert("Failed to update status. Please try again.");
+                        } finally {
+                          setUpdatingIds((prev) => prev.filter((id) => id !== appointment.appointmentID));
                         }
-                      }
-                      return (
-                        <option key={opt.value} value={opt.value} disabled={isBookedOption ? disableBooked : false} title={isBookedOption && disableBooked ? 'Cannot set to Booked for past/expired appointments' : ''}>
-                          {opt.label}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  {updatingIds.includes(appointment.appointmentID) && (
-                    <Spinner size="sm" />
-                  )}
-                </div>
+                      }}
+                      className="form-select"
+                      style={{
+                        minWidth: 120,
+                        backgroundColor: statusColor(appointment.status),
+                        color: "#fff",
+                        border: "none",
+                        padding: "6px 10px",
+                        borderRadius: 20,
+                        appearance: "none",
+                        WebkitAppearance: "none",
+                        MozAppearance: "none",
+                      }}
+                    >
+                      {STATUS_OPTIONS.map((opt) => {
+                        // Disable setting to 'booked' for appointments that are already expired
+                        const isBookedOption = opt.value === "booked";
+                        let disableBooked = false;
+                        if (isBookedOption) {
+                          try {
+                            const aptDate = new Date(appointment.date);
+                            const now = new Date();
+                            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                            const currentTime = now.toTimeString().slice(0, 5);
+                            // If appointment date is before today => expired
+                            if (aptDate < today) disableBooked = true;
+                            // If appointment date is today and endTime already passed => expired
+                            if (
+                              !disableBooked &&
+                              aptDate.getFullYear() === today.getFullYear() &&
+                              aptDate.getMonth() === today.getMonth() &&
+                              aptDate.getDate() === today.getDate()
+                            ) {
+                              if (appointment.endTime && appointment.endTime < currentTime) disableBooked = true;
+                            }
+                          } catch (e) {
+                            disableBooked = false;
+                          }
+                        }
+                        return (
+                          <option
+                            key={opt.value}
+                            value={opt.value}
+                            disabled={isBookedOption ? disableBooked : false}
+                            title={isBookedOption && disableBooked ? "Cannot set to Booked for past/expired appointments" : ""}
+                          >
+                            {opt.label}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    {updatingIds.includes(appointment.appointmentID) && <Spinner size="sm" />}
+                  </div>
+                )}
               </td>
             </tr>
           ))

@@ -163,43 +163,6 @@ const PatientDetails = ({ patientDetails }) => {
           </Col>
         </Row>
       </Card>
-      <Card className="px-3 pt-4 pb-0 bg-none">
-        <h6 className="b-b-light pb-3">Appointments or Health Checkups</h6>
-        <Row className="widget-grid">
-          <Col md="12 px-0">
-            <TableComponent
-              headers={["Record ID", "Date", "Reason", "Description", "Doctor"]}
-              tableBody={
-                <tbody>
-                  {!patientDetails.visits || patientDetails.visits?.length === 0 ? (
-                    <tr>
-                      <td colSpan="5" className="text-center">
-                        No medical records found.
-                      </td>
-                    </tr>
-                  ) : (
-                    patientDetails.visits.map((record, index) => (
-                      <tr key={index}>
-                        <td>{record.recordID ? record.recordID : "-"}</td>
-                        <td>
-                          {new Date(record.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                          })}
-                        </td>
-                        <td>{record.reason}</td>
-                        <td>{record.description}</td>
-                        <td>{record.doctor}</td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              }
-            />
-          </Col>
-        </Row>
-      </Card>
     </>
   );
 };
