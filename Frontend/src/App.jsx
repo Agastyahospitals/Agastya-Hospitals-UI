@@ -44,8 +44,8 @@ function App() {
           <span>Free Second Opinion</span>
           <i className="bi bi-chat-dots"></i>
         </a>
-
-        <a href="#" className="sticky-btn whatsapp cursor-pointer" onClick={() => window.open("https://wa.me/9876543210", "_blank")}>
+        <a className="sticky-btn whatsapp cursor-pointer" href="https://wa.me/919459108108?text=Hello%20I%20would%20like%20to%20get%20more%20information%20about%20your%20hospital%20services.%20Please%20assist%20me." target="_blank">
+        {/* <a href="tel:+91-9459108108" className="sticky-btn whatsapp cursor-pointer" onClick={() => window.open("https://wa.me/9876543210", "_blank")}> */}
           <i className="bi bi-whatsapp"></i>
         </a>
       </div>
