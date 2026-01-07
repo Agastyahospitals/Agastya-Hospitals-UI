@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { Container, Row } from "reactstrap";
 import { Breadcrumbs } from "../../../AbstractElements";
 import WidgetsWrapper from "./WidgetsWraper";
@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const today = new Date();
+  const hasFetched = useRef(false);
 
   const fetchAppointments = async () => {
     const dateParam = `?date=${today}`;
@@ -38,6 +39,9 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     fetchAppointments();
     appointmentsCount(today)
       .then((data) => {

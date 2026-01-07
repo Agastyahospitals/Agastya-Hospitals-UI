@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import { Breadcrumbs, Btn } from "../../AbstractElements";
 import { useNavigate } from "react-router-dom";
 import { Card, Container, Form, Row } from "reactstrap";
@@ -17,6 +17,7 @@ const RolesPermissions = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const hasFetched = useRef(false);
 
   const fetchUserRoles = async () => {
     try {
@@ -33,6 +34,8 @@ const RolesPermissions = () => {
 
   // Fetch user roles when the component mounts
   React.useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchUserRoles();
   }, []);
 

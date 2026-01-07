@@ -99,7 +99,11 @@ const UserRolesForm = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch login types and modules on component mount
+  const hasFetched = useRef(false);
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     const fetchData = async () => {
       try {
         setLoading(true);

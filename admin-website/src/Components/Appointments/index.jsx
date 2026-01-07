@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { Breadcrumbs } from "../../AbstractElements";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
@@ -12,6 +12,7 @@ const Appointments = () => {
   const [showAddAppointment, setShowAddAppointment] = useState(false);
   const [searchDate, setSearchDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const hasFetched = useRef(false);
 
   const handleSearch = (date) => {
     setSearchDate(date);
@@ -59,6 +60,8 @@ const Appointments = () => {
   };
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchAppointments();
   }, []);
   
