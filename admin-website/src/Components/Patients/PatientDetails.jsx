@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Col, Label, Row } from "reactstrap";
-import TableComponent from "../Common/Component/TableComponent";
 
 const PatientDetails = ({ patientDetails }) => {
   return (

@@ -5,7 +5,6 @@ import { Btn, H4, H6, P } from "../AbstractElements";
 
 const ForgetPwd = () => {
   const [togglePassword, setTogglePassword] = useState(false);
-  const history = useNavigate();
   return (
     <Fragment>
       <section>

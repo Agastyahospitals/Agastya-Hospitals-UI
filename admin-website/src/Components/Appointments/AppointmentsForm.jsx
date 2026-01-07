@@ -60,7 +60,7 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isVerifying, setIsVerifying] = React.useState(false);
   const [patientExists, setPatientExists] = React.useState(null);
-  const [verifiedPatient, setVerifiedPatient] = React.useState(null);
+  const [, setVerifiedPatient] = React.useState(null);
   const [isCheckingSlot, setIsCheckingSlot] = React.useState(false);
   const [availableSlots, setAvailableSlots] = React.useState([]);
   const [isLoadingSlots, setIsLoadingSlots] = React.useState(false);

@@ -1,26 +1,10 @@
 import React, { useState } from "react";
 import TableComponent from "../Common/Component/TableComponent";
-import { Badges } from "../../AbstractElements";
 import { format } from "date-fns";
 import { fetchDataPut } from "../../api/Services";
 import { APPOINTMENTS_API } from "../../api";
 import { Spinner } from "reactstrap";
 
-const dropdownStyle = {
-  position: "relative",
-  display: "inline-block",
-  marginLeft: "1rem",
-};
-const dropdownContentStyle = {
-  display: "block",
-  position: "absolute",
-  backgroundColor: "#fff",
-  minWidth: "160px",
-  boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
-  zIndex: 1,
-  padding: "10px",
-  border: "1px solid #eee",
-};
 
 const STATUS_OPTIONS = [
   { label: "Booked", value: "booked" },
@@ -30,7 +14,6 @@ const STATUS_OPTIONS = [
 
 const AppointmentsTable = ({ appointments, flowType, title }) => {
   const [searchText, setSearchText] = useState("");
-  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [updatingIds, setUpdatingIds] = useState([]);
   const isReadOnlyUser = (() => {
@@ -42,13 +25,6 @@ const AppointmentsTable = ({ appointments, flowType, title }) => {
     }
   })();
 
-  const handleStatusChange = (status) => {
-    setSelectedStatuses((prev) =>
-      prev.includes(status)
-        ? prev.filter((s) => s !== status)
-        : [...prev, status]
-    );
-  };
 
   const sortedAppointments = [...appointments].sort((a, b) => {
     return a.appointmentID - b.appointmentID;
@@ -81,18 +57,7 @@ const AppointmentsTable = ({ appointments, flowType, title }) => {
   // });
 
   const renderTableBody = () => {
-    const statusBg = (appStatus) => {
-      switch (appStatus) {
-        case "booked":
-          return "info";
-        case "completed":
-          return "success";
-        case "cancelled":
-          return "danger";
-        default:
-          return "secondary";
-      }
-    };
+    // status color mapping handled by statusColor
 
     const statusColor = (appStatus) => {
       switch (appStatus) {

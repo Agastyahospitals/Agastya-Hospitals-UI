@@ -150,11 +150,10 @@ const TechnologiesForm = ({ isEditMode, initialData, onClose }) => {
           }
         });
 
-        let response;
         if (isEditMode && initialData?.technologyID) {
-          response = await updateTechnology(initialData.technologyID, formData);
+          await updateTechnology(initialData.technologyID, formData);
         } else {
-          response = await createTechnology(formData);
+          await createTechnology(formData);
         }
         dispatch(fetchTechnologies());
         onClose();

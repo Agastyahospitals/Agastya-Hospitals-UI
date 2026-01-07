@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumbs, Btn } from "../../AbstractElements";
+import { Breadcrumbs } from "../../AbstractElements";
 import {
   Card,
   CardBody,
@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDoctors } from "../../slices/doctorsSlice";
 import { createSpeciality, updateSpeciality } from "../../api/Services";
 import { toast } from "react-toastify";
-import { FaTrashAlt } from "react-icons/fa";
 
 const initialFormState = {
   specialityName: "",
@@ -246,17 +245,13 @@ const SpecialityForm = ({
           ...(formState.updatedBy && { updatedBy: formState.updatedBy }),
         };
 
-        let response;
         if (isEditMode && initialData?.specialityID) {
           // Update existing speciality
-          response = await updateSpeciality(
-            initialData.specialityID,
-            submitData
-          );
+          await updateSpeciality(initialData.specialityID, submitData);
           toast.success("Speciality updated successfully!");
         } else {
           // Create new speciality
-          response = await createSpeciality(submitData);
+          await createSpeciality(submitData);
           toast.success("Speciality created successfully!");
         }
 
@@ -328,6 +323,7 @@ const SpecialityForm = ({
                             src={formState.icon}
                             height={"60px"}
                             width={"60px"}
+                            alt=""
                           />
                           <span
                             onClick={() => {

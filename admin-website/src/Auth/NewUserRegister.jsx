@@ -7,9 +7,8 @@ import {
   Row,
   Col,
   InputGroup,
-  InputGroupText,
 } from "reactstrap";
-import { Btn, H4, P, H6, Image } from "../AbstractElements";
+import { Btn, H4, P } from "../AbstractElements";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { countryCodes } from "../api/countryCode";
 import { toast } from "react-toastify";

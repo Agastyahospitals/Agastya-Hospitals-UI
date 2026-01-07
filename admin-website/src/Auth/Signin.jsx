@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { Btn, H4, P } from "../AbstractElements";
 import {
@@ -11,7 +11,6 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import man from "../assets/images/dashboard/profile.png";
 
 import OtherWay from "./OtherWay";
 import { ToastContainer, toast } from "react-toastify";

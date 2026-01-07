@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumbs, Btn } from "../../AbstractElements";
-import { Button, Col, Container, Row } from "reactstrap";
+import { Breadcrumbs } from "../../AbstractElements";
+import { Col, Container, Row } from "reactstrap";
 import SpecialityForm from "./SpecialityForm";
 import TableComponent from "../Common/Component/TableComponent";
 import { FaEdit, FaPencilAlt, FaTrash, FaTrashAlt } from "react-icons/fa";
@@ -14,7 +14,6 @@ import { toasterConfig } from "../../utils";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-const ITEMS_PER_PAGE = 7;
 const Specialities = () => {
   const [showSpecialityForm, setSpecialityForm] = useState(false);
   const [specialities, setSpecialities] = useState([]);

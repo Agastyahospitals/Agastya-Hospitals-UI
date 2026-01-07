@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Badges, Breadcrumbs } from "../../AbstractElements";
+import { Breadcrumbs } from "../../AbstractElements";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
 import { APPOINTMENTS_API } from "../../api";

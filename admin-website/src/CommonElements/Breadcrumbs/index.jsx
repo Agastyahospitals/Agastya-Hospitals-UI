@@ -1,17 +1,8 @@
 import React, { Fragment } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Input,
-  Label,
-  InputGroup,
-  InputGroupText,
-} from "reactstrap";
+import { Container, Button, Input, InputGroup, InputGroupText } from "reactstrap";
 import H3 from "../Headings/H3Element";
 import DatePicker from "react-datepicker";
-import { FaCalendarAlt, FaCrosshairs } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 
 const Breadcrumbs = ({
