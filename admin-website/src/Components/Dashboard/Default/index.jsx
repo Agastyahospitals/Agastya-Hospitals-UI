@@ -7,7 +7,6 @@ import { APPOINTMENTS_API } from "../../../api";
 import AppointmentsTable from "../../Appointments/AppointmentsTable";
 import { appointmentsCount } from "../../../api/Services";
 import { toast } from "react-toastify";
-import Loader from "../../Common/Component/Loader";
 import TableSkeleton from "../../Common/Component/TableSkeleton";
 
 const Dashboard = () => {

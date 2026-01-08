@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumbs } from "../../AbstractElements";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import TechnologiesForm from "./TechnologiesForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTechnologies } from "../../slices/technologiesSlice";
@@ -20,7 +20,7 @@ const Technologies = () => {
   const [searchText, setSearchText] = useState("");
 
   const dispatch = useDispatch();
-  const { technologies, loading, error } = useSelector((state) => {
+  const { technologies } = useSelector((state) => {
     console.log("STATE::: ", state);
     return state;
   });

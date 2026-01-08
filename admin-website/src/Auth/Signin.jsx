@@ -5,7 +5,6 @@ import {
   EmailAddress,
   ForgotPassword,
   Password,
-  RememberPassword,
   SignIn,
 } from "../Constant";
 

@@ -46,7 +46,7 @@ function ManageSlots(params) {
 
   const [errors, setErrors] = useState({});
   const [alertMessage, setAlertMessage] = useState({ show: false, type: "", message: "" });
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [slotIdForDoctor, setSlotIdForDoctor] = useState(null);
   const [noSlotsMessage, setNoSlotsMessage] = useState("");
   const dispatch = useDispatch();

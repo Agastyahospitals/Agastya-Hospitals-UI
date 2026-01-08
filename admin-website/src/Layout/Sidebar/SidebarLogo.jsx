@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
 import { Grid } from "react-feather";
-import { Link } from "react-router-dom";
 import CustomizerContext from "../../_helper/Customizer";
-import { Image } from "../../AbstractElements";
-import CubaIcon from "../../assets/images/logo/logo.png";
 
 const SidebarLogo = () => {
-  const { mixLayout, toggleSidebar, toggleIcon, layout, layoutURL } = useContext(CustomizerContext);
+  const { toggleSidebar, toggleIcon, layout } = useContext(CustomizerContext);
 
   const openCloseSidebar = () => {
     toggleSidebar(!toggleIcon);

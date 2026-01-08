@@ -3,16 +3,13 @@ import { Breadcrumbs } from "../../AbstractElements";
 import { Col, Container, Row } from "reactstrap";
 import SpecialityForm from "./SpecialityForm";
 import TableComponent from "../Common/Component/TableComponent";
-import { FaEdit, FaPencilAlt, FaTrash, FaTrashAlt } from "react-icons/fa";
+import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { deleteSpeciality } from "../../api/Services";
 import { SPECIALITIES_API } from "../../api";
 import { fetchDataGet } from "../../api/Services";
 import TableSkeleton from "../Common/Component/TableSkeleton";
 import { toast } from "react-toastify";
-import { toasterConfig } from "../../utils";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 
 const Specialities = () => {
   const [showSpecialityForm, setSpecialityForm] = useState(false);
@@ -21,8 +18,6 @@ const Specialities = () => {
   const [searchText, setSearchText] = useState("");
   const [editingSpeciality, setEditingSpeciality] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
-
-  const dispatch = useDispatch();
 
   const fetchSpecialities = async () => {
     try {

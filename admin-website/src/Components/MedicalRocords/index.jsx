@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumbs } from "../../AbstractElements";
-import { Button, Container, Row } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import TableComponent from "../Common/Component/TableComponent";
 import { fetchDataGet } from "../../api/Services";
 import { PATIENTS_API } from "../../api";
@@ -8,8 +8,7 @@ import PatientDetails from "../Patients/PatientDetails";
 import UploadForm from "./UploadForm";
 import { toast } from "react-toastify";
 import TableSkeleton from "../Common/Component/TableSkeleton";
-import PaginationComponent from "../Common/Component/PaginationComponent";
-import { FaPenAlt, FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
 
 
 const ITEMS_PER_PAGE = 7;
@@ -20,7 +19,7 @@ const MedicalRecords = () => {
   const [loading, setLoading] = useState(true);
   const [openUploadForm, setOpenUploadForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [editRecordData, setEditRecordData] = useState(false);
+  const [, setEditRecordData] = useState(false);
   const [patientID, setPatientID] = useState("");
 
   const handleViewDetails = (data) => {

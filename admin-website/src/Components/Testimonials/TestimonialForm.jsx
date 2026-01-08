@@ -259,6 +259,7 @@ const TestimonialForm = ({
                             <img
                               src={formState.userPhotoPreview}
                               style={{ objectFit: "contain", height: "8rem" }}
+                              alt=""
                             />
                           </div>
                         </>

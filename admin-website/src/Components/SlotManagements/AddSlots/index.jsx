@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumbs, Btn } from "../../../AbstractElements";
+import { Breadcrumbs } from "../../../AbstractElements";
 import {
   Button,
   Card,
@@ -7,8 +7,6 @@ import {
   Col,
   Container,
   Form,
-  FormFeedback,
-  FormGroup,
   Input,
   InputGroup,
   Label,
@@ -17,10 +15,10 @@ import {
   Spinner,
 } from "reactstrap";
 import ValidationAlert from "../../Common/Component/ValidationAlert";
-import { fetchDataGet, fetchDataPost } from "../../../api/Services";
-import { DOCTORS_API, SLOTS_API } from "../../../api";
+import { fetchDataPost } from "../../../api/Services";
+import { SLOTS_API } from "../../../api";
 import DatePicker from "react-datepicker";
-import { FaCalendar, FaCalendarAlt, FaClock } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDoctors } from "../../../slices/doctorsSlice";
 
@@ -272,8 +270,6 @@ function AddSlots() {
         let errorMessage = "Failed to create slots. Please try again.";
         
         if (error.response) {
-          // Server responded with error status
-          const status = error.response.status;
           const data = error.response.data;
           errorMessage = data.error;
         } 

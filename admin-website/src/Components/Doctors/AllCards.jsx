@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Card, CardBody, Col } from "reactstrap";
+import { Col } from "reactstrap";
 import { DOCTORS_API } from "../../api";
 import { fetchDataGet } from "../../api/Services";
 import CardSkeleton from "../Common/Component/CardSkeleton";
-import { deleteDoctor, fetchDoctors } from "../../slices/doctorsSlice";
+import { deleteDoctor } from "../../slices/doctorsSlice";
 import { toasterConfig } from "../../utils";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";

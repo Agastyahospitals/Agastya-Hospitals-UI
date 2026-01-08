@@ -2,12 +2,6 @@ import React, { Fragment, useState } from "react";
 import {
   Container,
   Row,
-  Col,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardImg,
 } from "reactstrap";
 import { Breadcrumbs } from "../../AbstractElements";
 import AllCards from "./AllCards";

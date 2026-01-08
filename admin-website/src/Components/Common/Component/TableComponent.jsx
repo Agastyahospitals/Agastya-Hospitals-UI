@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Col, Card, CardHeader, Table, Input, Row } from "reactstrap";
-import { H3, H4, H5 } from "../../../AbstractElements";
+import { H5 } from "../../../AbstractElements";
 
 const TableComponent = ({
   title,
@@ -9,8 +9,6 @@ const TableComponent = ({
   isSearch,
   searchText,
   onSearch,
-  showStatusFilter,
-  statusFilterComponent,
 }) => {
   return (
     <Fragment>

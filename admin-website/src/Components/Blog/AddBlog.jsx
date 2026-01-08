@@ -17,7 +17,6 @@ import { CREATE_BLOGS_API, UPDATE_BLOGS_API } from "../../api";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchBlogs } from "../../slices/blogSlice";
-import { is } from "date-fns/locale";
 import HTMLTextEditor from "../Common/Component/HTMLTextEditor";
 import { fetchSpecialities } from "../../api/Services";
 
@@ -108,7 +107,7 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
   };
 
   const handleChange = (e) => {
-    const { id, name, value } = e.target;
+    const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };

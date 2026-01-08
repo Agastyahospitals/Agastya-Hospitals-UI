@@ -4,13 +4,9 @@ import {
   Card,
   CardBody,
   Col,
-  Container,
   Form,
   Input,
   Label,
-  Modal,
-  ModalBody,
-  ModalHeader,
   Row,
 } from "reactstrap";
 import ModelComponent from "../Common/Component/ModelComponent";

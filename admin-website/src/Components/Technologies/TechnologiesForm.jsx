@@ -29,7 +29,7 @@ const TechnologiesForm = ({ isEditMode, initialData, onClose }) => {
   const [formState, setFormState] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const dispatch = useDispatch();
-  const { specialties, loading, error } = useSelector((state) => {
+  const { specialties } = useSelector((state) => {
     return state.specialties;
   });
 

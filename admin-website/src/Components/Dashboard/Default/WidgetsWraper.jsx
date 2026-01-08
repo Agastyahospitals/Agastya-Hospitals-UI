@@ -1,7 +1,6 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
+import { Col} from "reactstrap";
 import SocialWidget from "../../Common/CommonWidgets/SocialWidget";
-import { ca } from "date-fns/locale";
 
 const WidgetsWrapper = ({ totalAppointments, cancelledAppointments }) => {
   const SocialWidgetDataWidgetPage = [

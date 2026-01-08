@@ -24,7 +24,6 @@ const Departments = () => {
   const {
     data: departments,
     loading,
-    error,
   } = useSelector((state) => {
     return state.departments;
   });

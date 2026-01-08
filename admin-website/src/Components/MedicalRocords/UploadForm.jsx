@@ -21,15 +21,13 @@ const UploadForm = ({ onClose, patientID }) => {
   const [patientName, setPatientName] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [patientData, setPatientData] = useState({});
-  const [originalMedicalRecords, setOriginalMedicalRecords] = useState([]);
+  const [, setOriginalMedicalRecords] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [recordsChanged, setRecordsChanged] = useState(false);
   const dispatch = useDispatch();
   const {
     data: patients,
-    error,
-    loading,
   } = useSelector((state) => {
     return state.patients;
   });
@@ -117,7 +115,7 @@ const UploadForm = ({ onClose, patientID }) => {
     try {
       // If only records were changed (deleted) and no new files, update patient
       if (selectedFiles.length === 0 && recordsChanged) {
-        const updateResp = await updatePatient(patientData.patientID, {
+        await updatePatient(patientData.patientID, {
           medicalRecords: patientData.medicalRecords || [],
         });
         toast.success(`Medical records updated for ${patientData.fullName}`);
@@ -139,7 +137,7 @@ const UploadForm = ({ onClose, patientID }) => {
         await updatePatient(patientData.patientID, {
           medicalRecords: patientData.medicalRecords || [],
         });
-        const response = await uploadMedicalRecords(
+        await uploadMedicalRecords(
           patientData.patientID,
           selectedFiles
         );

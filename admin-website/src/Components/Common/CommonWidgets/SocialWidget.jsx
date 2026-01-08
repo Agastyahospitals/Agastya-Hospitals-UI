@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
-import { Image, H5 } from '../../../AbstractElements';
+import { H5 } from '../../../AbstractElements';
 import RadialChart from './RadialChart';
 
 const SocialWidget = ({ data }) => {

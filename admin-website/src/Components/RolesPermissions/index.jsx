@@ -1,13 +1,12 @@
 import React, { Fragment, useState, useRef } from "react";
-import { Breadcrumbs, Btn } from "../../AbstractElements";
+import { Breadcrumbs } from "../../AbstractElements";
 import { useNavigate } from "react-router-dom";
-import { Card, Container, Form, Row } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import UserRolesForm from "./UserRolesForm";
 import TableComponent from "../Common/Component/TableComponent";
 import { USERS_API } from "../../api";
 import { fetchDataGet } from "../../api/Services";
-import Swal from "sweetalert2"; // Add this import
-import { FaEdit, FaInfoCircle, FaPencilAlt, FaUserEdit } from "react-icons/fa"; // Add this import
+import { FaPencilAlt } from "react-icons/fa"; // Add this import
 import TableSkeleton from "../Common/Component/TableSkeleton";
 
 const RolesPermissions = () => {

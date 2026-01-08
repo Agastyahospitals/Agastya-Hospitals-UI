@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Breadcrumbs,
-  P,
-  Image,
-  H4,
-  H5,
   H6,
-  Btn,
   UL,
   LI,
 } from "../../AbstractElements";
@@ -14,7 +9,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
   Col,
   Container,
   Form,
@@ -29,7 +23,7 @@ import { updatePassword } from "../../api/Services";
 import axios from "axios";
 import { toasterConfig } from "../../utils";
 import { USERS_API } from "../../api";
-import { loginAsync, updateUserDetails } from "../../slices/authSlice";
+import { updateUserDetails } from "../../slices/authSlice";
 
 const UserProfileCard = () => {
   const [togglePwd, setTogglePwd] = useState(false);
@@ -42,7 +36,7 @@ const UserProfileCard = () => {
     mobile: "",
     email: "",
   });
-  const [errors, setErrors] = useState({});
+  const [, setErrors] = useState({});
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.auth);
 

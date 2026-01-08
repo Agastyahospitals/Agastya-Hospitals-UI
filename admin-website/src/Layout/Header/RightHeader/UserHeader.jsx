@@ -1,18 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FileText, LogIn, Mail, User } from "react-feather";
+import { LogIn, User } from "react-feather";
 import man from "../../../assets/images/dashboard/profile.png";
 
 import { LI, UL, Image, P } from "../../../AbstractElements";
-import CustomizerContext from "../../../_helper/Customizer";
 import {
-  Account,
-  Admin,
-  Inbox,
   LogOut,
   MyProfile,
-  Taskboard,
 } from "../../../Constant";
 import { logout } from "../../../slices/authSlice";
 
@@ -21,7 +16,6 @@ const UserHeader = () => {
   const dispatch = useDispatch();
   const [profile, setProfile] = useState("");
   const [name, setName] = useState("");
-  const { layoutURL } = useContext(CustomizerContext);
 
   // Get authentication state from Redux
   const { isAuthenticated, userDetails } = useSelector((state) => state.auth);

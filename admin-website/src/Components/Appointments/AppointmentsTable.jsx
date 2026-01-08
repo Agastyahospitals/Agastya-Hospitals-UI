@@ -14,7 +14,7 @@ const STATUS_OPTIONS = [
 
 const AppointmentsTable = ({ appointments, flowType, title }) => {
   const [searchText, setSearchText] = useState("");
-  const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const selectedStatuses = [];
   const [updatingIds, setUpdatingIds] = useState([]);
   const isReadOnlyUser = (() => {
     try {

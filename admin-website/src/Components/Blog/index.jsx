@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumbs } from "../../AbstractElements";
-import TableSkeleton from "../Common/Component/TableSkeleton";
-import TableComponent from "../Common/Component/TableComponent";
-import { Button, Card, Col, Container, Row } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import axios from "axios";
 import { BLOGS_API } from "../../api";
 import CardSkeleton from "../Common/Component/CardSkeleton";
 import AddBlog from "./AddBlog";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBlog, fetchBlogs } from "../../slices/blogSlice";
+import { fetchBlogs } from "../../slices/blogSlice";
 import ConfirmationAlert from "../Common/Component/ConfirmationAlert";
-import { set } from "date-fns";
 import { toasterConfig } from "../../utils";
 import Swal from "sweetalert2";
 
@@ -19,14 +16,13 @@ const Blog = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [blogDataToEdit, setBlogDataToEdit] = useState();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-  const [blogId, setBlogId] = useState("");
-  const [blogTitle, setBlogTitle] = useState("");
+  const blogId = "";
+  const blogTitle = "";
 
   const dispatch = useDispatch();
   const {
     data: blogs,
     loading,
-    error,
   } = useSelector((state) => {
     return state.blogs.blogs;
   });

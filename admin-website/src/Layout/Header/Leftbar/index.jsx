@@ -4,7 +4,6 @@ import { AlignCenter } from "react-feather";
 import { Link } from "react-router-dom";
 import { Image } from "../../../AbstractElements";
 import CustomizerContext from "../../../_helper/Customizer";
-import NotificationSlider from "./NotificationSlider";
 import { getRoleId } from '../../../utils';
 
 const Leftbar = () => {

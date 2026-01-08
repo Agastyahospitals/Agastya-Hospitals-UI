@@ -1,8 +1,5 @@
 import React from "react";
 import {
-  Card,
-  CardBody,
-  Col,
   Pagination,
   PaginationItem,
   PaginationLink,

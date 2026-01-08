@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Breadcrumbs, Btn, H5 } from "../../AbstractElements";
+import { Breadcrumbs, Btn } from "../../AbstractElements";
 import {
   Card,
   CardBody,
-  CardHeader,
   Col,
   Container,
   Form,
@@ -13,16 +12,12 @@ import {
   InputGroupText,
   Label,
   Row,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
   DropdownItem,
 } from "reactstrap";
 import ValidationAlert from "../Common/Component/ValidationAlert";
 import {
   fetchLoginTypes,
   fetchModules,
-  createUserRole,
   updateUserRole,
 } from "../../api/Services";
 import MultiSelect from "../Common/Component/MultiSelect";
@@ -94,7 +89,7 @@ const UserRolesForm = ({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loginTypes, setLoginTypes] = useState([]);
   const [modules, setModules] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [moduleDropdownOpen, setModuleDropdownOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 

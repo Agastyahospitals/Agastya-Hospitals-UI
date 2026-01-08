@@ -22,7 +22,6 @@ const Patients = () => {
   const dispatch = useDispatch();
   const {
     data: patients,
-    error,
     loading,
   } = useSelector((state) => {
     return state.patients;

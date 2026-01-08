@@ -17,7 +17,7 @@ import ValidationAlert from "../Common/Component/ValidationAlert";
 import HTMLTextEditor from "../Common/Component/HTMLTextEditor";
 import MultiSelect from "../Common/Component/MultiSelect";
 import ModelComponent from "../Common/Component/ModelComponent";
-import { createHealthPackage, updateHealthPackage, fetchHealthPackageById } from "../../api/Services";
+import { createHealthPackage, updateHealthPackage } from "../../api/Services";
 import { toasterConfig } from "../../utils";
 
 // Custom CSS for better checkbox visibility
@@ -107,7 +107,7 @@ const HealthPackagesForm = ({ onClose, editData = null, isEdit = false }) => {
   const [openPreview, setOpenPreview] = useState(false);
   const [modalErrors, setModalErrors] = useState(initialModalErrors);
   const [modalData, setModalData] = useState(initialModalData);
-  const [isModalSubmitted, setIsModalSubmitted] = useState(false);
+  const [, setIsModalSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const idealForList = [
