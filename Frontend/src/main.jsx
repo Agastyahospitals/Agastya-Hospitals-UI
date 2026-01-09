@@ -9,12 +9,17 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "react-quill/dist/quill.snow.css";
 
 
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );

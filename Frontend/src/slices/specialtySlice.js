@@ -3,15 +3,26 @@ import axios from "axios";
 import { SPECIALITIES_API } from "../api/services";
 
 
+import { queryClient } from "../api/queryClient";
+
 // Async thunk to fetch specialties
 export const fetchSpecialties = createAsyncThunk(
   "specialty/fetchSpecialties",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(SPECIALITIES_API);
-      return response;
+      const data = await queryClient.fetchQuery({
+        queryKey: ["specialties"],
+        queryFn: async () => {
+          const response = await axios.get(SPECIALITIES_API);
+          return response.data;
+        },
+        staleTime: 1000 * 60 * 5, // 5 minutes cache
+      });
+      return { data };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch specialties");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch specialties"
+      );
     }
   }
 );
