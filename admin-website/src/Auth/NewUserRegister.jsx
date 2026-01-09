@@ -12,7 +12,7 @@ import { Btn, H4, P } from "../AbstractElements";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { countryCodes } from "../api/countryCode";
 import { toast } from "react-toastify";
-import { registerUser, fetchLoginTypes } from "../api/Services";
+import { registerUser, fetchLoginTypes, sendSMS } from "../api/Services";
 
 const RegisterFrom = () => {
   const [togglePassword, setTogglePassword] = useState(false);
@@ -95,6 +95,16 @@ const RegisterFrom = () => {
       const data = await registerUser(payload);
       console.debug("Register response:", data);
       toast.success(data.message || "User registered successfully");
+      
+      // Send SMS notification
+      try {
+        await sendSMS('USER_REGISTERED', phone, fullName);
+        console.debug("SMS sent successfully");
+      } catch (smsError) {
+        console.error("Error sending SMS:", smsError);
+        // Don't show error to user - SMS is non-critical
+      }
+      
       // Only set token/userDetails for normal sign up (not adding via Roles page)
       if (!isAddRoleFlow) {
         if (data.token) {

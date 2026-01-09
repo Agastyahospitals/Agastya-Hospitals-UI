@@ -14,7 +14,8 @@ import {
   APPOINTMENTS_API,
   PATIENTS_API,
   HEALTH_PACKAGES_API,
-  UpdatePassword_URL
+  UpdatePassword_URL,
+  SMS_API
 } from "./index";
 
 // Add request interceptor to include auth token
@@ -562,6 +563,36 @@ export const fetchPatientById = async (id) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching patient by ID:", error);
+    throw error;
+  }
+};
+
+// Send SMS for various events
+export const sendSMS = async (eventType, mobileNumber, name, additionalParam1 = null, additionalParam2 = null) => {
+  try {
+    const payload = {
+      eventType,
+      mobileNumber,
+      name
+    };
+    
+    // Add optional parameters based on event type
+    if (eventType === 'APPOINTMENT_BOOKED') {
+      if (additionalParam1) payload.date = additionalParam1;
+      if (additionalParam2) payload.time = additionalParam2;
+    } else if (eventType === 'REPORT_READY') {
+      if (additionalParam1) payload.reportName = additionalParam1;
+      if (additionalParam2) payload.downloadUrl = additionalParam2;
+    }
+    
+    const response = await axios.post(SMS_API, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error sending SMS:", error);
     throw error;
   }
 };

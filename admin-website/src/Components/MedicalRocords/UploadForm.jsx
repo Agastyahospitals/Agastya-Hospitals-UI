@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPatients } from "../../slices/patientSlice";
-import { uploadMedicalRecords, updatePatient } from "../../api/Services";
+import { uploadMedicalRecords, updatePatient, sendSMS } from "../../api/Services";
 import { toast } from "react-toastify";
 
 const UploadForm = ({ onClose, patientID }) => {
@@ -137,13 +137,28 @@ const UploadForm = ({ onClose, patientID }) => {
         await updatePatient(patientData.patientID, {
           medicalRecords: patientData.medicalRecords || [],
         });
-        await uploadMedicalRecords(
+        const uploadResponse = await uploadMedicalRecords(
           patientData.patientID,
           selectedFiles
         );
         toast.success(
           `Successfully uploaded ${selectedFiles.length} medical record(s) for ${patientData.fullName}`
         );
+        
+        // Send SMS for each uploaded medical record
+        try {
+          for (const file of selectedFiles) {
+            const reportName = file.name;
+            // const medicalRecords = uploadResponse.updatedPatients?.medicalRecords || [];
+            // const downloadUrl = medicalRecords.length > 0 ? medicalRecords[medicalRecords.length - 1] : "Sample";
+            const downloadUrl = "";
+            await sendSMS('REPORT_READY', patientData.mobile, patientData.fullName, reportName, downloadUrl);
+          }
+          console.debug("SMS sent successfully for medical records upload");
+        } catch (smsError) {
+          console.error("Error sending SMS:", smsError);
+          // Don't show error to user - SMS is non-critical
+        }
 
         // Refresh patients list in parent/state
         dispatch(fetchPatients());
@@ -167,6 +182,22 @@ const UploadForm = ({ onClose, patientID }) => {
           toast.success(
             `Successfully uploaded ${selectedFiles.length} medical record(s) for ${patientData.fullName}`
           );
+          
+          // Send SMS for each uploaded medical record
+          try {
+            for (const file of selectedFiles) {
+              const reportName = file.name;
+              const downloadUrl = "";
+              // const medicalRecords = response.updatedPatients?.medicalRecords || [];
+              // const downloadUrl = medicalRecords.length > 0 ? medicalRecords[medicalRecords.length - 1] : "Sample";
+              await sendSMS('REPORT_READY', patientData.mobile, patientData.fullName, reportName, downloadUrl);
+            }
+            console.debug("SMS sent successfully for medical records upload");
+          } catch (smsError) {
+            console.error("Error sending SMS:", smsError);
+            // Don't show error to user - SMS is non-critical
+          }
+          
           // Refresh patients list in parent/state
           dispatch(fetchPatients());
 

@@ -22,6 +22,7 @@ import DatePicker from "react-datepicker";
 import { FaCalendarAlt } from "react-icons/fa";
 import axios from "axios";
 import { APPOINTMENTS_API, PATIENT_VERIFY_API, SLOTS_API } from "../../api";
+import { sendSMS } from "../../api/Services";
 import { toast } from "react-toastify";
 
 const today = new Date();
@@ -460,6 +461,19 @@ const AppointmentsForm = ({ onClose, onAppointmentAdded }) => {
           // Check if the response contains the success message
           if (responseData.message === "Appointment booked successfully") {
             toast.success("Appointment booked successfully!");
+            
+            // Send SMS notification
+            try {
+              const formattedDate = formState.appointmentDate
+                .toISOString()
+                .split("T")[0];
+              await sendSMS('APPOINTMENT_BOOKED', formState.mobile, formState.fullName, formattedDate, formState.startTime);
+              console.debug("SMS sent successfully for appointment");
+            } catch (smsError) {
+              console.error("Error sending SMS:", smsError);
+              // Don't show error to user - SMS is non-critical
+            }
+            
             if (onAppointmentAdded) {
               onAppointmentAdded(responseData.appointment);
             }
