@@ -27,6 +27,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const technologyRoutes = require('./routes/technologyRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const testimonialRoutes = require('./routes/testimonialRoutes');
+const smsRoutes = require('./routes/smsRoutes');
 
 // Connect to MongoDB
 connectDB();
@@ -69,6 +70,7 @@ app.use('/api/appointments', appointmentRoutes);
 app.use('/api/email', emailRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 
+app.use('/api/sms', smsRoutes);
 
 // ---------------- ERROR HANDLER ----------------
 app.use((err, req, res, next) => {
