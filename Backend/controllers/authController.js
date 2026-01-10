@@ -109,27 +109,37 @@ exports.login = async (req, res) => {
     }
 
     // Validate that either email OR (mobile + countryCode) is provided
-    if (!email && (!mobile || !countryCode)) {
-      return res.status(400).json({ message: 'Either email or (mobile + countryCode) is required' });
+    if (!email && !mobile) {
+      return res.status(400).json({ message: 'Either email or mobile number is required' });
     }
+
+    // If mobile is provided without countryCode, use default +91
+    const effectiveCountryCode = countryCode || '+91';
 
     // Find user by email or mobile
     let user;
     if (email) {
       // Login with email
       user = await User.findOne({ email: { $regex: `^${email}$`, $options: 'i' } });
-    } else {
+    } else if (mobile) {
       // Login with mobile and countryCode
-      user = await User.findOne({ mobile, countryCode });
+      user = await User.findOne({ mobile, countryCode: effectiveCountryCode });
     }
 
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
+    // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
+    // Get user role
     const role = await Role.findOne({ roleID: user.roleID });
 
+    // Generate JWT token
     const token = jwt.sign(
       {
         userID: user.userID,
@@ -145,6 +155,7 @@ exports.login = async (req, res) => {
       { expiresIn: '1h' }
     );
 
+    // Send response
     res.status(200).json({
       message: 'Login successful',
       token,

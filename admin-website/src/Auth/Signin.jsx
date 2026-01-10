@@ -2,12 +2,11 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { Btn, H4, P } from "../AbstractElements";
 import {
-  EmailAddress,
   ForgotPassword,
   Password,
   SignIn,
 } from "../Constant";
-
+import { countryCodes } from "../api/countryCode";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,9 +16,11 @@ import { loginAsync, clearError } from "../slices/authSlice";
 import { getRoleId } from '../utils';
 
 const Signin = ({ selected }) => {
-  const [email, setEmail] = useState("");
+  const [loginInput, setLoginInput] = useState(""); // Can be email or mobile
+  const [countryCode, setCountryCode] = useState("+91");
   const [password, setPassword] = useState("");
   const [togglePassword, setTogglePassword] = useState(false);
+  const [loginType, setLoginType] = useState("mobile"); // "mobile" or "email"
   const history = useNavigate();
   const dispatch = useDispatch();
 
@@ -54,20 +55,6 @@ const Signin = ({ selected }) => {
   // Handle authentication error with SweetAlert
   useEffect(() => {
     if (error) {
-      // Swal.fire({
-      //   title: "Login Failed!",
-      //   text: "Please check the email address or password and try again!",
-      //   icon: "error",
-      //   confirmButtonColor: "#3085d6",
-      //   confirmButtonText: "OK",
-      //   customClass: {
-      //     confirmButton: "btn btn-primary",
-      //   },
-      // });
-      // toasterConfig(
-      //   "error",
-      //   "Please check the email address or password and try again!"
-      // );
       dispatch(clearError());
     }
   }, [error, dispatch]);
@@ -75,18 +62,40 @@ const Signin = ({ selected }) => {
   const loginAuth = async (e) => {
     e.preventDefault();
 
+    if (!loginInput || !password) {
+      toasterConfig("error", "Please enter your credentials");
+      return;
+    }
+
+    if (loginType === "mobile" && loginInput.length !== 10) {
+      toasterConfig("error", "Please enter a valid 10-digit mobile number");
+      return;
+    }
+
+    if (loginType === "email" && !loginInput.includes("@")) {
+      toasterConfig("error", "Please enter a valid email address");
+      return;
+    }
+
     // Clear any previous errors
     dispatch(clearError());
 
+    // Prepare credentials based on login type
+    let credentials = { password };
+    if (loginType === "mobile") {
+      credentials = { ...credentials, mobile: loginInput, countryCode };
+    } else {
+      credentials = { ...credentials, email: loginInput };
+    }
+
     // Dispatch the login action
-    const result = await dispatch(loginAsync({ email, password }));
+    const result = await dispatch(loginAsync(credentials));
 
     // If login failed, the error will be handled by the useEffect above
     if (loginAsync.rejected.match(result)) {
-      // Error is already handled in useEffect with SweetAlert
       toasterConfig(
         "error",
-        "Please check the email address or password and try again!"
+        "Please check your credentials and try again!"
       );
       return;
     }
@@ -101,17 +110,95 @@ const Signin = ({ selected }) => {
               <div className="login-main login-tab">
                 <Form className="theme-form">
                   <H4>Sign In With Agastya Hospitals</H4>
-                  <P>{"Enter your email & password to login"}</P>
-                  <FormGroup>
-                    <Label className="col-form-label">{EmailAddress}</Label>
-                    <Input
-                      className="form-control"
-                      type="email"
-                      onChange={(e) => setEmail(e.target.value)}
-                      value={email}
-                      disabled={loading}
-                    />
+                  <P>{loginType === "mobile" ? "Enter your mobile number & password to login" : "Enter your email & password to login"}</P>
+                  
+                  {/* Login Type Toggle */}
+                  <FormGroup className="mb-3">
+                    <div className="d-flex gap-3">
+                      <Label className="mb-0">
+                        <Input
+                          type="radio"
+                          name="loginType"
+                          value="mobile"
+                          checked={loginType === "mobile"}
+                          onChange={(e) => {
+                            setLoginType(e.target.value);
+                            setLoginInput("");
+                          }}
+                          disabled={loading}
+                        />
+                        {" "} Login with Mobile
+                      </Label>
+                      <Label className="mb-0">
+                        <Input
+                          type="radio"
+                          name="loginType"
+                          value="email"
+                          checked={loginType === "email"}
+                          onChange={(e) => {
+                            setLoginType(e.target.value);
+                            setLoginInput("");
+                          }}
+                          disabled={loading}
+                        />
+                        {" "} Login with Email
+                      </Label>
+                    </div>
                   </FormGroup>
+
+                  {/* Mobile Login */}
+                  {loginType === "mobile" && (
+                    <FormGroup>
+                      <Label className="col-form-label">Mobile Number</Label>
+                      <Row className="g-2">
+                        <Col xs="4" sm="3">
+                          <Input
+                            type="select"
+                            value={countryCode}
+                            onChange={(e) => setCountryCode(e.target.value)}
+                            disabled={loading}
+                            className="form-control"
+                          >
+                            <option value="">Code</option>
+                            {countryCodes.map((code) => (
+                              <option value={code.dial_code} key={code.code}>
+                                {code.dial_code}
+                              </option>
+                            ))}
+                          </Input>
+                        </Col>
+                        <Col xs="8" sm="9">
+                          <Input
+                            className="form-control"
+                            type="tel"
+                            placeholder="Enter 10-digit mobile number"
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setLoginInput(value);
+                            }}
+                            value={loginInput}
+                            disabled={loading}
+                            maxLength="10"
+                          />
+                        </Col>
+                      </Row>
+                    </FormGroup>
+                  )}
+
+                  {/* Email Login */}
+                  {loginType === "email" && (
+                    <FormGroup>
+                      <Label className="col-form-label">Email Address</Label>
+                      <Input
+                        className="form-control"
+                        type="email"
+                        placeholder="Enter your email address"
+                        onChange={(e) => setLoginInput(e.target.value)}
+                        value={loginInput}
+                        disabled={loading}
+                      />
+                    </FormGroup>
+                  )}
                   <FormGroup className="position-relative">
                     <Label className="col-form-label">{Password}</Label>
                     <div className="position-relative">
