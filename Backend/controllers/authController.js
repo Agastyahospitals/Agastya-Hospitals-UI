@@ -210,6 +210,37 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
+// ============================== VERIFY MOBILE FOR PASSWORD RESET ==============================
+exports.verifyMobileReset = async (req, res) => {
+  try {
+    const { mobile, countryCode } = req.body;
+
+    if (!mobile || !countryCode) {
+      return res.status(400).json({ message: 'Mobile and countryCode are required', exists: false });
+    }
+
+    // Find user by mobile and country code
+    const user = await User.findOne({ mobile, countryCode });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found', exists: false });
+    }
+
+    res.status(200).json({
+      message: 'User found',
+      exists: true,
+      user: {
+        userID: user.userID,
+        userName: user.userName,
+        mobile: user.mobile,
+        countryCode: user.countryCode
+      }
+    });
+  } catch (err) {
+    console.error('Verify mobile reset error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message, exists: false });
+  }
+};
 
 
 // ============================== UPDATE PASSWORD ==============================

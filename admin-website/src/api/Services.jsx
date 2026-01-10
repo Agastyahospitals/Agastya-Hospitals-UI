@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   LOGIN_URL,
   REGISTER_URL,
-  // add new constant if needed in index.jsx later
+  VERIFY_MOBILE_RESET_URL,
   DOCTORS_API,
   USER_ROLES_API,
   USERS_API,
@@ -114,6 +114,20 @@ export const loginUser = async (credentials) => {
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(REGISTER_URL, userData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Verify Mobile for Password Reset
+export const verifyMobileReset = async (mobile, countryCode) => {
+  try {
+    const response = await axios.post(VERIFY_MOBILE_RESET_URL, { mobile, countryCode }, {   
       headers: {
         "Content-Type": "application/json",
       },
@@ -568,21 +582,25 @@ export const fetchPatientById = async (id) => {
 };
 
 // Send SMS for various events
-export const sendSMS = async (eventType, mobileNumber, name, additionalParam1 = null, additionalParam2 = null) => {
+export const sendSMS = async (eventType, mobileNumber, additionalParam1 = null, additionalParam2 = null) => {
   try {
     const payload = {
       eventType,
       mobileNumber,
-      name
     };
     
     // Add optional parameters based on event type
-    if (eventType === 'APPOINTMENT_BOOKED') {
+    if(eventType === 'USER_REGISTERED') {
+      if (additionalParam1) payload.name = additionalParam1;
+    }
+    else if (eventType === 'APPOINTMENT_BOOKED') {
       if (additionalParam1) payload.date = additionalParam1;
       if (additionalParam2) payload.time = additionalParam2;
     } else if (eventType === 'REPORT_READY') {
       if (additionalParam1) payload.reportName = additionalParam1;
       if (additionalParam2) payload.downloadUrl = additionalParam2;
+    }else if (eventType === 'OTP_RESET') {
+      if (additionalParam1) payload.otp = additionalParam1;
     }
     
     const response = await axios.post(SMS_API, payload, {

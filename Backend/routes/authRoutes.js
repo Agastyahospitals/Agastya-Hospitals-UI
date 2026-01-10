@@ -5,6 +5,7 @@ const { verifyToken } = require('../middlewares/authMiddleware');
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+router.post('/verify-mobile-reset', authController.verifyMobileReset);
 router.post('/forgot-password', authController.forgotPassword);
 router.put('/update-password', verifyToken, authController.updatePassword); // JWT protected
 
