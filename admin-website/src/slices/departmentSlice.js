@@ -2,12 +2,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { DEPARTMENTS_API } from "../api";
 
+import { queryClient } from "../api/queryClient";
+
 export const fetchDepartments = createAsyncThunk(
   "departments/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(DEPARTMENTS_API);
-      return response.data;
+      const data = await queryClient.fetchQuery({
+        queryKey: ["departments"],
+        queryFn: async () => {
+          const response = await axios.get(DEPARTMENTS_API);
+          return response.data;
+        },
+        staleTime: 1000 * 60 * 5,
+      });
+      return data;
     } catch (err) {
       return rejectWithValue(err.response?.data || err.message);
     }

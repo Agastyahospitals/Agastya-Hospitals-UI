@@ -3,6 +3,8 @@ import axios from "axios";
 import { PATIENTS_API } from "../api";
 import { getRoleId } from "../utils";
 
+import { queryClient } from "../api/queryClient";
+
 export const fetchPatients = createAsyncThunk(
   "patients/fetchPatients",
   async (_, { rejectWithValue }) => {
@@ -24,8 +26,16 @@ export const fetchPatients = createAsyncThunk(
           url = `${PATIENTS_API}?mobile=${encodeURIComponent(userDetails.mobile)}`;
         }
       }
-      const response = await axios.get(url);
-      return response.data;
+
+      const data = await queryClient.fetchQuery({
+        queryKey: ["patients", url],
+        queryFn: async () => {
+          const response = await axios.get(url);
+          return response.data;
+        },
+        staleTime: 1000 * 60 * 5,
+      });
+      return data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }

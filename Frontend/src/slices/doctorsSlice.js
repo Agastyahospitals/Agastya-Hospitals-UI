@@ -3,13 +3,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { DOCTORS_API } from "../api/services";
 
+import { queryClient } from "../api/queryClient";
+
 // Async thunk to fetch doctor list
 export const fetchDoctors = createAsyncThunk(
   "doctors/fetchDoctors",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(DOCTORS_API);
-      return response.data.data;
+      const data = await queryClient.fetchQuery({
+        queryKey: ["doctors"],
+        queryFn: async () => {
+          const response = await axios.get(DOCTORS_API);
+          return response.data.data;
+        },
+        staleTime: 1000 * 60 * 5,
+      });
+      return data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }

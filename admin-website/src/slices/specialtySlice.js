@@ -3,14 +3,21 @@ import axios from "axios";
 import { SPECIALITIES_API } from "../api";
 
 
-// Async thunk to fetch specialties
+import { queryClient } from "../api/queryClient";
+
 export const fetchSpecialties = createAsyncThunk(
   "specialty/fetchSpecialties",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(SPECIALITIES_API);
-      // return only the data payload so reducers and components get the expected array
-      return response.data;
+      const data = await queryClient.fetchQuery({
+        queryKey: ["specialties"],
+        queryFn: async () => {
+          const response = await axios.get(SPECIALITIES_API);
+          return response.data;
+        },
+        staleTime: 1000 * 60 * 5, // 5 minutes cache
+      });
+      return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch specialties");
     }

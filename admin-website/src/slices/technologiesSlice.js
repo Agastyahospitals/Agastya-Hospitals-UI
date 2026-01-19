@@ -2,13 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { TECHNOLOGIES_API } from '../api';
 
+import { queryClient } from "../api/queryClient";
+
 // Async thunk to fetch technologies
 export const fetchTechnologies = createAsyncThunk(
     'technologies/fetchTechnologies',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get(TECHNOLOGIES_API);
-            return response.data;
+            const data = await queryClient.fetchQuery({
+                queryKey: ["technologies"],
+                queryFn: async () => {
+                    const response = await axios.get(TECHNOLOGIES_API);
+                    return response.data;
+                },
+                staleTime: 1000 * 60 * 5,
+            });
+            return data;
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);
         }

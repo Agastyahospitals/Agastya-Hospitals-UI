@@ -2,12 +2,21 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { HEALTH_PACKAGES_API } from '../api/services';
 
+import { queryClient } from "../api/queryClient";
+
 export const fetchHealthPackages = createAsyncThunk(
     'healthPackages/fetchHealthPackages',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get(HEALTH_PACKAGES_API);
-            return response.data;
+            const data = await queryClient.fetchQuery({
+                queryKey: ["healthPackages"],
+                queryFn: async () => {
+                    const response = await axios.get(HEALTH_PACKAGES_API);
+                    return response.data;
+                },
+                staleTime: 1000 * 60 * 5,
+            });
+            return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data || error.message);
         }

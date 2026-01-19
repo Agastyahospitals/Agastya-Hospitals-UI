@@ -2,10 +2,19 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BLOGS_API } from "../api/services";
 
+import { queryClient } from "../api/queryClient";
+
 // Async thunks
 export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
-  const response = await axios.get(BLOGS_API);
-  return response.data;
+  const data = await queryClient.fetchQuery({
+    queryKey: ["blogs"],
+    queryFn: async () => {
+      const response = await axios.get(BLOGS_API);
+      return response.data;
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+  return data;
 });
 
 // Slice

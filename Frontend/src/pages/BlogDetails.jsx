@@ -11,9 +11,6 @@ const BlogDetails = () => {
   const [blogData, setBlogData] = useState(null);
   const { urlSlug: urlSlug } = useParams();
   const navigate = useNavigate();
-  //const location = useLocation();
-  //const blogData = location.state?.blogData;
-
   const dispatch = useDispatch();
   const { data: blogs } = useSelector((state) => {
     console.log(state);
@@ -57,6 +54,7 @@ const BlogDetails = () => {
   );
 
   const gotoBlogDetails = (slug) => {
+    dispatch(setBreadcrumb(["Home", "Blog Details"]));
     navigate(`/blog/${slug}`);
   };
 
