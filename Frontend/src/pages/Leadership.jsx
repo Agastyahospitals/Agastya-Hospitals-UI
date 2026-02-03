@@ -113,7 +113,7 @@ return (
 					</div>
 					<div className="leadership-grid-row">
 						<div>
-							<div className="leadership-card">
+							<div className="leadership-card t">
 								<img
 								src="https://res.cloudinary.com/sdk28cdn/image/upload/v1763285933/agastya/dr-g-sudhaker-reddy.png"
 								alt=""
