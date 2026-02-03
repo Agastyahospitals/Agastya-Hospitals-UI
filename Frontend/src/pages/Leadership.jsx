@@ -92,7 +92,7 @@ return (
 						</div>
 						<div>
 							<div className="leadership-info">
-								<h3>Dr Anil Madati</h3>
+								<h3>Dr Anil Madati </h3>
 								<p className="title">Hospital Administration & Operations Leadership  </p>
 								
 								<div className="description">
