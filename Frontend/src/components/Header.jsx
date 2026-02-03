@@ -73,7 +73,7 @@ const Header = () => {
     { path: "/about", label: "About Us" },
     { path: "/specialties", label: "Specialties" },
     { path: "/find-doctor", label: "Find a Doctor" },
-    { path: "/international-patient", label: "Patient" },
+    { path: "/international-patient", label: "International Patient" },
     { path: "/blog", label: "Blog" },
     { path: "/health-packages", label: "Health Packages" },
     { path: "/careers", label: "Careers" },
@@ -221,7 +221,7 @@ const Header = () => {
       {/* Main Navigation */}
       <div className={`main-navigation ${isSticky ? "sticky" : ""}`}>
         <nav
-          className={`container-fluid mx-auto px-2 pb-0 main-navigation ${
+          className={`container-fluid mx-auto px-2 pb-3 main-navigation ${
             // currentPage && currentPage !== "Home"
             trail.some((nav) => nav !== "Home") ? "banner" : ""
             }`}

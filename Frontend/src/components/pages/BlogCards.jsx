@@ -6,7 +6,7 @@ import { fetchBlogs } from "../../slices/blogSlice";
 import { useNavigate } from "react-router-dom";
 import { setBreadcrumb } from "../../slices/breadcrumbSlice";
 
-const BlogCards = () => {
+const BlogCards = ({ limit }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -17,6 +17,9 @@ const BlogCards = () => {
     console.log(state);
     return state.blogs.blogs;
   });
+  const displayBlogs = limit
+  ? blogs?.slice(0, limit)
+  : blogs;
 
   const hasFetched = useRef(false);
   useEffect(() => {
@@ -34,7 +37,7 @@ const BlogCards = () => {
     <div className="row">
       <div className="col-lg-12">
         <div className="blog-list">
-          {blogs?.map((blog) => (
+          {displayBlogs?.map((blog) => (
             <div
               key={blog.blogID}
               className="blog-card medical-news shadow-sm border"

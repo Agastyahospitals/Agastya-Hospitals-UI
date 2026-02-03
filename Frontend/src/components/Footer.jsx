@@ -188,7 +188,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-copy">
-        Copyright © 2025 Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.). All Rights Reserved.
+        Copyright © 2026 Agastya Hospitals (SRI LAKSHMI NARASIMHA HEALTH CARE PVT. LTD.). All Rights Reserved.
       </div>
     </footer>
   );
