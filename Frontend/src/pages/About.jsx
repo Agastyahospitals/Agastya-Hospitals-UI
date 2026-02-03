@@ -110,10 +110,10 @@ const About = () => {
           <div className="mission-card">
               <h4>Our Values</h4>
               <ul>
-                <li><b>Compassion: We are kind & caring. We put YOU first.</b></li>
-                <li><b>Integrity: We do only what is right.</b></li>
-                <li><b>Accountability: We walk the talk.</b></li>
-                <li><b>Team Work: We work together with Mutual Respect.</b></li>
+                <li><b>Compassion:</b> We are kind & caring. We put YOU first.</li>
+                <li><b>Integrity:</b> We do only what is right.</li>
+                <li><b>Accountability:</b> We walk the talk.</li>
+                <li><b>Team Work:</b> We work together with Mutual Respect.</li>
               </ul>
           </div>
         </div>

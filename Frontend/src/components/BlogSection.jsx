@@ -16,7 +16,7 @@ const BlogSection = () => {
           </div>
         </div>
 
-        <BlogCards />
+        <BlogCards limit={3} />
         <div className="text-center mt-12">
           <button
             className="btn-primary rounded-5"

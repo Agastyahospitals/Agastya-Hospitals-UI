@@ -96,7 +96,7 @@ return (
 								<p className="title">Hospital Administration & Operations Leadership  </p>
 								
 								<div className="description">
-									<p>Anil Kumar oversees hospital administration and operational strategy at Agastya Hospitals.
+									<p>Anil Madati oversees hospital administration and operational strategy at Agastya Hospitals.
 										With strong experience in healthcare operations, he ensures that clinical teams are supported
 									by efficient systems, modern infrastructure, and patient-friendly processes.  </p>
 									<p>His responsibilities include:</p>
