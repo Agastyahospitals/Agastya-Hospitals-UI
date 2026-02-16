@@ -145,6 +145,7 @@ exports.updateBlog = async (req, res) => {
 
     delete updateData._id;
     delete updateData.blogID;
+    delete updateData.dateOfPost;
 
     const { normalizedBlog, errors } = await validateAndNormalizeBlog(updateData, true);
     if (errors.length > 0) {
