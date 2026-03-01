@@ -13,11 +13,16 @@ const About = () => {
       <div className="row">
         <div className="col-lg-8 mx-auto text-center">
           <div className="video-container">
-            <video width="768" height="400" autoplay>
+            {/* <video width="768" height="400" autoplay>
               <source src="https://res.cloudinary.com/sdk28cdn/video/upload/v1758219748/agastya/agastya-hospital-video.mp4" type="video/mp4"></source>
               <source src="https://res.cloudinary.com/sdk28cdn/video/upload/v1758220909/agastya/agastya-hospital-video-m.webm" type="video/ogg"></source>
             Your browser does not support the video tag.
-            </video>
+            </video> */}
+            <img
+                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1772347822/agastya/Agastya_Hospitals.gif"
+                  alt="Agastya Hospitals"
+                  className="img-fluid"
+                />
           </div>
         </div>
       </div>
