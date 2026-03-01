@@ -1,4 +1,42 @@
+import React, { useState } from "react";
+import { useRef } from "react";
+
+
 const About = () => {
+
+  // ✅ 1. Place refs here (TOP of component)
+  const count1 = useRef(null);
+  const count2 = useRef(null);
+  const count3 = useRef(null);
+
+  // ✅ 2. Place useEffect here (BEFORE return)
+  useEffect(() => {
+
+    function animate(el, target, duration = 1500) {
+      let start = 0;
+      const step = 20;
+      const steps = duration / step;
+      const inc = target / steps;
+
+      const timer = setInterval(() => {
+        start += inc;
+
+        if (start >= target) {
+          el.innerText = target;
+          clearInterval(timer);
+        } else {
+          el.innerText = Math.ceil(start);
+        }
+      }, step);
+    }
+
+    // Run when page loads
+    animate(count1.current, 10000);
+    animate(count2.current, 400);
+    animate(count3.current, 15);
+    animate(count4.current, 50);
+
+  }, []);
   return (
     <div className="container mx-auto px-4 pt-5">
       <div className="row">
@@ -127,22 +165,22 @@ const About = () => {
       <div className="row stats-container">
         <div className="col-lg-3 stats-section">
           <h6>Happy Patients</h6>
-          <div className="stat-number">10,000+</div>
+          <div className="stat-number" ref={count1}>0</div>          
         </div>
 
         <div className="col-lg-3 stats-section">
           <h6>Surgeries Performed</h6>
-          <div className="stat-number">400+</div>
+          <div className="stat-number" ref={count2}>0</div>
         </div>
 
         <div className="col-lg-3 stats-section">
           <h6>Specialities</h6>
-          <div className="stat-number">15+</div>
+          <div className="stat-number" ref={count3}>0</div>
         </div>
 
         <div className="col-lg-3 stats-section">
           <h6>Strong Clinical Team</h6>
-          <div className="stat-number">50+</div>
+          <div className="stat-number" ref={count4}>0</div>
         </div>
       </div>
 
