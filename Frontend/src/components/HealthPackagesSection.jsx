@@ -103,7 +103,7 @@ const HealthPackagesSection = () => {
         <div className="container-fluid m-0 ps-0">
           <div className="row align-items-center m-0">
             <div className="col-lg-6 mb-4 mb-lg-0 px-0">
-              <div className="health-img">
+              <div className="health-img justify-content-end">
                 <img
                   src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662700/agastya/agastya-health-packages.png"
                   alt="Health Check-up"
