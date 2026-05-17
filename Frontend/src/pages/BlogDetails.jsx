@@ -1,11 +1,12 @@
 import axios from "axios";
 import { format } from "date-fns";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBlogs } from "../slices/blogSlice";
-import { setBreadcrumb } from "../slices/breadcrumbSlice";
+import { setBreadcrumb, setTitle } from "../slices/breadcrumbSlice";
 
 const BlogDetails = () => {
   const [blogData, setBlogData] = useState(null);
@@ -39,22 +40,26 @@ const BlogDetails = () => {
     }
   };
 
-  const hasFetched = useRef(false);
   useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
-    console.log("matchedBlog()", matchedBlog());
-    dispatch(setBreadcrumb(["Home", matchedBlog()]));
+    setBlogData(null);
     fetchBlogsData();
     dispatch(fetchBlogs());
-  }, [dispatch]);
+  }, [urlSlug]);
+
+  // Update breadcrumb and title once blog data is loaded
+  useEffect(() => {
+    if (blogData?.title) {
+      dispatch(setBreadcrumb(["Home", "Blog"]));
+      dispatch(setTitle(blogData.title));
+    }
+  }, [blogData, dispatch]);
 
   const sortedBlogs = [...(blogs || [])].sort(
     (a, b) => new Date(b.dateOfPost) - new Date(a.dateOfPost)
   );
 
   const gotoBlogDetails = (slug) => {
-    dispatch(setBreadcrumb(["Home", "Blog Details"]));
+    dispatch(setBreadcrumb(["Home", "Blog"]));
     navigate(`/blog/${slug}`);
   };
 
@@ -75,6 +80,33 @@ const BlogDetails = () => {
   }
 
   return (
+    <>
+      <Helmet>
+        <title>{blogData.title} | Agastya Hospitals</title>
+        <meta name="description" content={blogData.metaDescription} />
+        <meta name="keywords" content={blogData.metaKeywords} />
+        <meta name="author" content={blogData.authorName} />
+        <link rel="canonical" href={`https://agastyahospitals.com/blog/${blogData.url}`} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={blogData.title} />
+        <meta property="og:description" content={blogData.metaDescription} />
+        <meta property="og:image" content={blogData.postBanner} />
+        <meta property="og:url" content={`https://agastyahospitals.com/blog/${blogData.url}`} />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={blogData.dateOfPost} />
+        <meta property="article:author" content={blogData.authorName} />
+        <meta property="article:section" content={blogData.category} />
+        {blogData.tags?.map((tag, index) => (
+          <meta property="article:tag" content={tag} key={index} />
+        ))}
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={blogData.title} />
+        <meta name="twitter:description" content={blogData.metaDescription} />
+        <meta name="twitter:image" content={blogData.postBanner} />
+      </Helmet>
     <div className="container py-5">
       <div className="row m-0">
         <div className="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -87,7 +119,7 @@ const BlogDetails = () => {
             />
           </div>
           <p className="f-16 text-muted mt-4 " style={{ color: "#999999" }}>
-            by Admin | {format(new Date(blogData.dateOfPost), "MMM dd, yyyy")}
+            by {blogData.authorName || "Admin"} | {format(new Date(blogData.dateOfPost), "MMM dd, yyyy")}
           </p>
           <div className="mt-3 ql-snow">
             <p
@@ -122,7 +154,7 @@ const BlogDetails = () => {
                   </span>
                   &nbsp;
                   <span className="f-14">
-                    <a href="" onClick={() => gotoBlogDetails(data.url)}>
+                    <a href="" onClick={(e) => { e.preventDefault(); gotoBlogDetails(data.url); }}>
                       {data.title}
                     </a>
                   </span>
@@ -144,6 +176,7 @@ const BlogDetails = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -122,7 +122,7 @@ const Header = () => {
     allNavItems.find((item) => item.path === pathname)?.label ||
     (pathname.startsWith("/doctor/") ? "Doctor Profile" : "") ||
     (pathname.startsWith("/specialty/") ? "Specialty Details" : "") ||
-    (pathname.startsWith("/blog/") ? "Blog Details" : "");
+    (pathname.startsWith("/blog/") ? (title || "Blog") : "");
 
   console.log("CURRENT PAGE::: ", currentPage);
 
@@ -152,7 +152,9 @@ const Header = () => {
       } else if (pathname.startsWith("/specialty/")) {
         label = "Specialty Details";
       } else if (pathname.startsWith("/blog/")) {
-        label = "Blog Details";
+        // Don't set breadcrumb here — BlogDetails component will set it
+        // with the actual blog title after fetching data
+        label = "";
       }
 
       if (label) {

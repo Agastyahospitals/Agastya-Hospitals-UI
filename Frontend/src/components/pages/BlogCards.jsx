@@ -29,7 +29,7 @@ const BlogCards = ({ limit }) => {
   }, [dispatch]);
 
   const gotoBlogDetails = (slug) => {
-    dispatch(setBreadcrumb(["Home", "Blog Details"]));
+    dispatch(setBreadcrumb(["Home", "Blog"]));
     navigate(`/blog/${slug}`);
   };
 

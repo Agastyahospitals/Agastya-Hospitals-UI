@@ -13,8 +13,11 @@ const breadcrumbSlice = createSlice({
       state.trail = action.payload; // action.payload should be an array of breadcrumb parts
       state.title = action.payload[action.payload.length - 1];
     },
+    setTitle: (state, action) => {
+      state.title = action.payload;
+    },
   },
 });
 
-export const { setBreadcrumb } = breadcrumbSlice.actions;
+export const { setBreadcrumb, setTitle } = breadcrumbSlice.actions;
 export default breadcrumbSlice.reducer;
