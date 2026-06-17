@@ -111,7 +111,7 @@ return (
 							</div>
 						</div>
 					</div>
-					<div className="leadership-grid-row">
+					{/*<div className="leadership-grid-row">
 						<div>
 							<div className="leadership-card t">
 								<img
@@ -122,7 +122,7 @@ return (
 								
 							</div>
 						</div>
-						{/*<div>
+						<div>
 							<div className="leadership-info">
 								<h3>Dr Gurram Sudhakar Reddy</h3>
 								<p className="title">MBBS, MS (Orthopaedics) </p>
