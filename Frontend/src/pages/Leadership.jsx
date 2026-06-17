@@ -122,7 +122,7 @@ return (
 								
 							</div>
 						</div>
-						<!--<div>
+						{/*<div>
 							<div className="leadership-info">
 								<h3>Dr Gurram Sudhakar Reddy</h3>
 								<p className="title">MBBS, MS (Orthopaedics) </p>
@@ -142,7 +142,7 @@ return (
 									
 								</div>
 							</div>
-						</div>-->
+						</div>*/}
 					</div>
 					
 				</div>
