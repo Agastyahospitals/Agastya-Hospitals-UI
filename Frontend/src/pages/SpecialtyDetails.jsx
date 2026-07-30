@@ -8,6 +8,7 @@ import { DOCTORS_API, SPECIALITIES_API } from "../api/services";
 import { useState } from "react";
 import EnquiryForm from "./EnquiryForm";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
+import SEO from "../components/SEO";
 
 const SpecialtyDetails = () => {
   const location = useLocation();
@@ -99,8 +100,34 @@ const SpecialtyDetails = () => {
     navigate(`/doctor/${formattedName}`);
   };
 
+  // Build JSON-LD structured data for this specialty
+  const specialtyJsonLd = specialties ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalSpecialty",
+    "name": formatSpecialtyTitle(),
+    "description": specialties?.shortDescription || `${formatSpecialtyTitle()} department at Agastya Hospitals, LB Nagar, Hyderabad.`,
+    "url": `https://agastyahospitals.com/specialty/${specialityName}`,
+    "provider": {
+      "@type": "Hospital",
+      "name": "Agastya Hospitals",
+      "url": "https://agastyahospitals.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "LB Nagar, Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      }
+    }
+  } : null;
+
   return (
     <div className="container">
+      <SEO
+        title={`${formatSpecialtyTitle()} - Best ${formatSpecialtyTitle()} Hospital in LB Nagar, Hyderabad`}
+        description={specialties?.shortDescription || `Expert ${formatSpecialtyTitle()} care at Agastya Hospitals, LB Nagar, Hyderabad. Experienced specialists, advanced diagnostics, and personalized treatment plans.`}
+        canonical={`/specialty/${specialityName}`}
+        jsonLd={specialtyJsonLd}
+      />
       {loading ? (
         <div className="text-center">
           <div

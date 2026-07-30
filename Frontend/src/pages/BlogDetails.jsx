@@ -2,7 +2,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBlogs } from "../slices/blogSlice";
@@ -86,6 +86,7 @@ const BlogDetails = () => {
         <meta name="description" content={blogData.metaDescription} />
         <meta name="keywords" content={blogData.metaKeywords} />
         <meta name="author" content={blogData.authorName} />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://agastyahospitals.com/blog/${blogData.url}`} />
 
         {/* Open Graph */}
@@ -94,6 +95,7 @@ const BlogDetails = () => {
         <meta property="og:image" content={blogData.postBanner} />
         <meta property="og:url" content={`https://agastyahospitals.com/blog/${blogData.url}`} />
         <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Agastya Hospitals" />
         <meta property="article:published_time" content={blogData.dateOfPost} />
         <meta property="article:author" content={blogData.authorName} />
         <meta property="article:section" content={blogData.category} />
@@ -106,6 +108,32 @@ const BlogDetails = () => {
         <meta name="twitter:title" content={blogData.title} />
         <meta name="twitter:description" content={blogData.metaDescription} />
         <meta name="twitter:image" content={blogData.postBanner} />
+
+        {/* JSON-LD BlogPosting Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": blogData.title,
+            "description": blogData.metaDescription,
+            "image": blogData.postBanner,
+            "author": {
+              "@type": "Person",
+              "name": blogData.authorName || "Agastya Hospitals"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Agastya Hospitals",
+              "url": "https://agastyahospitals.com"
+            },
+            "datePublished": blogData.dateOfPost,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://agastyahospitals.com/blog/${blogData.url}`
+            },
+            "keywords": blogData.metaKeywords
+          })}
+        </script>
       </Helmet>
     <div className="container py-5">
       <div className="row m-0">
@@ -154,9 +182,9 @@ const BlogDetails = () => {
                   </span>
                   &nbsp;
                   <span className="f-14">
-                    <a href="" onClick={(e) => { e.preventDefault(); gotoBlogDetails(data.url); }}>
+                    <Link to={`/blog/${data.url}`} onClick={() => dispatch(setBreadcrumb(["Home", "Blog"]))}>
                       {data.title}
-                    </a>
+                    </Link>
                   </span>
                 </li>
               ))}

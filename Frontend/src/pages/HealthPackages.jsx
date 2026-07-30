@@ -4,6 +4,7 @@ import { fetchHealthPackages } from "../slices/healthPackages";
 import { useState } from "react";
 import ModalComponent from "../components/common/ModalComponent";
 import HealthPackagesCards from "./HealthPackagesCards";
+import SEO from "../components/SEO";
 
 const HealthPackages = () => {
   const [isBookOpen, setIsBookOpen] = useState(false);
@@ -72,6 +73,11 @@ const HealthPackages = () => {
 
   return (
     <div className="container py-5">
+      <SEO
+        title="Health Packages - Preventive Health Checkups"
+        description="Explore affordable health check-up packages at Agastya Hospitals, LB Nagar, Hyderabad. Comprehensive preventive health screenings for early detection and better wellness."
+        canonical="/health-packages"
+      />
       {loading && (
         <div className="text-center py-5">
           <div className="spinner-border text-primary" role="status">

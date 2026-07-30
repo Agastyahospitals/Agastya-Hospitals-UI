@@ -6,6 +6,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setBreadcrumb } from "../../slices/breadcrumbSlice";
+import SEO from "../SEO";
 
 const DoctorProfile = () => {
   const [doctorProfile, setDoctorProfile] = useState({});
@@ -43,8 +44,31 @@ const DoctorProfile = () => {
     dispatch(setBreadcrumb(["Home", formattedName]));
   }, []);
 
+  // Build JSON-LD for doctor
+  const doctorJsonLd = doctorProfile?.fullName ? {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "name": doctorProfile.fullName,
+    "description": doctorProfile.designation || `Doctor at Agastya Hospitals`,
+    "url": `https://agastyahospitals.com/doctor/${fullName}`,
+    "image": doctorProfile.profilePicture,
+    "medicalSpecialty": doctorProfile.speciality,
+    "worksFor": {
+      "@type": "Hospital",
+      "name": "Agastya Hospitals",
+      "url": "https://agastyahospitals.com"
+    }
+  } : null;
+
   return (
     <div className="container p-5 doctor-profile-page">
+      <SEO
+        title={`${formattedName} - Doctor Profile`}
+        description={`${formattedName} at Agastya Hospitals, LB Nagar, Hyderabad. ${doctorProfile.designation || ''} with ${doctorProfile.yearsOfExperience || ''} years of experience.`}
+        canonical={`/doctor/${fullName}`}
+        ogImage={doctorProfile.profilePicture}
+        jsonLd={doctorJsonLd}
+      />
       {loading ? (
         <div className="text-center">
           <div

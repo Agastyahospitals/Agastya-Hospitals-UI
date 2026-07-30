@@ -11,6 +11,7 @@ import {
 import { countryCodes } from "../../api/countryCode";
 import { useRef } from "react";
 import { toasterConfig } from "../../utils";
+import SEO from "../SEO";
 
 const initialState = {
   fullName: "",
@@ -469,6 +470,11 @@ const BookAppointment = () => {
 
   return (
     <div>
+      <SEO
+        title="Book Doctor Appointment Online"
+        description="Book an appointment with experienced specialist doctors at Agastya Hospitals, LB Nagar, Hyderabad. Easy online booking, quick confirmation, and personalized care."
+        canonical="/book-appointment"
+      />
       <div className="container pb-8">
         <div className="row">
           <div className="col-lg-8">

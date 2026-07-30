@@ -1,3 +1,5 @@
+import SEO from "../components/SEO";
+
 const Careers = () => {
   const positions = [
     {
@@ -62,6 +64,11 @@ const Careers = () => {
 
   return (
     <div className="container py-5" style={{ overflow: "hidden" }}>
+      <SEO
+        title="Careers - Join Our Medical Team"
+        description="Explore career opportunities at Agastya Hospitals, LB Nagar, Hyderabad. Join our team of experienced medical professionals and make a difference in healthcare."
+        canonical="/careers"
+      />
       {/* <h1 className="text-4xl font-bold text-gray-900 text-center mb-12">
           Careers at Agastya Hospitals
         </h1> */}

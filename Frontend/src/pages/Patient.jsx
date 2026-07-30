@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import EnquiryForm from './EnquiryForm';
 import intlpatientimg from"../assets/images/international-patients-map.png";
+import SEO from "../components/SEO";
 
 const Patient = () => {
   const [openFAQ, setOpenFAQ] = useState(0)
@@ -63,6 +64,11 @@ const Patient = () => {
   }
   return (
     <div className="py-5">
+      <SEO
+        title="Patient Services - International & Domestic Patient Care"
+        description="Comprehensive patient services at Agastya Hospitals, LB Nagar, Hyderabad. International patient support, tele-consultation, accommodation assistance, and personalized care."
+        canonical="/patient"
+      />
       <div className="container px-3 international-patient-page">
 
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toasterConfig } from "../../utils";
 import { useRef } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import SEO from "../SEO";
 
 const initialState = {
   fullName: "",
@@ -108,6 +109,11 @@ const ContactUs = () => {
 
   return (
     <div>
+      <SEO
+        title="Contact Us - Get in Touch"
+        description="Contact Agastya Hospitals, LB Nagar, Hyderabad. Reach us for appointments, enquiries, or emergency services. Phone, email, and location details."
+        canonical="/contact-us"
+      />
       <div className="container p-5">
         <div className="row">
           <div className="col-lg-4">

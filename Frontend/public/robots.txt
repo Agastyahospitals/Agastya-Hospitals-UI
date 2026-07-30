@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /medical-reports
+
+Sitemap: https://agastyahospitals.com/sitemap.xml

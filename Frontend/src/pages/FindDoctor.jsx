@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
 import { useDispatch } from "react-redux";
+import SEO from "../components/SEO";
 
 const FindDoctor = () => {
   const [doctors, setDoctors] = useState([]);
@@ -71,6 +72,11 @@ const FindDoctor = () => {
 
   return (
     <div className="container py-5">
+      <SEO
+        title="Find a Doctor - Expert Specialists at Agastya Hospitals"
+        description="Find the right specialist doctor at Agastya Hospitals, LB Nagar, Hyderabad. Search by specialty, name, or department. Book appointments with experienced consultants."
+        canonical="/find-doctor"
+      />
       {isLoading ? (
         <div className="text-center">
           <div

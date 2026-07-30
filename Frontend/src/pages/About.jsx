@@ -1,6 +1,13 @@
+import SEO from "../components/SEO";
+
 const About = () => {
   return (
     <div className="container mx-auto px-4 pt-5">
+      <SEO
+        title="About Us - Leading Hospital in LB Nagar, Hyderabad"
+        description="Learn about Agastya Hospitals, a leading super specialty hospital in LB Nagar, Hyderabad. Our mission is to provide empathetic, ethical, and advanced medical care."
+        canonical="/about"
+      />
       <div className="row">
         <div className="col-lg-8 mx-auto">
           <h1 className="text-center special-title gradient-text">

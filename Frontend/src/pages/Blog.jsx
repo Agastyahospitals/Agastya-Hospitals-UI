@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../slices/blogSlice";
 import BlogCards from "../components/pages/BlogCards";
+import SEO from "../components/SEO";
 
 const Blog = () => {
   // const [blogsData, setBlogsData] = useState([]);
@@ -26,6 +27,11 @@ const Blog = () => {
 
   return (
     <div className="container py-5">
+      <SEO
+        title="Health Blog - Medical Articles & Health Tips"
+        description="Read the latest health articles, medical tips, and wellness blogs from Agastya Hospitals, LB Nagar, Hyderabad. Expert insights on diseases, treatments, and healthy living."
+        canonical="/blog"
+      />
       {loading ? (
         <div className="text-center">
           <div
@@ -45,3 +51,4 @@ const Blog = () => {
 };
 
 export default Blog;
+

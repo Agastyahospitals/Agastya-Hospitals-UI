@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSpecialties } from "../slices/specialtySlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
 import { specialtyFaqs } from "../components/common/FAQs";
+import SEO from "../components/SEO";
 
 const Specialties = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -33,8 +34,28 @@ const Specialties = () => {
     }
   };
 
+  // Build FAQ JSON-LD structured data
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": specialtyFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div>
+      <SEO
+        title="Specialties - Best Super Specialty Hospital in LB Nagar, Hyderabad"
+        description="Explore our comprehensive specialties at Agastya Hospitals, LB Nagar, Hyderabad. From cardiology to orthopaedics, neurology to gastroenterology — advanced multispecialty care under one roof."
+        canonical="/specialties"
+        jsonLd={faqJsonLd}
+      />
       <div className="container py-5">
         {isLoading ? (
           <div className="text-center py-5">
@@ -115,20 +136,18 @@ const Specialties = () => {
                     </p>
 
                     <div className="specialtypage-btn">
-                      <a
+                      <Link
                         className="f-12 text-primary cursor-pointer"
+                        to={`/specialty/${specialty.specialityName.toLowerCase().replace(/\s+/g, "-")}`}
                         onClick={() => {
                           dispatch(
                             setBreadcrumb(["Home", specialty.specialityName])
                           );
-                          navigate(`/specialty/${specialty.specialityName.toLowerCase().replace(/\s+/g, "-")}`, {
-                            //state: { specialityID: specialty.specialityID },
-                          });
-                          window.scrollTo({ top: 0, behavior: "smooth" }); // scroll smoothly to top
+                          window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                       >
                         Know more
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
