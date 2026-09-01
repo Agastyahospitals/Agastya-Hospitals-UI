@@ -161,7 +161,7 @@ const About = () => {
               Contact Us for a Expert Second Opinion!
             </h2>
             <p className="mt-3">
-              At [Hospital Name], we understand that making informed decisions
+              At Agastya Hospitals, we understand that making informed decisions
               about your health can be challenging. Whether you’re facing a new
               diagnosis, considering treatment options, or just need reassurance
               about your current care plan, we’re here to help. Our experienced
