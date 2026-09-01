@@ -96,24 +96,24 @@ const TechnologySection = () => {
             <div className="mycustom-marque theme-blue-bg">
                 <div className="scrolling-wrap">
                     <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment &nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />State-of-the-Art Equipment &nbsp;&nbsp;</div>
                     </div>
                    <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                      <div className="comm">
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Technological Excellence</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />Precision Driven Tools</div>
-                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1767202076/agastya/has.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Technological Excellence</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />Precision Driven Tools</div>
+                        <div className="cmn-textslide stroke-text"><img src={'https://res.cloudinary.com/sdk28cdn/image/upload/v1788281285/agastya/bullet.png'} alt="img" />State-of-the-Art Equipment&nbsp;&nbsp;</div>
                     </div>
                     
                 </div>

@@ -710,7 +710,7 @@ const BookAppointment = () => {
 
               <div className="sidebar-section">
                 <h5 className="title">
-                  Visit our hospital for a free second opinion
+                  Visit our hospital for a expert second opinion
                 </h5>
                 <ul className="sep">
                   <li>

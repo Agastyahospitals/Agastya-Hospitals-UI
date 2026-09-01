@@ -86,7 +86,7 @@ const Header = () => {
     { path: "/contact-us", label: "Contact Us" },
     { path: "/privacy-policy", label: "Privacy Policy" },
     { path: "/terms-and-conditions", label: "Terms & Conditions" },
-    { path: "/free-second-opinion", label: "Free Second Opinion" },
+    { path: "/free-second-opinion", label: "Expert Second Opinion" },
     { path: "/medical-reports", label: "Medical Reports" },
     { path: `/doctor/`, label: "Doctor Profile" },
     { path: "/leadership-team", label: "Leadership Team" },

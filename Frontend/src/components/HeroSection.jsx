@@ -16,7 +16,7 @@ const quickLinks = [
     path: "/medical-reports",
   },
   {
-    label: "Get a Free Second Opinion",
+    label: "Get a Expert Second Opinion",
     path: "/free-second-opinion",
   },
 ];
@@ -140,7 +140,7 @@ const HeroSection = () => {
               </a>
               <a
                 onClick={() => {
-                  dispatch(setBreadcrumb(["Home", "Free Second Opinion"]));
+                  dispatch(setBreadcrumb(["Home", "Expert Second Opinion"]));
                   navigate("/free-second-opinion");
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}

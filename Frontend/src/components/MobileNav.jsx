@@ -28,7 +28,7 @@ const MobileNav = () => {
       <div
         class="mobile-nav-item"
         onClick={() => {
-          dispatch(setBreadcrumb(["Home", "Free Second Opinion"]));
+          dispatch(setBreadcrumb(["Home", "Expert Second Opinion"]));
           navigate("/free-second-opinion");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}

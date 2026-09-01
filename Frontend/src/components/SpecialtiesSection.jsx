@@ -90,11 +90,11 @@ const SpecialtiesSection = () => {
                     className=""
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="spec-title text-xl font-semibold mb-2">
                   {specialty.specialityName}
                 </h3>
                 <p
-                  className={`text-sm ${
+                  className={`spec-desc-card text-sm ${
                     specialty.active ? "text-gray-600" : "text-gray-600"
                   }`}
                 >

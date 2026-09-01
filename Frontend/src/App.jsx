@@ -37,11 +37,11 @@ function App() {
         </a>
 
         <a className="sticky-btn opinion cursor-pointer" onClick={() => {
-          dispatch(setBreadcrumb(["Home", "Free Second Opinion"]));
+          dispatch(setBreadcrumb(["Home", "Expert Second Opinion"]));
           navigate("/free-second-opinion");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}>
-          <span>Free Second Opinion</span>
+          <span>Expert Second Opinion</span>
           <i className="bi bi-chat-dots"></i>
         </a>
         <a className="sticky-btn whatsapp cursor-pointer" href="https://wa.me/919459108108?text=Hello%20I%20would%20like%20to%20get%20more%20information%20about%20your%20hospital%20services.%20Please%20assist%20me." target="_blank">

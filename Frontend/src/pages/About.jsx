@@ -158,7 +158,7 @@ const About = () => {
           <div className="second-opinion-content">
             <h3 className="second-opinion-title">Looking for a Second Opinion?</h3>
             <h2 className="second-opinion-highlight">
-              Contact Us for a Free Second Opinion!
+              Contact Us for a Expert Second Opinion!
             </h2>
             <p className="mt-3">
               At [Hospital Name], we understand that making informed decisions
@@ -169,7 +169,7 @@ const About = () => {
               feel confident in your healthcare choices.
             </p>
             <a href="/free-second-opinion" className="second-opinion-btn mt-3">
-              <span>➔</span> Get Your Free Second Opinion
+              <span>➔</span> Get Your Expert Second Opinion
             </a>
           </div>
           <div>
