@@ -1,21 +1,16 @@
-
-// import aboutagstya from "../assets/images/about-agastya.png";
-
-import { OutstandingCareSectionImages } from "../assets/ImageConstants"
-
-
+// import aboutagstya from "../assets/images/about_agastya.png";
 const OutstandingCareSection = () => {
   return (
-    <section className="outstanding-care">
+    <section className="outstanding-care">      
 
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
             <div className="left-section">
-              <img src={OutstandingCareSectionImages.aboutagstya} alt="Outstanding Care"></img>
+              <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1788792385/agastya/about-agastya.png" alt="Outstanding Care"></img>
               <div className="d-flex mt-5 mx-auto justify-center outstanding-btn-container">
                 <a href="#" className="video"><img height={24} src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758302379/agastya/video-icon.svg"></img> Watch Video</a>
-    
+                
               </div>
             </div>
           </div>
@@ -33,8 +28,8 @@ const OutstandingCareSection = () => {
               </ul>
             </div>
             <div className="accreditation">
-              <div className="background"></div>
-              <div className="accreds"><p className="paragraph-22 p-3 f-w-700">Accreditation <br />& Recognition</p><img src={OutstandingCareSectionImages.accreditation}></img></div>
+                <div className="background"></div>
+                <div className="accreds"><p className="paragraph-22 p-3 f-w-700">Accreditation <br/>& Recognition</p><img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662699/agastya/accreditation-recognition.png"></img></div>
             </div>
           </div>
         </div>
