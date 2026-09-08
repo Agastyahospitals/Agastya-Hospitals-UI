@@ -56,7 +56,7 @@ export async function getPrerenderRoutes() {
     const specialties = specialtiesRes.data || specialtiesRes || [];
     for (const spec of specialties) {
       if (spec.specialityName) {
-        const slug = spec.specialityName.toLowerCase().replace(/\s+/g, "-");
+        const slug = spec.specialityName.trim().toLowerCase().replace(/\s+/g, "-");
         routes.push(`/specialty/${slug}`);
       }
     }
@@ -72,7 +72,8 @@ export async function getPrerenderRoutes() {
     const blogs = blogsRes.data || blogsRes || [];
     for (const blog of blogs) {
       if (blog.url) {
-        routes.push(`/blog/${blog.url}`);
+        const cleanUrl = blog.url.trim();
+        routes.push(`/blog/${cleanUrl}`);
       }
     }
     console.log(`[prerender]   Added ${blogs.length} blog routes`);
@@ -87,7 +88,7 @@ export async function getPrerenderRoutes() {
     const doctors = doctorsRes.data || doctorsRes || [];
     for (const doc of doctors) {
       if (doc.fullName) {
-        const slug = doc.fullName.toLowerCase().replace(/[.\s]+/g, "-");
+        const slug = doc.fullName.trim().toLowerCase().replace(/[.\s]+/g, "-").replace(/^-+|-+$/g, "");
         routes.push(`/doctor/${slug}`);
       }
     }
@@ -96,6 +97,7 @@ export async function getPrerenderRoutes() {
     console.warn("[prerender] Warning: Could not fetch doctors:", err.message);
   }
 
-  console.log(`[prerender] Total routes to pre-render: ${routes.length}`);
-  return routes;
+  const uniqueRoutes = Array.from(new Set(routes));
+  console.log(`[prerender] Total routes to pre-render: ${uniqueRoutes.length}`);
+  return uniqueRoutes;
 }

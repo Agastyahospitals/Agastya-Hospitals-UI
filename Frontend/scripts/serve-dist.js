@@ -15,7 +15,11 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = resolve(__dirname, "../dist");
-const PREFERRED_PORTS = [3003, 3002, 4173, 5000];
+// On Render.com (and most cloud platforms), PORT env var is injected automatically.
+// Fall back to local dev ports when running locally.
+const PREFERRED_PORTS = process.env.PORT
+  ? [parseInt(process.env.PORT, 10)]
+  : [3003, 3002, 4173, 5000];
 
 const mimeTypes = {
   ".html": "text/html",
@@ -43,8 +47,16 @@ const server = createServer((req, res) => {
   const reqUrl = req.url.split("?")[0];
   let filePath = join(DIST_DIR, reqUrl === "/" ? "index.html" : reqUrl);
 
+  // If path has an asset extension (.css, .js, images, fonts) but doesn't exist, return 404 instead of index.html
+  const hasAssetExt = /\.(css|js|png|jpg|jpeg|webp|svg|ico|woff|woff2|ttf|json|xml|txt)$/i.test(reqUrl);
+  if (hasAssetExt && !existsSync(filePath)) {
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("404 Asset Not Found");
+    return;
+  }
+
   // Clean URL handling (e.g., /about -> dist/about/index.html)
-  if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
+  if (!existsSync(filePath) || (existsSync(filePath) && statSync(filePath).isDirectory())) {
     const subIndex = join(filePath, "index.html");
     const htmlFile = filePath + ".html";
     if (existsSync(subIndex)) {
@@ -60,7 +72,12 @@ const server = createServer((req, res) => {
     const content = readFileSync(filePath);
     const ext = "." + filePath.split(".").pop();
     const contentType = mimeTypes[ext] || "application/octet-stream";
-    res.writeHead(200, { "Content-Type": contentType });
+    res.writeHead(200, {
+      "Content-Type": contentType,
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0"
+    });
     res.end(content);
   } catch (err) {
     res.writeHead(500);

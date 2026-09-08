@@ -10,7 +10,7 @@
 
 import puppeteer from "puppeteer";
 import { createServer } from "http";
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
 import { join, dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { getPrerenderRoutes } from "./get-prerender-routes.js";
@@ -94,7 +94,7 @@ function awaitImportFs() {
 /**
  * Renders a single route and writes output to dist/
  */
-async function renderRoute(page, route) {
+async function renderRoute(page, route, compiledCss = "") {
   const url = `${BASE_URL}${route}`;
   console.log(`  [prerender] Rendering: ${route}`);
 
@@ -123,6 +123,11 @@ async function renderRoute(page, route) {
 
     // Remove any remaining raw Vite preview livereload scripts if present
     html = html.replace(/<script type="module" src="\/@vite\/client"><\/script>/g, "");
+
+    // Inject inlined CSS stylesheet so the HTML is 100% self-contained and renders styles even if opened via file:// or downloaded
+    if (compiledCss && !html.includes('id="inlined-app-styles"')) {
+      html = html.replace("</head>", `<style id="inlined-app-styles">\n${compiledCss}\n</style></head>`);
+    }
 
     // Determine output file path
     let outputPath;
@@ -176,6 +181,20 @@ async function prerender() {
 
   const results = [];
 
+  // Read all compiled CSS files to inline into each page
+  let compiledCss = "";
+  try {
+    const assetsDir = join(DIST_DIR, "assets");
+    if (existsSync(assetsDir)) {
+      const cssFiles = readdirSync(assetsDir).filter((f) => f.endsWith(".css"));
+      for (const file of cssFiles) {
+        compiledCss += readFileSync(join(assetsDir, file), "utf-8") + "\n";
+      }
+    }
+  } catch (err) {
+    console.warn("[prerender] Warning: Could not read compiled CSS for inlining:", err.message);
+  }
+
   try {
     const CONCURRENCY = 3;
     for (let i = 0; i < routes.length; i += CONCURRENCY) {
@@ -187,18 +206,25 @@ async function prerender() {
             page = await browser.newPage();
             await page.setViewport({ width: 1280, height: 800 });
 
-            // Suppress heavy resource requests (images, fonts, media) to speed up rendering
+            // Suppress heavy resource requests (images, fonts, media, analytics) to speed up rendering
             await page.setRequestInterception(true);
             page.on("request", (req) => {
               const resourceType = req.resourceType();
-              if (["image", "stylesheet", "font", "media"].includes(resourceType)) {
+              const url = req.url();
+              if (["image", "media", "font"].includes(resourceType)) {
+                req.abort();
+              } else if (
+                url.includes("googletagmanager.com") ||
+                url.includes("google-analytics.com") ||
+                url.includes("hcaptcha.com")
+              ) {
                 req.abort();
               } else {
                 req.continue();
               }
             });
 
-            const res = await renderRoute(page, route);
+            const res = await renderRoute(page, route, compiledCss);
             await page.close();
             return res;
           } catch (err) {

@@ -25,24 +25,35 @@ const DoctorProfile = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${DOCTORS_API}?fullName=${formattedName}`
+        `${DOCTORS_API}?fullName=${encodeURIComponent(formattedName.trim())}`
       );
-      if (response.data) {
+      if (response.data?.data && response.data.data.length > 0) {
         setDoctorProfile(response.data.data[0]);
         setLoading(false);
+        return;
       }
+
+      // Fallback: fetch all doctors and match by normalized slug
+      const allDoctorsRes = await axios.get(DOCTORS_API);
+      const allDocs = allDoctorsRes.data?.data || allDoctorsRes.data || [];
+      const cleanSlug = (fullName || "").toLowerCase().replace(/[.\s-]+/g, "");
+      const matched = allDocs.find((doc) => {
+        const docSlug = (doc.fullName || "").toLowerCase().replace(/[.\s-]+/g, "");
+        return docSlug === cleanSlug;
+      });
+      if (matched) {
+        setDoctorProfile(matched);
+      }
+      setLoading(false);
     } catch (error) {
-      throw error;
+      setLoading(false);
     }
   };
 
-  const hasFetched = useRef(false);
   useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
     fetchDoctorById();
-    dispatch(setBreadcrumb(["Home", formattedName]));
-  }, []);
+    dispatch(setBreadcrumb(["Home", formattedName.trim()]));
+  }, [fullName]);
 
   // Build JSON-LD for doctor
   const doctorJsonLd = doctorProfile?.fullName ? {

@@ -465,7 +465,7 @@ select.form-select {
 
 }
 
-*/ .main-navigation.sticky .hideinnertitleonscroll {
+.main-navigation.sticky .hideinnertitleonscroll {
   display: none;
 }
 

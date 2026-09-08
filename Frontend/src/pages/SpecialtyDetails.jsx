@@ -52,32 +52,44 @@ const SpecialtyDetails = () => {
   const fetchSpecialties = async () => {
     try {
       setLoading(true);
+      let targetSpecialty = null;
+
       const response = await axios.get(
-        `${SPECIALITIES_API}?specialityName=${formatSpecialtyTitle()}`
+        `${SPECIALITIES_API}?specialityName=${encodeURIComponent(formatSpecialtyTitle())}`
       );
-      if (response.data[0].doctor.length > 0) {
+      if (response.data && response.data.length > 0) {
+        targetSpecialty = response.data[0];
+      } else {
+        // Fallback: fetch all specialties and match by normalized slug
+        const allSpecRes = await axios.get(SPECIALITIES_API);
+        const allSpecs = allSpecRes.data?.data || allSpecRes.data || [];
+        const cleanSlug = (specialityName || "").toLowerCase().replace(/[^\w]/g, "");
+        targetSpecialty = allSpecs.find((s) => {
+          const specSlug = (s.specialityName || "").toLowerCase().replace(/[^\w]/g, "");
+          return specSlug === cleanSlug;
+        });
+      }
+
+      if (targetSpecialty && targetSpecialty.doctor && targetSpecialty.doctor.length > 0) {
         // Fetch all doctor data in parallel
         const doctorsList = await Promise.all(
-          response.data[0].doctor.map(async (doc) => {
+          targetSpecialty.doctor.map(async (doc) => {
             try {
               const docResponse = await axios.get(
                 `${DOCTORS_API}?doctorID=${doc}`
               );
-              // Only return doctor data if available
               return docResponse.data?.data || null;
             } catch {
-              // If doctor not found or error, return null
               return null;
             }
           })
         );
-        // Filter out null values (doctors not found)
         const doctorDataList = doctorsList.filter(Boolean);
         setDoctorData(doctorDataList);
       } else {
         setDoctorData([]);
       }
-      setSpecialties(response.data[0]);
+      setSpecialties(targetSpecialty || null);
       setLoading(false);
     } catch (error) {
       setDoctorData([]);
@@ -96,7 +108,7 @@ const SpecialtyDetails = () => {
 
   const gotoProfile = (fullName) => {
     dispatch(setBreadcrumb(["Home", "Doctor Profile"]));
-    const formattedName = fullName.toLowerCase().replace(/[.\s]+/g, "-");
+    const formattedName = (fullName || "").trim().toLowerCase().replace(/[.\s]+/g, "-").replace(/^-+|-+$/g, "");
     navigate(`/doctor/${formattedName}`);
   };
 

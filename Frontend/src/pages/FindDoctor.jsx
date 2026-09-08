@@ -66,7 +66,7 @@ const FindDoctor = () => {
   });
 
   const gotoProfile = (fullName) => {
-    const formattedName = fullName.toLowerCase().replace(/[.\s]+/g, "-");
+    const formattedName = (fullName || "").trim().toLowerCase().replace(/[.\s]+/g, "-").replace(/^-+|-+$/g, "");
     navigate(`/doctor/${formattedName}`);
   };
 
