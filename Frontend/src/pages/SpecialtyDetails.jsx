@@ -1,11 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import { fetchSpecialties } from "../slices/specialtySlice";
-import { useEffect } from "react";
 import axios from "axios";
 import { DOCTORS_API, SPECIALITIES_API } from "../api/services";
-import { useState } from "react";
 import EnquiryForm from "./EnquiryForm";
 import { setBreadcrumb } from "../slices/breadcrumbSlice";
 import SEO from "../components/SEO";
@@ -15,6 +13,7 @@ const SpecialtyDetails = () => {
   const [specialties, setSpecialties] = useState();
   const [doctorData, setDoctorData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { specialty: specialityName } = useParams();
@@ -90,6 +89,7 @@ const SpecialtyDetails = () => {
   useEffect(() => {
     // if (hasFetched.current) return;
     // hasFetched.current = true;
+    setIsDescExpanded(false);
     fetchSpecialties();
     dispatch(setBreadcrumb(["Home", formatSpecialtyTitle()]));
   }, [specialityName]);
@@ -119,6 +119,58 @@ const SpecialtyDetails = () => {
       }
     }
   } : null;
+
+  // Truncate HTML to maxChars visible characters, preserving tag structure
+  const truncateHtml = (html, maxChars) => {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    const plainText = tmp.textContent || tmp.innerText || "";
+    if (plainText.length <= maxChars) return { html, isTruncated: false };
+
+    let charCount = 0;
+    const walkAndTruncate = (node) => {
+      if (charCount >= maxChars) {
+        node.remove();
+        return;
+      }
+      if (node.nodeType === Node.TEXT_NODE) {
+        const remaining = maxChars - charCount;
+        if (node.textContent.length > remaining) {
+          node.textContent = node.textContent.slice(0, remaining);
+          charCount = maxChars;
+        } else {
+          charCount += node.textContent.length;
+        }
+      } else if (node.childNodes) {
+        [...node.childNodes].forEach(walkAndTruncate);
+      }
+    };
+
+    const clone = document.createElement("div");
+    clone.innerHTML = html;
+    walkAndTruncate(clone);
+    return { html: clone.innerHTML, isTruncated: true };
+  };
+
+  const displayDescription = useMemo(() => {
+    const raw = specialties?.pageDescription || "";
+    if (!raw) return raw;
+    const { isTruncated } = truncateHtml(raw, 1000);
+    if (isDescExpanded) {
+      if (!isTruncated) return raw;
+      return (
+        raw +
+        '<span class="read-less-trigger" tabindex="0" role="button" style="color:#0d6efd;cursor:pointer;font-weight:600;"> read less...</span>'
+      );
+    }
+    const { html: truncatedHtml } = truncateHtml(raw, 1000);
+    if (!isTruncated) return truncatedHtml;
+    return (
+      truncatedHtml +
+      '<span class="read-more-trigger" tabindex="0" role="button" style="color:#0d6efd;cursor:pointer;font-weight:600;"> read more...</span>'
+    );
+  }, [specialties?.pageDescription, isDescExpanded]);
+
 
   return (
     <div className="container">
@@ -152,8 +204,16 @@ const SpecialtyDetails = () => {
             />
             <h2 className="f-30 f-w-700 mt-4 mb-3">Overview</h2>
             <div className="ql-snow">
-              <div className="ql-editor"
-                dangerouslySetInnerHTML={{ __html: specialties?.pageDescription }}
+              <div
+                className="ql-editor"
+                dangerouslySetInnerHTML={{ __html: displayDescription }}
+                onClick={(e) => {
+                  if (e.target?.classList?.contains("read-more-trigger")) {
+                    setIsDescExpanded(true);
+                  } else if (e.target?.classList?.contains("read-less-trigger")) {
+                    setIsDescExpanded(false);
+                  }
+                }}
               />
             </div>
             <div className="mt-5">

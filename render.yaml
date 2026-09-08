@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: agastya-hospitals
+    env: node
+    region: singapore
+    rootDir: Frontend
+    buildCommand: |
+      # Install Chromium system dependencies for Puppeteer
+      apt-get install -y \
+        libatk1.0-0 \
+        libatk-bridge2.0-0 \
+        libcups2 \
+        libdrm2 \
+        libxkbcommon0 \
+        libxcomposite1 \
+        libxdamage1 \
+        libxrandr2 \
+        libgbm1 \
+        libasound2 \
+        libpango-1.0-0 \
+        libpangocairo-1.0-0 \
+        libnspr4 \
+        libnss3 \
+        libxss1 \
+        fonts-liberation \
+        xdg-utils \
+        wget \
+        --no-install-recommends 2>/dev/null || true
+      npm install && npm run build
+    startCommand: node scripts/serve-dist.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: "false"
+    healthCheckPath: /

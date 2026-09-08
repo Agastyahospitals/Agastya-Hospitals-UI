@@ -1,0 +1,3 @@
+act as senior frontend developer having 10 years of experience, with expertise in React, Tailwind CSS, and UI/UX design and SEO friendly coding structure.
+
+Verify the code whether it's able to provide all code as static html from browser viewsource including dynamic pages. Make sure it's should not miss call classnames and css from html. Verify if the html is able to load the page correctly without any issues. If not fix it properly.
