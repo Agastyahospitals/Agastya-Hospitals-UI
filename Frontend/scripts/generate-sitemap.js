@@ -99,7 +99,7 @@ async function generateSitemap() {
 
     for (const spec of specialties) {
       if (spec.specialityName) {
-        const slug = spec.specialityName.toLowerCase().replace(/\s+/g, "-");
+        const slug = spec.specialityName.trim().toLowerCase().replace(/\s+/g, "-");
         entries.push(
           toUrlEntry(`${BASE_URL}/specialty/${slug}`, today, "monthly", "0.8")
         );
@@ -110,16 +110,48 @@ async function generateSitemap() {
     console.warn("Warning: Could not fetch specialties for sitemap:", err.message);
   }
 
+  // 4. Dynamic doctor URLs
+  try {
+    console.log("Fetching doctors from API...");
+    const doctorsRes = await fetchJSON(`${BACKEND_URL}/doctors`);
+    const doctors = doctorsRes.data || doctorsRes || [];
+
+    for (const doc of doctors) {
+      if (doc.fullName) {
+        const slug = doc.fullName
+          .trim()
+          .toLowerCase()
+          .replace(/[.\s]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        entries.push(
+          toUrlEntry(`${BASE_URL}/doctor/${slug}`, today, "monthly", "0.8")
+        );
+      }
+    }
+    console.log(`  Added ${doctors.length} doctor URLs`);
+  } catch (err) {
+    console.warn("Warning: Could not fetch doctors for sitemap:", err.message);
+  }
+
   // Build the XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries.join("\n")}
 </urlset>`;
 
-  // Write to dist/
+  // Ensure dist folder exists
+  if (!fs.existsSync(DIST_DIR)) {
+    fs.mkdirSync(DIST_DIR, { recursive: true });
+  }
+
+  // Write to dist/ and public/
   const outputPath = path.join(DIST_DIR, "sitemap.xml");
   fs.writeFileSync(outputPath, xml, "utf-8");
-  console.log(`\nSitemap generated at ${outputPath}`);
+
+  const publicPath = path.resolve(__dirname, "../public/sitemap.xml");
+  fs.writeFileSync(publicPath, xml, "utf-8");
+
+  console.log(`\nSitemap generated at ${outputPath} and ${publicPath}`);
   console.log(`Total URLs: ${entries.length}`);
 }
 

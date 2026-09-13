@@ -113,24 +113,52 @@ const SpecialtyDetails = () => {
   };
 
   // Build JSON-LD structured data for this specialty
-  const specialtyJsonLd = specialties ? {
-    "@context": "https://schema.org",
-    "@type": "MedicalSpecialty",
-    "name": formatSpecialtyTitle(),
-    "description": specialties?.shortDescription || `${formatSpecialtyTitle()} department at Agastya Hospitals, LB Nagar, Hyderabad.`,
-    "url": `https://agastyahospitals.com/specialty/${specialityName}`,
-    "provider": {
-      "@type": "Hospital",
-      "name": "Agastya Hospitals",
-      "url": "https://agastyahospitals.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "LB Nagar, Hyderabad",
-        "addressRegion": "Telangana",
-        "addressCountry": "IN"
+  const specTitle = formatSpecialtyTitle();
+  const specialtyJsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalSpecialty",
+      "name": specTitle,
+      "description": specialties?.shortDescription || `${specTitle} department at Agastya Hospitals, LB Nagar, Hyderabad. Expert care, advanced procedures, and dedicated specialists.`,
+      "url": `https://agastyahospitals.com/specialty/${specialityName}`,
+      "provider": {
+        "@type": "Hospital",
+        "name": "Agastya Hospitals",
+        "url": "https://agastyahospitals.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "LB Nagar",
+          "addressLocality": "Hyderabad",
+          "addressRegion": "Telangana",
+          "addressCountry": "IN"
+        }
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://agastyahospitals.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Specialties",
+          "item": "https://agastyahospitals.com/specialties"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": specTitle,
+          "item": `https://agastyahospitals.com/specialty/${specialityName}`
+        }
+      ]
     }
-  } : null;
+  ];
 
   // Truncate HTML to maxChars visible characters, preserving tag structure
   const truncateHtml = (html, maxChars) => {

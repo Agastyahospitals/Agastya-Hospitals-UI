@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../SEO";
 
 const PrivacyPolicy = () => {
   return (
     <div className="container terms-privacy p-5">
+      <SEO
+        title="Privacy Policy - Agastya Hospitals"
+        description="Privacy policy of Agastya Hospitals (Sri Lakshmi Narasimha Health Care Pvt. Ltd.). Information on personal data protection, medical confidentiality, cookies, and website security."
+        canonical="/privacy-policy"
+      />
       <div className="row">
         <div className="col-lg-12">
           <p>&nbsp;</p>

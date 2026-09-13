@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../SEO";
 
 const NewsAndUpdates = () => {
   return (
     <div className="container p-5">
+      <SEO
+        title="News & Hospital Updates - Agastya Hospitals"
+        description="Latest news, medical events, health camps, awards, and hospital announcements from Agastya Hospitals, LB Nagar, Hyderabad."
+        canonical="/news-and-updates"
+      />
       <h2 className="text-2xl font-bold mb-4">News & Updates</h2>
       <ul className="list-disc ml-6">
         <li>

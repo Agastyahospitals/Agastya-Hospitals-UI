@@ -102,21 +102,22 @@ async function renderRoute(page, route, compiledCss = "") {
     // Navigate with generous timeout
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
 
-    // Wait until root has content AND helmet meta tags settled or network is idle
+    // Wait until root has content AND helmet meta tags settled and no loading spinner
     await Promise.race([
       page.waitForFunction(
         () => {
           const root = document.getElementById("root");
+          const hasSpinner = document.querySelector(".spinner-grow");
           const hasMeta = document.querySelector('meta[data-rh="true"]') || document.querySelector('meta[name="description"]');
-          return root && root.innerHTML.length > 300 && hasMeta;
+          return root && root.innerHTML.length > 500 && !hasSpinner && hasMeta;
         },
         { timeout: 15000 }
       ),
-      new Promise((resolve) => setTimeout(resolve, 6000)),
+      new Promise((resolve) => setTimeout(resolve, 7000)),
     ]);
 
-    // Give 1 second for final DOM updates
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Give 1.5 seconds for final DOM updates
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Get full HTML
     let html = await page.content();

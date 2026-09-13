@@ -21,7 +21,7 @@ import arthroscopy from "../assets/images/gallery/arthroscopy.png";
 import cathlab from "../assets/images/gallery/cathlab.png";
 import robotics from "../assets/images/gallery/robotics.png";
 import ctscan from "../assets/images/gallery/ct-scan.png";
-import galone from"../assets/images/gallery/agastyagallery-1.png";
+import galone from "../assets/images/gallery/agastyagallery-1.png";
 import galtwo from "../assets/images/gallery/agastyagallery-2.png";
 import galthree from "../assets/images/gallery/agastyagallery-3.png";
 import galfour from "../assets/images/gallery/agastyagallery-4.png";
@@ -41,31 +41,32 @@ import galseventeen from "../assets/images/gallery/agastyagallery-17.png";
 import galeighteen from "../assets/images/gallery/agastyagallery-18.png";
 import galninghteen from "../assets/images/gallery/agastyagallery-19.png";
 import galtwenty from "../assets/images/gallery/agastyagallery-20.png";
+import SEO from "../components/SEO";
 
 const Gallery = () => {
   // Tabs and their image sets
   const tabs = {
     Infrastructure: [
-{ src: galone, thumb: galone, caption: "Gallery Image" },
-{ src: galtwo, thumb: galtwo, caption: "Gallery Image" },
-{ src: galthree, thumb: galthree, caption: "Gallery Image" },
-{ src: galfour, thumb: galfour, caption: "Gallery Image" },
-{ src: galfive, thumb: galfive, caption: "Gallery Image" },
-{ src: galsix, thumb: galsix, caption: "Gallery Image" },
-{ src: galseven, thumb: galseven, caption: "Gallery Image" },
-{ src: galeight, thumb: galeight, caption: "Gallery Image" },
-{ src: galnine, thumb: galnine, caption: "Gallery Image" },
-{ src: galten, thumb: galten, caption: "Gallery Image" },
-{ src: galeleven, thumb: galeleven, caption: "Gallery Image" },
-{ src: galtwelve, thumb: galtwelve, caption: "Gallery Image" },
-{ src: galthirteen, thumb: galthirteen, caption: "Gallery Image" },
-{ src: galfourteen, thumb: galfourteen, caption: "Gallery Image" },
-{ src: galfifteen, thumb: galfifteen, caption: "Gallery Image" },
-{ src: galsixteen, thumb: galsixteen, caption: "Gallery Image" },
-{ src: galseventeen, thumb: galseventeen, caption: "Gallery Image" },
-{ src: galeighteen, thumb: galeighteen, caption: "Gallery Image" },
-{ src: galninghteen, thumb: galninghteen, caption: "Gallery Image" },
-{ src: galtwenty, thumb: galtwenty, caption: "Gallery Image" },
+      { src: galone, thumb: galone, caption: "Gallery Image" },
+      { src: galtwo, thumb: galtwo, caption: "Gallery Image" },
+      { src: galthree, thumb: galthree, caption: "Gallery Image" },
+      { src: galfour, thumb: galfour, caption: "Gallery Image" },
+      { src: galfive, thumb: galfive, caption: "Gallery Image" },
+      { src: galsix, thumb: galsix, caption: "Gallery Image" },
+      { src: galseven, thumb: galseven, caption: "Gallery Image" },
+      { src: galeight, thumb: galeight, caption: "Gallery Image" },
+      { src: galnine, thumb: galnine, caption: "Gallery Image" },
+      { src: galten, thumb: galten, caption: "Gallery Image" },
+      { src: galeleven, thumb: galeleven, caption: "Gallery Image" },
+      { src: galtwelve, thumb: galtwelve, caption: "Gallery Image" },
+      { src: galthirteen, thumb: galthirteen, caption: "Gallery Image" },
+      { src: galfourteen, thumb: galfourteen, caption: "Gallery Image" },
+      { src: galfifteen, thumb: galfifteen, caption: "Gallery Image" },
+      { src: galsixteen, thumb: galsixteen, caption: "Gallery Image" },
+      { src: galseventeen, thumb: galseventeen, caption: "Gallery Image" },
+      { src: galeighteen, thumb: galeighteen, caption: "Gallery Image" },
+      { src: galninghteen, thumb: galninghteen, caption: "Gallery Image" },
+      { src: galtwenty, thumb: galtwenty, caption: "Gallery Image" },
       /*{
         src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468065/agastya/agastya-gallery-1.jpg",
         thumb:
@@ -190,27 +191,27 @@ const Gallery = () => {
 
     Equipment: [
       { src: arthroscopy, thumb: arthroscopy, caption: "Arthroscopy" },
-       { src: ctscan, thumb: ctscan, caption: "CTScan" },
-        { src: cathlab, thumb: cathlab, caption: "Cathlab" },
-         { src: robotics, thumb: robotics, caption: "Robotics" },
-     /* {
-        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
-        thumb:
-          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
-        caption: "Robotics",
-      },
-      {
-        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
-        thumb:
-          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
-        caption: "CT Scan",
-      },
-      {
-        src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
-        thumb:
-          "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
-        caption: "Arthroscopy",
-      },*/
+      { src: ctscan, thumb: ctscan, caption: "CTScan" },
+      { src: cathlab, thumb: cathlab, caption: "Cathlab" },
+      { src: robotics, thumb: robotics, caption: "Robotics" },
+      /* {
+         src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
+         thumb:
+           "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/robotics.jpg",
+         caption: "Robotics",
+       },
+       {
+         src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
+         thumb:
+           "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468100/agastya/ct_scan.jpg",
+         caption: "CT Scan",
+       },
+       {
+         src: "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
+         thumb:
+           "https://res.cloudinary.com/sdk28cdn/image/upload/v1761468101/agastya/arthroscopy.jpg",
+         caption: "Arthroscopy",
+       },*/
     ],
     // Architecture: [
     //   { src: "https://picsum.photos/id/1003/1200/800", thumb: "https://picsum.photos/id/1003/600/400", caption: "Building" },
@@ -222,63 +223,69 @@ const Gallery = () => {
   const [activeTab, setActiveTab] = useState("Infrastructure");
 
   return (
-    <div className="container mt-5 mb-5">
-      {/* --- Tabs --- */}
-      <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        {Object.keys(tabs).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              padding: "10px 20px",
-              margin: "5px",
-              border: "1px",
-              borderStyle: "solid",
-              borderRadius: "50px",
-              cursor: "pointer",
-              background: activeTab === tab ? "#1a365a" : "#fff",
-              color: activeTab === tab ? "#fff" : "#333",
-              transition: "0.3s",
-            }}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* --- Gallery --- */}
-      <LightGallery
-        key={activeTab}
-        speed={500}
-        plugins={[lgThumbnail, lgZoom]}
-        elementClassNames="gallery-grid"
-      >
-        {tabs[activeTab].map((img, i) => (
-          <a key={i} href={img.src} data-sub-html={`<h4>${img.caption}</h4>`}>
-            <img
-              src={img.thumb}
-              alt={img.caption}
-              loading="lazy"
+    <>
+      <SEO
+        title="Hospital Infrastructure & Equipment Gallery - Agastya Hospitals"
+        description="Take a visual tour of Agastya Hospitals in LB Nagar, Hyderabad. View our state-of-the-art infrastructure, modular operation theatres, CathLab, CT Scan, and medical equipment."
+        canonical="/gallery"
+      />
+      <div className="container mt-5 mb-5">
+        {/* --- Tabs --- */}
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          {Object.keys(tabs).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
               style={{
-                width: "100%",
-                display: "block",
-                borderRadius: "8px",
-                marginBottom: "15px",
-                transition: "transform 0.3s ease",
+                padding: "10px 20px",
+                margin: "5px",
+                border: "1px",
+                borderStyle: "solid",
+                borderRadius: "50px",
+                cursor: "pointer",
+                background: activeTab === tab ? "#1a365a" : "#fff",
+                color: activeTab === tab ? "#fff" : "#333",
+                transition: "0.3s",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "scale(1.05)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "scale(1)")
-              }
-            />
-          </a>
-        ))}
-      </LightGallery>
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-      {/* --- Inline CSS for Masonry layout --- */}
-      <style jsx>{`
+        {/* --- Gallery --- */}
+        <LightGallery
+          key={activeTab}
+          speed={500}
+          plugins={[lgThumbnail, lgZoom]}
+          elementClassNames="gallery-grid"
+        >
+          {tabs[activeTab].map((img, i) => (
+            <a key={i} href={img.src} data-sub-html={`<h4>${img.caption}</h4>`}>
+              <img
+                src={img.thumb}
+                alt={img.caption}
+                loading="lazy"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  borderRadius: "8px",
+                  marginBottom: "15px",
+                  transition: "transform 0.3s ease",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
+              />
+            </a>
+          ))}
+        </LightGallery>
+
+        {/* --- Inline CSS for Masonry layout --- */}
+        <style jsx>{`
         .gallery-grid {
           column-count: 3;
           column-gap: 15px;
@@ -296,7 +303,8 @@ const Gallery = () => {
           }
         }
       `}</style>
-    </div>
+      </div>
+    </>
   );
 };
 

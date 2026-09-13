@@ -56,26 +56,60 @@ const DoctorProfile = () => {
   }, [fullName]);
 
   // Build JSON-LD for doctor
-  const doctorJsonLd = doctorProfile?.fullName ? {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    "name": doctorProfile.fullName,
-    "description": doctorProfile.designation || `Doctor at Agastya Hospitals`,
-    "url": `https://agastyahospitals.com/doctor/${fullName}`,
-    "image": doctorProfile.profilePicture,
-    "medicalSpecialty": doctorProfile.speciality,
-    "worksFor": {
-      "@type": "Hospital",
-      "name": "Agastya Hospitals",
-      "url": "https://agastyahospitals.com"
+  const docName = doctorProfile?.fullName || formattedName;
+  const doctorJsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": docName,
+      "description": doctorProfile.designation || `${docName} - Specialist Doctor at Agastya Hospitals, LB Nagar, Hyderabad`,
+      "url": `https://agastyahospitals.com/doctor/${fullName}`,
+      "image": doctorProfile.profilePicture,
+      "medicalSpecialty": doctorProfile.specialityNames || doctorProfile.speciality,
+      "hospitalAffiliation": {
+        "@type": "Hospital",
+        "name": "Agastya Hospitals",
+        "url": "https://agastyahospitals.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "LB Nagar",
+          "addressLocality": "Hyderabad",
+          "addressRegion": "Telangana",
+          "addressCountry": "IN"
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://agastyahospitals.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Doctors",
+          "item": "https://agastyahospitals.com/find-doctor"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": docName,
+          "item": `https://agastyahospitals.com/doctor/${fullName}`
+        }
+      ]
     }
-  } : null;
+  ];
 
   return (
     <div className="container p-5 doctor-profile-page">
       <SEO
-        title={`${formattedName} - Doctor Profile`}
-        description={`${formattedName} at Agastya Hospitals, LB Nagar, Hyderabad. ${doctorProfile.designation || ''} with ${doctorProfile.yearsOfExperience || ''} years of experience.`}
+        title={`${docName} - Specialist Doctor in LB Nagar, Hyderabad`}
+        description={`${docName} at Agastya Hospitals, LB Nagar, Hyderabad. ${doctorProfile.designation || 'Specialist Doctor'} with ${doctorProfile.yearsOfExperience ? doctorProfile.yearsOfExperience + ' years of' : 'extensive'} clinical experience.`}
         canonical={`/doctor/${fullName}`}
         ogImage={doctorProfile.profilePicture}
         jsonLd={doctorJsonLd}

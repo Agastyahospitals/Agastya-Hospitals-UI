@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import EnquiryForm from "./EnquiryForm";
 import { freeSecondOpinionFaqs } from "../components/common/FAQs";
+import SEO from "../components/SEO";
+
+const secondOpinionFaqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": (freeSecondOpinionFaqs || []).map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 
 const initialState = {
   fullName: "",
@@ -70,6 +84,12 @@ const FreeSecondOpinionForm = () => {
 
   return (
     <div className="container p-5 opinion-form">
+      <SEO
+        title="Get Expert Free Second Medical Opinion - Agastya Hospitals"
+        description="Seeking clarity before surgery or treatment? Get a free expert second opinion from senior doctors at Agastya Hospitals, LB Nagar, Hyderabad. Unbiased & evidence-based care."
+        canonical="/free-second-opinion"
+        jsonLd={secondOpinionFaqJsonLd}
+      />
       <div className="row">
         <div className="col-lg-5">
           {/* <p className="mb-6">

@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../SEO";
 
 const PatientCare = () => {
   return (
     <div className="container p-5">
+      <SEO
+        title="Patient Care & Medical Support Services - Agastya Hospitals"
+        description="Comprehensive patient care at Agastya Hospitals in LB Nagar, Hyderabad. 24x7 nursing care, inpatient/outpatient support, patient counseling, and medical assistance."
+        canonical="/patient-care"
+      />
       <h2 className="text-2xl font-bold mb-4">
         Patient Care at Agastya Hospitals
       </h2>

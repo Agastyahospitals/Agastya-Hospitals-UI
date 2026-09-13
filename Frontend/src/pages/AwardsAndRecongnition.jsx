@@ -1,5 +1,6 @@
 import React from "react";
 import LightGallery from "lightgallery/react";
+import SEO from "../components/SEO";
 
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
@@ -8,9 +9,24 @@ import "lightgallery/css/lg-thumbnail.css";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 
+const awardsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Hospital",
+  "name": "Agastya Hospitals - Awards & Recognition",
+  "url": "https://agastyahospitals.com/awards-recognition",
+  "award": "Times Icons of Healthcare 2025 - Excellence in Advanced Medical Care",
+  "description": "Agastya Hospitals awarded for Excellence in Advanced Medical Care at Times Icons of Healthcare 2025."
+};
+
 const AwardsAndRecongnition = () => {
   return (
     <div>
+      <SEO
+        title="Awards & Recognition - Times Icons of Healthcare 2025"
+        description="Agastya Hospitals awarded for Excellence in Advanced Medical Care at Times Icons of Healthcare 2025. Discover our awards and healthcare accolades."
+        canonical="/awards-recognition"
+        jsonLd={awardsJsonLd}
+      />
       <div className="container py-5">
         <div className="row">
           <div className="col-lg-12 text-center mb-12">

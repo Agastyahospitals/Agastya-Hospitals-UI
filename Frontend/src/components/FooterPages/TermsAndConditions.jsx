@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../SEO";
 
 const TermsAndConditions = () => {
   return (
     <div className="container terms-privacy p-5">
+      <SEO
+        title="Terms and Conditions - Agastya Hospitals"
+        description="Terms and conditions for using the website and healthcare services of Agastya Hospitals (Sri Lakshmi Narasimha Health Care Pvt. Ltd.), LB Nagar, Hyderabad."
+        canonical="/terms-and-conditions"
+      />
       <div className="row">
         <div className="col-lg-12">
           <p>&nbsp;</p>
