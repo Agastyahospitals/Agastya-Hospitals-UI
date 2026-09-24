@@ -147,7 +147,7 @@ const HeroSection = () => {
                 className="quicklink"
               >
                 <span>
-                  Get a Free <br />
+                  Get Expert <br />
                   Second Opinion
                 </span>
                 <span>

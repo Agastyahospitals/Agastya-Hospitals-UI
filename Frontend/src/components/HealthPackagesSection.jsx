@@ -104,23 +104,24 @@ const HealthPackagesSection = () => {
           <div className="row align-items-center m-0">
             <div className="col-lg-5 mb-4 mb-lg-0 px-0">
               <div className="health-img justify-content-end">
-                <img
+                {/* <img
                   src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662700/agastya/agastya-health-packages.png"
                   alt="Health Check-up"
                   className="img-fluid"
-                />
+                /> */}
+                <h2 class="main-title-left mb-0">
+                      Our Popular<br/>Health Check-up <br/>Packages
+                    </h2>
               </div>
             </div>
 
             <div className="col-lg-7 p-0">
               <div className="package-bg-color">
-                <div class="row">
+                { <div class="row">
                   <div class="col-lg-12 text-start my-4">
-                    <h2 class="main-title">
-                      Our Popular Health Check-up Packages
-                    </h2>
+                     
                   </div>
-                </div>
+                </div> }
 
                 <div className="text-right mb-3">
                   <button
