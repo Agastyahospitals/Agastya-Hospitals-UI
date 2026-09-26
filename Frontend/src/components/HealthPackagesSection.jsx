@@ -101,21 +101,15 @@ const HealthPackagesSection = () => {
     <div>
       <section className="healthpackage-section">
         <div className="container-fluid m-0 ps-0">
+          <div className="row">
+          <div className="col-lg-12 text-center mb-12">
+            <h2 className="main-title-center">
+              Our Popular Health Check-up Packages
+            </h2>
+          </div>
+        </div>
           <div className="row align-items-center m-0">
-            <div className="col-lg-5 mb-4 mb-lg-0 px-0">
-              <div className="health-img justify-content-end">
-                {/* <img
-                  src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756662700/agastya/agastya-health-packages.png"
-                  alt="Health Check-up"
-                  className="img-fluid"
-                /> */}
-                <h2 class="main-title-left mb-0">
-                      Our Popular<br/>Health Check-up <br/>Packages
-                    </h2>
-              </div>
-            </div>
-
-            <div className="col-lg-7 p-0">
+            <div className="col-lg-12 p-0">
               <div className="package-bg-color">
                 { <div class="row">
                   <div class="col-lg-12 text-start my-4">
@@ -139,12 +133,12 @@ const HealthPackagesSection = () => {
                   </button>
                 </div>
                 <div
-                  className="flex gap-6 overflow-x-auto pb-4 specialties-bg-scroller"
+                  className="flex gap-2 overflow-x-auto pb-4 specialties-bg-scroller"
                   ref={scrollRef}
                 >
                   {/* <div class="row g-4"> */}
                   {packages.packages?.map((pkg) => (
-                    <div className="col-md-5">
+                    <div className="col-md-3">
                       <div className="package-card shadow-md border-1">
                         <span className="discount-badge">
                           {getDiscountPercentage(pkg)}% Off

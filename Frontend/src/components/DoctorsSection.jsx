@@ -224,6 +224,22 @@ const DoctorsSection = () => {
             </div>
           )}
         </div>
+
+        <div className="row">
+          <div className="col-lg-12 text-center mt-5">
+              
+              <a
+                          onClick={() => {
+                            window.scrollTo(0, 0);
+                            dispatch(setBreadcrumb(["Home", "Find a Doctor"]));
+                            navigate("/find-doctor");
+                          }}
+                          className="rounded-5 btn-primary"
+                        >
+                          View All
+                        </a>
+          </div>
+        </div>
       </div>
     </section>
   );

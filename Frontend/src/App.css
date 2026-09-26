@@ -94,6 +94,20 @@
   background: #fff;
 }
 
+.btn-primary {
+  cursor: pointer !important;
+}
+
+  .common-btn-sm  {
+    border: 1px solid #022b50;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 50px;
+    color: #000;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
 /* .sidebar-section {
   margin-bottom: 1.5rem;
 } */
@@ -551,7 +565,7 @@ select.form-select {
 .herosection-bg {
   padding-top: 20px;
   /* background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1756660474/agastya/hero-background.jpg") no-repeat center center; */
-  background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1790277624/agastya/agastya-hospitals-hyderabad.jpg");
+  background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1790405674/agastya/agastya-hospital-lbnagar-hyderabad.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1240,11 +1254,15 @@ h1.main-title-center::after,
 }
 
 .doctor-profile-info li label {
-  font-size: 13px !important;
+  font-size: 14px !important;
+  color:#000 !important;
+  font-weight: 600;
 }
 
 .doctor-profile-info li p {
   font-size: 14px !important;
+  color:#555;
+  font-weight: normal;
 }
 
 
@@ -1309,7 +1327,7 @@ h1.main-title-center::after,
 
 
   .herosection-bg {
-    background: url("assets/images/healthcare-at-east-hyderabad-mobile.png");
+    background: url("https://res.cloudinary.com/sdk28cdn/image/upload/v1790405696/agastya/agastya-hospital-lbnagar-hyderabad-m.jpg");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -1513,6 +1531,8 @@ h1.main-title-center::after,
     margin: 5px 10px !important;
     padding: 5px 10px !important;
   }
+
+
 
   .accreds img {
     width: auto;

@@ -138,21 +138,26 @@ const DoctorProfile = () => {
               <div className="mt-3 border-bottom pb-3">
                 <h4 className="f-24 f-w-700">{doctorProfile.fullName}</h4>
                 <ul className="mt-2">
+                  {doctorProfile.designation
+                    ? doctorProfile.designation : "N/A"}
+                </ul>
+
+                {/* <ul className="mt-2">
                   {doctorProfile.qualification
                     ? doctorProfile.qualification?.map((edu) => (
                       <li className="f-12 text-muted mb-n1">{edu}</li>
                     ))
                     : "N/A"}
-                </ul>
+                </ul> */}
               </div>
               <div className="mt-3 doctor-profile-info">
                 <ul>
                   {[
-                    { label: "Designation", value: doctorProfile.designation },
                     {
                       label: "Specialty",
                       value: doctorProfile.specialityNames,
                     },
+                    { label: "Degrees", value: doctorProfile.qualification },
                     {
                       label: "Med Reg No",
                       value: doctorProfile.medicalRegNumber,
@@ -162,7 +167,7 @@ const DoctorProfile = () => {
                       value: doctorProfile.yearsOfExperience,
                     },
                     {
-                      label: "Languages Speak",
+                      label: "Languages",
                       value: doctorProfile.languagesKnown,
                     },
                     { label: "OPD Timings", value: doctorProfile.opTimings },
@@ -232,7 +237,7 @@ const DoctorProfile = () => {
               />
             </div>
             <div className="pl-2 border-bottom py-3 ql-snow">
-              <h3 className="f-w-700 f-18 mb-2">Services offered</h3>
+              <h3 className="f-w-700 f-18 mb-2">Expertise</h3>
               <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
                 {doctorProfile.servicesOffered
                   ? doctorProfile.servicesOffered?.map((service) => (
