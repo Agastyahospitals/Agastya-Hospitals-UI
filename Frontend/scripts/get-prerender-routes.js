@@ -56,7 +56,12 @@ export async function getPrerenderRoutes() {
     const specialties = specialtiesRes.data || specialtiesRes || [];
     for (const spec of specialties) {
       if (spec.specialityName) {
-        const slug = spec.specialityName.trim().toLowerCase().replace(/\s+/g, "-");
+        const slug = spec.specialityName
+          .trim()
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-");
         routes.push(`/specialty/${slug}`);
       }
     }

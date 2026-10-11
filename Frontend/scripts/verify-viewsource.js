@@ -15,7 +15,7 @@ const testRoutes = [
   { path: "/specialty/cardiology", file: "specialty/cardiology/index.html", label: "Cardiology (Dynamic Specialty)" },
   { path: "/blog/sports-injury-treatment-cost-in-lb-nagar-diagnosis-physiotherapy-and-surgery-explained", file: "blog/sports-injury-treatment-cost-in-lb-nagar-diagnosis-physiotherapy-and-surgery-explained/index.html", label: "Sports Injury Cost (Dynamic Blog)" },
   { path: "/doctor/dr-praveen-reddy-p", file: "doctor/dr-praveen-reddy-p/index.html", label: "Dr Praveen Reddy (Dynamic Doctor)" },
-  { path: "/doctor/dr-c-alekya-reddy", file: "doctor/dr-c-alekya-reddy/index.html", label: "Dr C Alekya Reddy (Dynamic Doctor)" },
+  { path: "/doctor/dr-y-goutham-raj", file: "doctor/dr-y-goutham-raj/index.html", label: "Dr Y Goutham Raj (Dynamic Doctor)" },
   { path: "/doctor/dr-kesava-rajashekar-reddy", file: "doctor/dr-kesava-rajashekar-reddy/index.html", label: "Dr Kesava Rajashekar (Dynamic Doctor)" }
 ];
 

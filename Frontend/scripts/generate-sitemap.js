@@ -51,7 +51,7 @@ async function fetchJSON(url) {
 function escapeXml(unsafe) {
   if (unsafe === undefined || unsafe === null) return "";
   return String(unsafe)
-    .replace(/&(?!(amp|lt|gt|quot|apos);)/g, "&amp;")
+    .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
@@ -109,7 +109,12 @@ async function generateSitemap() {
 
     for (const spec of specialties) {
       if (spec.specialityName) {
-        const slug = spec.specialityName.trim().toLowerCase().replace(/\s+/g, "-");
+        const slug = spec.specialityName
+          .trim()
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-");
         entries.push(
           toUrlEntry(`${BASE_URL}/specialty/${slug}`, today, "monthly", "0.8")
         );
