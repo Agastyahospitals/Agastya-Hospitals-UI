@@ -54,7 +54,11 @@ const Header = () => {
   const sortedData = Array.isArray(specialties?.data)
     ? [...specialties?.data].map((item) => {
       return {
-        path: item.specialityName.toLowerCase().replace(/\s+/g, "-"),
+        path: item.specialityName
+          .toLowerCase()
+          .replace(/&/g, "and")
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-"),
         label: item.specialityName,
         id: item.specialityID,
         isNavigationDisplay: item.isNavigationDisplay,

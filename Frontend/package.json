@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && node scripts/generate-sitemap.js && node scripts/prerender.js",
+    "build": "vite build && node scripts/generate-sitemap.js && node scripts/generate-ssg.js",
+    "build:puppeteer": "vite build && node scripts/generate-sitemap.js && node scripts/prerender.js",
     "build:ssg": "vite build && node scripts/generate-sitemap.js && node scripts/generate-ssg.js",
     "ssg": "node scripts/generate-ssg.js",
     "build:noprerender": "vite build && node scripts/generate-sitemap.js",

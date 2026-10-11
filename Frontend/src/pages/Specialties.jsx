@@ -138,7 +138,7 @@ const Specialties = () => {
                     <div className="specialtypage-btn">
                       <Link
                         className="f-12 text-primary cursor-pointer"
-                        to={`/specialty/${specialty.specialityName.toLowerCase().replace(/\s+/g, "-")}`}
+                        to={`/specialty/${specialty.specialityName.toLowerCase().replace(/&/g, "and").replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`}
                         onClick={() => {
                           dispatch(
                             setBreadcrumb(["Home", specialty.specialityName])

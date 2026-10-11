@@ -113,6 +113,8 @@ const SpecialtiesSection = () => {
                       navigate(
                         `/specialty/${specialty.specialityName
                           .toLowerCase()
+                          .replace(/&/g, "and")
+                          .replace(/[^\w\s-]/g, "")
                           .replace(/\s+/g, "-")}`,
                         {
                           //state: { specialityID: specialty.specialityID },
