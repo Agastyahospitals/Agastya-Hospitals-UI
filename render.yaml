@@ -5,7 +5,7 @@ services:
     region: singapore
     rootDir: Frontend
     buildCommand: npm install && npm run build
-    startCommand: node scripts/serve-dist.js
+    startCommand: npm run serve
     envVars:
       - key: NODE_ENV
         value: production
