@@ -17,6 +17,7 @@ import { CREATE_BLOGS_API, UPDATE_BLOGS_API } from "../../api";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchBlogs } from "../../slices/blogSlice";
+import { queryClient } from "../../api/queryClient";
 import HTMLTextEditor from "../Common/Component/HTMLTextEditor";
 import { fetchSpecialities } from "../../api/Services";
 
@@ -199,10 +200,14 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
         Object.entries(formState).forEach(([key, value]) => {
           if (key === "tags") {
             // Convert tags string to array if needed
-            formData[key] = value
-              .split(",")
-              .map((t) => t.trim())
-              .join(",");
+            formData[key] = Array.isArray(value)
+              ? value.join(",")
+              : typeof value === "string"
+              ? value
+                  .split(",")
+                  .map((t) => t.trim())
+                  .join(",")
+              : value;
           } else if (
             (key === "postThumbnail" || key === "postBanner") &&
             value &&
@@ -225,7 +230,9 @@ const AddBlog = ({ onClose, isEditMode, blogDataToEdit }) => {
         if (response) {
           setIsLoading(false);
         }
-        dispatch(fetchBlogs());
+        // Invalidate React Query cache and await fetching latest blogs into Redux
+        queryClient.removeQueries({ queryKey: ["blogs"] });
+        await dispatch(fetchBlogs(true));
         toasterConfig(
           "success",
           isEditMode ? "Blog updated successfully" : "Blog created successfully"

@@ -48,12 +48,22 @@ async function fetchJSON(url) {
   return response.json();
 }
 
+function escapeXml(unsafe) {
+  if (unsafe === undefined || unsafe === null) return "";
+  return String(unsafe)
+    .replace(/&(?!(amp|lt|gt|quot|apos);)/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 function toUrlEntry(loc, lastmod, changefreq, priority) {
   return `  <url>
-    <loc>${loc}</loc>
-    ${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
+    <loc>${escapeXml(loc)}</loc>
+    ${lastmod ? `<lastmod>${escapeXml(lastmod)}</lastmod>` : ""}
+    <changefreq>${escapeXml(changefreq)}</changefreq>
+    <priority>${escapeXml(priority)}</priority>
   </url>`;
 }
 

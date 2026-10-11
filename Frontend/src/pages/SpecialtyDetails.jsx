@@ -19,6 +19,9 @@ const SpecialtyDetails = () => {
   const { specialty: specialityName } = useParams();
 
   const formatSpecialtyTitle = () => {
+    if (specialties?.specialityName) {
+      return specialties.specialityName;
+    }
     return specialityName
       ?.replace(/-/g, " ")
       ?.toLowerCase()
@@ -28,26 +31,6 @@ const SpecialtyDetails = () => {
       )
       .join(" ");
   };
-
-  // const fetchSpecialties = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axios.get(
-  //       `${SPECIALITIES_API}?specialityID=${specialityID}`
-  //     );
-  //     if (response.data.doctor.length > 0) {
-  //       let doctorsList = response.data.doctor?.map((doc) => {
-  //         const docResponse = axios.get(`${DOCTORS_API}?doctorID=${doc}`);
-  //         return docResponse.then((res) => res.data);
-  //       });
-  //       const allDoctors = await Promise.all(doctorsList);
-  //       const doctorDataList = allDoctors.map((doc) => doc.data);
-  //       setDoctorData(doctorDataList.length > 0 ? doctorDataList : []);
-  //       setLoading(false);
-  //     }
-  //     setSpecialties(response.data);
-  //   } catch (error) {}
-  // };
 
   const fetchSpecialties = async () => {
     try {
@@ -63,10 +46,22 @@ const SpecialtyDetails = () => {
         // Fallback: fetch all specialties and match by normalized slug
         const allSpecRes = await axios.get(SPECIALITIES_API);
         const allSpecs = allSpecRes.data?.data || allSpecRes.data || [];
-        const cleanSlug = (specialityName || "").toLowerCase().replace(/[^\w]/g, "");
+        const normalize = (str) =>
+          (str || "")
+            .toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^\w]/g, "");
+        const cleanSlug = normalize(specialityName);
         targetSpecialty = allSpecs.find((s) => {
-          const specSlug = (s.specialityName || "").toLowerCase().replace(/[^\w]/g, "");
-          return specSlug === cleanSlug;
+          const specName = normalize(s.specialityName);
+          const specSlug = normalize(s.urlSlug);
+          return (
+            specName === cleanSlug ||
+            specSlug === cleanSlug ||
+            (specSlug && cleanSlug.startsWith(specSlug)) ||
+            (cleanSlug && specSlug.startsWith(cleanSlug)) ||
+            (specName && cleanSlug.startsWith(specName))
+          );
         });
       }
 

@@ -7,6 +7,7 @@ import CardSkeleton from "../Common/Component/CardSkeleton";
 import AddBlog from "./AddBlog";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../../slices/blogSlice";
+import { queryClient } from "../../api/queryClient";
 import ConfirmationAlert from "../Common/Component/ConfirmationAlert";
 import { toasterConfig } from "../../utils";
 import Swal from "sweetalert2";
@@ -53,7 +54,7 @@ const Blog = () => {
   const deleteBlogData = async (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Do you want to delete this patient?",
+      text: "Do you want to delete this blog?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#fc4438",
@@ -68,7 +69,8 @@ const Blog = () => {
               "success",
               response.data?.message || "Deleted successfully"
             );
-            dispatch(fetchBlogs()); // Refresh the list
+            queryClient.removeQueries({ queryKey: ["blogs"] });
+            dispatch(fetchBlogs(true)); // Refresh the list
           } else {
             toasterConfig("error", "Something went wrong");
           }

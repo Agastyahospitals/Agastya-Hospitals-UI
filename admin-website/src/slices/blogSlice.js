@@ -10,33 +10,49 @@ import {
 import { queryClient } from "../api/queryClient";
 
 // Async thunks
-export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
-  const data = await queryClient.fetchQuery({
-    queryKey: ["blogs"],
-    queryFn: async () => {
-      const response = await axios.get(BLOGS_API);
-      return response.data;
-    },
-    staleTime: 1000 * 60 * 5,
-  });
-  return data;
-});
+export const fetchBlogs = createAsyncThunk(
+  "blogs/fetchBlogs",
+  async (options = {}) => {
+    const forceRefresh =
+      typeof options === "boolean" ? options : Boolean(options?.forceRefresh);
+
+    if (forceRefresh) {
+      queryClient.removeQueries({ queryKey: ["blogs"] });
+    }
+
+    const data = await queryClient.fetchQuery({
+      queryKey: ["blogs"],
+      queryFn: async () => {
+        const response = await axios.get(BLOGS_API);
+        return response.data;
+      },
+      staleTime: forceRefresh ? 0 : 1000 * 60 * 5,
+    });
+    return data;
+  }
+);
 
 export const addBlog = createAsyncThunk("blogs/addBlog", async (blogData) => {
   const response = await axios.post(CREATE_BLOGS_API, blogData);
+  queryClient.removeQueries({ queryKey: ["blogs"] });
   return response.data;
 });
 
 export const updateBlog = createAsyncThunk(
   "blogs/updateBlog",
   async ({ id, blogData }) => {
-    const response = await axios.put(`${UPDATE_BLOGS_API}/${id}`, blogData);
+    const response = await axios.put(
+      `${UPDATE_BLOGS_API}?blogID=${id}`,
+      blogData
+    );
+    queryClient.removeQueries({ queryKey: ["blogs"] });
     return response.data;
   }
 );
 
 export const deleteBlog = createAsyncThunk("blogs/deleteBlog", async (id) => {
   const response = await axios.delete(`${DELETE_BLOGS_API}?blogID=${id}`);
+  queryClient.removeQueries({ queryKey: ["blogs"] });
   return response.message;
 });
 
@@ -63,20 +79,41 @@ const blogSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addBlog.fulfilled, (state, action) => {
-        state.blogs.push(action.payload);
+        const blogsList = Array.isArray(state.blogs)
+          ? state.blogs
+          : state.blogs?.data;
+        if (Array.isArray(blogsList)) {
+          blogsList.push(action.payload);
+        }
       })
       .addCase(updateBlog.fulfilled, (state, action) => {
-        const index = state.blogs.findIndex(
-          (blog) => blog.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.blogs[index] = action.payload;
+        const updatedBlog = action.payload?.data || action.payload;
+        const targetId =
+          updatedBlog?.blogID || updatedBlog?._id || updatedBlog?.id;
+        const blogsList = Array.isArray(state.blogs)
+          ? state.blogs
+          : state.blogs?.data;
+        if (Array.isArray(blogsList)) {
+          const index = blogsList.findIndex(
+            (blog) =>
+              (blog.blogID || blog._id || blog.id) === targetId
+          );
+          if (index !== -1) {
+            blogsList[index] = updatedBlog;
+          }
         }
       })
       .addCase(deleteBlog.fulfilled, (state, action) => {
-        state.blogs = state.blogs.filter(
-          (blog) => blog.blogID !== action.payload
-        );
+        const targetId = action.payload;
+        if (Array.isArray(state.blogs)) {
+          state.blogs = state.blogs.filter(
+            (blog) => (blog.blogID || blog._id || blog.id) !== targetId
+          );
+        } else if (Array.isArray(state.blogs?.data)) {
+          state.blogs.data = state.blogs.data.filter(
+            (blog) => (blog.blogID || blog._id || blog.id) !== targetId
+          );
+        }
       });
   },
 });
