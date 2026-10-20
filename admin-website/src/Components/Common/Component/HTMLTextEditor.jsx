@@ -1,10 +1,23 @@
 import React from "react";
 import ReactQuill from "react-quill";
-// import CKEditors from 'react-ckeditor-component';
+import "react-quill/dist/quill.snow.css";
+import htmlEditButton from "quill-html-edit-button";
+import Quill from "quill";
 
-const HTMLTextEditor = ({ name, placeholder, state, handleChange, errors }) => {
+// Register htmlEditButton on Quill instances
+if (ReactQuill && ReactQuill.Quill) {
+  ReactQuill.Quill.register("modules/htmlEditButton", htmlEditButton);
+}
+if (Quill && Quill !== ReactQuill?.Quill) {
+  Quill.register("modules/htmlEditButton", htmlEditButton);
+}
+if (typeof window !== "undefined" && !window.Quill) {
+  window.Quill = ReactQuill?.Quill || Quill;
+}
+
+const HTMLTextEditor = ({ name, placeholder, state, handleChange, onBlur, errors }) => {
   const modules = {
-    toolbar: [
+    htmlEditButton: {},    toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       [
         "bold",
@@ -58,6 +71,7 @@ const HTMLTextEditor = ({ name, placeholder, state, handleChange, errors }) => {
         value={state}
         onChange={handleChange}
         className="form-control"
+        onBlur={onBlur}
         name={name}
         placeholder={placeholder}
         modules={modules}
