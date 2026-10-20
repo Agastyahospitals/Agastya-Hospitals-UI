@@ -34,6 +34,7 @@
     "knob": "^1.1.0",
     "leaflet": "^1.9.3",
     "pigeon-maps": "^0.21.3",
+    "quill": "^2.0.3",
     "react-18-image-lightbox": "^5.1.4",
     "react-ace": "^10.1.0",
     "react-apexcharts": "^1.7.0",
