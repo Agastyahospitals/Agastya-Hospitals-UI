@@ -84,7 +84,7 @@ function buildHeaderHtml(activePath = "") {
       <nav class="main-navigation navbar navbar-expand-lg">
         <div class="container d-flex justify-between items-center">
           <a class="site-logo" href="/" style="display:inline-block;text-decoration:none;">
-            <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758389743/agastya/agastya-logo.svg" alt="Agastya Hospitals Logo" style="height:60px;" />
+            <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756301086/agastya/agastyahospitals-logo.svg" alt="Agastya Hospitals Logo" style="height:60px;" />
           </a>
           <div class="d-flex items-center gap-4">
             <a href="/" style="text-decoration:none;font-weight:600;color:#000;">Home</a>
@@ -110,7 +110,7 @@ function buildFooterHtml() {
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-6 mb-4">
-            <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1758389743/agastya/agastya-logo.svg" alt="Agastya Hospitals" style="height:55px;filter:brightness(0) invert(1);margin-bottom:15px;" />
+            <img src="https://res.cloudinary.com/sdk28cdn/image/upload/v1756301086/agastya/agastyahospitals-logo.svg" alt="Agastya Hospitals" style="height:55px;filter:brightness(0) invert(1);margin-bottom:15px;" />
             <p style="color:#ddd;font-size:14px;line-height:1.6;">
               Agastya Hospitals is a premier super specialty medical center in LB Nagar, Hyderabad, committed to delivering advanced, compassionate, and affordable clinical healthcare 24/7.
             </p>
@@ -196,15 +196,19 @@ function createStaticPageHtml(baseTemplate, {
   <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
 
   <!-- Open Graph / Facebook -->
+  <meta property="og:locale" content="en_IN" />
   <meta property="og:type" content="${escapeHtml(ogType)}" />
   <meta property="og:url" content="${escapeHtml(canonicalUrl)}" />
   <meta property="og:title" content="${escapeHtml(fullTitle)}" />
   <meta property="og:description" content="${escapeHtml(cleanDescription)}" />
   <meta property="og:site_name" content="${SITE_NAME}" />
   <meta property="og:image" content="${escapeHtml(ogImage)}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@AgastyaHospital" />
   <meta name="twitter:url" content="${escapeHtml(canonicalUrl)}" />
   <meta name="twitter:title" content="${escapeHtml(fullTitle)}" />
   <meta name="twitter:description" content="${escapeHtml(cleanDescription)}" />
@@ -829,6 +833,13 @@ export async function runSSG() {
       description: "Photo gallery of Agastya Hospitals campus, modular operation theatres, ICU facilities, and patient rooms.",
       h1: "Hospital Photo Gallery",
       intro: "Take a visual tour of our modern medical infrastructure, advanced ICUs, diagnostic labs, and patient recovery suites."
+    },
+    {
+      route: "/patient",
+      title: "Patient Information & Services | Agastya Hospitals",
+      description: "Comprehensive patient information including admissions, insurance, visitor guidelines, and hospital facilities at Agastya Hospitals, LB Nagar, Hyderabad.",
+      h1: "Patient Information & Services",
+      intro: "Everything you need to know about admissions, insurance support, visitor policies, and patient amenities at Agastya Hospitals."
     },
   ];
 

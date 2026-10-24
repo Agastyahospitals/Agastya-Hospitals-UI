@@ -7,12 +7,25 @@ import { fileURLToPath } from 'url';
 
 const __dirname = resolve(fileURLToPath(import.meta.url), '..');
 
+const mimeTypes = {
+  css: 'text/css',
+  js: 'application/javascript',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+  gif: 'image/gif',
+  svg: 'image/svg+xml',
+  woff: 'font/woff',
+  woff2: 'font/woff2',
+  ttf: 'font/ttf',
+};
+
 /**
  * Vite Dev Plugin: SSG Pre-render Preview
  *
- * When browsing routes on http://localhost:3002 or viewing source (view-source:),
- * this middleware intercepts HTML requests and serves the pre-rendered HTML
- * from dist/ (if it exists) while keeping Vite dev scripts active for HMR.
+ * Serves pre-rendered HTML with full DOM and compiled CSS stylesheets from dist/,
+ * while keeping Vite dev scripts active for HMR.
  */
 function ssgDevPreviewPlugin() {
   const distDir = resolve(__dirname, 'dist');
@@ -21,6 +34,19 @@ function ssgDevPreviewPlugin() {
     name: 'vite-plugin-ssg-dev-preview',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
+        // Serve static compiled assets from dist/assets (e.g. index-CsLPPKvc.css)
+        if (req.url.startsWith('/assets/')) {
+          const assetName = req.url.split('?')[0].replace(/^\/assets\//, '');
+          const assetPath = join(distDir, 'assets', assetName);
+          if (existsSync(assetPath)) {
+            const ext = assetName.split('.').pop()?.toLowerCase();
+            res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
+            res.statusCode = 200;
+            res.end(readFileSync(assetPath));
+            return;
+          }
+        }
+
         // Only intercept GET HTML navigation requests (skip static files, assets, @vite, /src)
         const isHtmlNav =
           req.method === 'GET' &&
@@ -45,11 +71,14 @@ function ssgDevPreviewPlugin() {
           if (existsSync(candidatePath)) {
             try {
               let html = readFileSync(candidatePath, 'utf-8');
-              // Replace production script bundle with Vite dev script for live HMR
+
+              // Replace production hashed JS bundle script with Vite dev entry script for live HMR
+              // Note: We keep the production CSS stylesheet link intact so view-source and initial render have full CSS styles!
               html = html.replace(
-                /<script\s+type="module"\s+crossorigin=""\s+src="\/assets\/index-[^"]+\.js"><\/script>/i,
+                /<script\s+type="module"\s+crossorigin(?:="")?\s+src="\/assets\/index-[^"]+\.js"><\/script>/gi,
                 '<script type="module" src="/src/main.jsx"></script>'
               );
+
               // Transform with Vite to inject @vite/client and React Refresh
               html = await server.transformIndexHtml(req.url, html);
               res.statusCode = 200;

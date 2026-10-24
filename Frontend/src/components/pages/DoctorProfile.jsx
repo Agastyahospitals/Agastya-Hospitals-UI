@@ -132,7 +132,7 @@ const DoctorProfile = () => {
               <img
                 src={doctorProfile.profilePicture}
                 className="img-fluid rounded-4"
-                alt="Doctor"
+                alt={doctorProfile.fullName || "Doctor Profile"}
                 style={{ width: "60%", objectFit: "cover" }}
               />
               <div className="mt-3 border-bottom pb-3">

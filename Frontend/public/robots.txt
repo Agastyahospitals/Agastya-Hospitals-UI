@@ -1,5 +1,14 @@
 User-agent: *
 Allow: /
 Disallow: /medical-reports
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Disallow: /medical-reports
+
+User-agent: Bingbot
+Allow: /
+Disallow: /medical-reports
 
 Sitemap: https://agastyahospitals.com/sitemap.xml

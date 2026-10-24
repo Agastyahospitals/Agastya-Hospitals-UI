@@ -267,7 +267,7 @@ const SpecialtyDetails = () => {
                           <img
                             src={doctor.profilePicture}
                             className="img-fluid rounded-3"
-                            alt="Doctor"
+                            alt={doctor.fullName || "Doctor"}
                             style={{ height: "14rem" }}
                           />
                         </div>

@@ -150,6 +150,7 @@ const BlogDetails = () => {
               <img
                 className="rounded-5"
                 src={blogData.postBanner}
+                alt={blogData.title}
                 style={{ height: "200px", width: "100%" }}
               />
             </div>

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --port 3000",
     "build": "vite build && node scripts/generate-sitemap.js && node scripts/generate-ssg.js",
     "build:puppeteer": "vite build && node scripts/generate-sitemap.js && node scripts/prerender.js",
     "build:ssg": "vite build && node scripts/generate-sitemap.js && node scripts/generate-ssg.js",
