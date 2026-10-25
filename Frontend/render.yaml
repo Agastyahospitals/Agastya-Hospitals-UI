@@ -23,4 +23,26 @@ services:
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
+    routes:
+      - type: rewrite
+        source: /specialties/:slug
+        destination: /specialties/:slug/index.html
+      - type: rewrite
+        source: /specialty/:slug
+        destination: /specialty/:slug/index.html
+      - type: rewrite
+        source: /doctors/:slug
+        destination: /doctors/:slug/index.html
+      - type: rewrite
+        source: /doctor/:slug
+        destination: /doctor/:slug/index.html
+      - type: rewrite
+        source: /blogs/:slug
+        destination: /blogs/:slug/index.html
+      - type: rewrite
+        source: /blog/:slug
+        destination: /blog/:slug/index.html
+      - type: rewrite
+        source: /:page
+        destination: /:page/index.html
 
