@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: agastya-hospitals-ui
+    name: agastya-hospitals-user
     env: static
     buildCommand: npm run build
     staticPublishPath: ./dist

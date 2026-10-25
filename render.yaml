@@ -1,12 +1,48 @@
 services:
   - type: web
-    name: agastya-hospitals
-    env: node
-    region: singapore
+    name: agastya-hospitals-user
+    env: static
     rootDir: Frontend
-    buildCommand: npm install && npm run build
-    startCommand: npm run serve
-    envVars:
-      - key: NODE_ENV
-        value: production
-    healthCheckPath: /
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    headers:
+      - path: /sitemap.xml
+        name: Content-Type
+        value: application/xml; charset=utf-8
+      - path: /robots.txt
+        name: Content-Type
+        value: text/plain; charset=utf-8
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /*
+        name: X-Robots-Tag
+        value: index, follow
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+    routes:
+      - type: rewrite
+        source: /specialties/:slug
+        destination: /specialties/:slug/index.html
+      - type: rewrite
+        source: /specialty/:slug
+        destination: /specialty/:slug/index.html
+      - type: rewrite
+        source: /doctors/:slug
+        destination: /doctors/:slug/index.html
+      - type: rewrite
+        source: /doctor/:slug
+        destination: /doctor/:slug/index.html
+      - type: rewrite
+        source: /blogs/:slug
+        destination: /blogs/:slug/index.html
+      - type: rewrite
+        source: /blog/:slug
+        destination: /blog/:slug/index.html
+      - type: rewrite
+        source: /:page
+        destination: /:page/index.html
