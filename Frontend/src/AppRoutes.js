@@ -22,6 +22,7 @@ import MedicalReports from "./pages/MedicalReports";
 import Patient from "./pages/Patient";
 import Specialties from "./pages/Specialties";
 import SpecialtyDetails from "./pages/SpecialtyDetails";
+import NotFound from "./pages/NotFound";
 
 export const routes = [
   { path: "/", component: Home },
@@ -48,4 +49,6 @@ export const routes = [
   { path: "/blog/:urlSlug", component: BlogDetails },
   { path: "/specialty/:specialty", component: SpecialtyDetails },
   { path: "/gallery", component: Gallery },
+  { path: "*", component: NotFound },
 ];
+

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { readFileSync, existsSync } from 'fs';
 import { resolve, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -101,14 +100,6 @@ export default defineConfig({
   plugins: [
     react(),
     ssgDevPreviewPlugin(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'public/_redirects',
-          dest: '.',
-        },
-      ],
-    }),
   ],
   server: {
     port: 3002,

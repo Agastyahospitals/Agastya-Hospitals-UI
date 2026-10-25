@@ -56,6 +56,7 @@ const server = createServer((req, res) => {
   }
 
   // Clean URL handling (e.g., /about -> dist/about/index.html)
+  let isNotFound = false;
   if (!existsSync(filePath) || (existsSync(filePath) && statSync(filePath).isDirectory())) {
     const subIndex = join(filePath, "index.html");
     const htmlFile = filePath + ".html";
@@ -64,7 +65,9 @@ const server = createServer((req, res) => {
     } else if (existsSync(htmlFile)) {
       filePath = htmlFile;
     } else {
-      filePath = join(DIST_DIR, "index.html");
+      isNotFound = true;
+      const notFoundPath = join(DIST_DIR, "404.html");
+      filePath = existsSync(notFoundPath) ? notFoundPath : join(DIST_DIR, "index.html");
     }
   }
 
@@ -72,11 +75,14 @@ const server = createServer((req, res) => {
     const content = readFileSync(filePath);
     const ext = "." + filePath.split(".").pop();
     const contentType = mimeTypes[ext] || "application/octet-stream";
-    res.writeHead(200, {
+    res.writeHead(isNotFound ? 404 : 200, {
       "Content-Type": contentType,
-      "Cache-Control": "no-cache, no-store, must-revalidate",
-      "Pragma": "no-cache",
-      "Expires": "0"
+      "Cache-Control": isNotFound
+        ? "no-cache, no-store, must-revalidate"
+        : ext === ".html"
+          ? "public, max-age=0, must-revalidate"
+          : "public, max-age=31536000, immutable",
+      "X-Content-Type-Options": "nosniff"
     });
     res.end(content);
   } catch (err) {
