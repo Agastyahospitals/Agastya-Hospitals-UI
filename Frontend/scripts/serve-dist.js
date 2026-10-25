@@ -15,11 +15,31 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = resolve(__dirname, "../dist");
+// Parse port and host from CLI args (e.g. --port 5137, --port=5137, 5137, --host 127.0.0.1)
+let cliPort = null;
+let cliHost = "0.0.0.0";
+for (let i = 2; i < process.argv.length; i++) {
+  const arg = process.argv[i];
+  if (arg === "--port" && process.argv[i + 1]) {
+    cliPort = parseInt(process.argv[i + 1], 10);
+    i++;
+  } else if (arg.startsWith("--port=")) {
+    cliPort = parseInt(arg.split("=")[1], 10);
+  } else if (arg === "--host" && process.argv[i + 1]) {
+    cliHost = process.argv[i + 1];
+    i++;
+  } else if (arg.startsWith("--host=")) {
+    cliHost = arg.split("=")[1];
+  } else if (/^\d+$/.test(arg)) {
+    cliPort = parseInt(arg, 10);
+  }
+}
+
 // On Render.com (and most cloud platforms), PORT env var is injected automatically.
-// Fall back to local dev ports when running locally.
-const PREFERRED_PORTS = process.env.PORT
-  ? [parseInt(process.env.PORT, 10)]
-  : [3003, 3002, 4173, 5000];
+// Fall back to CLI port or local dev ports when running locally.
+const PREFERRED_PORTS = (process.env.PORT || cliPort)
+  ? [parseInt(process.env.PORT || cliPort, 10)]
+  : [5137, 3003, 3002, 4173, 5000];
 
 const mimeTypes = {
   ".html": "text/html",
@@ -128,10 +148,11 @@ function listenOnAvailablePort(portsIndex = 0) {
   }
 
   const port = PREFERRED_PORTS[portsIndex];
-  server.listen(port, () => {
+  server.listen(port, cliHost, () => {
+    const displayHost = cliHost === "0.0.0.0" ? "localhost" : cliHost;
     console.log(`\n🌐 Local Pre-rendered Preview Server running at:`);
-    console.log(`   > http://localhost:${port}`);
-    console.log(`\n💡 Open any route in browser (e.g. http://localhost:${port}/about)`);
+    console.log(`   > http://${displayHost}:${port}`);
+    console.log(`\n💡 Open any route in browser (e.g. http://${displayHost}:${port}/about)`);
     console.log(`   Press Ctrl+U (or Right-Click -> View Page Source) to view full pre-rendered HTML!\n`);
   });
 
