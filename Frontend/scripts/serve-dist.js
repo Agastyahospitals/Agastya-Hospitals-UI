@@ -65,9 +65,39 @@ const server = createServer((req, res) => {
     } else if (existsSync(htmlFile)) {
       filePath = htmlFile;
     } else {
-      isNotFound = true;
-      const notFoundPath = join(DIST_DIR, "404.html");
-      filePath = existsSync(notFoundPath) ? notFoundPath : join(DIST_DIR, "index.html");
+      // Check singular / plural aliases
+      let foundAlias = false;
+      const cleanReq = reqUrl.replace(/^\/|\/$/g, "");
+      const aliasPairs = [
+        ["specialties/", "specialty/"],
+        ["specialty/", "specialties/"],
+        ["doctors/", "doctor/"],
+        ["doctor/", "doctors/"],
+        ["blogs/", "blog/"],
+        ["blog/", "blogs/"],
+      ];
+      for (const [prefix, target] of aliasPairs) {
+        if (cleanReq.startsWith(prefix)) {
+          const rest = cleanReq.slice(prefix.length);
+          const candidate1 = join(DIST_DIR, target, rest, "index.html");
+          const candidate2 = join(DIST_DIR, target, rest + ".html");
+          if (existsSync(candidate1)) {
+            filePath = candidate1;
+            foundAlias = true;
+            break;
+          } else if (existsSync(candidate2)) {
+            filePath = candidate2;
+            foundAlias = true;
+            break;
+          }
+        }
+      }
+
+      if (!foundAlias) {
+        isNotFound = true;
+        const notFoundPath = join(DIST_DIR, "404.html");
+        filePath = existsSync(notFoundPath) ? notFoundPath : join(DIST_DIR, "index.html");
+      }
     }
   }
 

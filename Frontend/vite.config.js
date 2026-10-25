@@ -47,9 +47,10 @@ function ssgDevPreviewPlugin() {
         }
 
         // Only intercept GET HTML navigation requests (skip static files, assets, @vite, /src)
+        const accept = req.headers.accept || '';
         const isHtmlNav =
           req.method === 'GET' &&
-          req.headers.accept?.includes('text/html') &&
+          (!accept || accept.includes('text/html') || accept.includes('*/*')) &&
           !req.url.startsWith('/@') &&
           !req.url.startsWith('/src') &&
           !req.url.startsWith('/assets') &&
@@ -63,9 +64,30 @@ function ssgDevPreviewPlugin() {
 
         if (isHtmlNav) {
           const cleanUrl = req.url.split('?')[0].replace(/^\/|\/$/g, '');
-          const candidatePath = cleanUrl
+          let candidatePath = cleanUrl
             ? join(distDir, cleanUrl, 'index.html')
             : join(distDir, 'index.html');
+
+          // Check singular / plural aliases if direct path not found
+          if (!existsSync(candidatePath) && cleanUrl) {
+            const aliasPairs = [
+              ['specialties/', 'specialty/'],
+              ['specialty/', 'specialties/'],
+              ['doctors/', 'doctor/'],
+              ['doctor/', 'doctors/'],
+              ['blogs/', 'blog/'],
+              ['blog/', 'blogs/'],
+            ];
+            for (const [prefix, target] of aliasPairs) {
+              if (cleanUrl.startsWith(prefix)) {
+                const alt = join(distDir, target, cleanUrl.slice(prefix.length), 'index.html');
+                if (existsSync(alt)) {
+                  candidatePath = alt;
+                  break;
+                }
+              }
+            }
+          }
 
           if (existsSync(candidatePath)) {
             try {
@@ -86,6 +108,23 @@ function ssgDevPreviewPlugin() {
               return;
             } catch (err) {
               console.error('[SSG Dev Preview] Error serving pre-rendered HTML:', err);
+            }
+          } else if (
+            cleanUrl.startsWith('specialty/') ||
+            cleanUrl.startsWith('specialties/') ||
+            cleanUrl.startsWith('doctor/') ||
+            cleanUrl.startsWith('doctors/') ||
+            cleanUrl.startsWith('blog/') ||
+            cleanUrl.startsWith('blogs/')
+          ) {
+            // For known dynamic prefixes that are missing, return true 404
+            const notFoundPath = join(distDir, '404.html');
+            if (existsSync(notFoundPath)) {
+              let html = readFileSync(notFoundPath, 'utf-8');
+              res.statusCode = 404;
+              res.setHeader('Content-Type', 'text/html; charset=utf-8');
+              res.end(html);
+              return;
             }
           }
         }

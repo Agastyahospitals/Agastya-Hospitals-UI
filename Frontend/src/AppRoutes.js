@@ -42,13 +42,17 @@ export const routes = [
   { path: "/free-second-opinion", component: FreeSecondOpinionForm },
   { path: "/medical-reports", component: MedicalReports },
   { path: "/doctor/:doctor", component: DoctorProfile },
+  { path: "/doctors/:doctor", component: DoctorProfile },
   { path: "/leadership-team", component: Leadership },
   { path: "/achievements", component: Achievements },
   { path: "/awards-recognition", component: AwardsAndRecongnition },
   { path: "/international-patient", component: InternationalPatient },
   { path: "/blog/:urlSlug", component: BlogDetails },
+  { path: "/blogs/:urlSlug", component: BlogDetails },
   { path: "/specialty/:specialty", component: SpecialtyDetails },
+  { path: "/specialties/:specialty", component: SpecialtyDetails },
   { path: "/gallery", component: Gallery },
   { path: "*", component: NotFound },
 ];
+
 

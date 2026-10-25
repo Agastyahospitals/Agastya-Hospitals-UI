@@ -491,7 +491,7 @@ export async function runSSG() {
       </div>
     `;
 
-    const html = createStaticPageHtml(baseTemplate, {
+    const htmlSingular = createStaticPageHtml(baseTemplate, {
       route,
       title,
       description,
@@ -503,15 +503,31 @@ export async function runSSG() {
       bodyHtml,
       compiledCss,
     });
+    writeRouteHtml(route, htmlSingular);
+    count++;
 
-    writeRouteHtml(route, html);
+    // Plural alias route (/blogs/:slug)
+    const pluralRoute = `/blogs/${slug}`;
+    const htmlPlural = createStaticPageHtml(baseTemplate, {
+      route: pluralRoute,
+      title,
+      description,
+      keywords: blog.metaKeywords || "",
+      canonical: route,
+      ogType: "article",
+      ogImage: banner,
+      jsonLd,
+      bodyHtml,
+      compiledCss,
+    });
+    writeRouteHtml(pluralRoute, htmlPlural);
     count++;
   }
 
   // ---------------------------------------------------------------------------
-  // Step 3: Generate Dynamic Specialty Pages (/specialty/:slug)
+  // Step 3: Generate Dynamic Specialty Pages (/specialty/:slug & /specialties/:slug)
   // ---------------------------------------------------------------------------
-  console.log(`🏥 Generating ${specialties.length} Dynamic Specialty Pages...`);
+  console.log(`🏥 Generating ${specialties.length} Dynamic Specialty Pages (Dual Routes)...`);
   for (const spec of specialties) {
     if (!spec.specialityName) continue;
     const rawName = spec.specialityName.trim();
@@ -564,6 +580,56 @@ export async function runSSG() {
       },
     ];
 
+    // Find specialist doctors associated with this specialty
+    const matchingDocs = doctors.filter((doc) => {
+      if (Array.isArray(spec.doctor) && spec.doctor.includes(doc.doctorID)) return true;
+      if (Array.isArray(doc.specialityNames) && doc.specialityNames.some((s) => (s || "").toLowerCase().includes(rawName.toLowerCase()) || rawName.toLowerCase().includes((s || "").toLowerCase()))) return true;
+      if (Array.isArray(spec.doctorNames) && spec.doctorNames.some((d) => (d || "").toLowerCase().includes((doc.fullName || "").toLowerCase()))) return true;
+      return false;
+    });
+
+    const doctorsHtml = matchingDocs.length > 0 ? `
+      <div class="mt-5">
+        <h2 class="f-30 f-w-700 mb-3" style="font-size:24px;color:#022b50;">Our Specialist Doctors</h2>
+        <div class="row g-3">
+          ${matchingDocs.map((doc) => {
+            const docSlug = (doc.fullName || "").toLowerCase().replace(/[.\s]+/g, "-").replace(/^-+|-+$/g, "");
+            const qual = Array.isArray(doc.qualification) ? doc.qualification.join(", ") : doc.qualification || "";
+            return `
+              <div class="col-12 mb-3">
+                <div class="doctor-card p-3 rounded-3 border bg-white shadow-sm">
+                  <div class="row align-items-center">
+                    <div class="col-md-3 text-center mb-3 mb-md-0">
+                      <img src="${escapeHtml(doc.profilePicture || DEFAULT_OG_IMAGE)}" alt="${escapeHtml(doc.fullName)}" class="img-fluid rounded-3" style="max-height:150px;object-fit:cover;" />
+                    </div>
+                    <div class="col-md-9">
+                      <h4 class="name fw-bold mb-1" style="color:#022b50;">
+                        <a href="/doctor/${docSlug}" style="text-decoration:none;color:inherit;">${escapeHtml(doc.fullName)}</a>
+                      </h4>
+                      ${qual ? `<p class="qualification text-muted small mb-1">${escapeHtml(qual)}</p>` : ""}
+                      <p class="designation text-primary fw-semibold mb-2">${escapeHtml(doc.designation || "Consultant Specialist")}</p>
+                      ${doc.yearsOfExperience ? `<p class="small mb-2"><strong>Experience:</strong> ${escapeHtml(doc.yearsOfExperience)} Years</p>` : ""}
+                      <div class="d-flex gap-2">
+                        <a href="/doctor/${docSlug}" class="btn btn-sm btn-outline-primary" style="border-radius:20px;">View Profile</a>
+                        <a href="/book-appointment" class="btn btn-sm btn-primary" style="background:#022b50;border-radius:20px;">Book Appointment</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    ` : (spec.doctorNames && spec.doctorNames.length > 0 ? `
+      <div class="mt-5 p-4 rounded bg-light border">
+        <h3 class="fw-bold mb-3" style="color:#022b50;">Specialist Doctors in ${escapeHtml(rawName)}</h3>
+        <ul style="list-style:none;padding:0;margin:0;">
+          ${spec.doctorNames.map((d) => `<li style="font-size:16px;margin-bottom:8px;"><strong>&bull;</strong> ${escapeHtml(d)}</li>`).join("")}
+        </ul>
+      </div>
+    ` : "");
+
     const bodyHtml = `
       <div class="banner bg-light py-3 border-bottom">
         <div class="container">
@@ -576,68 +642,106 @@ export async function runSSG() {
           </nav>
         </div>
       </div>
-      <div class="container py-5">
-        <div class="row">
-          <div class="col-lg-8 col-md-12">
-            <h1 class="main-title mb-4 fw-bold" style="font-size:34px;color:#16375b;">${escapeHtml(rawName)}</h1>
-            ${banner && banner !== DEFAULT_OG_IMAGE ? `<div class="mb-4">
-              <img src="${escapeHtml(banner)}" alt="${escapeHtml(rawName)}" class="img-fluid rounded shadow-sm" style="max-height:350px;width:100%;object-fit:cover;" />
-            </div>` : ""}
-            <div class="specialtypage-details" style="font-size:16px;line-height:1.8;color:#222;">
-              ${spec.pageDescription || `<p>${escapeHtml(description)}</p>`}
+      <div class="container py-4">
+        <div class="row m-0">
+          <div class="col-md-4 mb-4">
+            <div class="card p-4 shadow-sm border-0 rounded-4 enquiry-form-card" style="background:#ffffff;border:1px solid #e2e8f0!important;">
+              <h3 class="fw-bold mb-3" style="font-size:20px;color:#022b50;">${escapeHtml(rawName)} Enquiry</h3>
+              <p class="text-muted small mb-3">Book an appointment or speak with our hospital care coordinators.</p>
+              <form class="appointment-form">
+                <div class="mb-3">
+                  <label class="form-label small fw-semibold">Full Name *</label>
+                  <input type="text" class="form-control" placeholder="Enter your full name" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small fw-semibold">Email *</label>
+                  <input type="email" class="form-control" placeholder="Enter your email address" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small fw-semibold">Mobile Number *</label>
+                  <input type="tel" class="form-control" placeholder="10-digit mobile number" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small fw-semibold">Message / Medical Concern *</label>
+                  <textarea class="form-control" rows="3" placeholder="Describe symptoms or treatment query"></textarea>
+                </div>
+                <a href="/book-appointment" class="btn btn-primary w-100 py-2" style="background:#022b50;border-radius:25px;font-weight:600;display:block;text-align:center;text-decoration:none;">
+                  Submit Enquiry
+                </a>
+              </form>
+              <div class="mt-4 pt-3 border-top text-center">
+                <p class="small text-muted mb-1">24/7 Emergency & Appointment Helpline</p>
+                <a href="tel:04065108108" class="fw-bold" style="color:#022b50;font-size:16px;text-decoration:none;">
+                  040 65 108 108
+                </a>
+              </div>
             </div>
-            ${spec.doctorNames && spec.doctorNames.length > 0 ? `
-              <div class="mt-5 p-4 rounded bg-light border">
-                <h3 class="fw-bold mb-3" style="color:#022b50;">Specialist Doctors in ${escapeHtml(rawName)}</h3>
-                <ul style="list-style:none;padding:0;margin:0;">
-                  ${spec.doctorNames.map((d) => `<li style="font-size:16px;margin-bottom:8px;"><strong>&bull;</strong> ${escapeHtml(d)}</li>`).join("")}
-                </ul>
-              </div>` : ""}
           </div>
-          <div class="col-lg-4 col-md-12 mt-4 mt-lg-0">
-            <div class="appointment-sidebar p-4 rounded shadow-sm bg-light border">
-              <h4 class="mb-3 fw-bold" style="color:#022b50;">Book Consultation</h4>
-              <p style="font-size:14px;color:#555;">Consult our ${escapeHtml(rawName)} specialists for accurate diagnosis & advanced treatment.</p>
-              <a href="/book-appointment" class="btn btn-primary w-100 py-2 mt-2" style="background:#022b50;border-radius:25px;font-weight:600;">
-                Book Doctor Appointment
-              </a>
-              <a href="tel:04065108108" class="btn btn-outline-primary w-100 py-2 mt-2" style="border-radius:25px;font-weight:600;">
-                Call 040 65 108 108
-              </a>
+          <div class="col-md-8 p-4 specialtypage-details">
+            ${banner && banner !== DEFAULT_OG_IMAGE ? `
+              <div class="mb-4">
+                <img class="rounded-5 border-1 shadow-sm img-fluid" src="${escapeHtml(banner)}" alt="${escapeHtml(rawName)}" style="width:100%;max-height:420px;object-fit:cover;" />
+              </div>
+            ` : ""}
+            <h1 class="main-title mb-2 fw-bold" style="font-size:32px;color:#16375b;">${escapeHtml(rawName)}</h1>
+            <h2 class="f-30 f-w-700 mt-4 mb-3" style="font-size:24px;color:#022b50;">Overview</h2>
+            <div class="ql-snow">
+              <div class="ql-editor" style="font-size:16px;line-height:1.8;color:#222;">
+                ${spec.pageDescription || `<p>${escapeHtml(description)}</p>`}
+              </div>
             </div>
+            ${doctorsHtml}
           </div>
         </div>
       </div>
     `;
 
     for (const slug of slugs) {
-      const route = `/specialty/${slug}`;
-      const html = createStaticPageHtml(baseTemplate, {
-        route,
+      const singularRoute = `/specialty/${slug}`;
+      const pluralRoute = `/specialties/${slug}`;
+
+      // Singular route HTML
+      const htmlSingular = createStaticPageHtml(baseTemplate, {
+        route: singularRoute,
         title,
         description,
-        canonical: route,
+        canonical: singularRoute,
         ogType: "website",
         ogImage: banner,
         jsonLd,
         bodyHtml,
         compiledCss,
       });
+      writeRouteHtml(singularRoute, htmlSingular);
+      count++;
 
-      writeRouteHtml(route, html);
+      // Plural route HTML (/specialties/:slug) - points canonical to singular to prevent duplicate content
+      const htmlPlural = createStaticPageHtml(baseTemplate, {
+        route: pluralRoute,
+        title,
+        description,
+        canonical: singularRoute,
+        ogType: "website",
+        ogImage: banner,
+        jsonLd,
+        bodyHtml,
+        compiledCss,
+      });
+      writeRouteHtml(pluralRoute, htmlPlural);
       count++;
     }
   }
 
   // ---------------------------------------------------------------------------
-  // Step 4: Generate Dynamic Doctor Pages (/doctor/:slug)
+  // Step 4: Generate Dynamic Doctor Pages (/doctor/:slug & /doctors/:slug)
   // ---------------------------------------------------------------------------
-  console.log(`👨‍⚕️ Generating ${doctors.length} Dynamic Doctor Pages...`);
+  console.log(`👨‍⚕️ Generating ${doctors.length} Dynamic Doctor Pages (Dual Routes)...`);
   for (const doc of doctors) {
     if (!doc.fullName) continue;
     const name = doc.fullName.trim();
     const slug = name.toLowerCase().replace(/[.\s]+/g, "-").replace(/^-+|-+$/g, "");
-    const route = `/doctor/${slug}`;
+    const singularRoute = `/doctor/${slug}`;
+    const pluralRoute = `/doctors/${slug}`;
     const qualifications = Array.isArray(doc.qualification) ? doc.qualification.join(", ") : doc.qualification || "";
     const designation = doc.designation || "Consultant Specialist";
     const experience = doc.yearsOfExperience ? `${doc.yearsOfExperience} Years Experience` : "";
@@ -666,7 +770,7 @@ export async function runSSG() {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
           { "@type": "ListItem", position: 2, name: "Doctors", item: `${BASE_URL}/find-doctor` },
-          { "@type": "ListItem", position: 3, name: name, item: `${BASE_URL}${route}` },
+          { "@type": "ListItem", position: 3, name: name, item: `${BASE_URL}${singularRoute}` },
         ],
       },
     ];
@@ -722,19 +826,33 @@ export async function runSSG() {
       </div>
     `;
 
-    const html = createStaticPageHtml(baseTemplate, {
-      route,
+    const htmlSingular = createStaticPageHtml(baseTemplate, {
+      route: singularRoute,
       title,
       description,
-      canonical: route,
+      canonical: singularRoute,
       ogType: "profile",
       ogImage: photo,
       jsonLd,
       bodyHtml,
       compiledCss,
     });
+    writeRouteHtml(singularRoute, htmlSingular);
+    count++;
 
-    writeRouteHtml(route, html);
+    // Plural alias route (/doctors/:slug) - points canonical to singular
+    const htmlPlural = createStaticPageHtml(baseTemplate, {
+      route: pluralRoute,
+      title,
+      description,
+      canonical: singularRoute,
+      ogType: "profile",
+      ogImage: photo,
+      jsonLd,
+      bodyHtml,
+      compiledCss,
+    });
+    writeRouteHtml(pluralRoute, htmlPlural);
     count++;
   }
 
