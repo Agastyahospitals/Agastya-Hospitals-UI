@@ -5,6 +5,7 @@ import App from "./App";
 import "./i18n";
 import reportWebVitals from "./reportWebVitals";
 import "react-quill/dist/quill.snow.css";
+import './main.css'
 
 
 import { QueryClientProvider } from "@tanstack/react-query";
