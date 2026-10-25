@@ -92650,3 +92650,7 @@ rect {
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
     overflow-x: hidden !important;
 }
+
+.ql-snow.ql-toolbar button{
+	width: 30px !important;
+}
